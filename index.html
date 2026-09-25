@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Knowledge Base</title>
+
+<style>
+  :root {
+    --bg-0: #05060d;
+    --bg-1: #0a0d1c;
+    --accent: #7aa2ff;
+    --accent-2: #b98cff;
+    --text: #e8ecff;
+    --text-dim: #8a90b8;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-bg-hover: rgba(122, 162, 255, 0.08);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --card-border-hover: rgba(122, 162, 255, 0.45);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background: var(--bg-0);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body {
+    position: relative;
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(122, 162, 255, 0.15), transparent 50%),
+      radial-gradient(ellipse at 80% 100%, rgba(185, 140, 255, 0.12), transparent 50%),
+      linear-gradient(180deg, var(--bg-0) 0%, var(--bg-1) 100%);
+  }
+
+  /* Ẩn con trỏ trên desktop — linh vật là "con trỏ" */
+  @media (hover: hover) and (pointer: fine) {
+    body { cursor: none; }
+    .card, .nav-arrow, a { cursor: none; }
+  }
+
+  /* ---------- Sao nền ---------- */
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-repeat: repeat;
+  }
+
+  body::before {
+    background-image:
+      radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,.9), transparent),
+      radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,.7), transparent),
+      radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,.8), transparent),
+      radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,.6), transparent),
+      radial-gradient(1px 1px at 160px 20px, rgba(255,255,255,.7), transparent);
+    background-size: 200px 120px;
+    opacity: .55;
+    animation: drift 120s linear infinite;
+  }
+
+  body::after {
+    background-image:
+      radial-gradient(2px 2px at 60px 120px, rgba(180, 200, 255, .9), transparent),
+      radial-gradient(2px 2px at 220px 60px, rgba(200, 180, 255, .85), transparent),
+      radial-gradient(1.5px 1.5px at 300px 180px, rgba(255,255,255,.9), transparent),
+      radial-gradient(1.5px 1.5px at 100px 220px, rgba(160, 190, 255, .8), transparent);
+    background-size: 400px 280px;
+    opacity: .8;
+    animation: drift 240s linear infinite reverse;
+  }
+
+  @keyframes drift {
+    from { background-position: 0 0; }
+    to   { background-position: -800px -600px; }
+  }
+
+  /* ---------- Linh vật: bubble + vệt mờ ---------- */
+  .mascot,
+  .mascot-trail {
+    position: fixed;
+    top: 0; left: 0;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  /* Vệt mờ phía sau (theo chuột chậm hơn) */
+  .mascot-trail {
+    z-index: 9998;
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba(122, 162, 255, 0.55),
+      rgba(185, 140, 255, 0.25) 40%,
+      transparent 70%
+    );
+    filter: blur(14px);
+    opacity: 0.75;
+  }
+
+  /* Bubble chính */
+  .mascot {
+    z-index: 9999;
+    background:
+      radial-gradient(circle at 30% 25%, rgba(255,255,255,0.55), rgba(255,255,255,0) 45%),
+      radial-gradient(circle at 72% 78%, rgba(122,162,255,0.35), rgba(185,140,255,0.12) 60%),
+      radial-gradient(circle at 50% 50%, rgba(122,162,255,0.10), rgba(122,162,255,0.02));
+    border: 1px solid rgba(200, 220, 255, 0.4);
+    box-shadow:
+      inset -10px -12px 24px rgba(255,255,255,0.12),
+      inset 8px 10px 20px rgba(122,162,255,0.18),
+      0 0 22px rgba(122, 162, 255, 0.40),
+      0 0 60px rgba(122, 162, 255, 0.18);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .mascot svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (hover: none) {
+    body { cursor: auto; }
+    .mascot, .mascot-trail { width: 64px; height: 64px; }
+    .mascot-trail { opacity: 0.5; }
+  }
+
+  /* ---------- Layout ---------- */
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 72px 24px 100px;
+  }
+
+  header.hero {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  header.hero h1 {
+    margin: 0 0 14px;
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #ffffff 0%, var(--accent) 55%, var(--accent-2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  header.hero p {
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 15px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---------- Pager ---------- */
+  .pager {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .viewport {
+    overflow: hidden;
+    border-radius: 22px;
+    /* để shadow của card không bị cắt hai bên */
+    padding: 6px;
+    margin: -6px;
+  }
+
+  .track {
+    display: flex;
+    transition: transform .65s cubic-bezier(.22,.72,.28,1);
+    will-change: transform;
+  }
+
+  .page-group {
+    min-width: 100%;
+    flex-shrink: 0;
+    padding: 0 6px;
+  }
+
+  .page-group .grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  /* ---------- Card ---------- */
+  .card {
+    position: relative;
+    display: block;
+    padding: 20px 16px 18px;
+    min-height: 176px;
+    border-radius: 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    transition:
+      transform .35s cubic-bezier(.2,.7,.3,1),
+      border-color .35s ease,
+      background .35s ease,
+      box-shadow .35s ease;
+    isolation: isolate;
+  }
+
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: radial-gradient(
+      240px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(122, 162, 255, 0.18),
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity .35s ease;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--card-border-hover);
+    background: var(--card-bg-hover);
+    box-shadow:
+      0 10px 30px -12px rgba(122, 162, 255, 0.35),
+      0 0 0 1px rgba(122, 162, 255, 0.08);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card .num {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    margin-bottom: 12px;
+    opacity: .9;
+  }
+
+  .card .title {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text);
+    margin: 0 0 8px;
+  }
+
+  .card .desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .card .arrow {
+    position: absolute;
+    top: 18px;
+    right: 16px;
+    font-size: 15px;
+    color: var(--accent);
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity .3s ease, transform .3s ease;
+  }
+
+  .card:hover .arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Card khóa */
+  .card.locked {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  .card.locked:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: none;
+  }
+
+  .card.locked:hover::before { opacity: .35; }
+  .card.locked .num { color: var(--text-dim); }
+
+  .card.locked .badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 3px 7px;
+    border-radius: 999px;
+  }
+
+  /* ---------- Nút điều hướng ---------- */
+  .nav-arrow {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(122, 162, 255, 0.06);
+    color: var(--accent);
+    font-size: 22px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: transform .25s ease, background .25s ease,
+                border-color .25s ease, opacity .25s ease, box-shadow .25s ease;
+    user-select: none;
+    padding: 0;
+  }
+
+  .nav-arrow:hover:not(:disabled) {
+    background: rgba(122, 162, 255, 0.16);
+    border-color: rgba(122, 162, 255, 0.55);
+    transform: scale(1.08);
+    box-shadow: 0 0 24px -4px rgba(122, 162, 255, 0.55);
+  }
+
+  .nav-arrow:active:not(:disabled) {
+    transform: scale(0.96);
+  }
+
+  .nav-arrow:disabled {
+    opacity: 0.28;
+    cursor: not-allowed;
+  }
+
+  /* ---------- Chỉ số trang ---------- */
+  .page-indicator {
+    margin-top: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: var(--text-dim);
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    font-weight: 600;
+  }
+
+  .page-indicator .dots {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .page-indicator .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+    transition: background .3s ease, transform .3s ease, box-shadow .3s ease;
+  }
+
+  .page-indicator .dot.active {
+    background: var(--accent);
+    transform: scale(1.35);
+    box-shadow: 0 0 12px var(--accent);
+  }
+
+  .page-indicator .num {
+    color: var(--accent);
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 90px;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1100px) {
+    .page-group .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .card { min-height: 160px; }
+  }
+
+  @media (max-width: 760px) {
+    .page-group .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pager { gap: 10px; }
+    .nav-arrow { width: 40px; height: 40px; font-size: 18px; }
+  }
+
+  @media (max-width: 520px) {
+    .wrap { padding: 52px 16px 80px; }
+    .page-group .grid { grid-template-columns: 1fr; gap: 12px; }
+    .card { min-height: unset; padding: 18px 16px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body::before, body::after { animation: none; }
+    .track { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Vệt mờ chạy sau linh vật -->
+<div class="mascot-trail" id="mascotTrail" aria-hidden="true"></div>
+
+<!-- Linh vật bubble Einstein -->
+<div class="mascot" id="mascot" aria-hidden="true">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="hairGrad" cx="50%" cy="30%">
+        <stop offset="0%"  stop-color="rgba(255,255,255,0.98)"/>
+        <stop offset="100%" stop-color="rgba(180,205,255,0.55)"/>
+      </radialGradient>
+    </defs>
+
+    <!-- Tóc hai bên + đỉnh đầu -->
+    <g opacity="0.9">
+      <circle cx="16" cy="46" r="11" fill="url(#hairGrad)"/>
+      <circle cx="84" cy="46" r="11" fill="url(#hairGrad)"/>
+      <circle cx="22" cy="30" r="9"  fill="url(#hairGrad)"/>
+      <circle cx="78" cy="30" r="9"  fill="url(#hairGrad)"/>
+      <path d="M 28 22 Q 32 12 40 18 Q 45 8 52 16 Q 58 8 63 16 Q 70 12 72 22"
+            stroke="url(#hairGrad)" stroke-width="6" fill="none"
+            stroke-linecap="round" opacity="0.85"/>
+    </g>
+
+    <!-- Gọng kính -->
+    <g fill="none" stroke="rgba(20, 28, 55, 0.85)" stroke-width="2.4" stroke-linecap="round">
+      <circle cx="38" cy="53" r="11"/>
+      <circle cx="62" cy="53" r="11"/>
+      <line x1="48.5" y1="53" x2="51.5" y2="53"/>
+      <line x1="27.5" y1="51" x2="20"   y2="47"/>
+      <line x1="72.5" y1="51" x2="80"   y2="47"/>
+    </g>
+
+    <!-- Highlight trên tròng kính (ánh sáng phản chiếu) -->
+    <path d="M 32 48 Q 34 44 38 43" stroke="rgba(255,255,255,0.75)" stroke-width="1.4"
+          fill="none" stroke-linecap="round"/>
+    <path d="M 56 48 Q 58 44 62 43" stroke="rgba(255,255,255,0.75)" stroke-width="1.4"
+          fill="none" stroke-linecap="round"/>
+
+    <!-- Mắt -->
+    <circle cx="38" cy="53" r="2.8" fill="rgba(20,28,55,0.92)"/>
+    <circle cx="62" cy="53" r="2.8" fill="rgba(20,28,55,0.92)"/>
+    <circle cx="38.8" cy="52.2" r="0.9" fill="#ffffff" opacity="0.9"/>
+    <circle cx="62.8" cy="52.2" r="0.9" fill="#ffffff" opacity="0.9"/>
+
+    <!-- Râu -->
+    <path d="M 30 72 Q 38 67 46 72 Q 50 75 54 72 Q 62 67 70 72
+             Q 66 80 50 80 Q 34 80 30 72 Z"
+          fill="rgba(35, 45, 70, 0.78)"/>
+
+    <!-- Miệng cười -->
+    <path d="M 43 86 Q 50 89 57 86" stroke="rgba(35,45,70,0.72)"
+          stroke-width="1.6" fill="none" stroke-linecap="round"/>
+
+    <!-- Điểm sáng bubble (soap bubble shine) -->
+    <ellipse cx="30" cy="26" rx="15" ry="9"
+             fill="#ffffff" opacity="0.4"
+             transform="rotate(-35 30 26)"/>
+    <ellipse cx="72" cy="20" rx="5" ry="3"
+             fill="#ffffff" opacity="0.5"
+             transform="rotate(-25 72 20)"/>
+  </svg>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <h1>Knowledge Base</h1>
+    <p>Chọn một phần để bắt đầu</p>
+  </header>
+
+  <div class="pager">
+    <button class="nav-arrow prev" id="prevBtn" aria-label="Trang trước">‹</button>
+
+    <div class="viewport">
+      <div class="track" id="track">
+
+        <!-- ============ VIEW 01 ============ -->
+        <section class="page-group">
+          <div class="grid">
+
+            <a class="card" href="Diffusion/index.html">
+              <span class="num">01</span>
+              <span class="arrow">→</span>
+              <h3 class="title">Diffusion AI</h3>
+              <p class="desc">Xác suất, phân phối, quá trình khuếch tán và nền tảng thống kê.</p>
+            </a>
+
+            <a class="card" href="Math/index.html">
+              <span class="num">02</span>
+              <span class="arrow">→</span>
+              <h3 class="title">Math for AI</h3>
+              <p class="desc">Đại số tuyến tính, giải tích, tối ưu hoá và nền tảng toán cho AI.</p>
+            </a>
+
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span>
+              <span class="num">03</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span>
+              <span class="num">04</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span>
+              <span class="num">05</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ============ VIEW 02 ============ -->
+        <section class="page-group">
+          <div class="grid">
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span><span class="num">06</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span><span class="num">07</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span><span class="num">08</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span><span class="num">09</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span><span class="num">10</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ VIEW 03 ============ -->
+        <section class="page-group">
+          <div class="grid">
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span><span class="num">11</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span><span class="num">12</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span><span class="num">13</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span><span class="num">14</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span><span class="num">15</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ VIEW 04 ============ -->
+        <section class="page-group">
+          <div class="grid">
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span><span class="num">16</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span><span class="num">17</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span><span class="num">18</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span><span class="num">19</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span><span class="num">20</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ VIEW 05 ============ -->
+        <section class="page-group">
+          <div class="grid">
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span><span class="num">21</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span><span class="num">22</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span><span class="num">23</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span><span class="num">24</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+            <div class="card locked" aria-disabled="true">
+              <span class="badge">SOON</span><span class="num">25</span>
+              <h3 class="title">Chưa có tiêu đề</h3>
+              <p class="desc">Sẽ cập nhật sau.</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <button class="nav-arrow next" id="nextBtn" aria-label="Trang sau">›</button>
+  </div>
+
+  <!-- Chỉ số trang -->
+  <div class="page-indicator">
+    <span class="num" id="pageNum">01</span>
+    <span>/</span>
+    <span>05</span>
+    <span class="dots" id="dots"></span>
+  </div>
+
+  <footer>© 2026 · Built with ♥</footer>
+
+</div>
+
+<script>
+  /* ============================================================
+     1. HIỆU ỨNG GLOW THEO CHUỘT TRÊN CARD
+     ============================================================ */
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--mx', x + '%');
+      card.style.setProperty('--my', y + '%');
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.removeProperty('--mx');
+      card.style.removeProperty('--my');
+    });
+  });
+
+  /* ============================================================
+     2. PAGINATION — chuyển view bằng mũi tên trái/phải
+     ============================================================ */
+  (function () {
+    const track    = document.getElementById('track');
+    const prevBtn  = document.getElementById('prevBtn');
+    const nextBtn  = document.getElementById('nextBtn');
+    const pageNum  = document.getElementById('pageNum');
+    const dotsWrap = document.getElementById('dots');
+
+    const totalPages = track.children.length;
+    let current = 0;
+
+    // Tạo dấu chấm chỉ số trang
+    for (let i = 0; i < totalPages; i++) {
+      const d = document.createElement('span');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.dataset.i = i;
+      dotsWrap.appendChild(d);
+    }
+    const dots = dotsWrap.querySelectorAll('.dot');
+
+    function goTo(n) {
+      current = Math.max(0, Math.min(totalPages - 1, n));
+      track.style.transform = `translateX(-${current * 100}%)`;
+
+      pageNum.textContent = String(current + 1).padStart(2, '0');
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === totalPages - 1;
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+
+    // Bàn phím: ← →
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft')  goTo(current - 1);
+      if (e.key === 'ArrowRight') goTo(current + 1);
+    });
+
+    // Vuốt trên mobile
+    let touchStartX = 0, touchStartY = 0, swiping = false;
+    const viewport = track.parentElement;
+
+    viewport.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      swiping = false;
+    }, { passive: true });
+
+    viewport.addEventListener('touchmove', (e) => {
+      const dx = e.touches[0].clientX - touchStartX;
+      const dy = e.touches[0].clientY - touchStartY;
+      if (Math.abs(dx) > 20 && Math.abs(dx) > Math.abs(dy)) swiping = true;
+    }, { passive: true });
+
+    viewport.addEventListener('touchend', (e) => {
+      if (!swiping) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (dx > 60)       goTo(current - 1);
+      else if (dx < -60) goTo(current + 1);
+    }, { passive: true });
+
+    goTo(0);
+  })();
+
+  /* ============================================================
+     3. LINH VẬT BUBBLE + VỆT MỜ THEO CHUỘT
+     ============================================================ */
+  (function () {
+    const mascot = document.getElementById('mascot');
+    const trail  = document.getElementById('mascotTrail');
+
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 3;
+
+    // Vị trí hiện tại của bubble và vệt mờ
+    let bX = targetX, bY = targetY;      // bubble
+    let tX = targetX, tY = targetY;      // trail
+
+    // Hệ số đuổi — bubble theo nhanh, trail theo chậm hơn nhiều
+    const EASE_BUBBLE = 0.085;
+    const EASE_TRAIL  = 0.028;
+
+    const SIZE = 90;
+    const HALF = SIZE / 2;
+
+    function updateTarget(e) {
+      const p = (e.touches && e.touches[0]) ? e.touches[0] : e;
+      targetX = p.clientX;
+      targetY = p.clientY;
+    }
+
+    window.addEventListener('mousemove', updateTarget, { passive: true });
+    window.addEventListener('touchmove', updateTarget, { passive: true });
+    window.addEventListener('touchstart', updateTarget, { passive: true });
+
+    function loop(t) {
+      // Bubble đuổi mục tiêu
+      bX += (targetX - bX) * EASE_BUBBLE;
+      bY += (targetY - bY) * EASE_BUBBLE;
+
+      // Trail đuổi theo bubble
+      tX += (targetX - tX) * EASE_TRAIL;
+      tY += (targetY - tY) * EASE_TRAIL;
+
+      // Vận tốc bubble → độ blur và độ giãn của trail
+      const vx = targetX - bX;
+      const vy = targetY - bY;
+      const speed = Math.min(40, Math.hypot(vx, vy));
+      const blur   = 10 + speed * 0.6;
+      const scale  = 1 + Math.min(0.55, speed * 0.018);
+
+      // Nhấp nhô nhẹ
+      const bob = Math.sin(t / 720) * 3.5;
+
+      // Nghiêng nhẹ theo hướng
+      const tilt = Math.max(-10, Math.min(10, vx * 0.22));
+
+      mascot.style.transform =
+        `translate(${bX - HALF}px, ${bY - HALF + bob}px) rotate(${tilt}deg)`;
+
+      trail.style.transform =
+        `translate(${tX - HALF}px, ${tY - HALF}px) scale(${scale})`;
+      trail.style.filter = `blur(${blur}px)`;
+      trail.style.opacity = String(0.35 + Math.min(0.5, speed * 0.014));
+
+      requestAnimationFrame(loop);
+    }
+
+    requestAnimationFrame(loop);
+  })();
+</script>
+
+</body>
+</html>

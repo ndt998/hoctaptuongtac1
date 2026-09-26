@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bản Tin Khoa Học: Giải Mã Trí Tưởng Tượng Của AI</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,700&family=Roboto+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Design Tokens: Phong cách Tạp chí Khoa học Tương tác Thập niên 90 */
+    :root {
+      --paper-cream: #f7f3e9;
+      --paper-card: #f0e9dc;
+      --ink-dark: #1e1b18;
+      --ink-muted: #574e44;
+      --accent-rust: #9e3d24;
+      --accent-lava: #e65c00;
+      --border-dark: #3a322b;
+    }
+
+    body {
+      background-color: #2b2520;
+      color: var(--ink-dark);
+      font-family: 'Roboto', sans-serif;
+      background-image: 
+        radial-gradient(#423830 1px, transparent 1px),
+        radial-gradient(#423830 1px, #241e1a 1px);
+      background-size: 32px 32px;
+      background-position: 0 0, 16px 16px;
+    }
+
+    .editorial-sheet {
+      background-color: var(--paper-cream);
+      background-image: 
+        radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 0),
+        linear-gradient(to right, rgba(0,0,0,0.012) 1px, transparent 1px);
+      background-size: 16px 16px, 100% 28px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.5), inset 0 0 100px rgba(170, 140, 100, 0.18);
+    }
+
+    .font-code {
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    /* Thước kẻ báo chí vintage */
+    .rule-heavy {
+      border-top: 3px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-dark);
+      height: 6px;
+    }
+
+    .rule-light {
+      border-top: 1px dashed var(--border-dark);
+    }
+
+    /* Hiệu ứng con dấu */
+    .stamp-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      text-transform: uppercase;
+      font-weight: 700;
+      border: 2px dashed var(--accent-rust);
+      color: var(--accent-rust);
+      transform: rotate(-1.5deg);
+    }
+
+    /* Chữ cái phóng to đầu dòng */
+    .first-big-letter::first-letter {
+      float: left;
+      font-size: 3.8rem;
+      line-height: 0.82;
+      padding-top: 4px;
+      padding-right: 8px;
+      font-weight: 900;
+      color: var(--accent-rust);
+    }
+
+    input[type=range] {
+      accent-color: var(--accent-rust);
+    }
+
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #e2d7c3; }
+    ::-webkit-scrollbar-thumb { background: #8f7d6a; border-radius: 4px; }
+  </style>
+</head>
+
+<body class="p-2 sm:p-4 md:p-6 min-h-screen">
+  <div class="max-w-6xl mx-auto editorial-sheet border-4 border-stone-900 p-4 sm:p-7 md:p-9 transition-all">
+    
+    <!-- Thanh thông tin đầu báo -->
+    <header class="border-b-2 border-stone-800 pb-3 mb-6">
+      <div class="flex flex-wrap justify-between items-center text-xs font-code uppercase tracking-wider text-stone-700 pb-2 mb-2 border-b border-stone-400">
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-stone-900">Chuyên San Học Thuật AI Cơ Bản</span>
+          <span>&bull;</span>
+          <span>Chuyên đề: Giải Mã Năng Lực Sáng Tạo Phi Tồn Tại</span>
+        </div>
+        
+        <!-- Nút chuyển ngôn ngữ trực quan -->
+        <div class="flex items-center gap-2 mt-1 sm:mt-0">
+          <span class="font-bold text-[11px] text-stone-900">NGÔN NGỮ:</span>
+          <button id="lang-vi-btn" onclick="toggleLanguage('vi')" class="px-2.5 py-0.5 border border-stone-800 bg-stone-900 text-stone-100 font-bold transition text-xs">Tiếng Việt</button>
+          <button id="lang-en-btn" onclick="toggleLanguage('en')" class="px-2.5 py-0.5 border border-stone-800 bg-stone-200 text-stone-900 font-bold hover:bg-stone-300 transition text-xs">English</button>
+        </div>
+      </div>
+
+      <div class="text-center pt-2">
+        <div class="stamp-badge text-xs mb-2" data-key="badge_main">
+          HỎI ĐÁP CỐT LÕI CHO SINH VIÊN & NGƯỜI MỚI BẮT ĐẦU
+        </div>
+        <h1 class="text-2xl sm:text-4xl md:text-5xl font-black uppercase text-stone-950 tracking-tight" data-key="title_main">
+          Làm Sao AI Vẽ Ra Thứ Không Hề Tồn Tại Trên Đời?
+        </h1>
+        <p class="text-base sm:text-lg italic text-stone-700 max-w-3xl mx-auto mt-2 leading-relaxed" data-key="sub_main">
+          Bóc trần bí mật: Tại sao mô hình Diffusion không hề "cắt ghép ảnh cũ" mà thực chất đang "học thuộc các thuộc tính cơ bản của vũ trụ" để tái tổ hợp lại từ một đám mây nhiễu trắng.
+        </p>
+      </div>
+
+      <div class="rule-heavy my-4"></div>
+
+      <!-- Điều hướng nhanh giữa các chương phân tích -->
+      <nav class="flex flex-wrap justify-center gap-2 font-code text-xs font-bold uppercase">
+        <button onclick="scrollToSection('sec-myth')" class="px-3 py-1.5 bg-stone-200 border border-stone-800 hover:bg-stone-300 transition">1. Ảo tưởng Cắt Ghép</button>
+        <button onclick="scrollToSection('sec-mixer')" class="px-3 py-1.5 bg-stone-900 text-stone-100 border border-stone-900 shadow">2. Bảng Pha Màu Ý Niệm (Interactive)</button>
+        <button onclick="scrollToSection('sec-sculptor')" class="px-3 py-1.5 bg-stone-200 border border-stone-800 hover:bg-stone-300 transition">3. Điêu Khắc Từ Đám Mây Nhiễu</button>
+        <button onclick="scrollToSection('sec-coherence')" class="px-3 py-1.5 bg-stone-200 border border-stone-800 hover:bg-stone-300 transition">4. Ánh Sáng & Khớp Nối</button>
+        <button onclick="scrollToSection('sec-homework')" class="px-3 py-1.5 bg-stone-200 border border-stone-800 hover:bg-stone-300 transition">5. Tóm Tắt Nộp Bài Tập</button>
+      </nav>
+    </header>
+
+    <main class="space-y-8">
+      
+      <!-- PHẦN 1: BÁC BỎ ẢO TƯỞNG CẮT GHÉP PHOTOSHOP -->
+      <section id="sec-myth" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900">01</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="sec1_title">
+              Ảo Tưởng Phổ Biến: "Có Phải AI Đang Cắt Ghép Ảnh Trong Kho Dữ Liệu?"
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="sec1_sub">
+              Sự thật gây sốc về dung lượng mô hình và phép tính toán học.
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+          <div class="md:col-span-7 space-y-3 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter" data-key="sec1_p1">
+              Khi bạn gõ câu lệnh: <em>"Một sinh vật người làm từ đá thiên thạch, 4 cánh tay, 2 đầu, cầm súng không gian, mặc đồ cao bồi, cưỡi tảng đá vuông 4 chân cơ khí"</em>, trực giác tự nhiên của hầu hết mọi người sẽ nghĩ: 
+              <strong>"Chắc chắn máy tính đang mở kho ảnh khổng lồ ra, cắt ảnh chân cua, cắt ảnh tảng đá, cắt ảnh người cao bồi rồi dùng Photoshop dán chúng lại với nhau!"</strong>
+            </p>
+            <p data-key="sec1_p2">
+              <strong class="text-red-900 uppercase">Suy nghĩ này hoàn toàn sai lầm 100%!</strong> Hãy nhìn vào một nghịch lý toán học không thể chối cãi:
+            </p>
+            
+            <div class="p-3.5 bg-amber-50 border-l-4 border-amber-900 text-stone-900 space-y-1 text-xs sm:text-sm font-code">
+              <div>&bull; <strong>Dữ liệu huấn luyện:</strong> Khoảng 5.000.000.000 bức ảnh (hàng chục Petabytes).</div>
+              <div>&bull; <strong>Kích thước tệp mô hình AI:</strong> Chỉ vỏn vẹn khoảng <strong>2GB đến 6GB</strong>.</div>
+              <div>&bull; <strong>Phép tính logic:</strong> 4GB không thể lưu nổi 1 bức ảnh chất lượng siêu cao của từng người trong 5 tỷ ảnh, chứ đừng nói là toàn bộ kho ảnh!</div>
+            </div>
+
+            <p data-key="sec1_p3">
+              Bên trong tệp mô hình AI <strong>không hề có bất kỳ một bức ảnh mẫu nào được lưu trữ</strong>. Vậy nếu không có ảnh lưu sẵn, làm sao nó có thể vẽ ra một thứ kỳ quái như vậy?
+            </p>
+          </div>
+
+          <!-- Bảng so sánh Cắt ghép vs Diffusion -->
+          <div class="md:col-span-5 border-2 border-stone-800 p-3 bg-stone-200 space-y-2">
+            <div class="font-code font-bold text-xs uppercase text-stone-900 border-b border-stone-400 pb-1 text-center" data-key="sec1_box_head">
+              So Sánh Trực Tiếp Cơ Chế
+            </div>
+
+            <div class="p-2.5 bg-red-100 border border-red-300 text-xs text-stone-800">
+              <div class="font-bold text-red-950 flex items-center gap-1">
+                <span>&#10006;</span> <span data-key="sec1_bad_title">Nếu AI làm theo cách Cắt Ghép (Collage):</span>
+              </div>
+              <p class="mt-1" data-key="sec1_bad_desc">
+                Viền ảnh sẽ bị lộ vết cắt; ánh sáng mặt trời trên cánh tay này sẽ ngược hướng với cánh tay kia; khớp vai của cánh tay thứ 3 và 4 sẽ bị dán đè méo mó; và tảng đá vuông sẽ không thể có góc bóng đổ trùng khớp với mặt đất.
+              </p>
+            </div>
+
+            <div class="p-2.5 bg-green-100 border border-green-300 text-xs text-stone-800">
+              <div class="font-bold text-green-950 flex items-center gap-1">
+                <span>&#10004;</span> <span data-key="sec1_good_title">Cách Mô Hình Diffusion Thực Sự Làm:</span>
+              </div>
+              <p class="mt-1" data-key="sec1_good_desc">
+                Nó tự tạo mới toàn bộ từ con số 0! Nó hiểu "Quy luật vật lý của ánh sáng", "Cấu trúc bề mặt xốp của đá thiên thạch", và "Hình dáng góc cạnh của một chiếc hộp". Sau đó nó vẽ từng pixel hòa quyện tuyệt đối vào nhau.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PHẦN 2: BẢNG PHA MÀU Ý NIỆM (CONCEPT MIXER) -->
+      <section id="sec-mixer" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900">02</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="sec2_title">
+              Bí Mật Cốt Lõi: AI Không Học "Bức Ảnh", AI Học "Ý Niệm" (Concepts)
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="sec2_sub">
+              Giống như bảng pha màu: Trộn Đỏ và Vàng ra Cam, AI trộn "Người" + "Đá Thiên Thạch" = "Người Đá Nứt Nẻ"!
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-6 space-y-3 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <h3 class="font-bold text-stone-900 uppercase font-code text-sm" data-key="sec2_h1">
+              Phép Cộng Trừ Ý Niệm Trong Não Bộ AI
+            </h3>
+            <p data-key="sec2_p1">
+              Hãy tưởng tượng bạn dạy một đứa trẻ: Cho đứa trẻ xem 1.000 con mèo, nó sẽ không học thuộc vị trí từng sợi lông của 1.000 con mèo đó. Thay vào đó, nó đúc kết được <strong>bộ quy tắc cốt lõi</strong>: <em>"Mèo = Tai tam giác + Râu ria mép + Mắt hình hạt hạnh nhân + Lông mềm"</em>.
+            </p>
+            <p data-key="sec2_p2">
+              Nếu bạn bảo đứa trẻ: <em>"Hãy vẽ một con mèo làm bằng kính thủy tinh trong suốt"</em>, đứa trẻ chưa bao giờ nhìn thấy con mèo thủy tinh thật, nhưng nó vẽ được ngay! Nó lấy <strong>cấu trúc hình dạng con mèo</strong> ghép với <strong>thuộc tính khúc xạ ánh sáng của thủy tinh</strong>.
+            </p>
+            <p data-key="sec2_p3">
+              Mô hình Diffusion hoạt động y hệt như vậy. Nó học hàng tỷ khái niệm độc lập:
+            </p>
+            <ul class="list-disc list-inside space-y-1 font-code text-xs sm:text-sm bg-stone-200 p-3 border border-stone-400">
+              <li><strong>Ý niệm "Đá thiên thạch":</strong> Bề mặt rỗ tổ ong, màu xám tro tối, có vân nứt phát sáng màu cam dung nham.</li>
+              <li><strong>Ý niệm "Cao bồi":</strong> Mũ rộng vành vát hai bên, áo khoác choàng dài phủ qua hông, thắt lưng đạn.</li>
+              <li><strong>Ý niệm "4 cánh tay":</strong> Nhân đôi khớp bả vai, 2 tay trên giơ cao, 2 tay dưới hạ thấp tự nhiên.</li>
+              <li><strong>Ý niệm "Khối đá vuông 4 chân cơ khí":</strong> Khối hộp 6 mặt kết hợp các khớp piston thủy lực của bọ cạp.</li>
+            </ul>
+          </div>
+
+          <!-- BẢNG ĐIỀU KHIỂN TƯƠNG TÁC: THỰC NGHIỆM TRỘN Ý NIỆM -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900" data-key="sec2_lab_head">
+                Phòng Thí Nghiệm: Pha Trộn Ý Niệm Trực Quan
+              </span>
+              <span id="mixer-status-tag" class="text-xs font-code font-bold px-2 py-0.5 bg-amber-900 text-amber-50">
+                Chế độ Tùy biến
+              </span>
+            </div>
+
+            <!-- Canvas hiển thị kết quả trộn ý niệm -->
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="conceptMixerCanvas" width="420" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <!-- Các thanh trượt điều khiển ý niệm -->
+            <div class="space-y-3 bg-stone-100 p-3 border border-stone-400 text-xs font-code">
+              <div>
+                <div class="flex justify-between font-bold mb-1">
+                  <span>Chất liệu Bề mặt:</span>
+                  <span id="label-material" class="text-amber-900">Đá Thiên Thạch (Rỗ & Nứt Nẻ Dung Nham)</span>
+                </div>
+                <input type="range" id="slider-material" min="0" max="100" value="85" class="w-full h-2 cursor-pointer">
+                <div class="flex justify-between text-[10px] text-stone-500">
+                  <span>0% Da người bình thường</span>
+                  <span>100% Đá dung nham vũ trụ</span>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between font-bold mb-1">
+                  <span>Số Lượng Cánh Tay:</span>
+                  <span id="label-arms" class="text-amber-900">4 Cánh tay (Độc lập 4 Súng)</span>
+                </div>
+                <input type="range" id="slider-arms" min="2" max="6" step="2" value="4" class="w-full h-2 cursor-pointer">
+                <div class="flex justify-between text-[10px] text-stone-500">
+                  <span>2 Tay người thường</span>
+                  <span>4 Tay sinh vật lạ</span>
+                  <span>6 Tay quái vật</span>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between font-bold mb-1">
+                  <span>Thú Cưỡi & Chân:</span>
+                  <span id="label-mount" class="text-amber-900">Khối đá vuông 4 chân cơ khí</span>
+                </div>
+                <input type="range" id="slider-mount" min="0" max="100" value="90" class="w-full h-2 cursor-pointer">
+                <div class="flex justify-between text-[10px] text-stone-500">
+                  <span>Ngựa thông thường</span>
+                  <span>Khối đá vuông cơ khí</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-2 bg-amber-50 border border-stone-400 text-xs font-code text-stone-800" id="mixer-explanation">
+              <strong>Bài học:</strong> AI không tìm ảnh một gã 4 tay. Nó lấy công thức "Dáng người" + "Nhân đôi cấu trúc tay" + "Chất liệu đá xốp" để tự tính toán ra vị trí của từng pixel!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PHẦN 3: NGƯỜI THỢ ĐIÊU KHẮC VÀ ĐÁM MÂY NHIỄU -->
+      <section id="sec-sculptor" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900">03</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="sec3_title">
+              Cách Thức Vận Hành: Người Thợ Điêu Khắc Từ Đám Mây Nhiễu Trắng
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="sec3_sub">
+              Khái niệm "Khử Nhiễu Từng Bước" (Iterative Denoising) giải thích cực kỳ dễ hiểu.
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          <div class="lg:col-span-6 space-y-3 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <h3 class="font-bold text-stone-900 uppercase font-code text-sm" data-key="sec3_h1">
+              Ẩn Dụ Về Khối Đá Cẩm Thạch Của Michelangelo
+            </h3>
+            <p data-key="sec3_p1">
+              Đại danh họa Michelangelo từng có một câu nói nổi tiếng: <em>"Bức tượng David vốn đã nằm sẵn bên trong khối đá cẩm thạch thô ráp. Việc của tôi chỉ là dùng đục gạt bỏ những phần đá thừa thãi xung quanh ra ngoài."</em>
+            </p>
+            <p data-key="sec3_p2">
+              Mô hình Diffusion vẽ tranh <strong>chính xác theo cách thức đó</strong>:
+            </p>
+            <ol class="list-decimal list-inside space-y-2 text-xs sm:text-sm font-code bg-stone-200 p-3 border border-stone-400">
+              <li>
+                <strong>Bắt đầu bằng màn sương nhiễu hạt (Noise):</strong> Khi bạn bấm tạo ảnh, AI không mở trang giấy trắng tinh, mà nó rải ra một mảng hỗn loạn hàng triệu hạt nhiễu xám (giống như màn hình TV bị mất sóng).
+              </li>
+              <li>
+                <strong>Lực đẩy từ câu lệnh (Prompt Guidance):</strong> Bạn yêu cầu "Cao bồi đá 4 tay". Mô hình nhìn vào đám hạt nhiễu và tự hỏi: <em>"Trong hàng triệu hạt nhiễu ngẫu nhiên này, hạt nào có thể nắn thành chóp mũ cao bồi? Hạt nào có thể nắn thành báng súng?"</em>
+              </li>
+              <li>
+                <strong>Gọt giũa 50 bước liên tiếp:</strong> Ở mỗi bước, nó chỉ gạt đi một chút xíu hỗn loạn và làm nét thêm một chút hình dáng. Sau 30 đến 50 bước, từ màn sương mờ mịt hoàn toàn ngẫu nhiên, hình thù sinh vật siêu thực xuất hiện sắc lẹm!
+              </li>
+            </ol>
+          </div>
+
+          <!-- MÔ PHỎNG TƯƠNG TÁC QUÁ TRÌNH GỌT GIŨA NHIỄU -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900" data-key="sec3_lab_head">
+                Mô Phỏng: Kéo Thanh Trượt Xem Quá Trình "Gọt Nhiễu"
+              </span>
+              <button onclick="autoPlayDenoise()" id="btn-denoise-play" class="text-xs font-code font-bold px-2 py-0.5 bg-stone-900 text-stone-100 hover:bg-stone-800">
+                &#9654; Tự Động Chạy (Play)
+              </button>
+            </div>
+
+            <!-- Canvas gọt nhiễu -->
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded text-center">
+              <canvas id="sculptorDenoiseCanvas" width="420" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <!-- Slider bước thời gian -->
+            <div class="bg-stone-100 p-3 border border-stone-400 text-xs font-code space-y-2">
+              <div class="flex justify-between font-bold">
+                <span>Bước hiện tại: <span id="denoise-step-val" class="text-red-700 font-bold">Bước 25 / 50</span></span>
+                <span id="denoise-stage-label" class="text-stone-700">Giai đoạn: Định hình khung xương</span>
+              </div>
+              <input type="range" id="slider-denoise" min="0" max="50" value="25" class="w-full h-2 cursor-pointer">
+              <div class="flex justify-between text-[10px] text-stone-500">
+                <span>Bước 0 (Màn nhiễu TV)</span>
+                <span>Bước 25 (Khung hình mờ)</span>
+                <span>Bước 50 (Hoàn thiện sắc nét)</span>
+              </div>
+            </div>
+
+            <div id="denoise-status-desc" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Tại bước 25, mô hình đã dọn dẹp 50% nhiễu. Hai chiếc đầu đá và 4 cánh tay cầm súng lục đã lộ rõ hình hài sơ bộ!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PHẦN 4: VÌ SAO ÁNH SÁNG VÀ TƯ THẾ LẠI KHÔNG BỊ LỖI? -->
+      <section id="sec-coherence" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900">04</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="sec4_title">
+              Tại Sao 4 Cánh Tay Và Ánh Sáng Lại Ăn Khớp Hoàn Hảo?
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="sec4_sub">
+              Khái niệm "Tầm nhìn toàn cảnh" (Self-Attention) - Lý do mọi chi tiết trên bức tranh đều biết về nhau.
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-4 bg-stone-200 border border-stone-400 space-y-2">
+            <div class="font-bold text-amber-950 font-code text-sm flex items-center gap-1.5">
+              <span class="px-1.5 py-0.5 bg-amber-900 text-stone-100 text-xs">A</span>
+              <span data-key="sec4_c1_title">Ánh Sáng Thống Nhất</span>
+            </div>
+            <p class="text-xs sm:text-sm text-stone-800 leading-relaxed" data-key="sec4_c1_desc">
+              Khi bạn yêu cầu <em>"vân nứt dung nham phát sáng"</em>, AI không chỉ tô màu cam lên ngực. Ở mỗi bước gọt nhiễu, các pixel ở ngực "nói chuyện" với các pixel ở 4 cánh tay và áo khoác, tạo ra vệt hắt sáng màu cam vàng lung linh lên mặt dưới của cả 4 khẩu súng.
+            </p>
+          </div>
+
+          <div class="p-4 bg-stone-200 border border-stone-400 space-y-2">
+            <div class="font-bold text-amber-950 font-code text-sm flex items-center gap-1.5">
+              <span class="px-1.5 py-0.5 bg-amber-900 text-stone-100 text-xs">B</span>
+              <span data-key="sec4_c2_title">Giải Phẫu Học Tự Điều Chỉnh</span>
+            </div>
+            <p class="text-xs sm:text-sm text-stone-800 leading-relaxed" data-key="sec4_c2_desc">
+              Vì con người ngoài đời chỉ có 2 tay, nếu bạn bắt nó vẽ 4 tay, AI sẽ tự động tính toán để mở rộng lồng ngực và dời khớp bả vai thứ 3 và thứ 4 xuống thấp hơn một chút, giúp nhân vật trông có vẻ sinh học hợp lý chứ không bị gãy xương!
+            </p>
+          </div>
+
+          <div class="p-4 bg-stone-200 border border-stone-400 space-y-2">
+            <div class="font-bold text-amber-950 font-code text-sm flex items-center gap-1.5">
+              <span class="px-1.5 py-0.5 bg-amber-900 text-stone-100 text-xs">C</span>
+              <span data-key="sec4_c3_title">Trọng Tâm Và Khối Lượng</span>
+            </div>
+            <p class="text-xs sm:text-sm text-stone-800 leading-relaxed" data-key="sec4_c3_desc">
+              Nhân vật đá rất nặng, đặt lên "tảng đá vuông 4 chân". AI tự động tạo tư thế cho 4 chân cơ khí hơi choãi ra và lún nhẹ xuống nền đất đá vụn để tạo cảm giác sức nặng vật lý như thật.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PHẦN 5: TÓM TẮT ĐỂ NỘP BÀI TẬP VỀ NHÀ (DÀNH CHO FRESHER) -->
+      <section id="sec-homework" class="p-4 sm:p-6 bg-amber-50 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900">05</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="sec5_title">
+              Sổ Tay Nộp Bài: 4 Điểm Cốt Lõi Để Viết Vào Báo Cáo Của Bạn
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="sec5_sub">
+              Cách diễn đạt vừa thông minh, chính xác vừa không bị máy móc hay dính bẫy thuật ngữ.
+            </span>
+          </div>
+        </div>
+
+        <div class="space-y-3 text-xs sm:text-sm font-code text-stone-800">
+          <div class="p-3 bg-stone-100 border border-stone-400">
+            <strong class="text-amber-950 uppercase block mb-1">Luận điểm 1: Mô hình không phải máy photocopy (No Database of Photos)</strong>
+            <span>Mô hình Diffusion không lưu ảnh mẫu để cắt dán. Nó nén tri thức thị giác thành các thuộc tính trừu tượng (hình khối, chất liệu, bóng đổ, góc phối cảnh) trong không gian nơ-ron đa chiều.</span>
+          </div>
+
+          <div class="p-3 bg-stone-100 border border-stone-400">
+            <strong class="text-amber-950 uppercase block mb-1">Luận điểm 2: Sáng tạo là sự Giao thoa Ý niệm (Semantic Intersection)</strong>
+            <span>Những thứ "không tồn tại" (như người đá 4 tay cưỡi tảng đá vuông) thực chất là sự giao thoa giữa các ý niệm có thật: Cấu trúc cơ thể người + Độ rỗ của đá núi lửa + Cấu tạo súng lục + Hình học khối lập phương. AI kết hợp chúng lại theo quy luật toán học.</span>
+          </div>
+
+          <div class="p-3 bg-stone-100 border border-stone-400">
+            <strong class="text-amber-950 uppercase block mb-1">Luận điểm 3: Khởi đầu từ Sự Hỗn Loạn (Generation as Denoising)</strong>
+            <span>Quá trình vẽ ảnh là một chuỗi đảo ngược thời gian: Đi từ 100% nhiễu ngẫu nhiên (nhiễu trắng Gaussian) và gọt giũa dần qua 30–50 bước dưới sự định hướng của câu lệnh văn bản.</span>
+          </div>
+
+          <div class="p-3 bg-stone-100 border border-stone-400">
+            <strong class="text-amber-950 uppercase block mb-1">Luận điểm 4: Tính Nhất Quán Toàn Cục (Global Visual Coherence)</strong>
+            <span>Cơ chế Attention trong mạng nơ-ron giúp các điểm ảnh luôn kiểm tra trạng thái của nhau, đảm bảo ánh sáng dung nham phản chiếu đồng bộ lên áo khoác, súng và thú cưỡi mà không bị rời rạc.</span>
+          </div>
+        </div>
+
+        <!-- Trắc nghiệm kiểm tra nhanh 3 câu -->
+        <div class="mt-6 pt-4 border-t-2 border-stone-400">
+          <h3 class="font-bold text-stone-900 font-code text-sm uppercase mb-3" data-key="quiz_title">
+            Bài Kiểm Tra Nhanh 3 Câu (Tự Đánh Giá Độ Hiểu Bài):
+          </h3>
+          <div id="quick-quiz-container" class="space-y-3">
+            <!-- Dynamically injected -->
+          </div>
+          <div id="quiz-result-msg" class="mt-3 text-xs font-code font-bold hidden"></div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="mt-8 pt-4 border-t-2 border-stone-800 text-stone-600 text-xs font-code flex flex-wrap justify-between items-center">
+      <div>Bản Tin Khoa Học Trực Quan &bull; Dành cho Sinh Viên & Fresher Nhập Môn AI</div>
+      <div class="text-stone-900 font-bold">100% Thuần Toán Học & Quy Luật Trực Quan &bull; Không Cắt Ghép</div>
+    </footer>
+
+  </div>
+
+  <script>
+    /* Trạng thái ứng dụng */
+    const state = {
+      lang: 'vi',
+      materialVal: 85,
+      armsVal: 4,
+      mountVal: 90,
+      denoiseStep: 25,
+      isPlaying: false,
+      intervalId: null,
+      quizAnswers: {}
+    };
+
+    /* Từ điển 2 ngôn ngữ VI / EN giải thích trực quan */
+    const dictionary = {
+      vi: {
+        badge_main: "HỎI ĐÁP CỐT LÕI CHO SINH VIÊN & NGƯỜI MỚI BẮT ĐẦU",
+        title_main: "Làm Sao AI Vẽ Ra Thứ Không Hề Tồn Tại Trên Đời?",
+        sub_main: "Bóc trần bí mật: Tại sao mô hình Diffusion không hề \"cắt ghép ảnh cũ\" mà thực chất đang \"học thuộc các thuộc tính cơ bản của vũ trụ\" để tái tổ hợp lại từ một đám mây nhiễu trắng.",
+        sec1_title: "Ảo Tưởng Phổ Biến: \"Có Phải AI Đang Cắt Ghép Ảnh Trong Kho Dữ Liệu?\"",
+        sec1_sub: "Sự thật gây sốc về dung lượng mô hình và phép tính toán học.",
+        sec1_p1: "Khi bạn gõ câu lệnh: \"Một sinh vật người làm từ đá thiên thạch, 4 cánh tay, 2 đầu, cầm súng không gian, mặc đồ cao bồi, cưỡi tảng đá vuông 4 chân cơ khí\", trực giác tự nhiên của hầu hết mọi người sẽ nghĩ: \"Chắc chắn máy tính đang mở kho ảnh khổng lồ ra, cắt ảnh chân cua, cắt ảnh tảng đá, cắt ảnh người cao bồi rồi dùng Photoshop dán chúng lại với nhau!\"",
+        sec1_p2: "Suy nghĩ này hoàn toàn sai lầm 100%! Hãy nhìn vào một nghịch lý toán học không thể chối cãi:",
+        sec1_p3: "Bên trong tệp mô hình AI không hề có bất kỳ một bức ảnh mẫu nào được lưu trữ. Vậy nếu không có ảnh lưu sẵn, làm sao nó có thể vẽ ra một thứ kỳ quái như vậy?",
+        sec1_box_head: "So Sánh Trực Tiếp Cơ Chế",
+        sec1_bad_title: "Nếu AI làm theo cách Cắt Ghép (Collage):",
+        sec1_bad_desc: "Viền ảnh sẽ bị lộ vết cắt; ánh sáng mặt trời trên cánh tay này sẽ ngược hướng với cánh tay kia; khớp vai của cánh tay thứ 3 và 4 sẽ bị dán đè méo mó; và tảng đá vuông sẽ không thể có góc bóng đổ trùng khớp với mặt đất.",
+        sec1_good_title: "Cách Mô Hình Diffusion Thực Sự Làm:",
+        sec1_good_desc: "Nó tự tạo mới toàn bộ từ con số 0! Nó hiểu \"Quy luật vật lý của ánh sáng\", \"Cấu trúc bề mặt xốp của đá thiên thạch\", và \"Hình dáng góc cạnh của một chiếc hộp\". Sau đó nó vẽ từng pixel hòa quyện tuyệt đối vào nhau.",
+        sec2_title: "Bí Mật Cốt Lõi: AI Không Học \"Bức Ảnh\", AI Học \"Ý Niệm\" (Concepts)",
+        sec2_sub: "Giống như bảng pha màu: Trộn Đỏ và Vàng ra Cam, AI trộn \"Người\" + \"Đá Thiên Thạch\" = \"Người Đá Nứt Nẻ\"!",
+        sec2_h1: "Phép Cộng Trừ Ý Niệm Trong Não Bộ AI",
+        sec2_p1: "Hãy tưởng tượng bạn dạy một đứa trẻ: Cho đứa trẻ xem 1.000 con mèo, nó sẽ không học thuộc vị trí từng sợi lông của 1.000 con mèo đó. Thay vào đó, nó đúc kết được bộ quy tắc cốt lõi: \"Mèo = Tai tam giác + Râu ria mép + Mắt hình hạt hạnh nhân + Lông mềm\".",
+        sec2_p2: "Nếu bạn bảo đứa trẻ: \"Hãy vẽ một con mèo làm bằng kính thủy tinh trong suốt\", đứa trẻ chưa bao giờ nhìn thấy con mèo thủy tinh thật, nhưng nó vẽ được ngay! Nó lấy cấu trúc hình dạng con mèo ghép với thuộc tính khúc xạ ánh sáng của thủy tinh.",
+        sec2_p3: "Mô hình Diffusion hoạt động y hệt như vậy. Nó học hàng tỷ khái niệm độc lập:",
+        sec2_lab_head: "Phòng Thí Nghiệm: Pha Trộn Ý Niệm Trực Quan",
+        sec3_title: "Cách Thức Vận Hành: Người Thợ Điêu Khắc Từ Đám Mây Nhiễu Trắng",
+        sec3_sub: "Khái niệm \"Khử Nhiễu Từng Bước\" (Iterative Denoising) giải thích cực kỳ dễ hiểu.",
+        sec3_h1: "Ẩn Dụ Về Khối Đá Cẩm Thạch Của Michelangelo",
+        sec3_p1: "Đại danh họa Michelangelo từng có một câu nói nổi tiếng: \"Bức tượng David vốn đã nằm sẵn bên trong khối đá cẩm thạch thô ráp. Việc của tôi chỉ là dùng đục gạt bỏ những phần đá thừa thãi xung quanh ra ngoài.\"",
+        sec3_p2: "Mô hình Diffusion vẽ tranh chính xác theo cách thức đó:",
+        sec3_lab_head: "Mô Phỏng: Kéo Thanh Trượt Xem Quá Trình \"Gọt Nhiễu\"",
+        sec4_title: "Tại Sao 4 Cánh Tay Và Ánh Sáng Lại Ăn Khớp Hoàn Hảo?",
+        sec4_sub: "Khái niệm \"Tầm nhìn toàn cảnh\" (Self-Attention) - Lý do mọi chi tiết trên bức tranh đều biết về nhau.",
+        sec4_c1_title: "Ánh Sáng Thống Nhất",
+        sec4_c1_desc: "Khi bạn yêu cầu \"vân nứt dung nham phát sáng\", AI không chỉ tô màu cam lên ngực. Ở mỗi bước gọt nhiễu, các pixel ở ngực \"nói chuyện\" với các pixel ở 4 cánh tay và áo khoác, tạo ra vệt hắt sáng màu cam vàng lung linh lên mặt dưới của cả 4 khẩu súng.",
+        sec4_c2_title: "Giải Phẫu Học Tự Điều Chỉnh",
+        sec4_c2_desc: "Vì con người ngoài đời chỉ có 2 tay, nếu bạn bắt nó vẽ 4 tay, AI sẽ tự động tính toán để mở rộng lồng ngực và dời khớp bả vai thứ 3 và thứ 4 xuống thấp hơn một chút, giúp nhân vật trông có vẻ sinh học hợp lý chứ không bị gãy xương!",
+        sec4_c3_title: "Trọng Tâm Và Khối Lượng",
+        sec4_c3_desc: "Nhân vật đá rất nặng, đặt lên \"tảng đá vuông 4 chân\". AI tự động tạo tư thế cho 4 chân cơ khí hơi choãi ra và lún nhẹ xuống nền đất đá vụn để tạo cảm giác sức nặng vật lý như thật.",
+        sec5_title: "Sổ Tay Nộp Bài: 4 Điểm Cốt Lõi Để Viết Vào Báo Cáo Của Bạn",
+        sec5_sub: "Cách diễn đạt vừa thông minh, chính xác vừa không bị máy móc hay dính bẫy thuật ngữ.",
+        quiz_title: "Bài Kiểm Tra Nhanh 3 Câu (Tự Đánh Giá Độ Hiểu Bài):"
+      },
+      en: {
+        badge_main: "CORE Q&A FOR FRESHERS & STUDENTS",
+        title_main: "How Does AI Paint Things That Never Existed?",
+        sub_main: "Debunking the myth: Why Diffusion models don't collage existing photos, but rather learn the fundamental visual rules of reality and synthesize from pure noise.",
+        sec1_title: "The Common Myth: \"Is the AI just copy-pasting images from a dataset?\"",
+        sec1_sub: "The mathematical paradox of model weights vs training dataset scale.",
+        sec1_p1: "When you type: \"A humanoid creature made of meteorite rock, 4 arms, 2 heads, holding space guns, cowboy attire, riding a square rock with 4 mechanical legs\", people naturally assume: \"The computer is just cutting out crab legs, meteorite textures, and cowboys in Photoshop and gluing them together!\"",
+        sec1_p2: "This assumption is 100% false! Consider this undeniable mathematical fact:",
+        sec1_p3: "Inside the AI model file, zero reference photographs are stored. If no photos are saved, how does it synthesize such an alien creation?",
+        sec1_box_head: "Direct Mechanism Comparison",
+        sec1_bad_title: "If AI used Image Collage (Photoshop):",
+        sec1_bad_desc: "Visible seams would appear; lighting direction on arm 1 would clash with arm 4; extra shoulder sockets would look broken; and shadows from the square mount would not align with the alien ground.",
+        sec1_good_title: "How Diffusion Models Actually Work:",
+        sec1_good_desc: "It synthesizes everything from scratch! It understands \"the physics of light\", \"the porous texture of volcanic basalt\", and \"the perspective geometry of a box\". It paints every pixel coherently.",
+        sec2_title: "The Core Secret: AI Learns \"Concepts\", Not Pictures",
+        sec2_sub: "Just like color mixing: Red + Yellow = Orange, the AI mixes \"Human\" + \"Meteorite Basalt\" = \"Glowing Rocky Golem\"!",
+        sec2_h1: "Semantic Concept Addition and Subtraction",
+        sec2_p1: "Imagine teaching a child: Show them 1,000 cats. They don't memorize every hair on every cat. They extract the essence: \"Cat = triangular ears + whiskers + almond eyes + soft fur\".",
+        sec2_p2: "If you ask the child to draw \"a cat made of transparent glass\", they have never seen one, but can draw it immediately by combining feline shape with glass transparency.",
+        sec2_p3: "Diffusion models do the exact same thing across billions of concepts:",
+        sec2_lab_head: "Interactive Lab: Visual Concept Mixer",
+        sec3_title: "How It Operates: The Sculptor Carving Pure Gaussian Noise",
+        sec3_sub: "The concept of Iterative Denoising explained in plain, intuitive terms.",
+        sec3_h1: "Michelangelo's Marble Analogy",
+        sec3_p1: "Michelangelo famously stated: \"Every block of stone has a statue inside it and it is the task of the sculptor to discover it.\"",
+        sec3_p2: "Diffusion models generate visuals in that exact manner:",
+        sec3_lab_head: "Interactive Lab: Noise Sculpting Slider",
+        sec4_title: "Why Are 4 Arms And Lighting Perfectly Harmonized?",
+        sec4_sub: "Self-Attention mechanics: Why every single pixel is constantly aware of every other pixel.",
+        sec4_c1_title: "Unified Global Illumination",
+        sec4_c1_desc: "When magma glow is requested, chest pixels communicate with arm pixels, casting orange-gold ambient bounce light across the barrels of all four revolvers.",
+        sec4_c2_title: "Adaptive Anatomical Restructuring",
+        sec4_c2_desc: "Because humans have 2 arms, asking for 4 arms makes the model widen the ribcage and lower the secondary shoulder sockets to preserve believable biological biomechanics.",
+        sec4_c3_title: "Gravity And Balance",
+        sec4_c3_desc: "The rock rider is heavy. The 4 mechanical legs splay outwards with hydraulic pistons planted into the dirt to project tangible physical weight.",
+        sec5_title: "Homework Dossier: 4 Core Takeaways For Your Report",
+        sec5_sub: "Clear, academically sound arguments without getting trapped in confusing technical jargon.",
+        quiz_title: "3-Question Quick Mastery Check:"
+      }
+    };
+
+    const quizData = [
+      {
+        q_vi: "1. Tại sao nói AI KHÔNG THỂ thực hiện cắt ghép ảnh để tạo ra bức tranh này?",
+        q_en: "1. Why is it mathematically impossible for the AI to create this image via photo collage?",
+        opts_vi: [
+          "Vì luật bản quyền cấm lưu ảnh trên máy tính",
+          "Vì tệp mô hình chỉ nặng vài GB, không thể chứa nổi kho dữ liệu 5 tỷ bức ảnh gốc",
+          "Vì máy tính không có công cụ Photoshop",
+          "Vì ảnh cắt ghép sẽ biến thành màu đen trắng"
+        ],
+        opts_en: [
+          "Because copyright laws forbid saving photos",
+          "Because the model file is only a few GBs, incapable of storing 5 billion high-res photos",
+          "Because AI servers lack Photoshop licenses",
+          "Because collaged images automatically turn black and white"
+        ],
+        ans: 1,
+        exp_vi: "Chính xác! 4GB chỉ tương đương một bộ phim ngắn, không thể lưu trữ nổi hàng tỷ bức ảnh. Nó chỉ lưu các 'quy luật toán học'.",
+        exp_en: "Correct! A 4GB file cannot store billions of photos; it only stores mathematical concept weights."
+      },
+      {
+        q_vi: "2. Khi bạn bảo AI vẽ 'Người đá thiên thạch 4 tay', AI thực sự làm gì trong 'bộ não' của nó?",
+        q_en: "2. When prompted for '4-armed meteorite man', what does the AI actually do?",
+        opts_vi: [
+          "Tìm kiếm trên web xem có ai đã từng vẽ sinh vật này chưa",
+          "Pha trộn các ý niệm độc lập (Cấu trúc người + Chất liệu đá xốp + Nhân đôi khớp vai) từ không gian trừu tượng",
+          "Tự động đổi câu lệnh của bạn thành người 2 tay bình thường",
+          "Ghép ảnh người thật với ảnh hòn đá ven đường"
+        ],
+        opts_en: [
+          "Search the dark web to see if someone already drew it",
+          "Blend independent concepts (Human pose + Basalt porous texture + Duplicated shoulder joints)",
+          "Silently replace your prompt with a standard 2-armed man",
+          "Paste real human hands onto roadside gravel"
+        ],
+        ans: 1,
+        exp_vi: "Đúng! AI pha trộn các thuộc tính cốt lõi giống như trộn màu vẽ trên bảng pha màu.",
+        exp_en: "Correct! The AI blends abstract feature properties together seamlessly."
+      },
+      {
+        q_vi: "3. 'Diffusion' (Khuếch tán) tạo ra hình ảnh bằng cách nào từ con số không?",
+        q_en: "3. How does Diffusion actually sculpt the final image from scratch?",
+        opts_vi: [
+          "Tải ảnh từ vệ tinh xuống",
+          "Khởi đầu từ một đám mây nhiễu ngẫu nhiên và gọt giũa, khử nhiễu dần qua 30-50 bước theo lệnh văn bản",
+          "Vẽ ngay lập tức toàn bộ bức tranh hoàn hảo trong 1 bước",
+          "Chụp ảnh một mô hình đồ chơi trong phòng thí nghiệm"
+        ],
+        opts_en: [
+          "Download satellite imagery",
+          "Start from pure random noise static and iteratively remove noise over 30-50 steps guided by the prompt",
+          "Instantly spit out the entire finished picture in a single millisecond pass",
+          "Photograph a toy model in a physical studio"
+        ],
+        ans: 1,
+        exp_vi: "Chính xác! Giống như nhà điêu khắc đục dần khối đá, AI khử nhiễu từng bước để hình ảnh sắc nét dần.",
+        exp_en: "Correct! Like a sculptor chipping marble, it iteratively removes noise to reveal the prompt."
+      }
+    ];
+
+    function toggleLanguage(lang) {
+      state.lang = lang;
+      
+      const btnVi = document.getElementById('lang-vi-btn');
+      const btnEn = document.getElementById('lang-en-btn');
+      if (lang === 'vi') {
+        btnVi.className = "px-2.5 py-0.5 border border-stone-800 bg-stone-900 text-stone-100 font-bold transition text-xs";
+        btnEn.className = "px-2.5 py-0.5 border border-stone-800 bg-stone-200 text-stone-900 font-bold hover:bg-stone-300 transition text-xs";
+      } else {
+        btnEn.className = "px-2.5 py-0.5 border border-stone-800 bg-stone-900 text-stone-100 font-bold transition text-xs";
+        btnVi.className = "px-2.5 py-0.5 border border-stone-800 bg-stone-200 text-stone-900 font-bold hover:bg-stone-300 transition text-xs";
+      }
+
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (dictionary[lang] && dictionary[lang][key]) {
+          el.innerHTML = dictionary[lang][key];
+        }
+      });
+
+      renderMixerCanvas();
+      renderSculptorCanvas();
+      renderQuiz();
+    }
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    /* ========================================================
+       MÔ PHỎNG 1: CANVAS TRỘN Ý NIỆM (CONCEPT MIXER)
+       ======================================================== */
+    const mixerCanvas = document.getElementById('conceptMixerCanvas');
+    const mixerCtx = mixerCanvas ? mixerCanvas.getContext('2d') : null;
+
+    function renderMixerCanvas() {
+      if (!mixerCtx) return;
+      const w = mixerCanvas.width;
+      const h = mixerCanvas.height;
+      const mat = state.materialVal; // 0 to 100
+      const arms = state.armsVal;     // 2, 4, 6
+      const mount = state.mountVal;   // 0 to 100
+
+      // Cập nhật nhãn
+      const matLbl = document.getElementById('label-material');
+      if (mat < 30) matLbl.innerText = state.lang === 'vi' ? "Da Người Bình Thường" : "Smooth Human Skin";
+      else if (mat < 70) matLbl.innerText = state.lang === 'vi' ? "Đá Cứng Gồ Ghề" : "Rough Granite Rock";
+      else matLbl.innerText = state.lang === 'vi' ? "Đá Thiên Thạch (Rỗ & Nứt Dung Nham)" : "Basalt Meteorite (Lava Cracks)";
+
+      const armLbl = document.getElementById('label-arms');
+      armLbl.innerText = `${arms} ${state.lang === 'vi' ? 'Cánh tay' : 'Arms'}`;
+
+      // Nền vũ trụ đêm
+      mixerCtx.fillStyle = '#0f172a';
+      mixerCtx.fillRect(0, 0, w, h);
+
+      // Sao trời
+      mixerCtx.fillStyle = 'rgba(255,255,255,0.7)';
+      mixerCtx.fillRect(30, 20, 2, 2);
+      mixerCtx.fillRect(110, 35, 1.5, 1.5);
+      mixerCtx.fillRect(360, 25, 2, 2);
+      mixerCtx.fillRect(290, 45, 1, 1);
+
+      const cx = w / 2;
+      const cy = 115;
+
+      // 1. Thú cưỡi bên dưới (Ngựa vs Khối đá vuông 4 chân)
+      if (mount < 40) {
+        // Vẽ thân ngựa thường
+        mixerCtx.fillStyle = '#78350f';
+        mixerCtx.beginPath();
+        mixerCtx.ellipse(cx, cy + 50, 45, 20, 0, 0, Math.PI * 2);
+        mixerCtx.fill();
+        // 4 chân ngựa
+        mixerCtx.strokeStyle = '#5c2b09';
+        mixerCtx.lineWidth = 4;
+        mixerCtx.beginPath();
+        mixerCtx.moveTo(cx - 30, cy + 55); mixerCtx.lineTo(cx - 35, cy + 95);
+        mixerCtx.moveTo(cx - 15, cy + 55); mixerCtx.lineTo(cx - 15, cy + 95);
+        mixerCtx.moveTo(cx + 20, cy + 55); mixerCtx.lineTo(cx + 20, cy + 95);
+        mixerCtx.moveTo(cx + 35, cy + 55); mixerCtx.lineTo(cx + 40, cy + 95);
+        mixerCtx.stroke();
+      } else {
+        // Vẽ khối đá vuông + chân nhện cơ khí
+        mixerCtx.fillStyle = '#292524';
+        mixerCtx.fillRect(cx - 35, cy + 30, 70, 45);
+        mixerCtx.strokeStyle = mat > 60 ? '#f97316' : '#78716c';
+        mixerCtx.lineWidth = 2;
+        mixerCtx.strokeRect(cx - 35, cy + 30, 70, 45);
+
+        // Vết nứt dung nham trên khối đá
+        if (mat > 50) {
+          mixerCtx.strokeStyle = '#ea580c';
+          mixerCtx.beginPath();
+          mixerCtx.moveTo(cx - 20, cy + 40); mixerCtx.lineTo(cx - 5, cy + 60); mixerCtx.lineTo(cx + 15, cy + 50);
+          mixerCtx.stroke();
+        }
+
+        // 4 Chân cơ khí choãi ra
+        mixerCtx.strokeStyle = '#94a3b8';
+        mixerCtx.lineWidth = 3.5;
+        mixerCtx.beginPath();
+        // Chân 1 & 2 bên trái
+        mixerCtx.moveTo(cx - 35, cy + 40); mixerCtx.lineTo(cx - 65, cy + 60); mixerCtx.lineTo(cx - 80, cy + 100);
+        mixerCtx.moveTo(cx - 25, cy + 60); mixerCtx.lineTo(cx - 50, cy + 75); mixerCtx.lineTo(cx - 60, cy + 105);
+        // Chân 3 & 4 bên phải
+        mixerCtx.moveTo(cx + 35, cy + 40); mixerCtx.lineTo(cx + 65, cy + 60); mixerCtx.lineTo(cx + 80, cy + 100);
+        mixerCtx.moveTo(cx + 25, cy + 60); mixerCtx.lineTo(cx + 50, cy + 75); mixerCtx.lineTo(cx + 60, cy + 105);
+        mixerCtx.stroke();
+      }
+
+      // 2. Thân người (Torso)
+      const skinColor = mat < 40 ? '#d97706' : mat < 75 ? '#57534e' : '#292524';
+      mixerCtx.fillStyle = skinColor;
+      mixerCtx.beginPath();
+      mixerCtx.moveTo(cx - 20, cy - 25);
+      mixerCtx.lineTo(cx + 20, cy - 25);
+      mixerCtx.lineTo(cx + 15, cy + 35);
+      mixerCtx.lineTo(cx - 15, cy + 35);
+      mixerCtx.closePath();
+      mixerCtx.fill();
+
+      // Nếu có vân thiên thạch: vẽ vân nứt dung nham phát sáng
+      if (mat > 50) {
+        mixerCtx.strokeStyle = '#f97316';
+        mixerCtx.lineWidth = 2.5;
+        mixerCtx.beginPath();
+        mixerCtx.moveTo(cx - 8, cy - 15); mixerCtx.lineTo(cx + 5, cy + 5); mixerCtx.lineTo(cx - 4, cy + 25);
+        mixerCtx.stroke();
+      }
+
+      // 3. Hai đầu và hai mũ cao bồi
+      const drawHeadAndHat = (hx, hy) => {
+        mixerCtx.fillStyle = skinColor;
+        mixerCtx.beginPath();
+        mixerCtx.arc(hx, hy, 12, 0, Math.PI * 2);
+        mixerCtx.fill();
+
+        // Mắt rực lửa
+        mixerCtx.fillStyle = mat > 50 ? '#fde047' : '#1e293b';
+        mixerCtx.fillRect(hx - 5, hy - 2, 3, 2);
+        mixerCtx.fillRect(hx + 2, hy - 2, 3, 2);
+
+        // Mũ cao bồi
+        mixerCtx.fillStyle = '#78350f';
+        mixerCtx.beginPath();
+        mixerCtx.ellipse(hx, hy - 10, 18, 4, 0, 0, Math.PI * 2);
+        mixerCtx.fill();
+        mixerCtx.fillRect(hx - 8, hy - 22, 16, 12);
+      };
+
+      drawHeadAndHat(cx - 12, cy - 35);
+      drawHeadAndHat(cx + 12, cy - 35);
+
+      // 4. Các cánh tay (2, 4 hoặc 6) và súng
+      mixerCtx.strokeStyle = skinColor;
+      mixerCtx.lineWidth = 6;
+      mixerCtx.lineCap = 'round';
+
+      const drawGun = (gx, gy, dir) => {
+        mixerCtx.fillStyle = '#cbd5e1';
+        mixerCtx.fillRect(gx, gy - 3, dir * 18, 6);
+        mixerCtx.fillStyle = '#92400e';
+        mixerCtx.fillRect(gx - dir * 2, gy, dir * 6, 8);
+      };
+
+      // Cặp tay 1 (trên cùng)
+      mixerCtx.beginPath();
+      mixerCtx.moveTo(cx - 18, cy - 20); mixerCtx.lineTo(cx - 55, cy - 35);
+      mixerCtx.moveTo(cx + 18, cy - 20); mixerCtx.lineTo(cx + 55, cy - 35);
+      mixerCtx.stroke();
+      drawGun(cx - 55, cy - 35, -1);
+      drawGun(cx + 55, cy - 35, 1);
+
+      // Cặp tay 2 (ở giữa - nếu >= 4 tay)
+      if (arms >= 4) {
+        mixerCtx.beginPath();
+        mixerCtx.moveTo(cx - 16, cy - 5); mixerCtx.lineTo(cx - 50, cy - 5);
+        mixerCtx.moveTo(cx + 16, cy - 5); mixerCtx.lineTo(cx + 50, cy - 5);
+        mixerCtx.stroke();
+        drawGun(cx - 50, cy - 5, -1);
+        drawGun(cx + 50, cy - 5, 1);
+      }
+
+      // Cặp tay 3 (dưới - nếu 6 tay)
+      if (arms >= 6) {
+        mixerCtx.beginPath();
+        mixerCtx.moveTo(cx - 15, cy + 15); mixerCtx.lineTo(cx - 45, cy + 25);
+        mixerCtx.moveTo(cx + 15, cy + 15); mixerCtx.lineTo(cx + 45, cy + 25);
+        mixerCtx.stroke();
+        drawGun(cx - 45, cy + 25, -1);
+        drawGun(cx + 45, cy + 25, 1);
+      }
+
+      // Chú thích nhãn trực tiếp trên canvas
+      mixerCtx.fillStyle = '#f8fafc';
+      mixerCtx.font = '10px Roboto Mono, monospace';
+      mixerCtx.fillText(`[Ý Niệm: ${arms} Tay + Đá Thiên Thạch + Thú Cơ Khí]`, 10, h - 10);
+    }
+
+    // Lắng nghe sự kiện thanh trượt ý niệm
+    ['slider-material', 'slider-arms', 'slider-mount'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('input', (e) => {
+          if (id === 'slider-material') state.materialVal = parseInt(e.target.value);
+          if (id === 'slider-arms') state.armsVal = parseInt(e.target.value);
+          if (id === 'slider-mount') state.mountVal = parseInt(e.target.value);
+          renderMixerCanvas();
+        });
+      }
+    });
+
+    /* ========================================================
+       MÔ PHỎNG 2: NGƯỜI THỢ ĐIÊU KHẮC (DENOISE SCULPTOR)
+       ======================================================== */
+    const sculptorCanvas = document.getElementById('sculptorDenoiseCanvas');
+    const scCtx = sculptorCanvas ? sculptorCanvas.getContext('2d') : null;
+    const denoiseSlider = document.getElementById('slider-denoise');
+
+    function renderSculptorCanvas() {
+      if (!scCtx) return;
+      const w = sculptorCanvas.width;
+      const h = sculptorCanvas.height;
+      const step = state.denoiseStep; // 0 (100% noise) to 50 (clean image)
+      const cleanProgress = step / 50; // 0.0 to 1.0
+
+      document.getElementById('denoise-step-val').innerText = `${state.lang === 'vi' ? 'Bước' : 'Step'} ${step} / 50`;
+      
+      const stageLabel = document.getElementById('denoise-stage-label');
+      const descBox = document.getElementById('denoise-status-desc');
+
+      if (cleanProgress < 0.25) {
+        stageLabel.innerText = state.lang === 'vi' ? "Giai đoạn 1: Màn sương hỗn loạn" : "Phase 1: Pure Random Chaos";
+        descBox.innerText = state.lang === 'vi' 
+          ? "Ở các bước đầu tiên, bức tranh chỉ là màn sương nhiễu hạt ngẫu nhiên. AI đang dò tìm xem khu vực nào có thể nắn thành đầu, khu vực nào nắn thành súng."
+          : "In initial steps, the canvas is purely random static. The AI probes regions that will eventually become hats, revolvers, or rocky limbs.";
+      } else if (cleanProgress < 0.65) {
+        stageLabel.innerText = state.lang === 'vi' ? "Giai đoạn 2: Định hình khung xương" : "Phase 2: Skeletal Layout";
+        descBox.innerText = state.lang === 'vi'
+          ? "AI đã xác định được khối trung tâm! Khung xương 4 cánh tay và khối đá vuông bên dưới bắt đầu hiện ra mờ ảo qua lớp sương mù."
+          : "The core layout is locked. The 4-arm structure and cubic basalt steed emerge through the fading mist.";
+      } else {
+        stageLabel.innerText = state.lang === 'vi' ? "Giai đoạn 3: Khắc họa chi tiết vi mô" : "Phase 3: High-Frequency Details";
+        descBox.innerText = state.lang === 'vi'
+          ? "Các bước cuối cùng: AI mài sắc các vết nứt dung nham phát sáng, viền nòng súng lục và bề mặt gồ ghề của đá thiên thạch."
+          : "Final polish: Lava fissures glow brightly, gun barrels turn metallic, and the meteorite texture becomes crisp and tangible.";
+      }
+
+      const imgData = scCtx.createImageData(w, h);
+      const data = imgData.data;
+
+      // Vẽ hình kết hợp giữa nhiễu ngẫu nhiên và ảnh mục tiêu
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          const idx = (y * w + x) * 4;
+          const dx = x - w / 2;
+          const dy = y - h / 2;
+
+          // Tạo hình dáng sinh vật
+          let cleanLuma = 30; // nền tối
+          const isBody = (Math.abs(dx) < 22 && dy > -30 && dy < 25);
+          const isHead1 = Math.hypot(dx + 12, dy + 45) < 12;
+          const isHead2 = Math.hypot(dx - 12, dy + 45) < 12;
+          const isArms = (Math.abs(dx) > 20 && Math.abs(dx) < 65 && Math.abs(dy) < 35);
+          const isCube = (Math.abs(dx) < 35 && dy > 25 && dy < 65);
+          const isLegs = (Math.abs(dx) > 30 && Math.abs(dx) < 80 && dy > 55 && dy < 95);
+
+          if (isHead1 || isHead2 || isBody || isArms || isCube || isLegs) {
+            cleanLuma = 180;
+          }
+
+          // Nhiễu hạt ngẫu nhiên giả lập
+          const pseudoRand = ((Math.sin(x * 12.9898 + y * 78.233) * 43758.5453) % 1 + 1) % 1 * 255;
+
+          // Hòa trộn: (1 - cleanProgress) * Noise + cleanProgress * Signal
+          const finalVal = (1 - cleanProgress) * pseudoRand + cleanProgress * cleanLuma;
+
+          data[idx] = finalVal;
+          data[idx + 1] = cleanProgress > 0.5 && isBody ? finalVal * 0.7 : finalVal; // sắc cam dung nham
+          data[idx + 2] = cleanProgress > 0.5 ? finalVal * 0.4 : finalVal;
+          data[idx + 3] = 255;
+        }
+      }
+      scCtx.putImageData(imgData, 0, 0);
+    }
+
+    if (denoiseSlider) {
+      denoiseSlider.addEventListener('input', (e) => {
+        state.denoiseStep = parseInt(e.target.value);
+        renderSculptorCanvas();
+      });
+    }
+
+    function autoPlayDenoise() {
+      if (state.isPlaying) {
+        clearInterval(state.intervalId);
+        state.isPlaying = false;
+        document.getElementById('btn-denoise-play').innerText = state.lang === 'vi' ? "▶ Tự Động Chạy (Play)" : "▶ Auto Play";
+        return;
+      }
+
+      state.isPlaying = true;
+      document.getElementById('btn-denoise-play').innerText = state.lang === 'vi' ? "⏸ Tạm Dừng (Pause)" : "⏸ Pause";
+      state.denoiseStep = 0;
+
+      state.intervalId = setInterval(() => {
+        state.denoiseStep += 1;
+        if (state.denoiseStep > 50) {
+          state.denoiseStep = 50;
+          clearInterval(state.intervalId);
+          state.isPlaying = false;
+          document.getElementById('btn-denoise-play').innerText = state.lang === 'vi' ? "▶ Chạy Lại (Replay)" : "▶ Replay";
+        }
+        if (denoiseSlider) denoiseSlider.value = state.denoiseStep;
+        renderSculptorCanvas();
+      }, 50);
+    }
+
+    /* ========================================================
+       TRẮC NGHIỆM TỰ ĐÁNH GIÁ 3 CÂU
+       ======================================================== */
+    const quizContainer = document.getElementById('quick-quiz-container');
+
+    function renderQuiz() {
+      if (!quizContainer) return;
+      quizContainer.innerHTML = '';
+
+      quizData.forEach((item, qIdx) => {
+        const qCard = document.createElement('div');
+        qCard.className = "p-3 bg-stone-100 border border-stone-400 space-y-2";
+
+        const qTitle = state.lang === 'vi' ? item.q_vi : item.q_en;
+        const opts = state.lang === 'vi' ? item.opts_vi : item.opts_en;
+
+        qCard.innerHTML = `
+          <div class="font-bold text-stone-900 text-xs sm:text-sm font-code">${qTitle}</div>
+          <div class="space-y-1.5 text-xs font-code">
+            ${opts.map((opt, oIdx) => `
+              <label class="flex items-start gap-2 p-2 border border-stone-300 bg-stone-50 hover:bg-stone-200 cursor-pointer">
+                <input type="radio" name="quick-quiz-${qIdx}" value="${oIdx}" onchange="checkAnswer(${qIdx}, ${oIdx})" class="mt-0.5">
+                <span class="text-stone-800">${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+          <div id="quiz-feedback-${qIdx}" class="text-xs font-code font-bold pt-1 hidden"></div>
+        `;
+        quizContainer.appendChild(qCard);
+      });
+    }
+
+    function checkAnswer(qIdx, oIdx) {
+      const q = quizData[qIdx];
+      const fb = document.getElementById(`quiz-feedback-${qIdx}`);
+      state.quizAnswers[qIdx] = oIdx;
+
+      if (oIdx === q.ans) {
+        fb.className = "text-xs font-code font-bold pt-1 text-green-800";
+        fb.innerText = "✓ " + (state.lang === 'vi' ? q.exp_vi : q.exp_en);
+      } else {
+        fb.className = "text-xs font-code font-bold pt-1 text-red-800";
+        fb.innerText = "✗ " + (state.lang === 'vi' ? "Chưa đúng. Hãy thử suy nghĩ lại về dung lượng mô hình hoặc bản chất gọt nhiễu nhé!" : "Incorrect. Remember that AI stores concept rules, not raw photos!");
+      }
+      fb.classList.remove('hidden');
+
+      // Kiểm tra hoàn thành tất cả
+      if (Object.keys(state.quizAnswers).length === quizData.length) {
+        const resBox = document.getElementById('quiz-result-msg');
+        resBox.classList.remove('hidden');
+        resBox.className = "mt-3 p-3 bg-green-100 border-2 border-green-800 text-green-950 text-xs font-code";
+        resBox.innerHTML = state.lang === 'vi'
+          ? "🎉 <strong>TUYỆT VỜI!</strong> Bạn đã nắm vững lý do cốt lõi: AI tạo ra thứ không tồn tại bằng cách <em>pha trộn các ý niệm cơ bản</em> và <em>gọt giũa từ nhiễu trắng</em>. Bạn đã hoàn toàn sẵn sàng nộp bài tập!"
+          : "🎉 <strong>EXCELLENT!</strong> You now understand that AI invents the non-existent by <em>blending fundamental concepts</em> and <em>carving them out of Gaussian noise</em>. You are ready for your assignment!";
+      }
+    }
+
+    window.onload = function() {
+      renderMixerCanvas();
+      renderSculptorCanvas();
+      renderQuiz();
+    };
+  </script>
+</body>
+</html>

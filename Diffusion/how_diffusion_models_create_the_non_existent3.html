@@ -1,0 +1,2855 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bản Tin Khoa Học Số 03: Đại Chuyên Khảo Không Gian Ý Niệm, Hình Học Siêu Cầu & Giới Hạn 77 Token Trong CLIP</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Roboto & Roboto Mono chuẩn tiếng Việt 100% -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,700&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- KaTeX CSS & JS hỗ trợ render công thức toán học chuyên nghiệp -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+  <style>
+    :root {
+      --paper-cream: #f6f1e5;
+      --paper-card: #fdfcf9;
+      --paper-accent: #ebdcc4;
+      --ink-dark: #191410;
+      --ink-muted: #52473c;
+      --accent-rust: #9e3316;
+      --accent-cyan: #0b6363;
+      --accent-emerald: #19663d;
+      --border-dark: #261f1a;
+    }
+
+    body {
+      background-color: #1c1713;
+      color: var(--ink-dark);
+      font-family: 'Roboto', sans-serif;
+      background-image: 
+        radial-gradient(#332921 1px, transparent 1px),
+        radial-gradient(#332921 1px, #16120e 1px);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+    }
+
+    .editorial-sheet {
+      background-color: var(--paper-cream);
+      background-image: 
+        radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 0),
+        linear-gradient(to right, rgba(0,0,0,0.015) 1px, transparent 1px);
+      background-size: 16px 16px, 100% 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8), inset 0 0 160px rgba(150, 120, 85, 0.2);
+    }
+
+    .font-code {
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    .rule-double {
+      border-top: 3px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-dark);
+      height: 6px;
+    }
+
+    .stamp-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      text-transform: uppercase;
+      font-weight: 700;
+      border: 2px dashed var(--accent-rust);
+      color: var(--accent-rust);
+      transform: rotate(-0.5deg);
+    }
+
+    .first-big-letter::first-letter {
+      float: left;
+      font-size: 3.4rem;
+      line-height: 0.85;
+      padding-top: 4px;
+      padding-right: 10px;
+      font-weight: 900;
+      color: var(--accent-rust);
+    }
+
+    .math-box {
+      background-color: #eee4d1;
+      border: 1.5px solid #4a3c30;
+      box-shadow: 3px 3px 0px #382c23;
+    }
+
+    .analogy-box {
+      background-color: #e3ede6;
+      border-left: 4px solid var(--accent-emerald);
+      box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+    }
+
+    .takeaway-box {
+      background-color: #faebd7;
+      border-left: 4px solid var(--accent-rust);
+    }
+
+    input[type=range] {
+      accent-color: var(--accent-rust);
+    }
+
+    /* Định dạng KaTeX để hiển thị rõ ràng, chuẩn mực */
+    .katex {
+      font-size: 1.05em;
+      color: #17110c;
+    }
+    .katex-display {
+      margin: 0.6em 0 !important;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 4px 0;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #735e4d;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+
+<body class="p-2 sm:p-4 md:p-6 min-h-screen">
+  <div class="max-w-7xl mx-auto editorial-sheet border-4 border-stone-900 p-4 sm:p-7 md:p-10 transition-all">
+    
+    <!-- MASTHEAD BÁO CHÍ CỔ ĐIỂN 1990S -->
+    <header class="border-b-2 border-stone-800 pb-4 mb-8">
+      <div class="flex flex-wrap justify-between items-center text-xs font-code uppercase tracking-wider text-stone-700 pb-2 mb-3 border-b border-stone-400">
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-stone-950 bg-amber-200 px-2.5 py-0.5 border border-stone-800 shadow-sm">TẬP III &bull; ĐẠI CHUYÊN KHẢO TOÁN HỌC & KIẾN TRÚC MÔ HÌNH (BẢN HIỆU ĐÍNH)</span>
+          <span>&bull;</span>
+          <span class="text-stone-800 hidden sm:inline">Phòng Nghiên Cứu Hình Học Không Gian Ý Niệm & Cơ Chế Chú Ý CLIP</span>
+        </div>
+        
+        <!-- Bộ chuyển đổi song ngữ Anh - Việt -->
+        <div class="flex items-center gap-2 mt-2 sm:mt-0">
+          <span class="font-bold text-[11px] text-stone-900 font-code">NGÔN NGỮ / LANGUAGE:</span>
+          <button id="btn-lang-vi" onclick="setLanguage('vi')" class="px-2.5 py-0.5 border border-stone-900 bg-stone-900 text-stone-100 font-bold text-xs transition">Tiếng Việt</button>
+          <button id="btn-lang-en" onclick="setLanguage('en')" class="px-2.5 py-0.5 border border-stone-900 bg-stone-200 text-stone-900 font-bold hover:bg-stone-300 text-xs transition">English</button>
+        </div>
+      </div>
+
+      <div class="text-center pt-2">
+        <div class="stamp-badge text-xs mb-2" data-key="header_badge">
+          GIẢI MÃ TẬN GỐC TOÁN HỌC KHÔNG GIAN BIỂU DIỄN & QUY LUẬT XỬ LÝ PROMPT
+        </div>
+        <h1 class="text-2xl sm:text-4xl md:text-5xl font-black uppercase text-stone-950 tracking-tight" data-key="header_title">
+          Bản Đồ Siêu Chiều, Gốc Tọa Độ Chân Không & Bí Ẩn 77 Token Của CLIP
+        </h1>
+        <p class="text-sm sm:text-base italic text-stone-700 max-w-5xl mx-auto mt-2.5 leading-relaxed" data-key="header_subtitle">
+          Khám phá cách gốc tọa độ được thiết lập trên siêu cầu đơn vị, cơ chế định hình tọa độ ngữ nghĩa qua Transformer, giải mã kiến trúc giới hạn 77 Token, và phân tích tính xác thực của định kiến: "Cái gì quan trọng nhất phải viết đầu tiên".
+        </p>
+      </div>
+
+      <div class="rule-double my-4"></div>
+
+      <!-- MỤC LỤC TRUY CẬP NHANH TOÀN BỘ 15 PHẦN (12 CHƯƠNG + 3 BÀI THI) -->
+      <nav class="overflow-x-auto custom-scrollbar pb-2">
+        <div class="flex items-center gap-2 font-code text-[11px] font-bold uppercase whitespace-nowrap">
+          <span class="text-amber-950 font-black px-2 py-1 bg-amber-200 border border-amber-800">I. GỐC TỌA ĐỘ:</span>
+          <button onclick="scrollToEl('sec-ch1')" class="px-2.5 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C1: Gốc Euclid vs Chân Không</button>
+          <button onclick="scrollToEl('sec-ch2')" class="px-2.5 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C2: Siêu Cầu Đơn Vị L2</button>
+          <button onclick="scrollToEl('sec-ch3')" class="px-2.5 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C3: Sụp Đổ Dị Hướng</button>
+          <button onclick="scrollToEl('sec-ch4')" class="px-2.5 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C4: LayerNorm Tái Lập Gốc</button>
+          <button onclick="scrollToEl('sec-exam1')" class="px-2.5 py-1 bg-amber-900 text-stone-100 border border-stone-950 shadow">Thi Phần I (15 Câu)</button>
+
+          <span class="text-amber-950 font-black px-2 py-1 bg-amber-200 border border-amber-800 ml-2">II. TỌA ĐỘ NGỮ NGHĨA:</span>
+          <button onclick="scrollToEl('sec-ch5')" class="px-2.5 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C5: BPE & Lookup We</button>
+          <button onclick="scrollToEl('sec-ch6')" class="px-2.5 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C6: Self-Attention Uốn Nắn</button>
+          <button onclick="scrollToEl('sec-ch7')" class="px-2.5 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C7: Ma Trận Chiếu Đa Thức</button>
+          <button onclick="scrollToEl('sec-ch8')" class="px-2.5 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C8: Nhiệt Độ Tau InfoNCE</button>
+          <button onclick="scrollToEl('sec-exam2')" class="px-2.5 py-1 bg-amber-900 text-stone-100 border border-stone-950 shadow">Thi Phần II (15 Câu)</button>
+
+          <span class="text-amber-950 font-black px-2 py-1 bg-amber-200 border border-amber-800 ml-2">III. 77 TOKEN & PROMPT:</span>
+          <button onclick="scrollToEl('sec-ch9')" class="px-2.5 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C9: Căn Nguyên 77 Token</button>
+          <button onclick="scrollToEl('sec-ch10')" class="px-2.5 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C10: 77 Token = Mấy Từ?</button>
+          <button onclick="scrollToEl('sec-ch11')" class="px-2.5 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C11: Cross-Attention Lọc Tin</button>
+          <button onclick="scrollToEl('sec-ch12')" class="px-2.5 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C12: Mổ Xẻ "Viết Gì Đầu Tiên"</button>
+          <button onclick="scrollToEl('sec-exam3')" class="px-2.5 py-1 bg-amber-900 text-stone-100 border border-stone-950 shadow">Thi Phần III (15 Câu)</button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="space-y-14">
+      
+      <!-- ========================================================================= -->
+      <!-- PHẦN I: BÍ ẨN VỀ GỐC TỌA ĐỘ TRONG KHÔNG GIAN Ý NIỆM (CHƯƠNG 1 - 4 + THI 1) -->
+      <!-- ========================================================================= -->
+
+      <section id="sec-ch1" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">01</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="ch1_title">
+              Chương 1: Gốc Tọa Độ $(0,0,\dots,0)$ Tuyệt Đối Là Gì? Sự Ngộ Nhận Về "Ý Niệm Số 0"
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="ch1_sub">
+              Tại sao trong không gian ngữ nghĩa, điểm $(0,0,\dots,0)$ không đại diện cho "sự hư vô" mà là một điểm kỳ dị vô nghĩa?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter" data-key="ch1_p1">
+              Trong hình học giải tích phổ thông của Descartes, gốc tọa độ $\mathbf{O}(0,0,0)$ là điểm mốc quen thuộc nhất, nơi mọi trục giao nhau và là điểm xuất phát của mọi thước đo khoảng cách. Khi tiếp cận trí tuệ nhân tạo, trực giác tự nhiên khiến nhiều người lầm tưởng rằng điểm vector toàn số 0: $\mathbf{0} = (0, 0, \dots, 0) \in \mathbb{R}^{768}$ sẽ đại diện cho <em>"sự trống rỗng"</em>, <em>"một bức tranh toàn màu đen"</em>, hay <em>"câu lệnh prompt để trống"</em>.
+            </p>
+            <p data-key="ch1_p2">
+              Thực tế toán học hoàn toàn trái ngược: <strong>Gốc tọa độ số 0 là một điểm kỳ dị (mathematical singularity) hoàn toàn vô nghĩa và bị loại trừ khỏi không gian biểu diễn ngữ nghĩa của CLIP!</strong> Nguyên nhân nằm ở chính thước đo khoảng cách nền tảng của mạng nơ-ron: <strong>Độ Tương Đồng Cosine (Cosine Similarity)</strong>.
+            </p>
+
+            <div class="math-box p-4 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Công Thức Chuẩn Của Độ Tương Đồng Cosine & Sự Sụp Đổ Tại Gốc:
+              </div>
+              <div class="py-1">
+                $$S_C(\mathbf{u}, \mathbf{v}) = \frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\|_2 \|\mathbf{v}\|_2} = \frac{\sum_{i=1}^{d} u_i v_i}{\sqrt{\sum_{i=1}^{d} u_i^2} \cdot \sqrt{\sum_{i=1}^{d} v_i^2}} = \cos(\theta)$$
+              </div>
+              <div class="text-[11px] text-stone-700 leading-normal space-y-1">
+                <div>&bull; $\mathbf{u} \cdot \mathbf{v} = \sum_{i=1}^d u_i v_i$: Tích vô hướng (dot product) giữa hai vector.</div>
+                <div>&bull; $\|\mathbf{u}\|_2 = \sqrt{\sum_{i=1}^d u_i^2}$: Chuẩn độ dài Euclid ($L_2$ norm) của vector $\mathbf{u}$.</div>
+                <div>&bull; $\theta$: Góc hình học kẹp giữa hai hướng vector trong không gian $d$ chiều.</div>
+              </div>
+            </div>
+
+            <p data-key="ch1_p3">
+              Nếu ta thử đặt một ý niệm tại gốc tọa độ $\mathbf{u} = \mathbf{0} = (0, 0, \dots, 0)$, thì độ dài Euclid của nó bằng đúng số không: $\|\mathbf{u}\|_2 = \sqrt{0^2 + \dots + 0^2} = 0$. Khi thế vào công thức trên, mẫu số lập tức bị triệt tiêu về $0$, biến phép tính thành dạng <strong>vô định chia cho số 0 ($\frac{0}{0}$)</strong>! Vector $\mathbf{0}$ không có hướng, không tạo thành bất kỳ góc $\theta$ nào với bất kỳ vector nào khác.
+            </p>
+
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-emerald-950">💡 Ví dụ đời thực dễ hình dung:</div>
+              <p>
+                Hãy tưởng tượng bạn đang cầm một chiếc la bàn và đứng chính xác tại điểm <strong>Cực Bắc địa lý của Trái Đất</strong>. Nếu ai đó hỏi bạn: <em>"Hướng Bắc nằm ở đâu?"</em>, kim la bàn sẽ quay tít mù và hoàn toàn bất lực, vì tại điểm cực Bắc thì mọi hướng xung quanh đều chỉ là hướng Nam! Điểm $(0,0,\dots,0)$ trong AI cũng giống hệt như vậy: nó đánh mất hoàn toàn phương hướng ngữ nghĩa.
+              </p>
+            </div>
+
+            <div class="takeaway-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-amber-950">📌 Câu lệnh prompt rỗng (Empty String `""`) nằm ở đâu?</div>
+              <p>
+                Khi bạn không nhập chữ nào vào prompt, CLIP không hề tạo ra vector $(0,0,\dots,0)$. Nó vẫn đưa hai token đặc biệt là `[SOT]` (bắt đầu) và `[EOT]` (kết thúc) qua mạng Transformer. Kết quả tạo ra một vector có độ dài hữu hạn bằng $1.0$, chỉ về <strong>tâm tiên nghiệm trung bình (marginal prior centroid)</strong> của toàn bộ hàng trăm triệu bức ảnh trong tập huấn luyện!
+              </p>
+            </div>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 1: EUCLIDEAN ORIGIN VS DIRECTIONAL VACUUM -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 1: Thí Nghiệm Điểm Kỳ Dị Tại Gốc Tọa Độ $\mathbf{O}(0,0)$
+              </span>
+              <span id="fig1-status-pill" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Trạng thái: $\|\mathbf{v}\| > 0$ (Hợp Lệ)
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig1Canvas" width="480" height="240" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="space-y-2 text-xs font-code bg-stone-100 p-3 border border-stone-400">
+              <div class="flex justify-between items-center">
+                <span>Kéo độ dài vector về gốc tọa độ ($\|\mathbf{v}\|_2$):</span>
+                <span id="fig1-mag-val" class="font-bold text-amber-950">1.00</span>
+              </div>
+              <input type="range" id="fig1-slider" min="0" max="100" value="100" oninput="updateFig1(this.value)" class="w-full h-2 cursor-pointer">
+              
+              <div id="fig1-math-expl" class="text-[11px] text-stone-700 pt-1 leading-snug">
+                Hướng vector xác định rõ ràng: $\theta = 45.0^\circ$. Phép đo Cosine $S_C(\mathbf{u}, \mathbf{v})$ hoàn toàn ổn định.
+              </div>
+            </div>
+            
+            <div class="p-2.5 bg-stone-300 border border-stone-500 text-[11px] font-code text-stone-900">
+              <strong>Hướng dẫn thực hành:</strong> Hãy kéo thanh trượt về sát số 0. Quan sát thấy vòng tròn đỏ cảnh báo bùng nổ vì mẫu số $\|\mathbf{v}\|_2 = 0$ làm hỏng phép chia toán học!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-ch2" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">02</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="ch2_title">
+              Chương 2: Siêu Cầu Đơn Vị ($S^{d-1}$) & Chuẩn Hóa $L_2$: Tại Sao Bán Kính Luôn Bằng 1?
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="ch2_sub">
+              Khám phá vì sao mọi vector ý niệm đều bị "giam lỏng" trên lớp vỏ ngoài của quả cầu siêu chiều $d=768$.
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter" data-key="ch2_p1">
+              Trong ngôn ngữ tự nhiên, một câu mô tả có thể ngắn vỏn vẹn 2 từ (<em>"con mèo"</em>) hoặc dài tới 50 từ với vô số tính từ hoa mỹ. Nếu ta để mạng nơ-ron tự do tích lũy số liệu, vector của câu dài sẽ có độ lớn (magnitude) khổng lồ gấp hàng chục lần câu ngắn. Sự chênh lệch độ dài ngẫu nhiên này sẽ làm sai lệch mọi so sánh công bằng.
+            </p>
+            <p data-key="ch2_p2">
+              Để giải quyết triệt để vấn đề này, các nhà nghiên cứu của CLIP áp dụng một quy tắc cưỡng bức bất khả xâm phạm: <strong>Phép Chuẩn Hóa $L_2$ (L2 Normalization)</strong>. Mỗi vector thô $\mathbf{z} \in \mathbb{R}^d$ ($d=768$) sau khi ra khỏi Transformer sẽ lập tức bị chia cho độ dài của chính nó:
+            </p>
+
+            <div class="math-box p-4 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Phép Chiếu Lên Bề Mặt Siêu Cầu Đơn Vị $S^{d-1}$:
+              </div>
+              <div class="py-1">
+                $$\mathbf{e} = \frac{\mathbf{z}}{\|\mathbf{z}\|_2} = \frac{\mathbf{z}}{\sqrt{\sum_{i=1}^{d} z_i^2}} \implies \|\mathbf{e}\|_2 = 1.0$$
+              </div>
+              <div class="text-[11px] text-stone-700 leading-normal space-y-1">
+                <div>&bull; Bán kính của không gian luôn cố định tuyệt đối ở $R = 1.0$.</div>
+                <div>&bull; Mọi ý niệm của nhân loại (từ "viên đá", "người", đến "vũ trụ") đều nằm trên lớp vỏ ngoài mỏng manh của siêu cầu $S^{767}$!</div>
+              </div>
+            </div>
+
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-emerald-950">💡 Ví dụ đời thực dễ hình dung:</div>
+              <p>
+                Hãy tưởng tượng quả địa cầu để bàn. Cho dù bạn ở Tokyo, London hay New York, bạn chỉ có thể đi lại trên <strong>bề mặt vỏ Trái Đất</strong>. Không một thành phố nào nằm lơ lửng giữa tâm Trái Đất, và cũng không có thành phố nào bay tít ngoài không gian. Mọi địa điểm đều cách tâm Trái Đất đúng một khoảng bán kính $R$.
+              </p>
+            </div>
+
+            <p data-key="ch2_p3">
+              Khi hai vector $\mathbf{u}$ và $\mathbf{v}$ đã có độ dài bằng $1$ ($\|\mathbf{u}\| = \|\mathbf{v}\| = 1$), tích vô hướng trở nên đồng nhất hoàn toàn với độ tương đồng Cosine: $\mathbf{u} \cdot \mathbf{v} = \cos(\theta)$. Lúc này, thước đo khoảng cách giữa hai ý niệm có sự phân hóa rõ rệt:
+            </p>
+
+            <div class="math-box p-3 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                So Sánh Khoảng Cách Dây Cung Euclid & Cung Trắc Địa:
+              </div>
+              <div class="space-y-1 text-xs">
+                <div><strong>1. Khoảng cách dây cung Euclid bình phương (Chord distance):</strong></div>
+                <div>$$\|\mathbf{u} - \mathbf{v}\|_2^2 = \|\mathbf{u}\|_2^2 + \|\mathbf{v}\|_2^2 - 2(\mathbf{u} \cdot \mathbf{v}) = 1 + 1 - 2\cos(\theta) = 2 - 2\cos(\theta)$$</div>
+                <div class="pt-1"><strong>2. Cung trắc địa (Geodesic Arc Distance):</strong> Đường đi ngắn nhất uốn lượn men theo mặt cầu: $d_g(\mathbf{u}, \mathbf{v}) = \theta = \arccos(\mathbf{u} \cdot \mathbf{v})$.</div>
+              </div>
+            </div>
+
+            <div class="takeaway-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-amber-950">📌 Tính Bất Biến Quay (Rotational Invariance):</div>
+              <p>
+                Khoảng cách Cosine chỉ phụ thuộc vào góc xoay tương đối $\theta$ giữa hai vector. Cho dù bạn xoay cả hệ trục tọa độ đi góc nào, góc $\theta$ vẫn giữ nguyên (Bất biến dưới nhóm quay trực giao $SO(d)$). Trái lại, khoảng cách Manhattan ($L_1 = \sum |u_i - v_i|$) sẽ bị biến đổi tùy tiện khi xoay trục, nên hoàn toàn không phù hợp trên siêu cầu!
+              </p>
+            </div>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 2: L2 PROJECTION ONTO UNIT HYPERSPHERE -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 2: Mô Phỏng Chiếu Vector Thô Lên Siêu Cầu $S^1$ ($R=1$)
+              </span>
+              <span id="fig2-norm-val" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Chuẩn Hóa: ||e|| = 1.000
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig2Canvas" width="480" height="240" class="w-full h-auto bg-stone-950 cursor-crosshair"></canvas>
+            </div>
+
+            <div class="flex flex-wrap justify-between items-center text-xs font-code bg-stone-100 p-2.5 border border-stone-400">
+              <span class="text-stone-700">Rê chuột trên khung vẽ để đổi vector thô $\mathbf{z}$!</span>
+              <button onclick="resetFig2()" class="px-2.5 py-1 bg-stone-200 border border-stone-800 hover:bg-stone-300 font-bold">
+                ↺ Đặt Lại Vector Mẫu
+              </button>
+            </div>
+            
+            <div id="fig2-readout" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Vector thô: $\mathbf{z} = (1.42, 0.95), \|\mathbf{z}\| = 1.71 \xrightarrow{L_2} \mathbf{e} = (0.83, 0.55), \|\mathbf{e}\| = 1.00$.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-ch3" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">03</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="ch3_title">
+              Chương 3: Hiện Tượng Sụp Đổ Dị Hướng (Anisotropy) & Tâm Trọng Khối (Centroid Drift)
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="ch3_sub">
+              Bí ẩn "Chiếc Nón Hẹp": Vì sao các vector ngữ nghĩa tự nhiên luôn có xu hướng dồn cục vào một góc siêu cầu?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter" data-key="ch3_p1">
+              Về mặt lý thuyết hình học lý tưởng, chúng ta kỳ vọng các ý niệm sẽ phân bố <strong>đẳng hướng (Isotropic)</strong> — nghĩa là tỏa đều $360^\circ$ khắp mọi ngóc ngách của siêu cầu như những vì sao rải rác trên bầu trời đêm. Thế nhưng khi đo đạc thực tế trên các mô hình ngôn ngữ sâu, các nhà khoa học đã giật mình phát hiện một căn bệnh hình học nan y: <strong>Sự sụp đổ dị hướng (Representation Anisotropy)</strong>.
+            </p>
+            <p data-key="ch3_p2">
+              Thay vì tỏa đều, đại đa số các vector từ ngữ lại bị hút chặt vào một <strong>chiếc nón hẹp (narrow cone)</strong> duy nhất. Hậu quả tai hại là hai từ hoàn toàn không hề liên quan tới nhau (ví dụ: <em>"bánh mì kẹp thịt"</em> và <em>"tàu ngầm nguyên tử"</em>) khi đo Cosine vẫn cho ra kết quả dương rất cao ($\cos \theta \approx 0.65 - 0.85$ thay vì xấp xỉ $0$)!
+            </p>
+
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-emerald-950">💡 Ví dụ đời thực dễ hình dung:</div>
+              <p>
+                Hãy tưởng tượng một nhà hát hình tròn khổng lồ có 768 hàng ghế. Đáng lẽ khán giả phải ngồi rải đều khắp khán phòng để xem cho thoải mái, thì tất cả mọi người lại chen chúc, dồn ứ hết vào đúng một góc khán đài hẹp ở tầng 2. Kết quả là góc đó thì ngột ngạt nghẽn cứng, trong khi 95% diện tích còn lại của nhà hát thì bị bỏ hoang lãng phí!
+              </p>
+            </div>
+
+            <p data-key="ch3_p3">
+              Nguyên nhân sâu xa là do ngôn ngữ có những cấu trúc ngữ pháp chung (như mạo từ "a", "the", cấu trúc câu phổ biến) và tần suất xuất hiện từ vựng bị lệch. Điểm trung bình cộng của đám mây này trôi dạt ra xa, tạo thành một <strong>Tâm trọng khối (Centroid)</strong> lệch chuẩn:
+            </p>
+
+            <div class="math-box p-3.5 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Công Thức Khử Tâm Trọng Khối (Post-hoc Centering):
+              </div>
+              <div class="py-1">
+                $$\mathbf{c}_{\text{tâm}} = \frac{1}{M} \sum_{i=1}^{M} \mathbf{e}_i \quad \implies \quad \mathbf{e}'_i = \frac{\mathbf{e}_i - \mathbf{c}_{\text{tâm}}}{\|\mathbf{e}_i - \mathbf{c}_{\text{tâm}}\|_2}$$
+              </div>
+              <div class="text-[11px] text-stone-700 leading-normal">
+                Bằng cách lấy từng vector trừ đi vector tâm chung $\mathbf{c}_{\text{tâm}}$, ta triệt tiêu thành phần thiên kiến dùng chung, đưa gốc hệ quy chiếu về đúng tâm phân bố, mở toang góc nón hẹp ra trọn vẹn $360^\circ$!
+              </div>
+            </div>
+
+            <div class="takeaway-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-amber-950">📌 Lời Nguyền Số Chiều (Curse of Dimensionality) Trên $S^{767}$:</div>
+              <p>
+                Trong không gian siêu chiều $d=768$, khi các vector được phân bố đẳng hướng hoàn hảo, một tính chất kỳ lạ xuất hiện: <strong>Hầu như mọi cặp vector chọn ngẫu nhiên đều vuông góc với nhau ($\mathbf{u} \cdot \mathbf{v} \approx 0, \theta \approx 90^\circ$)!</strong> Nhờ đó, mô hình có thể chứa hàng triệu khái niệm hoàn toàn độc lập mà không hề dẫm chân lên nhau.
+              </p>
+            </div>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 3: ANISOTROPY CONE & CENTROID CORRECTION -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 3: Thí Nghiệm Chiếc Nón Dị Hướng & Hiệu Chỉnh Tâm
+              </span>
+              <span id="fig3-status-tag" class="text-[11px] font-code bg-red-900 text-stone-100 px-2 py-0.5">
+                Trạng thái: Bị Co Cụm Dị Hướng
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig3Canvas" width="480" height="240" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="bg-stone-100 p-3 border border-stone-400 space-y-2 text-xs font-code">
+              <div class="flex justify-between items-center font-bold text-stone-900">
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" id="fig3-chk-center" onchange="updateFig3()">
+                  <span>Kích hoạt phép khử tâm trọng khối ($\mathbf{e} - \mathbf{c}_{\text{tâm}}$)</span>
+                </label>
+              </div>
+              <div class="flex justify-between items-center text-[11px] text-stone-700">
+                <span>Góc mở chiếc nón dị hướng:</span>
+                <span id="fig3-cone-angle-txt" class="font-bold text-amber-950">32° (Bị nghẽn góc)</span>
+              </div>
+              <input type="range" id="fig3-slider-aniso" min="15" max="180" value="32" oninput="updateFig3()" class="w-full h-2 cursor-pointer">
+            </div>
+
+            <div id="fig3-desc-box" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Khi chưa khử tâm, mọi vector đều nằm trong góc hẹp phía trên bên phải. Khoảng cách Cosine bị bão hòa dương giả tạo!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-ch4" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">04</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="ch4_title">
+              Chương 4: LayerNorm: Chiếc Neo Tự Động Tái Lập Gốc Tọa Độ Qua Từng Tầng Transformer
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="ch4_sub">
+              Làm thế nào mạng nơ-ron liên tục kéo trọng tâm của mỗi vector về giá trị trung bình $\mu = 0$ và độ lệch chuẩn $\sigma = 1$?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter" data-key="ch4_p1">
+              Trong một mạng Transformer có 12 hoặc 24 tầng xếp chồng lên nhau, dữ liệu liên tục trải qua hàng trăm phép nhân ma trận trọng số. Nếu không có biện pháp kiềm chế, các con số sẽ tăng dần theo cấp số nhân (Hiện tượng Bùng nổ Gradient - Exploding Gradients) hoặc trôi dạt không kiểm soát, khiến hàm Softmax bị bão hòa và mạng nơ-ron hoàn toàn ngừng học.
+            </p>
+            <p data-key="ch4_p2">
+              Vị cứu tinh ở đây chính là <strong>Layer Normalization (LayerNorm)</strong>. Khác với BatchNorm (tính trung bình trên cả lô hàng trăm mẫu ảnh), LayerNorm hoạt động như một cỗ máy <em>tái lập gốc tọa độ tức thời cho từng token riêng biệt</em> trên toàn bộ $d=768$ chiều đặc trưng của chính nó:
+            </p>
+
+            <div class="math-box p-4 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Phương Trình Chuẩn Hóa Tầng (Layer Normalization):
+              </div>
+              <div class="py-1">
+                $$\hat{x}_i = \frac{x_i - \mu}{\sqrt{\sigma^2 + \epsilon}} \cdot \gamma + \beta$$
+              </div>
+              <div class="text-[11px] text-stone-700 leading-normal space-y-1">
+                <div>&bull; $\mu = \frac{1}{d} \sum_{j=1}^{d} x_j$: Giá trị trung bình của 768 chiều (Gốc tọa độ cục bộ của token).</div>
+                <div>&bull; $\sigma^2 = \frac{1}{d} \sum_{j=1}^{d} (x_j - \mu)^2$: Phương sai độ phân tán xung quanh mốc trung bình.</div>
+                <div>&bull; $\epsilon \approx 10^{-5}$: Một hằng số cực nhỏ để chống lỗi chia cho số 0 khi phương sai $\sigma^2 = 0$.</div>
+                <div>&bull; $\gamma, \beta$: Hai hệ số co giãn và tịnh tiến có thể học được trong quá trình huấn luyện.</div>
+              </div>
+            </div>
+
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-emerald-950">💡 Ví dụ đời thực dễ hình dung:</div>
+              <p>
+                LayerNorm giống hệt như chiếc <strong>Nút Trừ Bì (Tare Button)</strong> trên chiếc cân điện tử nhà bếp của bạn. Mỗi khi bạn đặt một chiếc bát mới lên cân (một tầng Transformer mới), bạn bấm nút "Tare" để màn hình lập tức nhảy về số 0.00 gam. Nhờ đó, bạn luôn đo được chính xác trọng lượng nguyên liệu bỏ thêm vào mà không bị ảnh hưởng bởi độ nặng của chiếc bát!
+              </p>
+            </div>
+
+            <div class="takeaway-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-amber-950">📌 Vì sao LayerNorm bảo vệ hàm Softmax?</div>
+              <p>
+                Hàm Softmax $\text{softmax}(z_i) = \frac{e^{z_i}}{\sum e^{z_j}}$ có đặc tính: nếu các giá trị $z_i$ quá lớn (ví dụ $+50$ hoặc $-50$), đạo hàm của nó sẽ tiệm cận về $0$ (Gradient Vanishing). Bằng cách ghì phương sai về $\sigma = 1.0$ và tâm về $\mu = 0$, LayerNorm giữ cho các tín hiệu luôn nằm trong "vùng dốc nhạy cảm" nhất của Softmax, đảm bảo quá trình cập nhật diễn ra thông suốt!
+              </p>
+            </div>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 4: LAYERNORM NORMAL DISTRIBUTION SHIFTER -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 4: Thí Nghiệm Kéo Lệch Phân Phối & Chuẩn Hóa Về $\mu=0$
+              </span>
+              <span id="fig4-metric-tag" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Sau LayerNorm: μ = 0.00 | σ = 1.00
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig4Canvas" width="480" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="bg-stone-100 p-3 border border-stone-400 space-y-2 text-xs font-code">
+              <div class="flex justify-between items-center">
+                <span>Độ lệch trung bình ban đầu của vector thô ($\mu_{\text{raw}}$):</span>
+                <span id="fig4-mu-val" class="font-bold text-amber-950">+3.50</span>
+              </div>
+              <input type="range" id="fig4-slider-mu" min="-50" max="50" value="35" oninput="updateFig4()" class="w-full h-2 cursor-pointer">
+              
+              <div class="flex justify-between items-center pt-1">
+                <span>Phương sai ban đầu ($\sigma^2_{\text{raw}}$):</span>
+                <span id="fig4-sigma-val" class="font-bold text-amber-950">4.20</span>
+              </div>
+              <input type="range" id="fig4-slider-sig" min="10" max="80" value="42" oninput="updateFig4()" class="w-full h-2 cursor-pointer">
+            </div>
+
+            <div class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Đường nét đứt màu đỏ là vector thô bị lệch tâm. Đường liền màu xanh lục là vector sau LayerNorm được đưa hoàn hảo về trung tâm đối xứng 0!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-exam1" class="p-4 sm:p-6 bg-amber-50 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">TEST I</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Bài Kiểm Tra Chuyên Đề I: Gốc Tọa Độ, Chuẩn Hóa L2 & Hình Học Siêu Cầu (15 Câu)
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              15 câu hỏi chuẩn Thang đo Bloom từ Cấp 1 (Nhận biết) đến Cấp 6 (Vận dụng cao) - Toàn bộ đều được giảng dạy chi tiết ở 4 chương trên!
+            </span>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center bg-stone-200 p-2.5 border border-stone-400 font-code text-xs mb-4">
+          <span class="font-bold text-stone-900" id="exam1-progress-text">Tiến độ: 0/15 câu đã làm</span>
+          <span class="font-bold text-amber-950" id="exam1-score-text">Điểm: 0 / 15</span>
+        </div>
+
+        <div id="exam1-quiz-container" class="space-y-4">
+          <!-- Render tự động 15 câu bằng JS -->
+        </div>
+
+        <div id="exam1-summary" class="mt-6 p-4 bg-stone-100 border-2 border-stone-800 text-xs font-code hidden"></div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- PHẦN II: CƠ CHẾ THIẾT LẬP CÁC TỌA ĐỘ NGỮ NGHĨA SIÊU CHIỀU (CHƯƠNG 5 - 8 + THI 2) -->
+      <!-- ========================================================================= -->
+
+      <section id="sec-ch5" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">05</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="ch5_title">
+              Chương 5: BPE & Bảng Tra Embedding: Điểm Xuất Phát Của Tọa Độ
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="ch5_sub">
+              Mỗi từ ngữ nhận tọa độ thô đầu tiên từ đâu trước khi bước vào mạng nơ-ron?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter" data-key="ch5_p1">
+              Mạng nơ-ron chỉ là một tập hợp các phép toán cộng trừ nhân chia số thực, nó hoàn toàn mù tịt trước các chữ cái như <em>"m-e-t-e-o-r-i-t-e"</em>. Để bắt đầu hành trình biến chữ thành tranh, bước khởi đầu tiên là phải cấp cho mỗi từ một <strong>tọa độ khởi điểm tĩnh (Static Initial Embedding)</strong>.
+            </p>
+            <p data-key="ch5_p2">
+              Quy trình diễn ra qua hai công đoạn nghiêm ngặt:
+            </p>
+            <ol class="list-decimal list-inside space-y-1.5 text-xs sm:text-sm bg-stone-200 p-3 border border-stone-400">
+              <li><strong>Tách từ thành số hiệu Token ID:</strong> Bằng thuật toán Byte-Pair Encoding (BPE), câu văn được băm thành các mã số nguyên. Ví dụ từ "meteorite" được cấp mã ID = `15420`.</li>
+              <li><strong>Tra cứu ma trận nhúng $W_e$:</strong> Mã số `15420` đóng vai trò là số thứ tự hàng để rút trích ra vector 768 chiều từ <strong>Ma Trận Tra Cứu (Embedding Lookup Matrix $W_e \in \mathbb{R}^{49408 \times 768}$)</strong>, trong đó $49,408$ là tổng kích thước vốn từ vựng của CLIP.</li>
+            </ol>
+
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-emerald-950">💡 Ví dụ đời thực dễ hình dung:</div>
+              <p>
+                Bảng tra $W_e$ giống hệt như cuốn <strong>Danh Bạ Điện Thoại Hoàng Gia</strong> hay một tủ chứa đồ có 49,408 ngăn kéo. Khi bạn cầm tấm vé số `15420`, bạn đến đúng ngăn kéo số `15420`, mở ra và lấy ra một xấp tài liệu gồm đúng 768 con số tọa độ khởi điểm của từ đó!
+              </p>
+            </div>
+
+            <div class="math-box p-3.5 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Phép Ghép Mã Hóa Vị Trí (Positional Encoding):
+              </div>
+              <div class="py-1">
+                $$\mathbf{x}_{\text{pos}} = W_e[\text{token\_id}] + PE(\text{pos})$$
+              </div>
+              <div class="text-[11px] text-stone-700 leading-normal">
+                Bản thân phép tính Chú ý (Self-Attention) có tính <strong>đối xứng hoán vị (Permutation Invariance)</strong>: nếu không có $PE(\text{pos})$, máy tính sẽ coi cụm từ <em>"chó cắn người"</em> có tọa độ y hệt như <em>"người cắn chó"</em>! Vector $PE$ hoạt động như một con dấu bưu điện đánh dấu chính xác vị trí thời gian của từ trên dòng văn bản.
+              </div>
+            </div>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 5: TOKEN EMBEDDING LOOKUP SIMULATOR -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 5: Khám Phá Ma Trận Tra Tọa Độ $W_e[49408 \times 768]$
+              </span>
+              <span id="fig5-token-badge" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Token: "meteorite" (ID: 15420)
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig5Canvas" width="480" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="flex flex-wrap gap-2 text-xs font-code">
+              <button onclick="pickFig5Token('meteorite', 15420)" class="px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-900">"meteorite"</button>
+              <button onclick="pickFig5Token('cowboy', 9832)" class="px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">"cowboy"</button>
+              <button onclick="pickFig5Token('arms', 4120)" class="px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">"arms"</button>
+              <button onclick="pickFig5Token('four', 1405)" class="px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">"four"</button>
+            </div>
+
+            <div id="fig5-slice-readout" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Trích xuất 8 chiều đầu tiên của $W_e[15420]$: `[+0.42, -0.88, +0.15, +1.02, -0.34, +0.77, -0.19, +0.61]`.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-ch6" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">06</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="ch6_title">
+              Chương 6: Multi-Head Self-Attention: Sự Uốn Nắn Tọa Độ Động Trong Ngữ Cảnh
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="ch6_sub">
+              Làm sao từ "đá" (rock) tự biết xoay hướng thành "đá bazan núi lửa" khi đứng cạnh từ "dung nham"?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter" data-key="ch6_p1">
+              Tọa độ ban đầu lấy từ bảng $W_e$ chỉ là <strong>tọa độ tĩnh (Static Embedding)</strong>. Từ <em>"rock"</em> đứng trơ trọi một mình chỉ mang nghĩa chung chung (vừa có thể là hòn đá, nhạc rock sôi động, hay động tác lắc lư). Nếu chỉ dùng tọa độ tĩnh này, AI sẽ không bao giờ hiểu được nghĩa thực sự của câu nói.
+            </p>
+            <p data-key="ch6_p2">
+              Sức mạnh biến hóa kỳ diệu thuộc về <strong>Cơ Chế Tự Chú Ý Đa Đầu (Multi-Head Self-Attention)</strong> của 12 tầng Transformer:
+            </p>
+
+            <div class="math-box p-4 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Phương Trình Uốn Nắn Tọa Độ Bằng Ma Trận Chú Ý:
+              </div>
+              <div class="py-1">
+                $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{Q K^T}{\sqrt{d_k}}\right) V$$
+              </div>
+              <div class="text-[11px] text-stone-700 leading-normal space-y-1">
+                <div>&bull; $Q = \mathbf{x} W_Q$ (Query), $K = \mathbf{x} W_K$ (Key), $V = \mathbf{x} W_V$ (Value).</div>
+                <div>&bull; <strong>Tại sao phải chia cho $\sqrt{d_k}$?</strong> Nếu không chia cho $\sqrt{d_k}$ (thường $d_k=64$), tích vô hướng $Q K^T$ sẽ có phương sai phình to theo $d_k$, đẩy hàm Softmax vào vùng bão hòa bằng phẳng khiến gradient bị triệt tiêu!</div>
+                <div>&bull; <strong>Tại sao là Multi-Head (Đa đầu)?</strong> Cho phép mô hình đồng thời chiếu vector vào nhiều không gian con độc lập: một đầu theo dõi hình thể giải phẫu, một đầu soi chất liệu bề mặt, một đầu soi phong cách mỹ thuật!</div>
+              </div>
+            </div>
+
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-emerald-950">💡 Ví dụ đời thực dễ hình dung:</div>
+              <p>
+                Self-Attention giống hệt như một <strong>chú tắc kè hoa</strong>. Khi đứng trên cành cây khô, da nó tự ngả sang màu nâu xám; khi bò sang tán lá xanh, da nó chuyển sang màu lục biếc. Từ "rock" khi đứng cạnh "meteorite, space" sẽ bị lực tương tác của các từ xung quanh <em>bẻ ngoặt góc tọa độ</em> về phía vật lý thiên văn!
+              </p>
+            </div>
+
+            <div class="takeaway-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-amber-950">📌 Đại số vector ý niệm kinh điển:</div>
+              <p>
+                Nhờ tính chất tuyến tính của các trục ngữ nghĩa sau Self-Attention, chúng ta có thể thực hiện những phép cộng trừ kỳ diệu:
+                $$\vec{v}_{\text{vua}} - \vec{v}_{\text{nam giới}} + \vec{v}_{\text{nữ giới}} \approx \vec{v}_{\text{nữ hoàng}}$$
+              </p>
+            </div>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 6: CONTEXTUAL VECTOR ROTATOR -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 6: Thí Nghiệm Uốn Nắn Góc Vector "Rock" Theo Ngữ Cảnh
+              </span>
+              <span id="fig6-angle-tag" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Góc lệch ngữ cảnh: Δθ = +38.5°
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig6Canvas" width="480" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="bg-stone-100 p-3 border border-stone-400 space-y-2 text-xs font-code">
+              <div class="flex justify-between items-center">
+                <span>Chọn ngữ cảnh ghép cặp với từ khóa <strong>"Rock"</strong>:</span>
+              </div>
+              <div class="grid grid-cols-3 gap-2">
+                <button onclick="setFig6Context('music')" id="btn-f6-music" class="px-2 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">"Rock Band / Music"</button>
+                <button onclick="setFig6Context('space')" id="btn-f6-space" class="px-2 py-1 bg-amber-900 text-stone-100 border border-stone-800 font-bold">"Space / Meteorite"</button>
+                <button onclick="setFig6Context('geology')" id="btn-f6-geo" class="px-2 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">"Cave / Mineral"</button>
+              </div>
+            </div>
+
+            <div id="fig6-desc" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Khi ghép với "Meteorite", trọng số chú ý $\alpha_{i,j} = 0.82$ kéo vector "Rock" quay hẳn sang góc phần tư của vật lý thiên văn!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-ch7" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">07</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="ch7_title">
+              Chương 7: Ma Trận Chiếu $W_v, W_t$: Chiếc Cầu Nối Văn Bản Vào Không Gian Thị Giác
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="ch7_sub">
+              Làm thế nào một chuỗi chữ viết và một ma trận pixel màu có thể gặp nhau tại cùng một tọa độ?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter" data-key="ch7_p1">
+              Trong kiến trúc CLIP, Text Encoder (mạng xử lý chữ) và Vision Encoder (mạng ViT xử lý lưới pixel ảnh) là hai cỗ máy hoàn toàn tách biệt. Ngay cả khi cả hai mạng đều có cùng số chiều ẩn $d=768$, cơ sở trực chuẩn (basis) và cách tổ chức hình học nội bộ của chúng hoàn toàn khác nhau: một bên hiểu theo cú pháp ngữ văn, một bên hiểu theo mảng màu và đường nét quang học.
+            </p>
+            <p data-key="ch7_p2">
+              Để hai thế giới này tìm thấy nhau, CLIP trang bị ở đầu ra của mỗi bên một <strong>Ma Trận Chiếu Tuyến Tính (Linear Projection Head)</strong>:
+            </p>
+
+            <div class="math-box p-4 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Phép Chiếu Đồng Quy Đa Phương Thức (Multimodal Projection):
+              </div>
+              <div class="py-1">
+                $$\mathbf{u} = \frac{\mathbf{h}_{\text{text}} \cdot W_t}{\|\mathbf{h}_{\text{text}} \cdot W_t\|_2}, \qquad \mathbf{v} = \frac{\mathbf{h}_{\text{img}} \cdot W_v}{\|\mathbf{h}_{\text{img}} \cdot W_v\|_2}$$
+              </div>
+              <div class="text-[11px] text-stone-700 leading-normal space-y-1">
+                <div>&bull; $W_t \in \mathbb{R}^{d_t \times d_e}$ và $W_v \in \mathbb{R}^{d_v \times d_e}$: Hai ma trận xoay và ánh xạ hai không gian riêng rẽ vào không gian nhúng chung (chung $d_e = 512$ hoặc $768$).</div>
+                <div>&bull; Sau phép chiếu và chuẩn hóa $L_2$, cả bức ảnh chàng cao bồi và câu chữ mô tả đều trở thành hai điểm nằm sát sạt nhau trên cùng một mặt siêu cầu!</div>
+              </div>
+            </div>
+
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-emerald-950">💡 Ví dụ đời thực dễ hình dung:</div>
+              <p>
+                Hai ma trận $W_t$ và $W_v$ giống như <strong>Phòng Phiên Dịch Đồng Thời tại Hội Nghị Liên Hợp Quốc</strong>. Một đại biểu nói tiếng Việt (Text) và một đại biểu nói tiếng Tây Ban Nha (Hình ảnh). Người phiên dịch sẽ chuyển cả hai luồng ngôn ngữ về cùng một chuẩn ngữ nghĩa chung để hai bên có thể hiểu và bắt tay nhau một cách chuẩn xác!
+              </p>
+            </div>
+
+            <div class="takeaway-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-amber-950">📌 Cơ sở của khả năng phân loại Zero-shot kỳ diệu:</div>
+              <p>
+                Nhờ không gian siêu cầu liên tục và trơn tru (Smooth Manifold), khi gặp một con vật hoàn toàn mới chưa từng học, vector ảnh của nó vẫn tự động rơi vào vùng lân cận của vector văn bản <em>"a photo of a [con vật mới]"</em>, giúp AI nhận diện chính xác mà không cần huấn luyện lại từ đầu!
+              </p>
+            </div>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 7: MULTIMODAL PROJECTION LAB -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 7: Thí Nghiệm Chiếu Đồng Quy Văn Bản & Hình Ảnh
+              </span>
+              <span id="fig7-dist-tag" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Độ Lệch Góc: θ = 4.2° (Khớp Gần Hoàn Hảo)
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig7Canvas" width="480" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="flex justify-between items-center bg-stone-100 p-2.5 border border-stone-400 text-xs font-code">
+              <span>Trạng thái huấn luyện ma trận $W_t, W_v$:</span>
+              <div class="flex gap-2">
+                <button onclick="setFig7State(false)" id="btn-f7-untrained" class="px-2 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">Chưa Khớp (Epoch 0)</button>
+                <button onclick="setFig7State(true)" id="btn-f7-trained" class="px-2 py-1 bg-amber-900 text-stone-100 border border-stone-800 font-bold">Đã Huấn Luyện (CLIP)</button>
+              </div>
+            </div>
+
+            <div id="fig7-expl" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Sau khi huấn luyện, vector chữ "cowboy on rock" (xanh dương) và vector ảnh tương ứng (cam) xoay trùng khít lên nhau!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-ch8" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">08</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="ch8_title">
+              Chương 8: Tham Số Nhiệt Độ $\tau$: Thước Đo Độ Dốc Định Hình Các Cụm Ngữ Nghĩa
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="ch8_sub">
+              Bí ẩn phép chia cho $\tau$ trong hàm mất mát InfoNCE: Nếu thiếu $\tau$, không gian sẽ biến dạng ra sao?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter" data-key="ch8_p1">
+              Trong quá trình huấn luyện tương phản giữa 400 triệu cặp ảnh-chữ, làm sao mô hình biết cách kéo cặp ảnh-chữ đúng lại gần nhau và xua đuổi hàng chục ngàn bức ảnh sai khác đi chỗ khác? Câu trả lời nằm ở <strong>Hàm Mất Mát InfoNCE Đối Xứng (Symmetric InfoNCE Loss)</strong>, nơi có sự xuất hiện của một tham số sinh tử: <strong>Nhiệt độ $\tau$ (Temperature parameter)</strong>, thường đặt $\tau \approx 0.07$.
+            </p>
+
+            <div class="math-box p-4 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Hàm Mất Mát InfoNCE & Tác Động Của Nhiệt Độ $\tau$:
+              </div>
+              <div class="py-1">
+                $$\mathcal{L}_{\text{Chữ}\to\text{Ảnh}} = -\sum_{i=1}^{B} \log \frac{\exp\left(\frac{\mathbf{u}_i \cdot \mathbf{v}_i}{\tau}\right)}{\exp\left(\frac{\mathbf{u}_i \cdot \mathbf{v}_i}{\tau}\right) + \sum_{j \neq i} \exp\left(\frac{\mathbf{u}_i \cdot \mathbf{v}_j}{\tau}\right)}$$
+                $$\mathcal{L}_{\text{CLIP}} = \frac{1}{2} \left( \mathcal{L}_{\text{Chữ}\to\text{Ảnh}} + \mathcal{L}_{\text{Ảnh}\to\text{Chữ}} \right)$$
+              </div>
+              <div class="text-[11px] text-stone-700 leading-normal space-y-1">
+                <div>&bull; $\mathbf{u}_i \cdot \mathbf{v}_i$: Tích vô hướng của cặp Đúng (Positive Pair).</div>
+                <div>&bull; $\mathbf{u}_i \cdot \mathbf{v}_j$: Tích vô hướng của hàng ngàn cặp Sai (Negative Pairs) trong cùng một mẻ dữ liệu (Batch).</div>
+                <div>&bull; <strong>Vai trò của Batch Size khổng lồ ($B=32,768$):</strong> Càng nhiều mẫu âm tính cạnh tranh, lực đẩy hình học càng chuẩn xác, tạo ra bề mặt siêu cầu hoàn hảo!</div>
+              </div>
+            </div>
+
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-emerald-950">💡 Ví dụ đời thực dễ hình dung:</div>
+              <p>
+                Tham số $\tau$ giống như <strong>Chiếc Núm Vặn Tiêu Cự Đèn Pin</strong>. 
+                <br>&bull; Nếu $\tau$ quá lớn ($\tau \to \infty$): Chùm sáng bị nhòe toẹt, phẳng lì, làm mất khả năng phân biệt đâu là bạn đâu là thù.
+                <br>&bull; Nếu $\tau$ quá nhỏ ($\tau \to 0$): Ánh sáng bị thu hẹp thành một sợi tia laser sắc nhọn cứng nhắc (Argmax), làm mô hình mất đi tính mềm dẻo.
+                <br>&bull; Giá trị tối ưu $\tau = 0.07$ tạo ra một chùm sáng vừa vặn, đủ sắc nét để phân biệt cặp đúng nhưng vẫn đủ bao dung cho các từ gần nghĩa đứng cạnh nhau.
+              </p>
+            </div>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 8: TEMPERATURE TAU SOFTMAX SIMULATOR -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 8: Thí Nghiệm Điều Chỉnh Độ Dốc Nhiệt Độ $\tau$
+              </span>
+              <span id="fig8-tau-pill" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                τ = 0.07 (Chuẩn CLIP)
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig8Canvas" width="480" height="220" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="bg-stone-100 p-3 border border-stone-400 space-y-2 text-xs font-code">
+              <div class="flex justify-between items-center">
+                <span>Vặn tham số nhiệt độ $\tau$:</span>
+                <span id="fig8-tau-disp" class="font-bold text-amber-950">0.07</span>
+              </div>
+              <input type="range" id="fig8-slider" min="1" max="100" value="7" oninput="updateFig8(this.value)" class="w-full h-2 cursor-pointer">
+              
+              <div class="flex justify-between text-[10px] text-stone-500">
+                <span>τ = 0.01 (Cực kỳ nhọn/Cứng nhắc)</span>
+                <span>τ = 0.07 (Tối ưu)</span>
+                <span>τ = 1.00 (Mờ nhạt/Hỗn loạn)</span>
+              </div>
+            </div>
+
+            <div id="fig8-expl-box" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Ở $\tau = 0.07$, đỉnh xác suất của câu mô tả đúng vọt lên 94.8%, áp đảo hoàn toàn các câu sai khác trong batch!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-exam2" class="p-4 sm:p-6 bg-amber-50 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">TEST II</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Bài Kiểm Tra Chuyên Đề II: Thiết Lập Tọa Độ Ngữ Nghĩa & Ma Trận Chiếu (15 Câu)
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              15 câu hỏi chuyên sâu từ Nhận biết, Thông hiểu đến Phân tích cấu trúc Attention và Đánh giá ma trận $W_v, W_t$ theo chuẩn Thang đo Bloom.
+            </span>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center bg-stone-200 p-2.5 border border-stone-400 font-code text-xs mb-4">
+          <span class="font-bold text-stone-900" id="exam2-progress-text">Tiến độ: 0/15 câu đã làm</span>
+          <span class="font-bold text-amber-950" id="exam2-score-text">Điểm: 0 / 15</span>
+        </div>
+
+        <div id="exam2-quiz-container" class="space-y-4">
+          <!-- Render tự động 15 câu bằng JS -->
+        </div>
+
+        <div id="exam2-summary" class="mt-6 p-4 bg-stone-100 border-2 border-stone-800 text-xs font-code hidden"></div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- PHẦN III: NGHỆ THUẬT XỬ LÝ PROMPT, GIỚI HẠN 77 TOKEN & CƠ CHẾ DIFFUSION (CHƯƠNG 9 - 12 + THI 3) -->
+      <!-- ========================================================================= -->
+
+      <section id="sec-ch9" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">09</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="ch9_title">
+              Chương 9: Tại Sao Lại Là 77 Token? Căn Nguyên Kiến Trúc & Độ Phức Tạp $O(N^2)$
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="ch9_sub">
+              Con số 77 đến từ đâu? Tại sao OpenAI không cho phép 500 hay 1000 token trong CLIP ban đầu?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter" data-key="ch9_p1">
+              Bất kỳ ai từng sử dụng Stable Diffusion 1.5 hay 2.1 đều từng gặp phải "bức tường gạch" vô hình: <strong>Câu prompt bị cắt cụt không thương tiếc ở token thứ 77</strong>. Tại sao lại là con số lẻ 77 mà không phải là 64, 100, hay 512 như các mô hình ngôn ngữ lớn?
+            </p>
+            <p data-key="ch9_p2">
+              Con số 77 bắt nguồn từ sự kết hợp của hai yếu tố thực tiễn: <em>Thống kê ngôn ngữ thực tế</em> và <em>Định lý bộ nhớ bậc hai $O(N^2)$ của ma trận Attention</em>.
+            </p>
+
+            <div class="math-box p-4 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Cấu Trúc Khung Đệm 77 Token & Chi Phí Bộ Nhớ Bậc Hai:
+              </div>
+              <div class="py-1">
+                $$\text{Cấu trúc} = \underbrace{[SOT]}_{\text{Vị trí 0}} + \underbrace{\text{Tối đa 75 tokens nội dung}}_{\text{Vị trí 1 đến 75}} + \underbrace{[EOT]}_{\text{Vị trí 76}} = \mathbf{77 \text{ Tokens}}$$
+                $$\text{Chi phí bộ nhớ Self-Attention} \propto N^2 \cdot d_k$$
+              </div>
+              <div class="text-[11px] text-stone-700 leading-normal space-y-1">
+                <div>&bull; Khi $N = 77$, ma trận Attention có kích thước $77 \times 77 = 5,929$ phần tử.</div>
+                <div>&bull; Nếu tăng lên $N = 256$, kích thước vọt lên $256 \times 256 = 65,536$ phần tử (Gấp 11 lần!).</div>
+                <div>&bull; Nếu tăng lên $N = 512$, kích thước bùng nổ lên $262,144$ phần tử (Gấp 44 lần!), làm cháy sạch bộ nhớ VRAM của hàng nghìn card GPU tại thời điểm năm 2021!</div>
+              </div>
+            </div>
+
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-emerald-950">💡 Ví dụ đời thực dễ hình dung:</div>
+              <p>
+                Giới hạn 77 token giống như <strong>Hạn mức hành lý xách tay 7kg khi đi máy bay</strong>. Hãng bay (OpenAI) đã thống kê thấy 98.5% hành khách chỉ cần mang balo dưới 60 từ là đủ mô tả bức ảnh. Nếu cho phép mỗi người mang vali 50kg (512 tokens), chiếc máy bay sẽ quá tải và không thể cất cánh được!
+              </p>
+            </div>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 9: O(N^2) ATTENTION MEMORY EXPLOSION LAB -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 9: Khảo Sát Bùng Nổ Bộ Nhớ Tương Quan $O(N^2)$
+              </span>
+              <span id="fig9-tokens-badge" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                N = 77 Tokens | Bộ nhớ: 1.0x (Cơ sở)
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig9Canvas" width="480" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="bg-stone-100 p-3 border border-stone-400 space-y-2 text-xs font-code">
+              <div class="flex justify-between items-center">
+                <span>Thay đổi độ dài cửa sổ Token ngữ cảnh ($N$):</span>
+                <span id="fig9-val-disp" class="font-bold text-amber-950">77 tokens</span>
+              </div>
+              <input type="range" id="fig9-slider" min="16" max="256" value="77" oninput="updateFig9(this.value)" class="w-full h-2 cursor-pointer">
+              
+              <div class="flex justify-between text-[10px] text-stone-500">
+                <span>N = 32 (Quá ngắn)</span>
+                <span>N = 77 (Điểm cân bằng vàng)</span>
+                <span>N = 256 (Tốn VRAM gấp 11 lần)</span>
+              </div>
+            </div>
+
+            <div id="fig9-calc-box" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Tại $N = 77$, ma trận Attention $77 \times 77 = 5,929$ phần tử. Nếu tăng lên 256, con số vọt lên $65,536$ phần tử!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-ch10" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">10</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="ch10_title">
+              Chương 10: 77 Token Bằng Bao Nhiêu Từ? Bẫy Phân Mảnh Từ Vựng Của BPE
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="ch10_sub">
+              Vì sao 77 token KHÔNG PHẢI là 77 từ? Nguy cơ nuốt mất từ khóa khi viết prompt quá dài.
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter" data-key="ch10_p1">
+              Một trong những cạm bẫy ngây thơ nhất của người mới học prompt là mở Word ra đếm số từ theo khoảng trắng, nghĩ rằng mình có thể gõ thoải mái 75 từ. <strong>Thực tế hoàn toàn không phải như vậy!</strong>
+            </p>
+            <p data-key="ch10_p2">
+              Thuật toán Byte-Pair Encoding (BPE) không chia văn bản theo ranh giới từng từ hoàn chỉnh mà băm theo các mảnh âm tiết (subwords):
+            </p>
+
+            <ul class="list-disc list-inside space-y-1.5 font-code text-xs sm:text-sm bg-stone-200 p-3 border border-stone-400">
+              <li>Từ tiếng Anh đơn giản (như <em>"cat", "cowboy"</em>) = Đúng 1 token.</li>
+              <li>Từ ghép phức tạp (như <em>"meteorite"</em>) = Bị chém thành 2 tokens: <code>["meteor", "ite&lt;/w&gt;"]</code>.</li>
+              <li>Từ hiếm hoặc thuật ngữ chuyên sâu = Có thể tốn từ <strong>3 đến 5 tokens</strong> cho duy nhất một từ!</li>
+              <li><strong>Tiếng Việt có dấu:</strong> Bị phân mảnh cực kỳ nặng nề vì BPE của CLIP tối ưu cho tiếng Anh. Mỗi từ tiếng Việt có dấu có thể bị chém thành <strong>2 đến 4 mảnh byte tokens</strong>!</li>
+            </ul>
+
+            <div class="math-box p-3.5 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Quy Tắc Ước Lượng Thực Nghiệm (Empirical Rule):
+              </div>
+              <div class="py-1">
+                $$1 \text{ Token} \approx 0.75 \text{ Từ Tiếng Anh} \implies 75 \text{ Content Tokens} \approx \mathbf{45 \text{ đến } 55 \text{ Từ Tiếng Anh}}$$
+              </div>
+              <div class="text-[11px] text-stone-700 leading-normal">
+                <strong>Hậu quả tai hại của việc viết quá dài (Silent Truncation):</strong> Mọi từ ngữ nằm từ token thứ 78 trở đi sẽ bị <em>cắt bỏ hoàn toàn trong im lặng</em>. Bạn tưởng AI đọc hết, nhưng thực tế toàn bộ các từ ở nửa sau prompt đã biến mất không dấu vết khỏi bộ nhớ của mô hình!
+              </div>
+            </div>
+
+            <div class="takeaway-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-amber-950">📌 Đột phá của Stable Diffusion XL (SDXL):</div>
+              <p>
+                Để phá vỡ sự chật hẹp này, SDXL sử dụng song song <strong>Dual Text Encoders</strong>: một mạng OpenAI CLIP ViT-L ($768$D) kết hợp với một mạng OpenCLIP ViT-bigG ($1280$D). Hai luồng này được ghép nối (concatenate) lại thành vector nhúng khổng lồ $2048$ chiều, giúp sức chứa chi tiết phong phú hơn gấp nhiều lần!
+              </p>
+            </div>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 10: REAL-TIME BPE TOKENIZER ANALYZER -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 10: Máy Phân Tích & Đếm Token BPE Thời Gian Thực
+              </span>
+              <span id="fig10-usage-badge" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Sử dụng: 18 / 77 Tokens (23.4%)
+              </span>
+            </div>
+
+            <div class="space-y-2">
+              <textarea id="fig10-input-text" oninput="analyzeBpeTokens()" rows="3" class="w-full p-2 bg-stone-900 text-amber-100 font-code text-xs border border-stone-700 rounded resize-none focus:outline-none focus:border-amber-500">a humanoid creature made of meteorite rock, 4 arms, 2 heads, holding space gun, cowboy style, riding a square rock</textarea>
+            </div>
+
+            <div class="bg-stone-950 p-2.5 rounded border border-stone-700 max-h-36 overflow-y-auto custom-scrollbar">
+              <div id="fig10-token-chips" class="flex flex-wrap gap-1 font-code text-[11px]"></div>
+            </div>
+
+            <div class="bg-stone-100 p-2.5 border border-stone-400 space-y-1.5 text-xs font-code">
+              <div class="flex justify-between font-bold text-stone-900">
+                <span>Thước đo sức chứa khung nhớ (Max 77):</span>
+                <span id="fig10-word-token-ratio">Số từ: 19 | Số token: 23 | Tỉ lệ: 1.21 tok/từ</span>
+              </div>
+              <div class="w-full bg-stone-300 h-2.5 rounded overflow-hidden">
+                <div id="fig10-progress-bar" class="bg-amber-900 h-full transition-all" style="width: 29.8%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-ch11" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">11</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="ch11_title">
+              Chương 11: Mạng Diffusion "Lọc & Rút Trích" Dữ Liệu Từ Prompt Như Thế Nào?
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="ch11_sub">
+              Cơ chế Cross-Attention Query-Key-Value: Tại sao mô hình không đọc cả câu như một khối mà tra cứu từng mảnh?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter" data-key="ch11_p1">
+              Đầu ra từ Text Encoder cấp cho mạng U-Net là một khối tensor 3 chiều: $\mathbf{C} \in \mathbb{R}^{77 \times 768}$, chứa đúng 77 vector nhúng của từng token. Khi mạng U-Net gọt nhiễu qua từng bước thời gian $t$, nó không nuốt chửng cả 77 vector một cách mù quáng. Thay vào đó, nó mở ra các <strong>Cổng Tra Cứu Chú Ý Chéo (Cross-Attention)</strong>:
+            </p>
+
+            <div class="math-box p-4 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Phương Trình Định Tuyến Luồng Thông Tin Cross-Attention:
+              </div>
+              <div class="py-1">
+                $$Q = W_Q \cdot \mathbf{z}_{\text{nhiễu}}^{(t)}, \quad K = W_K \cdot \mathbf{C}_{\text{prompt}}, \quad V = W_V \cdot \mathbf{C}_{\text{prompt}}$$
+                $$\text{Output} = \text{softmax}\left(\frac{Q K^T}{\sqrt{d_k}}\right) V$$
+              </div>
+              <div class="text-[11px] text-stone-700 leading-normal space-y-1">
+                <div>&bull; <strong>$Q$ (Query):</strong> Bắt nguồn từ các <em>pixel không gian của ảnh nhiễu</em> từ U-Net. Điểm ảnh ở vị trí tay thầm hỏi: <em>"Tôi đang ở tọa độ $(x=30, y=80)$, tôi cần vẽ vật thể gì vào đây?"</em>.</div>
+                <div>&bull; <strong>$K$ (Key):</strong> 77 token trong prompt đồng thanh trả lời. Token <em>"space gun"</em> cho tích vô hướng $Q K^T$ vọt lên cực đại!</div>
+                <div>&bull; <strong>$V$ (Value):</strong> Dữ liệu đặc trưng của khẩu súng được bơm thẳng vào điểm ảnh đó để trừ nhiễu!</div>
+              </div>
+            </div>
+
+            <div class="takeaway-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-amber-950">📌 Hiện Tượng Pha Loãng Chú Ý (Attention Dilution):</div>
+              <p>
+                Mẫu số của hàm Softmax là tổng số mũ của toàn bộ các token: $\sum_{j=1}^{77} \exp\left(\frac{Q K_j^T}{\sqrt{d_k}}\right)$. Nếu bạn nhồi nhét quá nhiều từ rác vô nghĩa (như <em>"hyperrealistic, highly detailed, 8k, octane render"</em>), mẫu số sẽ bị phình to vô ích, khiến tổng năng lượng chú ý bị phân mảnh và làm mờ nhạt đi các đặc tính cốt lõi (như 4 tay, súng không gian)!
+              </p>
+            </div>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 11: CROSS-ATTENTION ROUTING VISUALIZER -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 11: Mô Phỏng Định Tuyến Dữ Liệu Query-Key Giữa Pixel & Token
+              </span>
+              <span id="fig11-routing-tag" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Pixel Đang Chọn: Vùng Tay Cầm Súng
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig11Canvas" width="480" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="flex flex-wrap gap-2 text-xs font-code">
+              <button onclick="pickFig11Target('hat')" class="px-2 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">Pixel Vùng Đầu (Mũ)</button>
+              <button onclick="pickFig11Target('gun')" class="px-2 py-1 bg-amber-900 text-stone-100 border border-stone-800 font-bold">Pixel Vùng Tay (Súng)</button>
+              <button onclick="pickFig11Target('mount')" class="px-2 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">Pixel Khối Đá Chân</button>
+            </div>
+
+            <div id="fig11-routing-expl" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Query tại vị trí tay ghép cặp cực đại với Key của token "space gun" (Trọng số Softmax $\approx 0.89$).
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-ch12" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">12</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="ch12_title">
+              Chương 12: Mổ Xẻ Định Kiến: "Cái Gì Quan Trọng Nhất Viết Đầu Tiên Là Đúng Hay Sai?"
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="ch12_sub">
+              Giải mã toàn diện dưới góc nhìn toán học: Mặt đúng, mặt sai lầm, và sự thật về ma trận nhân quả Causal Mask.
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter" data-key="ch12_p1">
+              Trong cộng đồng người dùng Midjourney hay Stable Diffusion, có một kinh nghiệm truyền miệng phổ biến: <em>"Muốn AI vẽ rõ cái gì nhất thì bắt buộc phải ném từ đó lên đầu câu lệnh"</em>. Quan niệm này <strong>VỪA ĐÚNG MỘT PHẦN, NHƯNG LẠI SAI LẦM NẾU HIỂU MÁY MÓC!</strong>
+            </p>
+            
+            <div class="bg-amber-100 p-3.5 border-l-4 border-amber-900 space-y-2 text-xs sm:text-sm">
+              <div class="font-bold text-amber-950">MẶT ĐÚNG (Tại sao nó hiệu quả?):</div>
+              <p>
+                1. <strong>Mặt nạ nhân quả (Causal Attention Masking) trong CLIP:</strong> Text Encoder là mô hình tự hồi quy. Từ đứng ở vị trí số 1 được tất cả các từ số 2, 3, 4... phía sau nhìn vào và tham chiếu. Nó đóng vai trò như "chiếc mỏ neo ngữ cảnh" định hình toàn bộ phong cách cho các từ đi sau!
+              </p>
+              <p>
+                2. <strong>Bảo hiểm chống cắt xén (Truncation Insurance):</strong> Đặt từ quan trọng ở đầu đảm bảo 100% nó không bao giờ bị cắt mất nếu câu lệnh vô tình vượt quá 77 token.
+              </p>
+            </div>
+
+            <div class="bg-stone-200 p-3.5 border-l-4 border-stone-800 space-y-2 text-xs sm:text-sm">
+              <div class="font-bold text-stone-950">MẶT SAI LẦM (Hiểu sai bản chất Diffusion):</div>
+              <p>
+                1. <strong>Cross-Attention trong U-Net là toàn cục 2 chiều (Bidirectional):</strong> U-Net không có mặt nạ nhân quả. Một điểm ảnh vẽ khẩu súng có thể tra cứu token "gun" nằm ở vị trí số 65 với trọng số mạnh $0.95$ ngang ngửa như thể nó nằm ở vị trí số 2!
+              </p>
+              <p>
+                2. <strong>Trọng số từ khóa (Prompt Weighting) có sức mạnh áp đảo:</strong> Cú pháp tăng trọng số như `(cowboy:1.3)` trực tiếp nhân hệ số khuếch đại vào vector Key/Value, tạo lực kéo mạnh gấp nhiều lần việc chỉ đơn thuần dịch chuyển vị trí từ ngữ!
+              </p>
+            </div>
+
+            <div class="takeaway-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-amber-950">📌 Kỹ thuật "Prompt Chunking" (Ghép mảnh):</div>
+              <p>
+                Trong các công cụ như ComfyUI hay WebUI A1111, khi bạn gõ prompt dài 150 - 300 token, phần mềm tự động cắt văn bản thành các khối 77 token riêng biệt (Chunks), đưa qua CLIP nhiều lần rồi ghép nối các tensor lại (ví dụ $154 \times 768$ hoặc $231 \times 768$) để U-Net tra cứu trọn vẹn mà không bị mất chữ!
+              </p>
+            </div>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 12: TOKEN POSITION SWAP ATTENTION COMPARISON -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 12: Thí Nghiệm So Sánh Vị Trí Đầu vs Cuối Câu
+              </span>
+              <span id="fig12-swap-tag" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Từ "Cowboy": Nằm Ở Đầu Câu (Pos #2)
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig12Canvas" width="480" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="bg-stone-100 p-3 border border-stone-400 space-y-2 text-xs font-code">
+              <div class="flex justify-between items-center font-bold text-stone-900">
+                <span>Hoán đổi vị trí từ khóa <strong>"Cowboy"</strong> trong cấu trúc câu:</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <button onclick="setFig12Position('head')" id="btn-f12-head" class="px-2.5 py-1.5 bg-amber-900 text-stone-100 border border-stone-800 font-bold">Đặt Ở Đầu: "cowboy, 4 arms, meteorite..."</button>
+                <button onclick="setFig12Position('tail')" id="btn-f12-tail" class="px-2.5 py-1.5 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">Đặt Ở Cuối: "4 arms, meteorite..., cowboy"</button>
+              </div>
+            </div>
+
+            <div id="fig12-expl" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Quan sát thấy: Đặt ở đầu giúp "cowboy" lan tỏa ngữ cảnh sang các từ kế tiếp trong CLIP, nhưng trong U-Net, vị trí tay vẫn bắt dính đặc tính súng nhờ Cross-Attention chuẩn hóa Softmax!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-exam3" class="p-4 sm:p-6 bg-amber-50 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">TEST III</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Bài Kiểm Tra Chuyên Đề III: 77 Token, Thuật Toán BPE & Định Tuyến Prompt (15 Câu)
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              15 câu hỏi đánh giá mức độ am hiểu cấu trúc token, tính toán độ dài thực tế và nghệ thuật thiết kế prompt theo chuẩn Thang đo Bloom.
+            </span>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center bg-stone-200 p-2.5 border border-stone-400 font-code text-xs mb-4">
+          <span class="font-bold text-stone-900" id="exam3-progress-text">Tiến độ: 0/15 câu đã làm</span>
+          <span class="font-bold text-amber-950" id="exam3-score-text">Điểm: 0 / 15</span>
+        </div>
+
+        <div id="exam3-quiz-container" class="space-y-4">
+          <!-- Render tự động 15 câu bằng JS -->
+        </div>
+
+        <div id="exam3-summary" class="mt-6 p-4 bg-stone-100 border-2 border-stone-800 text-xs font-code hidden"></div>
+      </section>
+
+    </main>
+
+    <!-- CHÂN TRANG TỔNG KẾT ĐẠI CHUYÊN KHẢO -->
+    <footer class="mt-12 pt-5 border-t-2 border-stone-800 text-stone-600 text-xs font-code flex flex-wrap justify-between items-center gap-2">
+      <div>Đại Chuyên Khảo Số 03 &bull; Tổng Hợp 12 Chương Hiệu Đính &bull; 45 Câu Hỏi Bloom Đầy Đủ</div>
+      <div class="text-stone-900 font-bold">100% KaTeX Math &bull; 100% Roboto Chống Lỗi Dấu &bull; 12 Interactive Figures Hoàn Chỉnh</div>
+    </footer>
+
+  </div>
+
+  <script>
+    /* TRẠNG THÁI TOÀN CỤC CỦA BẢN TIN SỐ 03 */
+    const appState = {
+      lang: 'vi',
+      fig1Mag: 1.0,
+      fig2RawX: 1.42,
+      fig2RawY: 0.95,
+      fig3ConeAngle: 32,
+      fig3Centering: false,
+      fig4Mu: 3.5,
+      fig4Sigma: 4.2,
+      fig5Token: 'meteorite',
+      fig5Id: 15420,
+      fig6Context: 'space',
+      fig7Trained: true,
+      fig8Tau: 0.07,
+      fig9N: 77,
+      fig10Tokens: [],
+      fig11Target: 'gun',
+      fig12Pos: 'head',
+      exam1Answers: {},
+      exam2Answers: {},
+      exam3Answers: {}
+    };
+
+    /* TỪ ĐIỂN SONG NGỮ CHO TIÊU ĐỀ CHÍNH */
+    const textDict = {
+      vi: {
+        header_badge: "GIẢI MÃ TẬN GỐC TOÁN HỌC KHÔNG GIAN BIỂU DIỄN & QUY LUẬT XỬ LÝ PROMPT",
+        header_title: "Bản Đồ Siêu Chiều, Gốc Tọa Độ Chân Không & Bí Ẩn 77 Token Của CLIP",
+        header_subtitle: "Khám phá cách gốc tọa độ được thiết lập trên siêu cầu đơn vị, cơ chế định hình tọa độ ngữ nghĩa qua Transformer, giải mã kiến trúc giới hạn 77 Token, và phân tích tính xác thực của định kiến: 'Cái gì quan trọng nhất phải viết đầu tiên'.",
+        ch1_title: "Chương 1: Gốc Tọa Độ $(0,0,\\dots,0)$ Tuyệt Đối Là Gì? Sự Ngộ Nhận Về \"Ý Niệm Số 0\"",
+        ch1_sub: "Tại sao trong không gian ngữ nghĩa, điểm $(0,0,\\dots,0)$ không đại diện cho \"sự hư vô\" mà là một điểm kỳ dị vô nghĩa?",
+        ch2_title: "Chương 2: Siêu Cầu Đơn Vị ($S^{d-1}$) & Chuẩn Hóa $L_2$: Tại Sao Bán Kính Luôn Bằng 1?",
+        ch2_sub: "Khám phá vì sao mọi vector ý niệm đều bị \"giam lỏng\" trên lớp vỏ ngoài của quả cầu siêu chiều $d=768$.",
+        ch3_title: "Chương 3: Hiện Tượng Sụp Đổ Dị Hướng (Anisotropy) & Tâm Trọng Khối (Centroid Drift)",
+        ch3_sub: "Bí ẩn \"Chiếc Nón Hẹp\": Vì sao các vector ngữ nghĩa tự nhiên luôn có xu hướng dồn cục vào một góc siêu cầu?",
+        ch4_title: "Chương 4: LayerNorm: Chiếc Neo Tự Động Tái Lập Gốc Tọa Độ Qua Từng Tầng Transformer",
+        ch4_sub: "Làm thế nào mạng nơ-ron liên tục kéo trọng tâm của mỗi vector về giá trị trung bình $\\mu = 0$ và độ lệch chuẩn $\\sigma = 1$?",
+        ch5_title: "Chương 5: BPE & Bảng Tra Embedding: Điểm Xuất Phát Của Tọa Độ",
+        ch5_sub: "Mỗi từ ngữ nhận tọa độ thô đầu tiên từ đâu trước khi bước vào mạng nơ-ron?",
+        ch6_title: "Chương 6: Multi-Head Self-Attention: Sự Uốn Nắn Tọa Độ Động Trong Ngữ Cảnh",
+        ch6_sub: "Làm sao từ \"đá\" (rock) tự biết xoay hướng thành \"đá bazan núi lửa\" khi đứng cạnh từ \"dung nham\"?",
+        ch7_title: "Chương 7: Ma Trận Chiếu $W_v, W_t$: Chiếc Cầu Nối Văn Bản Vào Không Gian Thị Giác",
+        ch7_sub: "Làm thế nào một chuỗi chữ viết và một ma trận pixel màu có thể gặp nhau tại cùng một tọa độ?",
+        ch8_title: "Chương 8: Tham Số Nhiệt Độ $\\tau$: Thước Đo Độ Dốc Định Hình Các Cụm Ngữ Nghĩa",
+        ch8_sub: "Bí ẩn phép chia cho $\\tau$ trong hàm mất mát InfoNCE: Nếu thiếu $\\tau$, không gian sẽ biến dạng ra sao?",
+        ch9_title: "Chương 9: Tại Sao Lại Là 77 Token? Căn Nguyên Kiến Trúc & Độ Phức Tạp $O(N^2)$",
+        ch9_sub: "Con số 77 đến từ đâu? Tại sao OpenAI không cho phép 500 hay 1000 token trong CLIP ban đầu?",
+        ch10_title: "Chương 10: 77 Token Bằng Bao Nhiêu Từ? Bẫy Phân Mảnh Từ Vựng Của BPE",
+        ch10_sub: "Vì sao 77 token KHÔNG PHẢI là 77 từ? Nguy cơ nuốt mất từ khóa khi viết prompt quá dài.",
+        ch11_title: "Chương 11: Mạng Diffusion \"Lọc & Rút Trích\" Dữ Liệu Từ Prompt Như Thế Nào?",
+        ch11_sub: "Cơ chế Cross-Attention Query-Key-Value: Tại sao mô hình không đọc cả câu như một khối mà tra cứu từng mảnh?",
+        ch12_title: "Chương 12: Mổ Xẻ Định Kiến: \"Cái Gì Quan Trọng Nhất Viết Đầu Tiên Là Đúng Hay Sai?\"",
+        ch12_sub: "Giải mã toàn diện dưới góc nhìn toán học: Mặt đúng, mặt sai lầm, và sự thật về ma trận nhân quả Causal Mask."
+      },
+      en: {
+        header_badge: "DECODING REPRESENTATION MANIFOLDS & PROMPT PROCESSING DYNAMICS",
+        header_title: "High-Dimensional Manifolds, The Vacuum Origin & CLIP's 77-Token Limit",
+        header_subtitle: "Unraveling how coordinate origins exist on unit hyperspheres, Transformer semantic coordinate calibration, the architecture behind the 77-token ceiling, and dissecting the myth: 'Does the most important token strictly belong first?'",
+        ch1_title: "Chapter 1: The Absolute Origin $(0,0,\\dots,0)$: Dispelling The 'Zero Concept' Fallacy",
+        ch1_sub: "Why does $(0,0,\\dots,0)$ in semantic space represent a mathematical singularity rather than 'nothingness'?",
+        ch2_title: "Chapter 2: The Unit Hypersphere ($S^{d-1}$) & L2 Normalization: Why Radius Is Fixed To 1.0",
+        ch2_sub: "Discover why all concept vectors are strictly confined to the outer crust of a 768-dimensional hypersphere.",
+        ch3_title: "Chapter 3: Representation Anisotropy & Centroid Drift: The Narrow Cone Dilemma",
+        ch3_sub: "The mystery of the 'Narrow Cone': Why do natural semantic vectors collapse into an acute sector of hyperspherical space?",
+        ch4_title: "Chapter 4: LayerNorm: The Dynamic Recalibration Anchor Across Transformer Layers",
+        ch4_sub: "How neural networks perpetually pull token coordinate distributions back to mean $\\mu = 0$ and variance $\\sigma = 1$.",
+        ch5_title: "Chapter 5: BPE & The Embedding Lookup Matrix: The Genesis Of Raw Coordinates",
+        ch5_sub: "Where do raw token coordinates originate before entering deep contextual Transformer attention?",
+        ch6_title: "Chapter 6: Multi-Head Self-Attention: Dynamic Contextual Vector Twisting",
+        ch6_sub: "How the token 'rock' dynamically pivots toward 'volcanic basalt' when contextually bound to 'magma'.",
+        ch7_title: "Chapter 7: Linear Projections $W_v, W_t$: Bridging Text Tokens Into Visual Pixel Space",
+        ch7_sub: "How discrete text strings and continuous pixel matrices converge upon identical coordinates.",
+        ch8_title: "Chapter 8: Temperature Parameter $\\tau$: The Steepness Factor Shaping Semantic Clusters",
+        ch8_sub: "The role of division by $\\tau$ in InfoNCE: What catastrophic geometry emerges when $\\tau$ is misconfigured?",
+        ch9_title: "Chapter 9: Why Exactly 77 Tokens? Architectural Origins & $O(N^2)$ Complexity",
+        ch9_sub: "Why 77 instead of 512 or 1024? Deconstructing OpenAI's quadratic memory bottlenecks in 2021.",
+        ch10_title: "Chapter 10: How Many Words Equal 77 Tokens? The BPE Subword Fragmentation Trap",
+        ch10_sub: "Why 77 tokens $\\neq$ 77 words: The silent truncation danger when composing verbose generative prompts.",
+        ch11_title: "Chapter 11: How Diffusion Networks Extract & Route Information From Prompts",
+        ch11_sub: "Cross-Attention Query-Key routing: Why the denoiser queries discrete token fragments rather than monolithic sentences.",
+        ch12_title: "Chapter 12: Deconstructing The Myth: 'Should The Most Important Token Always Be First?'",
+        ch12_sub: "Rigorous mathematical verdict: Causal masking truths, bidirectional reality, and prompt weight dominance."
+      }
+    };
+
+    function setLanguage(lang) {
+      appState.lang = lang;
+      const btnVi = document.getElementById('btn-lang-vi');
+      const btnEn = document.getElementById('btn-lang-en');
+      if (lang === 'vi') {
+        btnVi.className = "px-2.5 py-0.5 border border-stone-900 bg-stone-900 text-stone-100 font-bold text-xs transition";
+        btnEn.className = "px-2.5 py-0.5 border border-stone-900 bg-stone-200 text-stone-900 font-bold hover:bg-stone-300 text-xs transition";
+      } else {
+        btnEn.className = "px-2.5 py-0.5 border border-stone-900 bg-stone-900 text-stone-100 font-bold text-xs transition";
+        btnVi.className = "px-2.5 py-0.5 border border-stone-900 bg-stone-200 text-stone-900 font-bold hover:bg-stone-300 text-xs transition";
+      }
+
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (textDict[lang] && textDict[lang][key]) {
+          el.innerHTML = textDict[lang][key];
+        }
+      });
+
+      renderAllExams();
+      renderAllFigures();
+      renderMathKaTeX();
+    }
+
+    function scrollToEl(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function renderMathKaTeX() {
+      if (window.renderMathInElement) {
+        window.renderMathInElement(document.body, {
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          throwOnError: false
+        });
+      }
+    }
+
+    /* FIGURE 1: EUCLIDEAN ORIGIN VS DIRECTIONAL VACUUM */
+    const f1Canvas = document.getElementById('fig1Canvas');
+    const f1Ctx = f1Canvas ? f1Canvas.getContext('2d') : null;
+
+    function updateFig1(val) {
+      appState.fig1Mag = parseFloat(val) / 100;
+      const magDisp = document.getElementById('fig1-mag-val');
+      const pill = document.getElementById('fig1-status-pill');
+      const expl = document.getElementById('fig1-math-expl');
+      if (magDisp) magDisp.innerText = appState.fig1Mag.toFixed(2);
+
+      if (appState.fig1Mag <= 0.05) {
+        if (pill) {
+          pill.className = "text-[11px] font-code bg-red-900 text-stone-100 px-2 py-0.5 font-bold";
+          pill.innerText = "KỲ DỊ: Chia Cho 0! (0 / 0)";
+        }
+        if (expl) {
+          expl.innerHTML = "<strong>SỤP ĐỔ TOÁN HỌC:</strong> Chuẩn $\|\mathbf{v}\|_2 \\to 0$. Phép đo Cosine $S_C(\\mathbf{u},\\mathbf{v}) = \\frac{\\mathbf{u}\\cdot\\mathbf{v}}{\\|\\mathbf{u}\\|_2 \\|\\mathbf{v}\\|_2}$ rơi vào vô định $\\frac{0}{0}$. Gốc tọa độ $(0,0)$ không mang bất kỳ ngữ nghĩa nào!";
+        }
+      } else {
+        if (pill) {
+          pill.className = "text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5";
+          pill.innerText = "Trạng thái: ||v|| > 0 (Hợp Lệ)";
+        }
+        if (expl) {
+          expl.innerHTML = `Hướng vector xác định rõ ràng: $\\theta = 45.0^\\circ$. Chuẩn $\|\mathbf{v}\|_2 = ${appState.fig1Mag.toFixed(2)}$. Góc $\\theta$ luôn giữ nguyên dù độ dài co ngắn.`;
+        }
+      }
+      renderFig1();
+      renderMathKaTeX();
+    }
+
+    function renderFig1() {
+      if (!f1Ctx) return;
+      const w = f1Canvas.width;
+      const h = f1Canvas.height;
+      const cx = w / 2;
+      const cy = h / 2;
+
+      f1Ctx.fillStyle = '#0a0a0c';
+      f1Ctx.fillRect(0, 0, w, h);
+
+      // Trục tọa độ
+      f1Ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+      f1Ctx.lineWidth = 1;
+      f1Ctx.beginPath();
+      f1Ctx.moveTo(40, cy); f1Ctx.lineTo(w - 40, cy);
+      f1Ctx.moveTo(cx, 30); f1Ctx.lineTo(cx, h - 30);
+      f1Ctx.stroke();
+
+      // Vòng tròn đơn vị bán kính R = 80
+      const R = 80;
+      f1Ctx.strokeStyle = 'rgba(245, 158, 11, 0.25)';
+      f1Ctx.setLineDash([4, 4]);
+      f1Ctx.beginPath();
+      f1Ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      f1Ctx.stroke();
+      f1Ctx.setLineDash([]);
+
+      // Gốc tọa độ O
+      f1Ctx.fillStyle = '#ef4444';
+      f1Ctx.beginPath();
+      f1Ctx.arc(cx, cy, 4, 0, Math.PI * 2);
+      f1Ctx.fill();
+      f1Ctx.fillStyle = '#f87171';
+      f1Ctx.font = '10px Roboto Mono';
+      f1Ctx.fillText("O(0,0) - Kỳ dị vô nghĩa", cx + 8, cy + 14);
+
+      // Vẽ vector v
+      const len = R * appState.fig1Mag;
+      const ang = -Math.PI / 4;
+      const vx = cx + len * Math.cos(ang);
+      const vy = cy + len * Math.sin(ang);
+
+      if (appState.fig1Mag > 0.05) {
+        f1Ctx.strokeStyle = '#38bdf8';
+        f1Ctx.lineWidth = 3;
+        f1Ctx.beginPath();
+        f1Ctx.moveTo(cx, cy); f1Ctx.lineTo(vx, vy);
+        f1Ctx.stroke();
+
+        f1Ctx.fillStyle = '#38bdf8';
+        f1Ctx.beginPath(); f1Ctx.arc(vx, vy, 5, 0, Math.PI * 2); f1Ctx.fill();
+        f1Ctx.fillText("v (Ý niệm)", vx + 8, vy - 4);
+      } else {
+        f1Ctx.strokeStyle = '#ef4444';
+        f1Ctx.lineWidth = 8;
+        f1Ctx.beginPath(); f1Ctx.arc(cx, cy, 14, 0, Math.PI * 2); f1Ctx.stroke();
+      }
+    }
+
+    /* FIGURE 2: L2 PROJECTION ONTO UNIT HYPERSPHERE */
+    const f2Canvas = document.getElementById('fig2Canvas');
+    const f2Ctx = f2Canvas ? f2Canvas.getContext('2d') : null;
+
+    if (f2Canvas) {
+      f2Canvas.addEventListener('mousemove', (e) => {
+        const rect = f2Canvas.getBoundingClientRect();
+        const mouseX = (e.clientX - rect.left) * (f2Canvas.width / rect.width);
+        const mouseY = (e.clientY - rect.top) * (f2Canvas.height / rect.height);
+        const cx = f2Canvas.width / 2;
+        const cy = f2Canvas.height / 2;
+        appState.fig2RawX = (mouseX - cx) / 70;
+        appState.fig2RawY = (cy - mouseY) / 70;
+        renderFig2();
+      });
+    }
+
+    function resetFig2() {
+      appState.fig2RawX = 1.42;
+      appState.fig2RawY = 0.95;
+      renderFig2();
+    }
+
+    function renderFig2() {
+      if (!f2Ctx) return;
+      const w = f2Canvas.width;
+      const h = f2Canvas.height;
+      const cx = w / 2;
+      const cy = h / 2;
+      const scale = 70;
+
+      f2Ctx.fillStyle = '#0a0a0c';
+      f2Ctx.fillRect(0, 0, w, h);
+
+      // Trục tọa độ
+      f2Ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+      f2Ctx.lineWidth = 1;
+      f2Ctx.beginPath();
+      f2Ctx.moveTo(30, cy); f2Ctx.lineTo(w - 30, cy);
+      f2Ctx.moveTo(cx, 20); f2Ctx.lineTo(cx, h - 20);
+      f2Ctx.stroke();
+
+      // Mặt siêu cầu đơn vị S1 (R = 1.0 = 70px)
+      f2Ctx.strokeStyle = '#4ade80';
+      f2Ctx.lineWidth = 2;
+      f2Ctx.beginPath();
+      f2Ctx.arc(cx, cy, scale, 0, Math.PI * 2);
+      f2Ctx.stroke();
+
+      f2Ctx.fillStyle = '#86efac';
+      f2Ctx.font = '10px Roboto Mono';
+      f2Ctx.fillText("Mặt siêu cầu đơn vị ||e|| = 1.0", cx + scale + 8, cy - 8);
+
+      const rx = appState.fig2RawX;
+      const ry = appState.fig2RawY;
+      const rawMag = Math.sqrt(rx * rx + ry * ry);
+
+      if (rawMag > 0.001) {
+        const nx = rx / rawMag;
+        const ny = ry / rawMag;
+
+        const rawPxX = cx + rx * scale;
+        const rawPxY = cy - ry * scale;
+        const normPxX = cx + nx * scale;
+        const normPxY = cy - ny * scale;
+
+        // Vẽ đường chiếu mờ
+        f2Ctx.strokeStyle = 'rgba(251, 146, 60, 0.4)';
+        f2Ctx.setLineDash([3, 3]);
+        f2Ctx.beginPath();
+        f2Ctx.moveTo(rawPxX, rawPxY);
+        f2Ctx.lineTo(normPxX, normPxY);
+        f2Ctx.stroke();
+        f2Ctx.setLineDash([]);
+
+        // Vector thô z
+        f2Ctx.strokeStyle = '#f97316';
+        f2Ctx.lineWidth = 2;
+        f2Ctx.beginPath();
+        f2Ctx.moveTo(cx, cy); f2Ctx.lineTo(rawPxX, rawPxY);
+        f2Ctx.stroke();
+
+        f2Ctx.fillStyle = '#fb923c';
+        f2Ctx.beginPath(); f2Ctx.arc(rawPxX, rawPxY, 5, 0, Math.PI * 2); f2Ctx.fill();
+        f2Ctx.fillText(`z thô (||z|| = ${rawMag.toFixed(2)})`, rawPxX + 6, rawPxY - 6);
+
+        // Vector chuẩn hóa e trên vỏ cầu
+        f2Ctx.strokeStyle = '#4ade80';
+        f2Ctx.lineWidth = 3.5;
+        f2Ctx.beginPath();
+        f2Ctx.moveTo(cx, cy); f2Ctx.lineTo(normPxX, normPxY);
+        f2Ctx.stroke();
+
+        f2Ctx.fillStyle = '#4ade80';
+        f2Ctx.beginPath(); f2Ctx.arc(normPxX, normPxY, 6, 0, Math.PI * 2); f2Ctx.fill();
+        f2Ctx.fillText(`e (||e|| = 1.0)`, normPxX + 8, normPxY + 12);
+
+        const readout = document.getElementById('fig2-readout');
+        if (readout) {
+          readout.innerHTML = `Vector thô: $\\mathbf{z} = (${rx.toFixed(2)}, ${ry.toFixed(2)}), \\|\\mathbf{z}\\|_2 = ${rawMag.toFixed(2)} \\xrightarrow{L_2} \\mathbf{e} = (${nx.toFixed(2)}, ${ny.toFixed(2)}), \\|\\mathbf{e}\\|_2 = 1.00$.`;
+          renderMathKaTeX();
+        }
+      }
+    }
+
+    /* FIGURE 3: ANISOTROPY CONE & CENTROID CORRECTION */
+    const f3Canvas = document.getElementById('fig3Canvas');
+    const f3Ctx = f3Canvas ? f3Canvas.getContext('2d') : null;
+
+    function updateFig3() {
+      const slider = document.getElementById('fig3-slider-aniso');
+      const chk = document.getElementById('fig3-chk-center');
+      if (slider) appState.fig3ConeAngle = parseInt(slider.value, 10);
+      if (chk) appState.fig3Centering = chk.checked;
+
+      const txt = document.getElementById('fig3-cone-angle-txt');
+      const tag = document.getElementById('fig3-status-tag');
+      const desc = document.getElementById('fig3-desc-box');
+
+      if (txt) txt.innerText = `${appState.fig3ConeAngle}° ${appState.fig3ConeAngle < 60 ? '(Bị nghẽn góc)' : '(Mở rộng)'}`;
+
+      if (appState.fig3Centering) {
+        if (tag) {
+          tag.className = "text-[11px] font-code bg-green-900 text-stone-100 px-2 py-0.5 font-bold";
+          tag.innerText = "Đã Khử Tâm (Đẳng Hướng 360°)";
+        }
+        if (desc) {
+          desc.innerHTML = "<strong>Hoàn tất khử tâm:</strong> Sau phép trừ $\\mathbf{e} - \\mathbf{c}_{\\text{tâm}}$, các vector bung tỏa đều khắp 360 độ trên siêu cầu, triệt tiêu độ tương đồng dương giả tạo!";
+        }
+      } else {
+        if (tag) {
+          tag.className = "text-[11px] font-code bg-red-900 text-stone-100 px-2 py-0.5 font-bold";
+          tag.innerText = "Trạng thái: Bị Co Cụm Dị Hướng";
+        }
+        if (desc) {
+          desc.innerHTML = `Mọi vector ngữ nghĩa bị giam lỏng trong góc mở hẹp ${appState.fig3ConeAngle}°. Các từ dù khác xa nhau vẫn bị kéo độ tương đồng Cosine $\\cos(\\theta) > 0.70$!`;
+        }
+      }
+
+      renderFig3();
+      renderMathKaTeX();
+    }
+
+    function renderFig3() {
+      if (!f3Ctx) return;
+      const w = f3Canvas.width;
+      const h = f3Canvas.height;
+      const cx = w / 2;
+      const cy = h / 2;
+      const R = 85;
+
+      f3Ctx.fillStyle = '#0a0a0c';
+      f3Ctx.fillRect(0, 0, w, h);
+
+      // Vẽ vòng tròn siêu cầu
+      f3Ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+      f3Ctx.lineWidth = 1.5;
+      f3Ctx.beginPath();
+      f3Ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      f3Ctx.stroke();
+
+      const halfAngle = (appState.fig3ConeAngle / 2) * (Math.PI / 180);
+      const baseCenterAngle = -Math.PI / 4;
+
+      if (!appState.fig3Centering) {
+        f3Ctx.fillStyle = 'rgba(239, 68, 68, 0.15)';
+        f3Ctx.beginPath();
+        f3Ctx.moveTo(cx, cy);
+        f3Ctx.arc(cx, cy, R, baseCenterAngle - halfAngle, baseCenterAngle + halfAngle);
+        f3Ctx.closePath();
+        f3Ctx.fill();
+
+        f3Ctx.strokeStyle = '#ef4444';
+        f3Ctx.lineWidth = 1.5;
+        f3Ctx.stroke();
+      }
+
+      const count = 24;
+      for (let i = 0; i < count; i++) {
+        let ang;
+        if (appState.fig3Centering) {
+          ang = (i / count) * Math.PI * 2;
+        } else {
+          const randOffset = ((i - count / 2) / (count / 2)) * halfAngle * 0.9;
+          ang = baseCenterAngle + randOffset;
+        }
+
+        const px = cx + R * Math.cos(ang);
+        const py = cy + R * Math.sin(ang);
+
+        f3Ctx.strokeStyle = appState.fig3Centering ? 'rgba(74, 222, 128, 0.3)' : 'rgba(248, 113, 113, 0.3)';
+        f3Ctx.lineWidth = 1;
+        f3Ctx.beginPath(); f3Ctx.moveTo(cx, cy); f3Ctx.lineTo(px, py); f3Ctx.stroke();
+
+        f3Ctx.fillStyle = appState.fig3Centering ? '#4ade80' : '#f87171';
+        f3Ctx.beginPath(); f3Ctx.arc(px, py, 4, 0, Math.PI * 2); f3Ctx.fill();
+      }
+
+      if (!appState.fig3Centering) {
+        const tpx = cx + (R * 0.8) * Math.cos(baseCenterAngle);
+        const tpy = cy + (R * 0.8) * Math.sin(baseCenterAngle);
+        f3Ctx.fillStyle = '#fbbf24';
+        f3Ctx.beginPath(); f3Ctx.arc(tpx, tpy, 6, 0, Math.PI * 2); f3Ctx.fill();
+        f3Ctx.font = '10px Roboto Mono';
+        f3Ctx.fillText("Tâm c(trọng khối)", tpx + 8, tpy - 4);
+      }
+    }
+
+    /* FIGURE 4: LAYERNORM NORMAL DISTRIBUTION SHIFTER */
+    const f4Canvas = document.getElementById('fig4Canvas');
+    const f4Ctx = f4Canvas ? f4Canvas.getContext('2d') : null;
+
+    function updateFig4() {
+      const sMu = document.getElementById('fig4-slider-mu');
+      const sSig = document.getElementById('fig4-slider-sig');
+      if (sMu) appState.fig4Mu = parseFloat(sMu.value) / 10;
+      if (sSig) appState.fig4Sigma = parseFloat(sSig.value) / 10;
+
+      const dMu = document.getElementById('fig4-mu-val');
+      const dSig = document.getElementById('fig4-sigma-val');
+      if (dMu) dMu.innerText = (appState.fig4Mu >= 0 ? '+' : '') + appState.fig4Mu.toFixed(2);
+      if (dSig) dSig.innerText = appState.fig4Sigma.toFixed(2);
+
+      renderFig4();
+    }
+
+    function renderFig4() {
+      if (!f4Ctx) return;
+      const w = f4Canvas.width;
+      const h = f4Canvas.height;
+      const cx = w / 2;
+      const cy = h - 35;
+
+      f4Ctx.fillStyle = '#0a0a0c';
+      f4Ctx.fillRect(0, 0, w, h);
+
+      f4Ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+      f4Ctx.lineWidth = 1.5;
+      f4Ctx.beginPath();
+      f4Ctx.moveTo(20, cy); f4Ctx.lineTo(w - 20, cy);
+      f4Ctx.stroke();
+
+      f4Ctx.strokeStyle = '#64748b';
+      f4Ctx.lineWidth = 2;
+      f4Ctx.beginPath();
+      f4Ctx.moveTo(cx, cy); f4Ctx.lineTo(cx, 20);
+      f4Ctx.stroke();
+
+      f4Ctx.fillStyle = '#94a3b8';
+      f4Ctx.font = '10px Roboto Mono';
+      f4Ctx.fillText("0 (Gốc mốc chuẩn)", cx - 40, cy + 18);
+
+      const muRawPx = cx + appState.fig4Mu * 25;
+      const sigRawPx = appState.fig4Sigma * 12;
+
+      f4Ctx.strokeStyle = '#f87171';
+      f4Ctx.lineWidth = 2;
+      f4Ctx.setLineDash([4, 3]);
+      f4Ctx.beginPath();
+      for (let x = 30; x < w - 30; x += 3) {
+        const z = (x - muRawPx) / sigRawPx;
+        const y = cy - (150 / Math.max(1, appState.fig4Sigma)) * Math.exp(-0.5 * z * z);
+        if (x === 30) f4Ctx.moveTo(x, y); else f4Ctx.lineTo(x, y);
+      }
+      f4Ctx.stroke();
+      f4Ctx.setLineDash([]);
+
+      f4Ctx.fillStyle = '#f87171';
+      f4Ctx.fillText(`Phân phối thô lệch tâm (μ = ${appState.fig4Mu.toFixed(1)})`, muRawPx - 40, 45);
+
+      const sigNormPx = 30;
+      f4Ctx.strokeStyle = '#4ade80';
+      f4Ctx.lineWidth = 3;
+      f4Ctx.beginPath();
+      for (let x = 30; x < w - 30; x += 3) {
+        const z = (x - cx) / sigNormPx;
+        const y = cy - 120 * Math.exp(-0.5 * z * z);
+        if (x === 30) f4Ctx.moveTo(x, y); else f4Ctx.lineTo(x, y);
+      }
+      f4Ctx.stroke();
+
+      f4Ctx.fillStyle = '#4ade80';
+      f4Ctx.fillText("Sau LayerNorm: μ = 0, σ = 1 (Ổn định)", cx - 75, 75);
+    }
+
+    /* FIGURE 5: TOKEN EMBEDDING LOOKUP SIMULATOR */
+    const f5Canvas = document.getElementById('fig5Canvas');
+    const f5Ctx = f5Canvas ? f5Canvas.getContext('2d') : null;
+
+    function pickFig5Token(tok, id) {
+      appState.fig5Token = tok;
+      appState.fig5Id = id;
+      const b = document.getElementById('fig5-token-badge');
+      if (b) b.innerText = `Token: "${tok}" (ID: ${id})`;
+
+      const out = document.getElementById('fig5-slice-readout');
+      const seed = id * 1337;
+      let dims = [];
+      for (let i = 0; i < 8; i++) {
+        const v = Math.sin(seed + i * 2.5) * 0.95;
+        dims.push((v >= 0 ? '+' : '') + v.toFixed(2));
+      }
+      if (out) out.innerText = `Trích xuất 8 chiều đầu tiên của We[${id}]: [${dims.join(', ')}].`;
+      renderFig5();
+    }
+
+    function renderFig5() {
+      if (!f5Ctx) return;
+      const w = f5Canvas.width;
+      const h = f5Canvas.height;
+
+      f5Ctx.fillStyle = '#0a0a0c';
+      f5Ctx.fillRect(0, 0, w, h);
+
+      f5Ctx.strokeStyle = '#475569';
+      f5Ctx.strokeRect(30, 30, 200, 170);
+
+      f5Ctx.fillStyle = '#94a3b8';
+      f5Ctx.font = '10px Roboto Mono';
+      f5Ctx.fillText("Ma Trận We [49408 × 768]", 45, 22);
+
+      const rowY = 30 + (appState.fig5Id % 150) + 10;
+      f5Ctx.fillStyle = 'rgba(234, 88, 12, 0.4)';
+      f5Ctx.fillRect(31, rowY - 4, 198, 8);
+
+      f5Ctx.fillStyle = '#f97316';
+      f5Ctx.fillText(`Hàng #${appState.fig5Id} ->`, 235, rowY + 3);
+
+      f5Ctx.strokeRect(340, 30, 110, 170);
+      f5Ctx.fillText("Vector 768D", 360, 22);
+
+      const seed = appState.fig5Id * 1337;
+      for (let i = 0; i < 14; i++) {
+        const val = Math.sin(seed + i * 1.8);
+        f5Ctx.fillStyle = val > 0 ? `rgba(56, 189, 248, ${Math.abs(val)})` : `rgba(244, 63, 94, ${Math.abs(val)})`;
+        f5Ctx.fillRect(345, 35 + i * 11, 100, 9);
+      }
+    }
+
+    /* FIGURE 6: CONTEXTUAL VECTOR ROTATOR */
+    const f6Canvas = document.getElementById('fig6Canvas');
+    const f6Ctx = f6Canvas ? f6Canvas.getContext('2d') : null;
+
+    function setFig6Context(ctx) {
+      appState.fig6Context = ctx;
+      ['music', 'space', 'geo'].forEach(c => {
+        const btn = document.getElementById(`btn-f6-${c}`);
+        if (btn) {
+          if (c === ctx) {
+            btn.className = "px-2 py-1 bg-amber-900 text-stone-100 border border-stone-800 font-bold";
+          } else {
+            btn.className = "px-2 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300";
+          }
+        }
+      });
+
+      const tag = document.getElementById('fig6-angle-tag');
+      const desc = document.getElementById('fig6-desc');
+
+      if (ctx === 'music') {
+        if (tag) tag.innerText = "Góc lệch ngữ cảnh: Δθ = -52.0° (Về Phía Âm Nhạc)";
+        if (desc) desc.innerText = "Khi ghép với 'Music/Band', vector 'Rock' bị kéo lệch hẳn về cụm nghệ thuật biểu diễn & guitar điện!";
+      } else if (ctx === 'space') {
+        if (tag) tag.innerText = "Góc lệch ngữ cảnh: Δθ = +38.5° (Về Phía Vũ Trụ)";
+        if (desc) desc.innerText = "Khi ghép với 'Meteorite', trọng số chú ý α kéo vector 'Rock' quay hẳn sang góc thiên văn học và vật chất vô cơ ngoài hành tinh!";
+      } else {
+        if (tag) tag.innerText = "Góc lệch ngữ cảnh: Δθ = +15.0° (Về Phía Địa Chất Đất Đá)";
+        if (desc) desc.innerText = "Khi ghép với 'Cave/Mineral', vector 'Rock' giữ đặc tính địa chất tĩnh của thạch học cẩm thạch!";
+      }
+
+      renderFig6();
+    }
+
+    function renderFig6() {
+      if (!f6Ctx) return;
+      const w = f6Canvas.width;
+      const h = f6Canvas.height;
+      const cx = 90;
+      const cy = h / 2;
+      const R = 110;
+
+      f6Ctx.fillStyle = '#0a0a0c';
+      f6Ctx.fillRect(0, 0, w, h);
+
+      f6Ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+      f6Ctx.lineWidth = 1;
+      f6Ctx.beginPath();
+      f6Ctx.arc(cx, cy, R, -Math.PI / 2, Math.PI / 2);
+      f6Ctx.stroke();
+
+      f6Ctx.strokeStyle = '#94a3b8';
+      f6Ctx.lineWidth = 2;
+      f6Ctx.setLineDash([3, 3]);
+      f6Ctx.beginPath();
+      f6Ctx.moveTo(cx, cy);
+      f6Ctx.lineTo(cx + R * 0.9, cy);
+      f6Ctx.stroke();
+      f6Ctx.setLineDash([]);
+      f6Ctx.fillStyle = '#94a3b8';
+      f6Ctx.font = '10px Roboto Mono';
+      f6Ctx.fillText("v_tĩnh(Rock)", cx + R * 0.9 + 6, cy + 3);
+
+      let targetAng = 0;
+      if (appState.fig6Context === 'space') targetAng = -Math.PI / 4.5;
+      else if (appState.fig6Context === 'music') targetAng = Math.PI / 3.5;
+      else targetAng = -Math.PI / 12;
+
+      const tx = cx + R * Math.cos(targetAng);
+      const ty = cy + R * Math.sin(targetAng);
+
+      f6Ctx.strokeStyle = '#f97316';
+      f6Ctx.lineWidth = 3.5;
+      f6Ctx.beginPath();
+      f6Ctx.moveTo(cx, cy); f6Ctx.lineTo(tx, ty);
+      f6Ctx.stroke();
+
+      f6Ctx.fillStyle = '#f97316';
+      f6Ctx.beginPath(); f6Ctx.arc(tx, ty, 6, 0, Math.PI * 2); f6Ctx.fill();
+      f6Ctx.fillText("v'(Rock Đã Ngữ Cảnh Hóa)", tx + 8, ty - 6);
+
+      f6Ctx.strokeStyle = '#fbbf24';
+      f6Ctx.lineWidth = 1.5;
+      f6Ctx.beginPath();
+      f6Ctx.arc(cx, cy, 45, Math.min(0, targetAng), Math.max(0, targetAng));
+      f6Ctx.stroke();
+      f6Ctx.fillStyle = '#fbbf24';
+      f6Ctx.fillText("Δθ", cx + 50, cy + (targetAng < 0 ? -12 : 18));
+    }
+
+    /* FIGURE 7: MULTIMODAL PROJECTION LAB */
+    const f7Canvas = document.getElementById('fig7Canvas');
+    const f7Ctx = f7Canvas ? f7Canvas.getContext('2d') : null;
+
+    function setFig7State(isTrained) {
+      appState.fig7Trained = isTrained;
+      const bUntr = document.getElementById('btn-f7-untrained');
+      const bTr = document.getElementById('btn-f7-trained');
+      if (isTrained) {
+        bTr.className = "px-2 py-1 bg-amber-900 text-stone-100 border border-stone-800 font-bold";
+        bUntr.className = "px-2 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300";
+      } else {
+        bUntr.className = "px-2 py-1 bg-amber-900 text-stone-100 border border-stone-800 font-bold";
+        bTr.className = "px-2 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300";
+      }
+
+      const tag = document.getElementById('fig7-dist-tag');
+      const expl = document.getElementById('fig7-expl');
+      if (isTrained) {
+        if (tag) tag.innerText = "Độ Lệch Góc: θ = 4.2° (Khớp Gần Hoàn Hảo)";
+        if (expl) expl.innerText = "Sau khi huấn luyện với InfoNCE, vector chữ 'cowboy on rock' (xanh dương) và vector ảnh tương ứng (cam) xoay trùng khít lên nhau!";
+      } else {
+        if (tag) tag.innerText = "Độ Lệch Góc: θ = 112.5° (Chưa Khớp / Ngẫu Nhiên)";
+        if (expl) expl.innerText = "Khi khởi tạo ngẫu nhiên, ma trận Wt và Wv chiếu chữ và ảnh về hai hướng đối nghịch nhau hoàn toàn!";
+      }
+      renderFig7();
+    }
+
+    function renderFig7() {
+      if (!f7Ctx) return;
+      const w = f7Canvas.width;
+      const h = f7Canvas.height;
+      const cx = w / 2;
+      const cy = h / 2;
+      const R = 85;
+
+      f7Ctx.fillStyle = '#0a0a0c';
+      f7Ctx.fillRect(0, 0, w, h);
+
+      f7Ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+      f7Ctx.lineWidth = 1.5;
+      f7Ctx.beginPath();
+      f7Ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      f7Ctx.stroke();
+
+      const textAng = -Math.PI / 4;
+      let imgAng = appState.fig7Trained ? (-Math.PI / 4 + 0.07) : (Math.PI / 2.5);
+
+      const tx = cx + R * Math.cos(textAng);
+      const ty = cy + R * Math.sin(textAng);
+      f7Ctx.strokeStyle = '#38bdf8';
+      f7Ctx.lineWidth = 3;
+      f7Ctx.beginPath(); f7Ctx.moveTo(cx, cy); f7Ctx.lineTo(tx, ty); f7Ctx.stroke();
+      f7Ctx.fillStyle = '#38bdf8';
+      f7Ctx.beginPath(); f7Ctx.arc(tx, ty, 5, 0, Math.PI * 2); f7Ctx.fill();
+      f7Ctx.fillText("u_text (h_text · Wt)", tx + 8, ty - 6);
+
+      const ix = cx + R * Math.cos(imgAng);
+      const iy = cy + R * Math.sin(imgAng);
+      f7Ctx.strokeStyle = '#fb923c';
+      f7Ctx.lineWidth = 3;
+      f7Ctx.beginPath(); f7Ctx.moveTo(cx, cy); f7Ctx.lineTo(ix, iy); f7Ctx.stroke();
+      f7Ctx.fillStyle = '#fb923c';
+      f7Ctx.beginPath(); f7Ctx.arc(ix, iy, 5, 0, Math.PI * 2); f7Ctx.fill();
+      f7Ctx.fillText("v_image (h_img · Wv)", ix + 8, iy + 14);
+    }
+
+    /* FIGURE 8: TEMPERATURE TAU SOFTMAX SIMULATOR */
+    const f8Canvas = document.getElementById('fig8Canvas');
+    const f8Ctx = f8Canvas ? f8Canvas.getContext('2d') : null;
+
+    function updateFig8(val) {
+      appState.fig8Tau = parseFloat(val) / 100;
+      const disp = document.getElementById('fig8-tau-disp');
+      const pill = document.getElementById('fig8-tau-pill');
+      const box = document.getElementById('fig8-expl-box');
+      if (disp) disp.innerText = appState.fig8Tau.toFixed(2);
+      if (pill) pill.innerText = `τ = ${appState.fig8Tau.toFixed(2)}`;
+
+      const sPos = 0.85 / appState.fig8Tau;
+      const sNeg1 = 0.35 / appState.fig8Tau;
+      const sNeg2 = 0.20 / appState.fig8Tau;
+      const sNeg3 = 0.10 / appState.fig8Tau;
+
+      const maxS = Math.max(sPos, sNeg1, sNeg2, sNeg3);
+      const ePos = Math.exp(sPos - maxS);
+      const eNeg1 = Math.exp(sNeg1 - maxS);
+      const eNeg2 = Math.exp(sNeg2 - maxS);
+      const eNeg3 = Math.exp(sNeg3 - maxS);
+      const sumE = ePos + eNeg1 + eNeg2 + eNeg3;
+      const pCorrect = (ePos / sumE) * 100;
+
+      if (box) {
+        box.innerText = `Ở τ = ${appState.fig8Tau.toFixed(2)}, xác suất của cặp ảnh-chữ đúng đạt: ${pCorrect.toFixed(1)}%. Các cặp sai bị đè xuống còn lại ${(100 - pCorrect).toFixed(1)}%!`;
+      }
+      renderFig8();
+    }
+
+    function renderFig8() {
+      if (!f8Ctx) return;
+      const w = f8Canvas.width;
+      const h = f8Canvas.height;
+
+      f8Ctx.fillStyle = '#0a0a0c';
+      f8Ctx.fillRect(0, 0, w, h);
+
+      const sims = [0.85, 0.35, 0.20, 0.10];
+      const labels = ["Cặp Đúng", "Sai Lệch 1", "Sai Lệch 2", "Sai Lệch 3"];
+      const tau = Math.max(0.01, appState.fig8Tau);
+
+      const scaled = sims.map(s => s / tau);
+      const maxS = Math.max(...scaled);
+      const expVals = scaled.map(s => Math.exp(s - maxS));
+      const sumExp = expVals.reduce((a, b) => a + b, 0);
+      const probs = expVals.map(e => e / sumExp);
+
+      const barW = 75;
+      const startX = 50;
+
+      probs.forEach((p, idx) => {
+        const x = startX + idx * 105;
+        const barH = p * 130;
+        const y = h - 45 - barH;
+
+        f8Ctx.fillStyle = idx === 0 ? '#4ade80' : '#f87171';
+        f8Ctx.fillRect(x, y, barW, barH);
+
+        f8Ctx.fillStyle = '#f8fafc';
+        f8Ctx.font = '10px Roboto Mono';
+        f8Ctx.fillText(`${(p * 100).toFixed(1)}%`, x + 15, y - 6);
+        f8Ctx.fillText(labels[idx], x + 5, h - 25);
+      });
+    }
+
+    /* FIGURE 9: O(N^2) ATTENTION MEMORY EXPLOSION LAB */
+    const f9Canvas = document.getElementById('fig9Canvas');
+    const f9Ctx = f9Canvas ? f9Canvas.getContext('2d') : null;
+
+    function updateFig9(val) {
+      appState.fig9N = parseInt(val, 10);
+      const disp = document.getElementById('fig9-val-disp');
+      const b = document.getElementById('fig9-tokens-badge');
+      const calc = document.getElementById('fig9-calc-box');
+
+      const ratio = Math.pow(appState.fig9N / 77, 2);
+      if (disp) disp.innerText = `${appState.fig9N} tokens`;
+      if (b) b.innerText = `N = ${appState.fig9N} | Bộ nhớ: ${ratio.toFixed(2)}x`;
+
+      const memElems = appState.fig9N * appState.fig9N;
+      if (calc) {
+        calc.innerText = `Tại N = ${appState.fig9N}, kích thước ma trận Self-Attention là: ${appState.fig9N} × ${appState.fig9N} = ${memElems.toLocaleString()} phần tử (Gấp ${ratio.toFixed(2)} lần so với chuẩn 77).`;
+      }
+      renderFig9();
+    }
+
+    function renderFig9() {
+      if (!f9Ctx) return;
+      const w = f9Canvas.width;
+      const h = f9Canvas.height;
+
+      f9Ctx.fillStyle = '#0a0a0c';
+      f9Ctx.fillRect(0, 0, w, h);
+
+      const ox = 50;
+      const oy = h - 35;
+      f9Ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+      f9Ctx.lineWidth = 1;
+      f9Ctx.beginPath();
+      f9Ctx.moveTo(ox, oy); f9Ctx.lineTo(w - 30, oy);
+      f9Ctx.moveTo(ox, oy); f9Ctx.lineTo(ox, 25);
+      f9Ctx.stroke();
+
+      f9Ctx.strokeStyle = '#f97316';
+      f9Ctx.lineWidth = 2.5;
+      f9Ctx.beginPath();
+      for (let n = 16; n <= 256; n += 4) {
+        const x = ox + ((n - 16) / (256 - 16)) * (w - 100);
+        const y = oy - Math.pow(n / 256, 2) * (h - 70);
+        if (n === 16) f9Ctx.moveTo(x, y); else f9Ctx.lineTo(x, y);
+      }
+      f9Ctx.stroke();
+
+      const curX = ox + ((appState.fig9N - 16) / (256 - 16)) * (w - 100);
+      const curY = oy - Math.pow(appState.fig9N / 256, 2) * (h - 70);
+
+      f9Ctx.fillStyle = '#ef4444';
+      f9Ctx.beginPath(); f9Ctx.arc(curX, curY, 6, 0, Math.PI * 2); f9Ctx.fill();
+
+      f9Ctx.strokeStyle = 'rgba(239, 68, 68, 0.5)';
+      f9Ctx.setLineDash([3, 3]);
+      f9Ctx.beginPath();
+      f9Ctx.moveTo(curX, oy); f9Ctx.lineTo(curX, curY); f9Ctx.lineTo(ox, curY);
+      f9Ctx.stroke();
+      f9Ctx.setLineDash([]);
+
+      f9Ctx.fillStyle = '#fef08a';
+      f9Ctx.font = '10px Roboto Mono';
+      f9Ctx.fillText(`N = ${appState.fig9N}`, curX - 20, oy + 16);
+    }
+
+    /* FIGURE 10: REAL-TIME BPE TOKENIZER ANALYZER */
+    function analyzeBpeTokens() {
+      const input = document.getElementById('fig10-input-text');
+      const text = input ? input.value : "";
+
+      const words = text.trim().split(/\s+/).filter(w => w.length > 0);
+      let tokens = ["[SOT]"];
+
+      words.forEach(w => {
+        const clean = w.toLowerCase().replace(/[^\w]/g, '');
+        if (clean === "meteorite") {
+          tokens.push("meteor", "ite</w>");
+        } else if (clean === "humanoid") {
+          tokens.push("human", "oid</w>");
+        } else if (clean.length > 7) {
+          tokens.push(clean.slice(0, 4), clean.slice(4) + "</w>");
+        } else if (clean.length > 0) {
+          tokens.push(clean + "</w>");
+        }
+      });
+      tokens.push("[EOT]");
+
+      appState.fig10Tokens = tokens;
+      const total = tokens.length;
+      const badge = document.getElementById('fig10-usage-badge');
+      const ratioDisp = document.getElementById('fig10-word-token-ratio');
+      const bar = document.getElementById('fig10-progress-bar');
+      const container = document.getElementById('fig10-token-chips');
+
+      if (badge) badge.innerText = `Sử dụng: ${total} / 77 Tokens (${((total / 77) * 100).toFixed(1)}%)`;
+      if (ratioDisp) ratioDisp.innerText = `Số từ: ${words.length} | Số token: ${total} | Tỉ lệ: ${(total / Math.max(1, words.length)).toFixed(2)} tok/từ`;
+
+      const pct = Math.min(100, (total / 77) * 100);
+      if (bar) {
+        bar.style.width = `${pct}%`;
+        bar.className = pct >= 100 ? "bg-red-700 h-full transition-all" : (pct >= 80 ? "bg-amber-600 h-full transition-all" : "bg-amber-900 h-full transition-all");
+      }
+
+      if (container) {
+        container.innerHTML = tokens.map((t, idx) => {
+          const isOverflow = idx >= 77;
+          return `<span class="px-2 py-0.5 border ${isOverflow ? 'bg-red-950 text-red-200 border-red-700 line-through' : 'bg-stone-800 text-amber-200 border-stone-600'} rounded">${t}</span>`;
+        }).join('');
+      }
+    }
+
+    /* FIGURE 11: CROSS-ATTENTION ROUTING VISUALIZER */
+    const f11Canvas = document.getElementById('fig11Canvas');
+    const f11Ctx = f11Canvas ? f11Canvas.getContext('2d') : null;
+
+    function pickFig11Target(target) {
+      appState.fig11Target = target;
+      const tag = document.getElementById('fig11-routing-tag');
+      const expl = document.getElementById('fig11-routing-expl');
+
+      if (target === 'hat') {
+        if (tag) tag.innerText = "Pixel Đang Chọn: Vùng Đầu (Mũ Cao Bồi)";
+        if (expl) expl.innerText = "Query tại vùng đỉnh đầu ghép cặp cực đại với Key của token 'cowboy style' (Softmax weight ≈ 0.92).";
+      } else if (target === 'gun') {
+        if (tag) tag.innerText = "Pixel Đang Chọn: Vùng Tay Cầm Súng";
+        if (expl) expl.innerText = "Query tại vùng cánh tay ghép cặp cực đại với Key của token 'space gun' (Softmax weight ≈ 0.89).";
+      } else {
+        if (tag) tag.innerText = "Pixel Đang Chọn: Khối Đá Chân";
+        if (expl) expl.innerText = "Query tại vùng chân dưới ghép cặp cực đại với Key của token 'riding a square rock' (Softmax weight ≈ 0.94).";
+      }
+      renderFig11();
+    }
+
+    function renderFig11() {
+      if (!f11Ctx) return;
+      const w = f11Canvas.width;
+      const h = f11Canvas.height;
+
+      f11Ctx.fillStyle = '#0a0a0c';
+      f11Ctx.fillRect(0, 0, w, h);
+
+      const qx = 90;
+      let qy = 110;
+      if (appState.fig11Target === 'hat') qy = 55;
+      else if (appState.fig11Target === 'gun') qy = 110;
+      else qy = 180;
+
+      f11Ctx.fillStyle = '#38bdf8';
+      f11Ctx.beginPath(); f11Ctx.arc(qx, qy, 8, 0, Math.PI * 2); f11Ctx.fill();
+      f11Ctx.font = '10px Roboto Mono';
+      f11Ctx.fillText(`Q (Pixel Query)`, qx - 80, qy + 4);
+
+      const tokens = [
+        { label: "Token #5: 'cowboy style'", y: 55, id: 'hat' },
+        { label: "Token #12: 'space gun'", y: 100, id: 'gun' },
+        { label: "Token #18: 'meteorite rock'", y: 145, id: 'rock' },
+        { label: "Token #24: 'square rock'", y: 190, id: 'mount' }
+      ];
+
+      tokens.forEach(t => {
+        const isMatched = t.id === appState.fig11Target;
+        f11Ctx.fillStyle = isMatched ? '#4ade80' : '#64748b';
+        f11Ctx.fillRect(290, t.y - 12, 170, 24);
+
+        f11Ctx.fillStyle = isMatched ? '#052e16' : '#f8fafc';
+        f11Ctx.fillText(t.label, 300, t.y + 4);
+
+        f11Ctx.strokeStyle = isMatched ? 'rgba(74, 222, 128, 0.8)' : 'rgba(255, 255, 255, 0.08)';
+        f11Ctx.lineWidth = isMatched ? 3 : 1;
+        f11Ctx.beginPath();
+        f11Ctx.moveTo(qx, qy);
+        f11Ctx.lineTo(290, t.y);
+        f11Ctx.stroke();
+      });
+    }
+
+    /* FIGURE 12: TOKEN POSITION SWAP ATTENTION COMPARISON */
+    const f12Canvas = document.getElementById('fig12Canvas');
+    const f12Ctx = f12Canvas ? f12Canvas.getContext('2d') : null;
+
+    function setFig12Position(pos) {
+      appState.fig12Pos = pos;
+      const bH = document.getElementById('btn-f12-head');
+      const bT = document.getElementById('btn-f12-tail');
+      if (pos === 'head') {
+        bH.className = "px-2.5 py-1.5 bg-amber-900 text-stone-100 border border-stone-800 font-bold";
+        bT.className = "px-2.5 py-1.5 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300";
+      } else {
+        bT.className = "px-2.5 py-1.5 bg-amber-900 text-stone-100 border border-stone-800 font-bold";
+        bH.className = "px-2.5 py-1.5 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300";
+      }
+
+      const tag = document.getElementById('fig12-swap-tag');
+      const expl = document.getElementById('fig12-expl');
+      if (pos === 'head') {
+        if (tag) tag.innerText = "Từ 'Cowboy': Nằm Ở Đầu Câu (Pos #2)";
+        if (expl) expl.innerText = "Khi đặt ở đầu câu, từ 'cowboy' được áp đặt mặt nạ nhân quả Causal Mask sớm, ảnh hưởng sâu rộng đến các từ mô tả trang phục phía sau.";
+      } else {
+        if (tag) tag.innerText = "Từ 'Cowboy': Nằm Ở Cuối Câu (Pos #28)";
+        if (expl) expl.innerText = "Khi đặt ở cuối, trong U-Net Cross-Attention nó VẪN được tra cứu hoàn hảo nhờ Softmax toàn cục, nhưng mất đi lực ảnh hưởng mỏ neo trong CLIP!";
+      }
+      renderFig12();
+    }
+
+    function renderFig12() {
+      if (!f12Ctx) return;
+      const w = f12Canvas.width;
+      const h = f12Canvas.height;
+
+      f12Ctx.fillStyle = '#0a0a0c';
+      f12Ctx.fillRect(0, 0, w, h);
+
+      const isHead = appState.fig12Pos === 'head';
+      f12Ctx.fillStyle = '#1e293b';
+      f12Ctx.fillRect(40, 50, 400, 30);
+
+      const cbX = isHead ? 60 : 360;
+      f12Ctx.fillStyle = '#f97316';
+      f12Ctx.fillRect(cbX, 48, 70, 34);
+      f12Ctx.fillStyle = '#ffffff';
+      f12Ctx.font = '10px Roboto Mono';
+      f12Ctx.fillText("cowboy", cbX + 14, 68);
+
+      f12Ctx.fillStyle = '#94a3b8';
+      f12Ctx.fillText("[SOT]", 42, 68);
+      f12Ctx.fillText("[EOT]", 415, 68);
+
+      f12Ctx.strokeStyle = '#38bdf8';
+      f12Ctx.lineWidth = 2.5;
+      f12Ctx.beginPath();
+      for (let x = 40; x <= 440; x += 5) {
+        const dist = Math.abs(x - (cbX + 35));
+        const val = isHead ? Math.exp(-dist / 85) : Math.exp(-dist / 50);
+        const y = h - 35 - val * 75;
+        if (x === 40) f12Ctx.moveTo(x, y); else f12Ctx.lineTo(x, y);
+      }
+      f12Ctx.stroke();
+
+      f12Ctx.fillStyle = '#38bdf8';
+      f12Ctx.fillText("Trọng số ảnh hưởng ngữ cảnh lan tỏa (Attention Spread)", 75, h - 12);
+    }
+
+    function renderAllFigures() {
+      renderFig1();
+      renderFig2();
+      renderFig3();
+      renderFig4();
+      renderFig5();
+      renderFig6();
+      renderFig7();
+      renderFig8();
+      renderFig9();
+      analyzeBpeTokens();
+      renderFig11();
+      renderFig12();
+    }
+
+    /* ========================================================================= */
+    /* CƠ SỞ DỮ LIỆU ĐỀ THI 45 CÂU HỎI BLOOM (15 CÂU X 3 CHUYÊN ĐỀ) */
+    /* ========================================================================= */
+
+    const exam1Database = [
+      {
+        id: 1, tier: "1. Nhận Biết", ans: 1,
+        q_vi: "Trong không gian biểu diễn của CLIP, điểm gốc tọa độ Euclid (0,0,...,0) mang ý nghĩa gì?",
+        q_en: "In CLIP latent space, what does the Euclidean origin (0,0,...,0) represent?",
+        opts_vi: ["Đại diện cho một bức tranh toàn màu đen hoặc câu prompt rỗng", "Là một điểm kỳ dị toán học không chứa ý niệm nào vì độ dài bằng 0 làm phép đo Cosine vô nghĩa (0/0)", "Đại diện cho khái niệm số 0 trong toán học", "Là điểm trung bình cộng của tất cả ảnh trên Internet"],
+        opts_en: ["Represents a pitch-black canvas or empty string", "A mathematical singularity devoid of concept because zero length breaks Cosine similarity (0/0)", "Represents the mathematical number zero", "The geometric center of all Internet images"],
+        exp_vi: "Chính xác! Chuẩn ||0||_2 = 0 khiến mẫu số trong phép đo Cosine bằng 0, dẫn tới dạng vô định 0/0. Do đó gốc tọa độ tuyệt đối bị trục xuất khỏi không gian ngữ nghĩa.",
+        exp_en: "Correct! With ||0||_2 = 0, Cosine division suffers division by zero (0/0), rendering the origin semantically invalid."
+      },
+      {
+        id: 2, tier: "1. Nhận Biết", ans: 2,
+        q_vi: "Tất cả các vector ý niệm sau khi xuất ra từ CLIP Text/Vision Encoder đều được chuẩn hóa về độ dài bằng bao nhiêu?",
+        q_en: "All concept vectors exiting CLIP encoders are normalized to what exact magnitude?",
+        opts_vi: ["Bằng 0.0", "Bằng 768.0", "Bằng đúng 1.0 (Chuẩn L2 đơn vị)", "Bằng vô cùng"],
+        opts_en: ["Exactly 0.0", "Exactly 768.0", "Exactly 1.0 (Unit L2 Norm)", "Infinity"],
+        exp_vi: "Đúng! Phép chiếu e = z / ||z||_2 ép mọi vector nằm trên vỏ siêu cầu đơn vị bán kính cố định R=1.",
+        exp_en: "Correct! The projection e = z / ||z||_2 constrains all embeddings to the unit hypersphere surface R=1."
+      },
+      {
+        id: 3, tier: "1. Nhận Biết", ans: 0,
+        q_vi: "Layer Normalization (LayerNorm) tính toán giá trị trung bình μ và phương sai σ² trên phạm vi nào?",
+        q_en: "Across what scope does Layer Normalization compute mean μ and variance σ²?",
+        opts_vi: ["Trên toàn bộ các chiều tọa độ (features) của từng token riêng biệt", "Trên toàn bộ batch hàng trăm bức ảnh cùng lúc", "Trên toàn bộ cơ sở dữ liệu huấn luyện", "Chỉ tính trên 3 kênh màu RGB"],
+        opts_en: ["Across all hidden dimensions of an individual token", "Across the entire mini-batch of images simultaneously", "Across the entire training dataset", "Only across RGB color channels"],
+        exp_vi: "Chính xác! Khác với BatchNorm, LayerNorm chuẩn hóa độc lập trên d=768 chiều của từng token riêng lẻ.",
+        exp_en: "Spot on! Unlike BatchNorm, LayerNorm normalizes across the d=768 hidden features of each independent token."
+      },
+      {
+        id: 4, tier: "2. Thông Hiểu", ans: 1,
+        q_vi: "Hiện tượng 'Sụp đổ dị hướng' (Representation Anisotropy) trong không gian vector gây ra hậu quả gì?",
+        q_en: "What detrimental effect does Representation Anisotropy induce in vector spaces?",
+        opts_vi: ["Làm mô hình bị mất kết nối mạng Internet", "Khiến các vector bị dồn cục vào một 'chiếc nón hẹp', làm hai từ không liên quan vẫn có độ tương đồng Cosine dương rất cao", "Làm ảnh sinh ra luôn có độ phân giải thấp", "Làm mô hình quên mất chữ cái A"],
+        opts_en: ["Causes network socket disconnections", "Clusters vectors into a narrow cone, causing unrelated words to exhibit deceptively high positive cosine similarity", "Forces generated images into low resolution", "Erases the letter A from memory"],
+        exp_vi: "Đúng! Sự dồn cục làm sai lệch khoảng cách góc, khiến độ tương đồng Cosine bị bão hòa dương giả tạo giữa các khái niệm bất tương quan.",
+        exp_en: "Correct! Clustering warps angular distances, saturating cosine similarities with false positive correlations."
+      },
+      {
+        id: 5, tier: "2. Thông Hiểu", ans: 2,
+        q_vi: "Tại sao khoảng cách Euclid thẳng xuyên tâm không còn phù hợp để đo độ tương đồng trên siêu cầu đơn vị S^(d-1)?",
+        q_en: "Why is straight-line Euclidean chord distance discarded on the unit hypersphere S^(d-1)?",
+        opts_vi: ["Vì máy tính không biết làm phép trừ", "Vì khoảng cách Euclid chạy chậm hơn 1000 lần", "Vì mọi vector đều có cùng độ dài 1, góc quay θ và độ dài cung trắc địa (Geodesic Arc) phản ánh chính xác bản chất ngữ nghĩa hơn", "Vì số chiều 768 là số chẵn"],
+        opts_en: ["Because computers cannot perform subtraction", "Because Euclidean distance is 1000x slower", "Because with constant unit length, the rotation angle θ and geodesic arc reflect semantic divergence purely", "Because 768 is an even integer"],
+        exp_vi: "Chính xác! Khi ||u||_2 = ||v||_2 = 1, tích vô hướng u · v = cos(θ) đo trực tiếp góc quay độc lập với độ lớn.",
+        exp_en: "Accurate! When ||u||_2 = ||v||_2 = 1, the inner product u · v = cos(θ) directly captures angular orientation."
+      },
+      {
+        id: 6, tier: "2. Thông Hiểu", ans: 0,
+        q_vi: "Khi thực hiện phép trừ tâm trọng khối e' = (e - c_tâm) / ||e - c_tâm||, ta đang làm gì về mặt hình học?",
+        q_en: "Geometrically, what does centroid centering e' = (e - c) / ||e - c|| accomplish?",
+        opts_vi: ["Dịch chuyển gốc hệ quy chiếu về đúng tâm đám mây dữ liệu và mở rộng góc bung tỏa đẳng hướng", "Xóa bỏ toàn bộ các vector bị lỗi", "Làm cho quả cầu biến thành hình lập phương", "Tăng gấp đôi số chiều của không gian"],
+        opts_en: ["Translates coordinate reference to data centroid, restoring 360° isotropic dispersion", "Deletes corrupted vectors entirely", "Transforms the sphere into a cube", "Doubles spatial dimensionality"],
+        exp_vi: "Đúng! Phép khử tâm triệt tiêu thành phần chung, phân tán đều các vector khắp 360 độ mặt siêu cầu.",
+        exp_en: "Correct! Centroid subtraction strips dominant shared bias, spreading vectors uniformly."
+      },
+      {
+        id: 7, tier: "3. Vận Dụng", ans: 1,
+        q_vi: "Cho hai vector chuẩn hóa u và v có tích vô hướng u · v = 0. Khoảng cách cung trắc địa ngắn nhất d_g giữa chúng trên siêu cầu là bao nhiêu?",
+        q_en: "For unit vectors u and v where u · v = 0, what is their geodesic arc distance d_g on the hypersphere?",
+        opts_vi: ["0 rad", "π / 2 rad (tương ứng 90 độ)", "π rad (tương ứng 180 độ)", "768 rad"],
+        opts_en: ["0 rad", "π / 2 rad (corresponding to 90 degrees)", "π rad (corresponding to 180 degrees)", "768 rad"],
+        exp_vi: "Chính xác! d_g = arccos(0) = π/2 ≈ 1.57 rad (vuông góc trực giao hoàn hảo).",
+        exp_en: "Correct! d_g = arccos(0) = π/2 ≈ 1.57 rad (perfect orthogonal independence)."
+      },
+      {
+        id: 8, tier: "3. Vận Dụng", ans: 2,
+        q_vi: "Một vector thô z có tọa độ (3, 4). Sau khi thực hiện chuẩn hóa L2, tọa độ vector đơn vị e là gì?",
+        q_en: "A raw vector z has coordinates (3, 4). After L2 normalization, what is unit vector e?",
+        opts_vi: ["(1, 1)", "(0, 0)", "(0.6, 0.8)", "(7, 7)"],
+        opts_en: ["(1, 1)", "(0, 0)", "(0.6, 0.8)", "(7, 7)"],
+        exp_vi: "Đúng! Độ dài ||z||_2 = √(3² + 4²) = 5. Do đó e = (3/5, 4/5) = (0.6, 0.8).",
+        exp_en: "Spot on! Magnitude ||z||_2 = √(3² + 4²) = 5. Hence e = (3/5, 4/5) = (0.6, 0.8)."
+      },
+      {
+        id: 9, tier: "3. Vận Dụng", ans: 0,
+        q_vi: "Trong câu lệnh prompt rỗng (empty string \"\"), vector embedding của nó sẽ nằm ở đâu?",
+        q_en: "For an empty string prompt (\"\"), where does its embedding vector settle?",
+        opts_vi: ["Ở một điểm hữu hạn trên siêu cầu đại diện cho kỳ vọng tiên nghiệm trung bình của tập dữ liệu", "Bắt buộc phải nằm ở điểm (0, 0, ..., 0)", "Không thể tính toán được và gây crash chương trình", "Nằm ở tọa độ vô cực"],
+        opts_en: ["At a finite location on the hypersphere reflecting the dataset marginal prior centroid", "Strictly at (0, 0, ..., 0)", "Throws an unhandled exception crash", "At positive infinity"],
+        exp_vi: "Chính xác! Chuỗi rỗng vẫn đi qua Text Encoder (token [SOT] và [EOT]) tạo thành vector prior có độ dài hữu hạn bằng 1.",
+        exp_en: "Correct! The empty prompt encodes through [SOT][EOT] tokens into a valid unit prior vector."
+      },
+      {
+        id: 10, tier: "4. Phân Tích", ans: 1,
+        q_vi: "Phân tích vì sao hàm Softmax trong Attention cần LayerNorm hỗ trợ ổn định phương sai:",
+        q_en: "Analyze why Softmax in Attention relies on LayerNorm to stabilize variance:",
+        opts_vi: ["Để làm tăng tốc độ quạt chip", "Nếu không chuẩn hóa, độ lớn giá trị x_i sẽ bùng nổ, khiến Softmax rơi vào vùng bão hòa với gradient cực tiểu (triệt tiêu đạo hàm)", "Để biến ma trận thành hình tròn", "Để đổi số âm thành số dương"],
+        opts_en: ["To maximize CPU fan RPM", "Without variance control, activation magnitudes explode, pushing Softmax into saturated regions with vanishing gradients", "To reshape matrices into circles", "To convert negatives to positives"],
+        exp_vi: "Đúng! Đạo hàm Softmax tiệm cận 0 khi giá trị đầu vào quá lớn, làm ngưng trệ quá trình học của mô hình.",
+        exp_en: "Correct! Softmax gradients vanish exponentially when inputs diverge into extreme magnitudes."
+      },
+      {
+        id: 11, tier: "4. Phân Tích", ans: 0,
+        q_vi: "Hiện tượng 'Curse of Dimensionality' (Lời nguyền số chiều) trên siêu cầu S^767 khiến phân bố khoảng cách có đặc tính gì?",
+        q_en: "Due to the Curse of Dimensionality, distance distributions on S^767 exhibit which property?",
+        opts_vi: ["Hầu như mọi cặp vector chọn ngẫu nhiên đều có xu hướng gần như vuông góc tuyệt đối (u · v ≈ 0)", "Tất cả các vector đều trùng khít vào một điểm duy nhất", "Khoảng cách giữa các điểm luôn bằng 0", "Không gian bị biến dạng thành đường thẳng 1 chiều"],
+        opts_en: ["Almost all randomly sampled vector pairs tend toward near-perfect orthogonality (u · v ≈ 0)", "All vectors collapse into a single point", "Distances between all points equal zero", "Space collapses into a 1D line"],
+        exp_vi: "Chính xác! Trong số chiều cực cao d=768, thể tích tập trung gần xích đạo của mọi vector ngẫu nhiên.",
+        exp_en: "Accurate! In high dimensions, hyperspherical measure concentrates near equatorial hyperplanes."
+      },
+      {
+        id: 12, tier: "4. Phân Tích", ans: 2,
+        q_vi: "Tại sao việc loại bỏ độ dài vector (Magnitude) thông qua chuẩn hóa L2 không làm mất thông tin ngữ nghĩa?",
+        q_en: "Why does stripping vector magnitude via L2 normalization preserve semantic integrity?",
+        opts_vi: ["Vì độ dài vector chỉ chứa mã độc", "Vì các nhà toán học không thích độ dài", "Vì trong mô hình ngôn ngữ, ngữ nghĩa trừu tượng được mã hóa hoàn toàn bằng hướng chỉ (Direction/Orientation) chứ không phải độ lớn", "Vì độ dài luôn luôn bằng 0"],
+        opts_en: ["Because magnitude contains malicious code", "Because mathematicians dislike magnitudes", "Because in representation learning, semantic concepts are encoded in directional orientation rather than scale", "Because magnitude is identically zero"],
+        exp_vi: "Đúng! Hướng của mũi tên định nghĩa thuộc tính ('đá', 'người', 'súng'), độ dài chỉ là tỷ lệ ngẫu nhiên do câu dài ngắn gây ra.",
+        exp_en: "Correct! Conceptual properties are encoded in ray directions; magnitude is arbitrary scale."
+      },
+      {
+        id: 13, tier: "5. Đánh Giá", ans: 1,
+        q_vi: "Đánh giá: Nếu một kỹ sư thay thế phép đo Cosine trên siêu cầu bằng khoảng cách Manhattan (|x1-x2| + |y1-y2|), điều gì sẽ xảy ra?",
+        q_en: "Evaluation: If an engineer replaces Cosine with Manhattan distance on the hypersphere, what occurs?",
+        opts_vi: ["Mô hình sẽ chạy nhanh gấp 10 lần", "Phép đo mất tính bất biến quay (Rotational Invariance), khiến độ tương đồng bị phụ thuộc giả tạo vào cách xoay hệ trục tọa độ", "Mô hình tạo ra ảnh có độ phân giải 8K", "Không có bất kỳ sự thay đổi nào"],
+        opts_en: ["The network accelerates by 10x", "Metric loses rotational invariance, causing similarity to artificially depend on coordinate axis rotation", "The network synthesizes 8K images", "No measurable difference occurs"],
+        exp_vi: "Xuất sắc! Khoảng cách Cosine bất biến dưới mọi phép biến đổi quay trực giao SO(d); khoảng cách Manhattan L1 thì phụ thuộc vào hướng trục tọa độ!",
+        exp_en: "Outstanding! Cosine metric possesses rotational invariance under SO(d); Manhattan L1 metric does not."
+      },
+      {
+        id: 14, tier: "5. Đánh Giá", ans: 0,
+        q_vi: "Một nhóm nghiên cứu phát hiện mô hình của họ bị trôi tâm nghiêm trọng (Centroid Drift: c_tâm = [0.8, 0.8, ...]). Giải pháp nào tối ưu nhất?",
+        q_en: "A lab discovers severe Centroid Drift (c = [0.8, 0.8, ...]). Which algorithmic remediation is optimal?",
+        opts_vi: ["Áp dụng phép chuẩn hóa Centering kết hợp hàm mất mát Regularization phạt độ lệch tâm trong quá trình huấn luyện", "Tăng kích thước ảnh lên gấp đôi", "Xóa bỏ hoàn toàn lớp Text Encoder", "Giảm tốc độ học (Learning rate) về bằng 0"],
+        opts_en: ["Apply Centering combined with an isotropy regularizer penalty during contrastive training", "Double the training image resolution", "Discard the Text Encoder entirely", "Set the learning rate to zero"],
+        exp_vi: "Chính xác! Phối hợp khử tâm hậu kỳ và regularizer cân bằng phân phối là giải pháp triệt để nhất.",
+        exp_en: "Correct! Combining post-hoc centering with uniformity regularization resolves the root cause."
+      },
+      {
+        id: 15, tier: "6. Vận Dụng Cao", ans: 1,
+        q_vi: "Vận dụng cao: Thiết kế công thức chuyển đổi từ khoảng cách Euclid bình phương giữa hai vector đơn vị ||u - v||² sang độ tương đồng Cosine:",
+        q_en: "Advanced Synthesis: Formulate the exact algebraic relation mapping squared chord distance ||u - v||² to Cosine similarity:",
+        opts_vi: ["||u - v||² = 1 + cos(θ)", "||u - v||² = 2 - 2·cos(θ)", "||u - v||² = cos²(θ)", "||u - v||² = 2 / cos(θ)"],
+        opts_en: ["||u - v||² = 1 + cos(θ)", "||u - v||² = 2 - 2·cos(θ)", "||u - v||² = cos²(θ)", "||u - v||² = 2 / cos(θ)"],
+        exp_vi: "Hoàn hảo! Khai triển: ||u-v||² = ||u||² + ||v||² - 2(u·v) = 1 + 1 - 2 cos(θ) = 2 - 2 cos(θ).",
+        exp_en: "Perfect! Expansion: ||u-v||² = ||u||² + ||v||² - 2(u·v) = 1 + 1 - 2 cos(θ) = 2 - 2 cos(θ)."
+      }
+    ];
+
+    const exam2Database = [
+      {
+        id: 16, tier: "1. Nhận Biết", ans: 1,
+        q_vi: "Bảng tra Embedding Lookup Matrix We của CLIP có kích thước bao nhiêu?",
+        q_en: "What is the tensor dimension of CLIP's Embedding Lookup Matrix We?",
+        opts_vi: ["512 × 512", "49408 × 768", "1000 × 3", "77 × 77"],
+        opts_en: ["512 × 512", "49408 × 768", "1000 × 3", "77 × 77"],
+        exp_vi: "Chính xác! 49,408 từ vựng BPE và mỗi token được biểu diễn bằng vector 768 chiều.",
+        exp_en: "Correct! 49,408 vocabulary entries projected into 768-dimensional initial embeddings."
+      },
+      {
+        id: 17, tier: "1. Nhận Biết", ans: 0,
+        q_vi: "Positional Encoding (PE) được cộng trực tiếp vào vector token nhằm mục đích gì?",
+        q_en: "Why is Positional Encoding (PE) directly added to token embeddings?",
+        opts_vi: ["Cung cấp thông tin về trật tự trước-sau của các từ trong câu", "Làm tăng độ sáng của bức ảnh", "Để nén dung lượng bộ nhớ", "Để mã hóa mật khẩu"],
+        opts_en: ["To inject sequential order and positional context into permutation-invariant self-attention", "To brighten visual pixels", "To compress memory footprint", "To encrypt user passwords"],
+        exp_vi: "Đúng! Self-Attention vốn có tính đối xứng hoán vị (Permutation Invariant), bắt buộc cần PE để nhận biết thứ tự.",
+        exp_en: "Correct! Self-attention is permutation-invariant; PE restores sequential word order."
+      },
+      {
+        id: 18, tier: "1. Nhận Biết", ans: 2,
+        q_vi: "Hai ma trận chiếu tuyến tính Wt và Wv trong CLIP đóng vai trò gì?",
+        q_en: "What function do linear projection heads Wt and Wv serve in CLIP?",
+        opts_vi: ["Tăng độ phân giải ảnh lên 4K", "Dịch tiếng Anh sang tiếng Pháp", "Chiếu các vector độc lập từ Text Encoder và Image Encoder vào một không gian siêu cầu chung", "Lưu trữ dữ liệu vào ổ cứng"],
+        opts_en: ["Upscale image resolution to 4K", "Translate English to French", "Project independent text and image encoder representations into a unified shared embedding manifold", "Persist weights to disk storage"],
+        exp_vi: "Chính xác! Wt và Wv là cầu nối đa phương thức đưa hai luồng dữ liệu về cùng một không gian so sánh.",
+        exp_en: "Spot on! Wt and Wv align disparate modal representations into a shared metric manifold."
+      },
+      {
+        id: 19, tier: "2. Thông Hiểu", ans: 1,
+        q_vi: "Khác biệt cốt lõi giữa 'Static Embedding' (như Word2Vec ban đầu) và 'Contextual Embedding' (Transformer) là gì?",
+        q_en: "What is the key difference between Static Embeddings (Word2Vec) and Contextual Embeddings (Transformers)?",
+        opts_vi: ["Static embedding chạy trên GPU, contextual chạy trên CPU", "Static embedding gán cố định 1 vector duy nhất cho từ bất kể ngữ cảnh; Contextual embedding uốn nắn vector theo các từ xung quanh", "Static embedding chỉ dùng cho tiếng Việt", "Contextual embedding không dùng số thực"],
+        opts_en: ["Static runs on GPUs, contextual runs on CPUs", "Static assigns a rigid invariant vector per word; contextual dynamically twists vectors based on surrounding tokens", "Static only supports Vietnamese", "Contextual does not use real numbers"],
+        exp_vi: "Đúng! Nhờ Self-Attention, từ 'rock' đổi hướng tọa độ tùy theo việc nó đứng cạnh 'music' hay 'meteorite'.",
+        exp_en: "Correct! Self-attention dynamically twists the token vector toward its contextual neighbors."
+      },
+      {
+        id: 20, tier: "2. Thông Hiểu", ans: 0,
+        q_vi: "Trong phép tính Attention Softmax(Q K^T / √d_k), vì sao phải chia cho căn bậc hai của số chiều (√d_k)?",
+        q_en: "In Attention Softmax(Q K^T / √d_k), why divide by the square root of dimension (√d_k)?",
+        opts_vi: ["Để phương sai của tích vô hướng không tăng tuyến tính theo d_k, tránh làm Softmax bị bão hòa triệt tiêu gradient", "Để làm tròn số nguyên", "Để chuyển đổi góc từ radian sang độ", "Để tiết kiệm điện năng"],
+        opts_en: ["To prevent inner-product variance scaling linearly with d_k, averting saturated Softmax vanishings", "To truncate floating points to integers", "To convert radians into degrees", "To conserve electrical power"],
+        exp_vi: "Chính xác! Khi d_k lớn (ví dụ 64), tích vô hướng có phương sai tăng mạnh khiến Softmax bị nhọn hoắt và mất gradient.",
+        exp_en: "Accurate! Without scaling, variance scales with d_k, causing Softmax to saturate drastically."
+      },
+      {
+        id: 21, tier: "2. Thông Hiểu", ans: 2,
+        q_vi: "Điều gì xảy ra với không gian ý niệm nếu ta đặt tham số nhiệt độ τ quá lớn (ví dụ τ = 100.0)?",
+        q_en: "What happens to the representation space if temperature τ is set excessively high (e.g., τ = 100.0)?",
+        opts_vi: ["Mô hình sẽ học nhanh gấp 100 lần", "Ảnh sinh ra bị cháy tương phản", "Phân phối xác suất Softmax bị san phẳng lì (Uniform), mô hình mất khả năng phân biệt cặp đúng và cặp sai", "Các vector bị nén về 0"],
+        opts_en: ["Convergence accelerates by 100x", "Generated images suffer severe contrast burns", "The Softmax distribution flattens into near-uniformity, destroying discrimination between positive and negative pairs", "All vectors collapse to zero"],
+        exp_vi: "Đúng! exp(s / 100) ≈ 1 cho mọi s, khiến hàm mất mát không tạo ra lực đẩy kéo nào.",
+        exp_en: "Correct! When τ >> 1, activations approach uniform distribution, dissipating gradient forces."
+      },
+      {
+        id: 22, tier: "3. Vận Dụng", ans: 1,
+        q_vi: "Cho query vector Q = [1, 2] và hai key vector K1 = [1, 2], K2 = [-2, 1]. Vector Q sẽ chú ý mạnh vào Key nào?",
+        q_en: "Given Q = [1, 2], K1 = [1, 2], and K2 = [-2, 1], which Key does Q predominantly attend to?",
+        opts_vi: ["K2 vì K2 mang dấu âm", "K1 vì tích vô hướng Q · K1 = 5 (rất lớn), trong khi Q · K2 = 0 (vuông góc)", "Cả hai bằng nhau", "Không chú ý vào vector nào"],
+        opts_en: ["K2 because K2 is negative", "K1 because inner product Q · K1 = 5 (high alignment), whereas Q · K2 = 0 (orthogonal)", "Both equally", "Neither vector"],
+        exp_vi: "Chính xác! Softmax ưu tiên tuyệt đối cho hướng có tích vô hướng cực đại: 1(1) + 2(2) = 5 so với 0.",
+        exp_en: "Correct! Q·K1 = 1(1)+2(2)=5, whereas Q·K2 = 1(-2)+2(1)=0. K1 captures virtually all weight."
+      },
+      {
+        id: 23, tier: "3. Vận Dụng", ans: 0,
+        q_vi: "Nếu hai vector đặc trưng của từ 'vua' (king) và 'nam giới' (man) được biểu diễn trong không gian chiếu, phép toán king - man + woman sẽ cho kết quả xấp xỉ vector nào?",
+        q_en: "If embeddings for 'king' and 'man' exist in representation space, king - man + woman approximates which vector?",
+        opts_vi: ["'queen' (nữ hoàng)", "'rock' (hòn đá)", "'apple' (quả táo)", "'space' (vũ trụ)"],
+        opts_en: ["'queen'", "'rock'", "'apple'", "'space'"],
+        exp_vi: "Đúng! Đây là phép toán đại số vector kinh điển chứng minh tính tuyến tính của các trục ngữ nghĩa.",
+        exp_en: "Spot on! The foundational vector analogy demonstrating linear semantic axis decomposition."
+      },
+      {
+        id: 24, tier: "3. Vận Dụng", ans: 2,
+        q_vi: "Một bức ảnh chú chó được mã hóa thành v_img. Một câu mô tả 'con mèo' được mã hóa thành u_text. Trong quá trình tối ưu InfoNCE, gradient sẽ làm gì với hai vector này?",
+        q_en: "An image of a dog is v_img. A text 'a cat' is u_text. During InfoNCE optimization, what does the gradient do?",
+        opts_vi: ["Kéo hai vector lại gần nhau", "Biến hai vector thành số 0", "Tạo ra lực đẩy bài xích, ép góc giữa chúng mở rộng về 90 độ (trực giao) hoặc 180 độ", "Không làm gì cả"],
+        opts_en: ["Pulls both vectors together", "Converts both vectors to zero", "Exerts repulsive gradient force, driving their angular separation toward 90° orthogonality or 180° opposition", "Does nothing"],
+        exp_vi: "Chính xác! Vì đây là cặp âm tính (Negative pair), InfoNCE cực tiểu hóa tích vô hướng của chúng.",
+        exp_en: "Accurate! For mismatched negative pairs, InfoNCE minimization actively repels the vectors."
+      },
+      {
+        id: 25, tier: "4. Phân Tích", ans: 1,
+        q_vi: "Phân tích vai trò của Multi-Head Attention so với Single-Head Attention trong việc xác lập tọa độ ngữ nghĩa:",
+        q_en: "Analyze the architectural advantage of Multi-Head over Single-Head Attention for semantic coordinates:",
+        opts_vi: ["Chỉ để chia nhỏ cho GPU chạy mát hơn", "Cho phép mô hình đồng thời theo dõi các mối quan hệ ngữ nghĩa ở nhiều không gian con khác nhau (ví dụ một đầu soi giải phẫu, một đầu soi chất liệu)", "Multi-head attention làm giảm độ chính xác", "Không có sự khác biệt nào về mặt toán học"],
+        opts_en: ["Solely to reduce GPU temperature", "Permits simultaneous projection into multiple representation subspaces (e.g., one head for anatomy, another for material textures)", "Multi-head attention degrades accuracy", "Mathematically identical to single-head"],
+        exp_vi: "Đúng! Mỗi Attention Head học một khía cạnh thuộc tính độc lập và chiếu vào không gian con d_k chiều.",
+        exp_en: "Correct! Multiple heads attend to distinct semantic subspaces (syntax, color, topology) in parallel."
+      },
+      {
+        id: 26, tier: "4. Phân Tích", ans: 0,
+        q_vi: "Tại sao ma trận chiếu Wt và Wv lại cần thiết kể cả khi Text Encoder và Vision Encoder có cùng số chiều ẩn (ví dụ cùng d=768)?",
+        q_en: "Why are linear projections Wt and Wv necessary even if text and image backbones share hidden size d=768?",
+        opts_vi: ["Vì không gian nội tại của hai mạng có cơ sở trực chuẩn (basis) và phân phối hình học hoàn toàn khác nhau; ma trận chiếu xoay hai cơ sở về trùng khớp", "Để làm file model nặng hơn", "Vì luật pháp quốc tế quy định", "Để đổi màu bức ảnh"],
+        opts_en: ["Because internal manifold geometries and coordinate bases differ fundamentally; projections align coordinate frames into congruence", "To artificially bloat weight files", "Mandated by legal requirements", "To alter image palette"],
+        exp_vi: "Chính xác! Cùng số chiều không có nghĩa là cùng hệ cơ sở trực chuẩn. Ma trận chiếu đóng vai trò xoay hệ trục về đồng quy.",
+        exp_en: "Accurate! Identical dimensionality does not imply identical basis alignments. Projections perform necessary rotations."
+      },
+      {
+        id: 27, tier: "4. Phân Tích", ans: 2,
+        q_vi: "Điều gì giải thích cho khả năng 'Zero-shot classification' kỳ diệu của CLIP khi nhìn thấy một loài động vật mới?",
+        q_en: "What explains CLIP's remarkable zero-shot classification capability on unseen animal breeds?",
+        opts_vi: ["Mô hình tra cứu Google trong thời gian thực", "Mô hình đã học thuộc lòng toàn bộ động vật trên Trái Đất", "Vector của bức ảnh mới được ánh xạ vào vùng lân cận của vector văn bản 'a photo of [con vật]' nhờ sự liên tục của không gian siêu cầu", "Do may mắn ngẫu nhiên"],
+        opts_en: ["Real-time online Google Search queries", "Memorization of every animal on Earth", "The image vector maps into the topological neighborhood of the prompt embedding 'a photo of [animal]' on the continuous manifold", "Pure stochastic luck"],
+        exp_vi: "Đúng! Cấu trúc siêu cầu liên tục (Smooth manifold) cho phép nội suy các khái niệm chưa từng gặp dựa trên khoảng cách góc.",
+        exp_en: "Correct! Smooth topological metric spaces enable generalization via geometric proximity interpolation."
+      },
+      {
+        id: 28, tier: "5. Đánh Giá", ans: 1,
+        q_vi: "Đánh giá chiến lược: Khi huấn luyện mô hình tương phản, nên dùng Batch Size cực lớn (ví dụ B=32,768) hay Batch Size nhỏ (B=32)?",
+        q_en: "Strategy Evaluation: In contrastive learning, should one employ massive batch sizes (B=32,768) or small batches (B=32)?",
+        opts_vi: ["Nên dùng batch size nhỏ để tiết kiệm RAM", "Bắt buộc phải dùng Batch Size cực lớn vì càng nhiều mẫu âm tính (Negative pairs), lực đẩy hình học càng chuẩn xác và không gian càng hoàn hảo", "Batch size không ảnh hưởng gì đến hàm mất mát", "Dùng B=1 là tốt nhất"],
+        opts_en: ["Small batches to preserve memory", "Massive batch sizes are mandatory: more negative distractors yield sharper geometric repulsion and superior metric manifolds", "Batch size has zero influence", "B=1 is ideal"],
+        exp_vi: "Xuất sắc! CLIP của OpenAI thành công rực rỡ chính nhờ batch size khổng lồ 32,768 cung cấp hàng chục ngàn mẫu đối nghịch định hình không gian.",
+        exp_en: "Outstanding! InfoNCE efficiency scales directly with negative pool cardinality (B=32,768 in CLIP)."
+      },
+      {
+        id: 29, tier: "5. Đánh Giá", ans: 0,
+        q_vi: "Nếu một mô hình tạo ảnh gặp hiện tượng 'Text Blindness' (hoàn toàn phớt lờ chi tiết trong prompt), nguyên nhân sâu xa nhất ở tầng chiếu tọa độ là gì?",
+        q_en: "If a diffusion model exhibits Text Blindness (ignoring prompt tokens), what is the root cause in the projection layer?",
+        opts_vi: ["Trọng số ma trận chiếu Wt hoặc Cross-Attention bị suy hao (Collapse) về phân phối hẹp, khiến gradient ngữ nghĩa không truyền được sang U-Net", "Do màn hình hiển thị quá tối", "Do bàn phím bị hỏng", "Do bộ nhớ đệm trình duyệt bị đầy"],
+        opts_en: ["Projection matrix Wt or Cross-Attention weights suffered rank collapse, preventing semantic gradients from modulating U-Net denoisers", "Display brightness is too low", "Hardware keyboard malfunction", "Browser cache is congested"],
+        exp_vi: "Chính xác! Hiện tượng sụp đổ hạng ma trận (Rank Collapse) làm triệt tiêu dòng thông tin ngữ nghĩa truyền sang bộ khử nhiễu.",
+        exp_en: "Correct! Low-rank collapse in cross-attention projections starves the denoiser of conditioning signals."
+      },
+      {
+        id: 30, tier: "6. Vận Dụng Cao", ans: 2,
+        q_vi: "Vận dụng cao: Giả sử bạn muốn thiết kế một hàm mất mát tương phản đối xứng hoàn toàn giữa hai chiều Ảnh->Chữ và Chữ->Ảnh. Công thức tổng quát là gì?",
+        q_en: "Advanced Synthesis: Formulate the symmetric contrastive loss combining both Image-to-Text and Text-to-Image directions:",
+        opts_vi: ["Loss = L_(Image->Text) * L_(Text->Image)", "Loss = L_(Image->Text) - L_(Text->Image)", "Loss = 0.5 * (L_(Image->Text) + L_(Text->Image))", "Loss = 0"],
+        opts_en: ["Loss = L_(Image->Text) * L_(Text->Image)", "Loss = L_(Image->Text) - L_(Text->Image)", "Loss = 0.5 * (L_(Image->Text) + L_(Text->Image))", "Loss = 0"],
+        exp_vi: "Hoàn hảo! CLIP sử dụng trung bình cộng đối xứng của hai chiều hàm mất mát InfoNCE để cân bằng gradient giữa hai mạng encoder.",
+        exp_en: "Perfect! Symmetrical bi-directional loss averaging ensures balanced dual-encoder gradient updates."
+      }
+    ];
+
+    const exam3Database = [
+      {
+        id: 31, tier: "1. Nhận Biết", ans: 1,
+        q_vi: "Trong khung chuẩn của CLIP, cấu trúc 77 token bao gồm những thành phần cụ thể nào?",
+        q_en: "In standard CLIP architectures, how is the 77-token sequence specifically partitioned?",
+        opts_vi: ["77 từ tiếng Anh bất kỳ", "1 token [SOT] đầu + tối đa 75 tokens nội dung prompt + 1 token [EOT] kết thúc", "77 chữ cái riêng lẻ", "1 token ảnh + 76 token chữ"],
+        opts_en: ["77 arbitrary English words", "1 [SOT] prefix token + at most 75 prompt content tokens + 1 [EOT] postfix token", "77 isolated characters", "1 image token + 76 text tokens"],
+        exp_vi: "Chính xác! [SOT] đánh dấu bắt đầu và [EOT] đánh dấu kết thúc, chỉ còn đúng 75 vị trí cho nội dung prompt.",
+        exp_en: "Correct! Delimited by [SOT] and [EOT], leaving exactly 75 slots for prompt content."
+      },
+      {
+        id: 32, tier: "1. Nhận Biết", ans: 2,
+        q_vi: "Thuật toán Byte-Pair Encoding (BPE) phân tách văn bản dựa trên nguyên lý nào?",
+        q_en: "Upon what fundamental algorithmic principle does Byte-Pair Encoding (BPE) tokenize text?",
+        opts_vi: ["Dựa trên việc đếm số chữ cái", "Dựa trên ngữ pháp tiếng Anh", "Ghép lặp đi lặp lại các cặp byte hoặc ký tự xuất hiện thường xuyên nhất thành các mảnh từ vựng (subwords)", "Tra từ điển Oxford"],
+        opts_en: ["Character counting", "English grammar parsing", "Iteratively merging the most frequent adjacent character pairs into subword vocabulary entries", "Querying Oxford dictionaries"],
+        exp_vi: "Đúng! BPE là thuật toán nén thống kê dữ liệu không phụ thuộc vào ranh giới từ hoàn chỉnh.",
+        exp_en: "Spot on! BPE is a data-driven subword merging compression algorithm."
+      },
+      {
+        id: 33, tier: "1. Nhận Biết", ans: 0,
+        q_vi: "Khối tensor đầu ra của CLIP Text Encoder cấp cho mạng Diffusion có kích thước hình học chuẩn là bao nhiêu?",
+        q_en: "What is the standard tensor shape output by CLIP Text Encoder for Diffusion conditioning?",
+        opts_vi: ["77 × 768 (trong SD 1.5) hoặc 77 × 1024 / 2048 (SDXL)", "512 × 512 × 3", "1 × 1", "77 × 77"],
+        opts_en: ["77 × 768 (in SD 1.5) or 77 × 1024 / 2048 (SDXL)", "512 × 512 × 3", "1 × 1", "77 × 77"],
+        exp_vi: "Chính xác! 77 vị trí token và mỗi vị trí là một vector nhúng sâu 768 chiều.",
+        exp_en: "Correct! Exactly 77 sequential token slots, each mapped to a 768-dimensional embedding."
+      },
+      {
+        id: 34, tier: "2. Thông Hiểu", ans: 1,
+        q_vi: "Vì sao 75 content token của CLIP thường CHỈ tương ứng với khoảng 45 đến 55 từ tiếng Anh thực tế?",
+        q_en: "Why do 75 CLIP content tokens practically accommodate only ~45-55 real English words?",
+        opts_vi: ["Vì máy tính tự động xóa bỏ 20 từ ngẫu nhiên", "Vì các từ ghép, từ hiếm, dấu câu hoặc tiền tố/hậu tố bị BPE băm thành nhiều mảnh token nhỏ", "Vì tiếng Anh có quá nhiều nguyên âm", "Vì mô hình không biết đếm"],
+        opts_en: ["Computers randomly drop 20 words", "Compound terms, rare vocabulary, punctuation, and morphological affixes are cleaved into multiple BPE subword tokens", "English has excessive vowels", "The tokenizer cannot count"],
+        exp_vi: "Đúng! Trung bình 1 từ tốn ~1.3 đến 1.5 tokens (ví dụ 'meteorite' bị chém thành 2 tokens).",
+        exp_en: "Correct! Real text averages ~1.3-1.5 tokens per word due to subword splitting."
+      },
+      {
+        id: 35, tier: "2. Thông Hiểu", ans: 2,
+        q_vi: "Điều gì xảy ra với các từ ngữ bạn viết ở vị trí token thứ 78 trở đi trong một câu prompt dài?",
+        q_en: "What fate befalls text tokens situated beyond position 77 in an overly verbose prompt?",
+        opts_vi: ["Mô hình sẽ lưu vào bộ nhớ tạm để vẽ sau", "Mô hình sẽ báo lỗi màn hình xanh", "Bị cắt xén hoàn toàn trong im lặng (Silently Dropped) và mạng U-Net không hề nhận được dữ liệu của chúng", "Các từ đó sẽ biến thành màu đỏ"],
+        opts_en: ["Stored in temporary swap cache", "Triggers a blue-screen hardware crash", "Silently truncated and completely discarded; the U-Net never observes their existence", "Renders words in red font"],
+        exp_vi: "Chính xác! Khung đệm cứng 77 tokens cắt cụt mọi dữ liệu thừa phía sau mà không hề đưa ra cảnh báo lỗi.",
+        exp_en: "Accurate! Fixed-length tensor buffers silently drop overflowing tokens beyond index 77."
+      },
+      {
+        id: 36, tier: "2. Thông Hiểu", ans: 0,
+        q_vi: "Trong cơ chế Cross-Attention của mô hình Diffusion, thành phần nào đóng vai trò là 'Query' (Q)?",
+        q_en: "Within Diffusion Cross-Attention, which representation serves as the 'Query' (Q)?",
+        opts_vi: ["Các đặc trưng không gian của điểm ảnh nhiễu (Spatial Latent Features) từ mạng U-Net", "Các từ trong câu lệnh prompt", "Bức ảnh gốc ban đầu", "Con chuột máy tính"],
+        opts_en: ["Spatial latent noisy image representations originating from the U-Net denoiser", "Text prompt tokens", "The original uncompressed image", "Hardware input mouse coordinates"],
+        exp_vi: "Đúng! Pixel đóng vai trò Query đi hỏi, các token văn bản đóng vai trò Key và Value cung cấp câu trả lời.",
+        exp_en: "Correct! Spatial latent pixels emit Queries (Q); prompt token embeddings act as Keys (K) and Values (V)."
+      },
+      {
+        id: 37, tier: "3. Vận Dụng", ans: 1,
+        q_vi: "Bạn viết một câu prompt tiếng Việt có dấu dài 40 từ. Hiện tượng gì rất dễ xảy ra với giới hạn 77 token?",
+        q_en: "You compose a 40-word accented Vietnamese prompt. What complication frequently occurs regarding the 77-token ceiling?",
+        opts_vi: ["Mô hình sẽ tự dịch sang tiếng Anh hoàn hảo", "Các ký tự có dấu tiếng Việt bị BPE phân mảnh thành nhiều mảnh byte (2-4 token/từ), làm câu lệnh vượt quá 77 token và bị cắt cụt phần đuôi", "Không có bất kỳ ảnh hưởng nào", "Mô hình tạo ra ảnh nhanh gấp đôi"],
+        opts_en: ["The network autonomously translates to English", "Vietnamese diacritics cause severe subword fragmentation (2-4 tokens/word), overflowing 77 tokens and truncating the tail", "Zero measurable effect", "Inference latency halves"],
+        exp_vi: "Chính xác! BPE của CLIP được tối ưu cho tiếng Anh, các ký tự tiếng Việt có dấu bị đội token gấp 2-4 lần bình thường.",
+        exp_en: "Correct! CLIP's BPE vocabulary is English-centric; non-Latin diacritics explode token usage."
+      },
+      {
+        id: 38, tier: "3. Vận Dụng", ans: 2,
+        q_vi: "Để khắc phục việc từ khóa quan trọng ở cuối câu bị phớt lờ, giải pháp kỹ thuật nào sau đây là chuẩn xác nhất?",
+        q_en: "To remediate an ignored critical token at the tail of a prompt, which engineering action is most effective?",
+        opts_vi: ["Viết hoa toàn bộ câu", "Xóa bỏ hết dấu cách", "Áp dụng trọng số tăng cường (Prompt Weighting, ví dụ (keyword:1.3)) hoặc rút ngắn câu để từ nằm trong vùng chú ý cao", "Cài lại hệ điều hành Windows"],
+        opts_en: ["Capitalize all letters", "Strip all whitespace characters", "Apply prompt weighting syntax (e.g., (keyword:1.3)) or trim filler words to keep the token within high-attention budget", "Reinstall Windows OS"],
+        exp_vi: "Đúng! Tăng trọng số vector trực tiếp khuếch đại biên độ Key/Value trong ma trận Cross-Attention.",
+        exp_en: "Spot on! Prompt emphasis boosts Key/Value activations directly in the Cross-Attention layer."
+      },
+      {
+        id: 39, tier: "3. Vận Dụng", ans: 0,
+        q_vi: "Mô hình Stable Diffusion XL (SDXL) đã làm gì để giải quyết sự hạn chế nghèo nàn thông tin của CLIP 77 token?",
+        q_en: "How did Stable Diffusion XL (SDXL) structurally address CLIP's 77-token representational constraints?",
+        opts_vi: ["Kết hợp song song hai Text Encoder độc lập (OpenCLIP ViT-bigG 1280D + OpenAI CLIP ViT-L 768D), cộng gộp thành vector 2048 chiều", "Giảm số token xuống còn 32", "Bỏ hoàn toàn văn bản, chỉ dùng giọng nói", "Dùng chatGPT để vẽ hộ"],
+        opts_en: ["Fused two parallel Text Encoders (OpenCLIP ViT-bigG 1280D + OpenAI CLIP ViT-L 768D) yielding 2048-dim embeddings", "Reduced context window to 32 tokens", "Discarded text entirely for audio", "Delegated rendering to chatGPT"],
+        exp_vi: "Chính xác! SDXL sử dụng hệ thống Dual Text Encoders để tăng cường sức chứa ngữ nghĩa lên 2048 chiều.",
+        exp_en: "Correct! SDXL concatenates dual text encoders to form massive 2048-dimensional conditioning."
+      },
+      {
+        id: 40, tier: "4. Phân Tích", ans: 1,
+        q_vi: "Phân tích vì sao định kiến 'Cái gì quan trọng nhất phải viết đầu tiên' lại SAI LẦM khi xét trong mạng U-Net:",
+        q_en: "Analyze why the dogma 'Most important tokens must be first' is FLAWED with respect to the U-Net:",
+        opts_vi: ["Vì U-Net không biết đọc chữ", "Vì Cross-Attention trong U-Net là toàn cục 2 chiều (Bidirectional); mọi pixel đều tính Softmax với toàn bộ 77 token độc lập với vị trí xuất hiện", "Vì U-Net luôn đọc từ phải sang trái", "Vì U-Net chỉ đọc 1 token duy nhất"],
+        opts_en: ["Because U-Nets cannot parse text", "Because U-Net Cross-Attention is fully bidirectional; each pixel computes Softmax across all 77 tokens regardless of sequence order", "Because U-Nets read right-to-left", "Because U-Nets inspect only one token"],
+        exp_vi: "Đúng! Cross-Attention không có mặt nạ nhân quả; token thứ 70 vẫn có thể nhận trọng số 0.95 nếu khớp đúng đặc trưng.",
+        exp_en: "Correct! Cross-Attention lacks causal masks; token #70 binds as powerfully as token #2 if semantics match."
+      },
+      {
+        id: 41, tier: "4. Phân Tích", ans: 0,
+        q_vi: "Phân tích lý do vì sao trong Text Encoder của CLIP, vị trí đầu câu THỰC SỰ có ưu thế ngữ cảnh hơn:",
+        q_en: "Analyze why token positioning near the front ACTUALLY confers advantages inside CLIP's Text Encoder:",
+        opts_vi: ["Do mặt nạ nhân quả (Causal Mask) ép các từ phía sau phải tham chiếu từ phía trước, biến từ đầu câu thành chiếc mỏ neo ngữ cảnh", "Vì từ đầu câu được tô màu đậm hơn", "Vì từ đầu câu chạy nhanh hơn qua dây cáp", "Vì các kỹ sư lập trình ưu tiên chữ cái đầu"],
+        opts_en: ["Causal autoregressive masking forces all subsequent tokens to attend back to early tokens, turning initial words into contextual anchors", "Front tokens render in bolder font", "Front tokens transmit faster over bus cables", "Hardcoded priority conditional blocks"],
+        exp_vi: "Chính xác! Causal Mask chỉ cho phép nhìn về quá khứ, nên từ đầu tiên lan tỏa ngữ nghĩa sang toàn bộ câu văn phía sau.",
+        exp_en: "Accurate! Autoregressive causal masking allows early tokens to condition all downstream attention."
+      },
+      {
+        id: 42, tier: "4. Phân Tích", ans: 2,
+        q_vi: "Hiện tượng 'Attention Dilution' (Pha loãng chú ý) khi nhồi nhét quá nhiều từ mô tả dài dòng bắt nguồn từ cơ chế toán học nào?",
+        q_en: "What mathematical mechanism drives 'Attention Dilution' when prompts are stuffed with excessive keywords?",
+        opts_vi: ["Do bộ vi xử lý bị nóng lên", "Do dung lượng file ảnh quá nhẹ", "Do mẫu số của hàm Softmax là tổng số mũ của tất cả 77 token; càng nhiều token cạnh tranh, trọng số phân bổ cho từ cốt lõi càng bị chia nhỏ", "Do độ dài câu làm giảm xung nhịp GPU"],
+        opts_en: ["Processor overheating throttling", "Image filesize is excessively light", "The Softmax denominator sums exponentials across all active keys; more competing tokens inevitably fragment probability mass", "Clock frequencies decelerate"],
+        exp_vi: "Đúng! Σ exp(QK^T / √d) ở mẫu số phình to, kéo giảm xác suất tuyệt đối của các từ khóa quan trọng.",
+        exp_en: "Correct! The expanding Softmax denominator partitions attention energy across too many competing keys."
+      },
+      {
+        id: 43, tier: "5. Đánh Giá", ans: 1,
+        q_vi: "Đánh giá kỹ thuật 'Prompt Chunking' (như trong ComfyUI hay WebUI Auto1111 cho phép gõ prompt dài 150-300 token):",
+        q_en: "Technical Evaluation: How does 'Prompt Chunking' (ComfyUI / A1111) bypass the 77-token ceiling?",
+        opts_vi: ["Bằng cách tăng kích thước VRAM của máy tính", "Bằng cách chia câu văn thành các khối 77 token riêng biệt (Chunks), đưa qua CLIP nhiều lần rồi ghép nối các tensor lại với nhau", "Bằng cách xóa bỏ các nguyên âm", "Bằng cách nén file ảnh lại"],
+        opts_en: ["Physically expanding GPU VRAM", "Splitting text into multiple 77-token chunks, executing parallel CLIP encoding passes, and concatenating output tensors", "Stripping all vowel characters", "Compressing intermediate PNG files"],
+        exp_vi: "Xuất sắc! Tensor 77x768 được ghép nối thành 154x768 hoặc 231x768 để U-Net tra cứu đầy đủ.",
+        exp_en: "Outstanding! Concatenating chunk tensors into 154x768 or 231x768 enables arbitrary prompt lengths."
+      },
+      {
+        id: 44, tier: "5. Đánh Giá", ans: 0,
+        q_vi: "So sánh hiệu quả giữa hai câu prompt: A: 'cowboy, space, rock, gun, detailed' vs B: 'a majestic cinematic masterpiece photorealistic ultra-detailed 8k octane render cowboy in outer space holding gun':",
+        q_en: "Compare Prompt A ('cowboy, space, rock, gun, detailed') vs Prompt B (verbose 8k octane render filler):",
+        opts_vi: ["Prompt A hiệu quả hơn vì tập trung mật độ thông tin cao vào các khái niệm đột biến, không bị pha loãng Softmax bởi các từ rác vô nghĩa", "Prompt B tốt hơn vì càng nhiều từ dài AI vẽ càng đẹp", "Hai prompt hoàn toàn giống hệt nhau", "Prompt A sẽ bị lỗi không vẽ được"],
+        opts_en: ["Prompt A is superior: high information density focused on core mutant concepts, free of Softmax-diluting filler tokens", "Prompt B is superior because longer prompts guarantee quality", "Both generate identical latent noise", "Prompt A fails validation"],
+        exp_vi: "Chính xác! Các từ vô nghĩa như '8k, octane, photorealistic' chỉ làm loãng ma trận chú ý mà không tạo thêm hình học mới.",
+        exp_en: "Correct! Generic buzzwords dilute attention without contributing distinctive geometric priors."
+      },
+      {
+        id: 45, tier: "6. Vận Dụng Cao", ans: 1,
+        q_vi: "Vận dụng cao: Bạn muốn vẽ sinh vật kỳ dị 'Người đá 4 tay cao bồi' mà không bị các đặc tính thông thường lấn át. Cấu trúc prompt tối ưu nhất là gì?",
+        q_en: "Advanced Synthesis: To render the mutant '4-armed meteorite cowboy' without standard anatomical bleeding, what is optimal?",
+        opts_vi: ["Chỉ gõ prompt ngắn 'monster' và đặt CFG = 1.0", "Đặt từ khóa đột biến cốt lõi ở đầu với trọng số cao: '(meteorite rock creature:1.2), (four arms:1.3), cowboy hat', kết hợp Negative Prompt trừ khử 'human skin, normal 2 arms', CFG w ≈ 7.5", "Gõ 300 từ mô tả chi tiết từng hạt cát", "Tắt hoàn toàn CLIP Text Encoder"],
+        opts_en: ["Type single prompt 'monster' at CFG = 1.0", "Anchor core mutant tokens early with calibrated weights: '(meteorite rock creature:1.2), (four arms:1.3), cowboy hat', coupled with Negative Prompt 'human skin, normal 2 arms', CFG w ≈ 7.5", "Write 300 words describing every grain of sand", "Disable CLIP Text Encoder entirely"],
+        exp_vi: "Hoàn hảo! Đây là công thức tổng hòa đỉnh cao: Mỏ neo ngữ cảnh + Trọng số khuếch đại + Lực đẩy Negative + CFG cân bằng!",
+        exp_en: "Flawless! The ultimate synthesis: Contextual anchor + Prompt weights + Repulsive negative force + Calibrated CFG."
+      }
+    ];
+
+    function renderExamSection(containerId, db, answersObj, examNum) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.innerHTML = '';
+
+      db.forEach(item => {
+        const card = document.createElement('div');
+        card.className = "p-3.5 bg-stone-100 border border-stone-400 space-y-2.5 transition-all";
+
+        const qTitle = appState.lang === 'vi' ? item.q_vi : item.q_en;
+        const opts = appState.lang === 'vi' ? item.opts_vi : item.opts_en;
+        const isAnswered = answersObj.hasOwnProperty(item.id);
+        const chosen = answersObj[item.id];
+
+        card.innerHTML = `
+          <div class="flex flex-wrap justify-between items-center border-b border-stone-300 pb-1.5">
+            <span class="font-bold text-stone-900 text-xs sm:text-sm font-code flex items-center gap-2">
+              <span class="px-1.5 py-0.5 bg-stone-800 text-stone-100 text-[11px]">Câu ${item.id}</span>
+              <span>${qTitle}</span>
+            </span>
+            <span class="text-[10px] font-code px-2 py-0.5 bg-amber-200 text-amber-950 font-bold border border-amber-400">${item.tier}</span>
+          </div>
+
+          <div class="space-y-1.5 text-xs font-code">
+            ${opts.map((opt, oIdx) => `
+              <label class="flex items-start gap-2 p-2 border border-stone-300 ${isAnswered && chosen === oIdx ? 'bg-amber-100 border-amber-600 font-bold' : 'bg-stone-50 hover:bg-stone-200'} cursor-pointer">
+                <input type="radio" name="exam-${examNum}-q-${item.id}" value="${oIdx}" ${isAnswered && chosen === oIdx ? 'checked' : ''} onchange="handleAnswer(${examNum}, ${item.id}, ${oIdx})" class="mt-0.5">
+                <span class="text-stone-800 leading-snug">${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+
+          <div id="fb-exam-${examNum}-${item.id}" class="text-xs font-code font-bold pt-1.5 ${isAnswered ? '' : 'hidden'}">
+            ${isAnswered ? (chosen === item.ans 
+              ? `<span class="text-green-800">✓ ${appState.lang === 'vi' ? item.exp_vi : item.exp_en}</span>` 
+              : `<span class="text-red-800">✗ ${appState.lang === 'vi' ? 'Chưa chính xác. Hãy xem kỹ lại công thức toán học và nguyên lý hình học!' : 'Incorrect. Review mathematical formulas and geometric foundations!'}</span>`) : ''}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      renderMathKaTeX();
+    }
+
+    function handleAnswer(examNum, qId, oIdx) {
+      let db, answersObj, progId, scoreId, sumId;
+      if (examNum === 1) {
+        db = exam1Database; answersObj = appState.exam1Answers;
+        progId = 'exam1-progress-text'; scoreId = 'exam1-score-text'; sumId = 'exam1-summary';
+      } else if (examNum === 2) {
+        db = exam2Database; answersObj = appState.exam2Answers;
+        progId = 'exam2-progress-text'; scoreId = 'exam2-score-text'; sumId = 'exam2-summary';
+      } else {
+        db = exam3Database; answersObj = appState.exam3Answers;
+        progId = 'exam3-progress-text'; scoreId = 'exam3-score-text'; sumId = 'exam3-summary';
+      }
+
+      answersObj[qId] = oIdx;
+
+      let correct = 0;
+      db.forEach(q => {
+        if (answersObj[q.id] === q.ans) correct++;
+      });
+
+      const answeredCount = Object.keys(answersObj).length;
+      const prog = document.getElementById(progId);
+      const score = document.getElementById(scoreId);
+      if (prog) prog.innerText = `Tiến độ: ${answeredCount}/15 câu đã làm`;
+      if (score) score.innerText = `Điểm: ${correct} / 15`;
+
+      const fb = document.getElementById(`fb-exam-${examNum}-${qId}`);
+      const qObj = db.find(x => x.id === qId);
+      if (fb && qObj) {
+        if (oIdx === qObj.ans) {
+          fb.className = "text-xs font-code font-bold pt-1.5 text-green-800";
+          fb.innerHTML = `✓ ${appState.lang === 'vi' ? qObj.exp_vi : qObj.exp_en}`;
+        } else {
+          fb.className = "text-xs font-code font-bold pt-1.5 text-red-800";
+          fb.innerHTML = `✗ ${appState.lang === 'vi' ? 'Chưa chính xác. Hãy xem kỹ lại công thức toán học và nguyên lý hình học!' : 'Incorrect. Review mathematical formulas and geometric foundations!'}`;
+        }
+        fb.classList.remove('hidden');
+      }
+
+      if (answeredCount === 15) {
+        const sum = document.getElementById(sumId);
+        if (sum) {
+          sum.classList.remove('hidden');
+          sum.innerHTML = `
+            <div class="border-b-2 border-stone-800 pb-2 mb-2 font-bold text-sm text-stone-900">
+              📊 KẾT QUẢ ĐÁNH GIÁ CHUYÊN ĐỀ ${examNum}: ${correct}/15 ĐIỂM
+            </div>
+            <p class="leading-relaxed text-stone-800">
+              ${correct >= 13 
+                ? '<strong>XUẤT SẮC TUYỆT ĐỐI!</strong> Bạn đã đạt cấp độ Đánh giá & Vận dụng cao (Bloom Cấp 5-6). Bạn hoàn toàn làm chủ kiến trúc toán học và hình học của phần này!' 
+                : '<strong>KẾT QUẢ RẤT KHẢ QUAN!</strong> Bạn đã nắm vững các mức Nhận biết và Vận dụng cơ bản. Hãy rà soát lại các câu sai để hoàn thiện tư duy phân tích sâu!'}
+            </p>
+          `;
+        }
+      }
+      renderMathKaTeX();
+    }
+
+    function renderAllExams() {
+      renderExamSection('exam1-quiz-container', exam1Database, appState.exam1Answers, 1);
+      renderExamSection('exam2-quiz-container', exam2Database, appState.exam2Answers, 2);
+      renderExamSection('exam3-quiz-container', exam3Database, appState.exam3Answers, 3);
+    }
+
+    /* KHỞI ĐỘNG ỨNG DỤNG */
+    window.onload = function() {
+      renderAllFigures();
+      renderAllExams();
+      renderMathKaTeX();
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bản Tin Khoa Học Số 02: Giải Mã Không Gian Ý Niệm & Chiếc La Bàn Toán Học AI</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Roboto & Roboto Mono chuẩn tiếng Việt 100% -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,700&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- KaTeX CSS & JS hỗ trợ render công thức toán học chuyên nghiệp -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+  <style>
+    :root {
+      --paper-cream: #f7f3ea;
+      --paper-card: #fdfbf7;
+      --paper-accent: #ece4d2;
+      --ink-dark: #1b1612;
+      --ink-muted: #544b41;
+      --accent-rust: #a33b1e;
+      --accent-cyan: #0d6e6e;
+      --accent-emerald: #1e7044;
+      --border-dark: #2d2621;
+    }
+
+    body {
+      background-color: #211c18;
+      color: var(--ink-dark);
+      font-family: 'Roboto', sans-serif;
+      background-image: 
+        radial-gradient(#3a312a 1px, transparent 1px),
+        radial-gradient(#3a312a 1px, #1a1613 1px);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+    }
+
+    .editorial-sheet {
+      background-color: var(--paper-cream);
+      background-image: 
+        radial-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 0),
+        linear-gradient(to right, rgba(0,0,0,0.015) 1px, transparent 1px);
+      background-size: 16px 16px, 100% 26px;
+      box-shadow: 0 16px 45px rgba(0,0,0,0.7), inset 0 0 140px rgba(160, 130, 95, 0.18);
+    }
+
+    .font-code {
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    .rule-double {
+      border-top: 3px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-dark);
+      height: 6px;
+    }
+
+    .stamp-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      text-transform: uppercase;
+      font-weight: 700;
+      border: 2px dashed var(--accent-rust);
+      color: var(--accent-rust);
+      transform: rotate(-0.5deg);
+    }
+
+    .first-big-letter::first-letter {
+      float: left;
+      font-size: 3.8rem;
+      line-height: 0.82;
+      padding-top: 4px;
+      padding-right: 10px;
+      font-weight: 900;
+      color: var(--accent-rust);
+    }
+
+    .math-box {
+      background-color: #ede5d5;
+      border: 1.5px solid #4a3e35;
+      box-shadow: 3px 3px 0px #382e27;
+    }
+
+    input[type=range] {
+      accent-color: var(--accent-rust);
+    }
+
+    /* Style tùy biến KaTeX cho hài hòa với màu mực in */
+    .katex {
+      font-size: 1.08em;
+      color: #1a1410;
+    }
+    .katex-display {
+      margin: 0.5em 0 !important;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 4px 0;
+    }
+  </style>
+</head>
+
+<body class="p-2 sm:p-4 md:p-6 min-h-screen">
+  <div class="max-w-6xl mx-auto editorial-sheet border-4 border-stone-900 p-4 sm:p-7 md:p-10 transition-all">
+    
+    <!-- MASTHEAD BÁO CHÍ -->
+    <header class="border-b-2 border-stone-800 pb-3 mb-6">
+      <div class="flex flex-wrap justify-between items-center text-xs font-code uppercase tracking-wider text-stone-700 pb-2 mb-2 border-b border-stone-400">
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-stone-950 bg-amber-200 px-2 py-0.5 border border-stone-800">SỐ 02 &bull; CHUYÊN KHẢO ĐÀO SÂU</span>
+          <span>&bull;</span>
+          <span class="text-stone-800">Cơ Sở Hình Học Của Sự Tưởng Tượng Trong Mạng Nơ-ron Diffusion</span>
+        </div>
+        
+        <!-- Bộ chuyển đổi ngôn ngữ Việt / Anh -->
+        <div class="flex items-center gap-2 mt-2 sm:mt-0">
+          <span class="font-bold text-[11px] text-stone-900 font-code">BILINGUAL:</span>
+          <button id="btn-lang-vi" onclick="setLanguage('vi')" class="px-2.5 py-0.5 border border-stone-900 bg-stone-900 text-stone-100 font-bold text-xs transition">Tiếng Việt</button>
+          <button id="btn-lang-en" onclick="setLanguage('en')" class="px-2.5 py-0.5 border border-stone-900 bg-stone-200 text-stone-900 font-bold hover:bg-stone-300 text-xs transition">English</button>
+        </div>
+      </div>
+
+      <!-- Tiêu đề trang trọng -->
+      <div class="text-center pt-2">
+        <div class="stamp-badge text-xs mb-2" data-key="header_badge">
+          NGUYÊN LÝ KHÔNG GIAN BIỂU DIỄN & HỌC TƯƠNG PHẢN (CONTRASTIVE LEARNING)
+        </div>
+        <h1 class="text-2xl sm:text-4xl md:text-5xl font-black uppercase text-stone-950 tracking-tight" data-key="header_title">
+          Giải Mã Hệ Tọa Độ Ý Niệm: Làm Sao AI Tự Tạo Ra Trục Không Gian?
+        </h1>
+        <p class="text-sm sm:text-base italic text-stone-700 max-w-4xl mx-auto mt-2 leading-relaxed" data-key="header_subtitle">
+          Tìm hiểu cách mạng nơ-ron tự động khám phá các trục đặc trưng vô hình, cơ chế đại số vector siêu chiều, lực đẩy ngược của Negative Prompt, cùng bộ 15 câu hỏi đánh giá theo Thang đo Bloom.
+        </p>
+      </div>
+
+      <div class="rule-double my-4"></div>
+
+      <!-- Mục lục truy cập nhanh -->
+      <nav class="flex flex-wrap justify-center gap-2 font-code text-xs font-bold uppercase">
+        <button onclick="scrollToEl('sec-axes-origin')" class="px-3 py-1.5 bg-stone-200 border border-stone-800 hover:bg-stone-300 transition">1. Cơ Chế Sinh Trục Tọa Độ</button>
+        <button onclick="scrollToEl('sec-multidim-space')" class="px-3 py-1.5 bg-stone-200 border border-stone-800 hover:bg-stone-300 transition">2. Không Gian Siêu Chiều 768D</button>
+        <button onclick="scrollToEl('sec-attention-binding')" class="px-3 py-1.5 bg-stone-200 border border-stone-800 hover:bg-stone-300 transition">3. Đèn Pin Cross-Attention</button>
+        <button onclick="scrollToEl('sec-cfg-dial')" class="px-3 py-1.5 bg-stone-200 border border-stone-800 hover:bg-stone-300 transition">4. La Bàn CFG Scale</button>
+        <button onclick="scrollToEl('sec-negative-prompting')" class="px-3 py-1.5 bg-amber-900 text-stone-100 border border-stone-900 shadow">5. Lực Đẩy Negative Prompt</button>
+        <button onclick="scrollToEl('sec-bloom-quiz')" class="px-3 py-1.5 bg-stone-200 border border-stone-800 hover:bg-stone-300 transition">6. Bài Test 15 Câu (Bloom)</button>
+      </nav>
+    </header>
+
+    <main class="space-y-10">
+      
+      <section id="sec-axes-origin" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">01</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="sec1_title">
+              Tiêu Chí Nào Giúp Máy Tính Tự Tạo Ra Các Trục Tọa Độ?
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="sec1_sub">
+              Làm sao máy biết Trục X = Đặc trưng Sinh học, Trục Y = Địa chất & Cơ khí mà không cần ai dán nhãn?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter" data-key="sec1_p1">
+              Một câu hỏi hóc búa bậc nhất của người mới học là: <em>"Ai là người ngồi phân loại và gán nhãn xem trục nào là trục sinh học, trục nào là trục đá hay cơ khí?"</em>. Câu trả lời gây kinh ngạc: <strong>Hoàn toàn không có con người nào làm việc đó thủ công cả!</strong>
+            </p>
+            <p data-key="sec1_p2">
+              Các trục tọa độ này tự động nảy sinh thông qua một kỹ thuật học máy đột phá gọi là <strong>Học Tương Phản (Contrastive Learning)</strong> — tiêu biểu là mạng CLIP (Contrastive Language-Image Pretraining). Trong quá trình quét hàng trăm triệu cặp ảnh và chú thích trên mạng, mô hình phải giải một bài toán tối ưu:
+            </p>
+
+            <!-- Khung công thức KaTeX về hàm mất mát tương phản InfoNCE -->
+            <div class="math-box p-3.5 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Hàm Mục Tiêu Tương Phản Đa Thức (InfoNCE Loss):
+              </div>
+              <div class="py-1">
+                $$\mathcal{L}_{\text{CLIP}} = -\log \frac{\exp\left(\frac{\mathbf{u}_{\text{ảnh}} \cdot \mathbf{v}_{\text{chữ}}}{\tau}\right)}{\sum_{j=1}^{N} \exp\left(\frac{\mathbf{u}_{\text{ảnh}} \cdot \mathbf{v}_j}{\tau}\right)}$$
+              </div>
+              <div class="text-[11px] text-stone-700 leading-normal space-y-1">
+                <div>&bull; $\mathbf{u}_{\text{ảnh}} \cdot \mathbf{v}_{\text{chữ}}$: Tích vô hướng đo độ tương đồng giữa ảnh đúng và câu mô tả đúng.</div>
+                <div>&bull; Mẫu số: Tổng độ tương đồng với hàng nghìn câu mô tả sai lệch khác.</div>
+                <div>&bull; $\tau$: Tham số nhiệt độ điều hòa phân phối xác suất.</div>
+              </div>
+            </div>
+
+            <p data-key="sec1_p3">
+              Để giảm thiểu hàm mất mát này, mạng nơ-ron buộc phải xếp các khái niệm <strong>càng khác nhau ra càng xa nhau</strong> theo các hướng trực giao (vuông góc 90 độ). Đặc trưng <em>"Sinh học / Có xương khớp"</em> và đặc trưng <em>"Vô cơ / Đất đá"</em> luôn xuất hiện trong các ngữ cảnh đối nghịch nhau, nên toán học tự động đẩy chúng thành hai chiều độc lập trên hệ trục!
+            </p>
+          </div>
+
+          <!-- PHÒNG THÍ NGHIỆM 1: MÔ PHỎNG SỰ PHÂN TÁCH TRỤC BẰNG HỌC TƯƠNG PHẢN -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900" data-key="sec1_lab_head">
+                Thực Nghiệm 1: Xem Lực Tương Phản Đẩy Tự Động Các Trục
+              </span>
+              <span id="contrastive-epoch-tag" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Vòng Lặp: Khởi Tạo
+              </span>
+            </div>
+
+            <!-- Canvas mô phỏng lực hút đẩy tương phản -->
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="contrastiveCanvas" width="460" height="240" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <!-- Bộ nút điều khiển huấn luyện -->
+            <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-code">
+              <div class="flex gap-2">
+                <button onclick="startContrastiveSim()" id="btn-run-contrastive" class="px-3 py-1.5 bg-amber-900 text-stone-100 font-bold border border-stone-900 hover:bg-amber-800">
+                  ▶ Chạy Quá Trình Huấn Luyện
+                </button>
+                <button onclick="resetContrastiveSim()" class="px-3 py-1.5 bg-stone-100 text-stone-900 font-bold border border-stone-800 hover:bg-stone-300">
+                  ↺ Đặt Lại
+                </button>
+              </div>
+              <span class="text-[11px] text-stone-600 italic">Các chấm cùng màu tự co cụm, khác màu bị đẩy văng ra xa!</span>
+            </div>
+
+            <div id="contrastive-expl-box" class="p-2.5 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800 leading-relaxed">
+              <strong>Quan sát hình học:</strong> Ban đầu các khái niệm bị trộn lẫn lộn xộn. Sau khi tối ưu hóa InfoNCE, trục Ngang tự động biến thành <em>"Trục Sinh Học"</em>, trục Dọc tự động biến thành <em>"Trục Địa Chất & Cơ Khí"</em>.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-multidim-space" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">02</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="sec2_title">
+              Không Gian Siêu Chiều: Tại Sao 2D Hay 3D Là Không Đủ?
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="sec2_sub">
+              Sức chứa kỳ diệu của không gian 768 chiều ($d=768$) và phép cộng trừ vector trừu tượng.
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          <div class="lg:col-span-6 space-y-3 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p data-key="sec2_p1">
+              Trong thế giới thực, chúng ta chỉ hình dung được không gian 3 chiều ($X, Y, Z$). Nhưng trong các mô hình như Stable Diffusion hay Midjourney, không gian ý niệm có tới <strong>768 hoặc 1024 chiều tọa độ</strong>!
+            </p>
+            <p data-key="sec2_p2">
+              Tại sao lại cần nhiều chiều đến vậy? Trong hình học giải tích, <em>trong không gian $N$ chiều ta có thể vẽ được tối đa $N$ mũi tên hoàn toàn vuông góc với nhau</em>. Với 768 chiều, mô hình có thể chứa hàng trăm thuộc tính hoàn toàn độc lập mà không sợ cái này đè bẹp cái kia:
+            </p>
+
+            <ul class="list-disc list-inside space-y-1 font-code text-xs sm:text-sm bg-stone-200 p-3 border border-stone-400">
+              <li>Chiều thứ 42: Đo mức độ <em>"Xù xì thô ráp của đá"</em>.</li>
+              <li>Chiều thứ 118: Đo mức độ <em>"Khớp nối sinh học của cánh tay"</em>.</li>
+              <li>Chiều thứ 305: Đo tính chất <em>"Mũ vành cao bồi miền Tây"</em>.</li>
+              <li>Chiều thứ 612: Đo tính chất <em>"Khối hộp lập phương vuông vức"</em>.</li>
+            </ul>
+
+            <!-- Khung công thức KaTeX về Cosine Similarity và Phép cộng vector -->
+            <div class="math-box p-3 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Độ Tương Đồng Cosine Giữa Hai Khái Niệm:
+              </div>
+              <div class="py-1">
+                $$\cos(\theta) = \frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\| \|\mathbf{v}\|} = \frac{\sum_{i=1}^{d} u_i v_i}{\sqrt{\sum_{i=1}^{d} u_i^2} \sqrt{\sum_{i=1}^{d} v_i^2}}$$
+              </div>
+              <div class="text-[11px] text-stone-700">
+                Nếu $\cos(\theta) \approx 0$, hai ý niệm hoàn toàn vuông góc (như "Đá lửa" và "Súng lục"). Chúng có thể kết hợp mượt mà mà không làm mất bản sắc của nhau!
+              </div>
+            </div>
+          </div>
+
+          <!-- PHÒNG THÍ NGHIỆM 2: PHÉP CỘNG VECTOR Ý NIỆM ĐA THÀNH PHẦN -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900" data-key="sec2_lab_head">
+                Thực Nghiệm 2: Phép Cộng Vector Ý Niệm Tổng Hợp
+              </span>
+              <span id="vec-target-coords" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Đích: [78, 65]
+              </span>
+            </div>
+
+            <!-- Canvas vẽ tổng hợp vector đa chiều chiếu xuống 2D -->
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="multiVectorCanvas" width="460" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <!-- Nút bật tắt các vector thành phần -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-code">
+              <label class="flex items-center gap-1.5 p-1.5 bg-stone-100 border border-stone-400 cursor-pointer">
+                <input type="checkbox" id="chk-v-human" checked onchange="updateMultiVectorMap()">
+                <span>Dáng Người</span>
+              </label>
+              <label class="flex items-center gap-1.5 p-1.5 bg-stone-100 border border-stone-400 cursor-pointer">
+                <input type="checkbox" id="chk-v-stone" checked onchange="updateMultiVectorMap()">
+                <span>Đá Thiên Thạch</span>
+              </label>
+              <label class="flex items-center gap-1.5 p-1.5 bg-stone-100 border border-stone-400 cursor-pointer">
+                <input type="checkbox" id="chk-v-arms" checked onchange="updateMultiVectorMap()">
+                <span>Khớp 4 Tay</span>
+              </label>
+              <label class="flex items-center gap-1.5 p-1.5 bg-stone-100 border border-stone-400 cursor-pointer">
+                <input type="checkbox" id="chk-v-mount" checked onchange="updateMultiVectorMap()">
+                <span>Khối Đá Vuông</span>
+              </label>
+            </div>
+
+            <div id="vector-math-summary" class="p-2.5 bg-amber-50 border border-stone-400 text-xs font-code text-stone-800">
+              $$\mathbf{v}_{\text{đích}} = \mathbf{v}_{\text{người}} + \mathbf{v}_{\text{đá}} + 2\mathbf{v}_{\text{tay}} + \mathbf{v}_{\text{thú cưỡi}}$$
+              <span class="block text-[11px] text-stone-600 mt-1">Hạt nhiễu được điều khiển lăn dốc thế năng hướng về đúng điểm đích này.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-attention-binding" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">03</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="sec3_title">
+              Cơ Chế Attention: Phân Định Tọa Độ Không Gian Cho Từng Ý Niệm
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="sec3_sub">
+              Làm sao từ "Súng" chỉ rọi vào tay, còn từ "Mũ cao bồi" chỉ rọi vào đỉnh đầu?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          <div class="lg:col-span-6 space-y-3 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p data-key="sec3_p1">
+              Nếu chỉ cộng các vector lại với nhau, máy tính sẽ biết <em>bức tranh gồm những gì</em> nhưng chưa biết <em>đặt thứ gì vào vị trí nào</em>. Nếu không có bộ định vị không gian, khẩu súng sẽ bị biến thành đá núi lửa, hoặc chiếc nón lá sẽ mọc ra 4 cái chân!
+            </p>
+            <p data-key="sec3_p2">
+              Để giải quyết triệt để sự "lem màu" (Attribute Bleeding) này, mô hình áp dụng công thức <strong>Cross-Attention (Chú ý chéo)</strong> giữa các pixel ảnh và từ ngữ:
+            </p>
+
+            <!-- Hộp toán học KaTeX Cross-Attention -->
+            <div class="math-box p-3 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Công Thức Ma Trận Attention Chuẩn Hóa:
+              </div>
+              <div class="py-1">
+                $$\mathbf{A} = \text{softmax}\left(\frac{\mathbf{Q} \mathbf{K}^T}{\sqrt{d_k}}\right) \mathbf{V}$$
+              </div>
+              <div class="text-[11px] text-stone-700 space-y-0.5">
+                <div>&bull; $\mathbf{Q}$ (Query): Tọa độ không gian của từng điểm ảnh trên khung vẽ.</div>
+                <div>&bull; $\mathbf{K}$ (Key): Vector ý niệm của từng từ trong câu lệnh bạn viết.</div>
+                <div>&bull; $\mathbf{A}_{i, j}$: Mức độ sáng của chiếc đèn pin từ từ thứ $j$ rọi vào pixel thứ $i$.</div>
+              </div>
+            </div>
+
+            <p data-key="sec3_p3">
+              Nhờ phép nhân ma trận này, điểm ảnh ở tọa độ tay chỉ phản hồi với từ <em>"Súng"</em>, điểm ảnh ở đỉnh đầu chỉ phản hồi với từ <em>"Mũ cao bồi"</em>, tạo nên sự phân tách giải phẫu hoàn hảo!
+            </p>
+          </div>
+
+          <!-- PHÒNG THÍ NGHIỆM 3: BẢN ĐỒ NHIỆT ATTENTION SOI CHIẾU -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900" data-key="sec3_lab_head">
+                Thực Nghiệm 3: Bật Đèn Pin Soi Từng Cụm Từ
+              </span>
+              <span id="active-attn-badge" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Đang soi: [4 Cánh Tay Cầm Súng]
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="attnHeatmapCanvas" width="460" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="flex flex-wrap gap-2 text-xs font-code">
+              <button onclick="selectAttnToken('head')" id="btn-at-head" class="px-2.5 py-1.5 border border-stone-800 bg-stone-100 hover:bg-stone-300 font-bold">
+                [2 Đầu & Mũ]
+              </button>
+              <button onclick="selectAttnToken('arms')" id="btn-at-arms" class="px-2.5 py-1.5 border border-stone-800 bg-amber-900 text-stone-100 font-bold">
+                [4 Cánh Tay & Súng]
+              </button>
+              <button onclick="selectAttnToken('chest')" id="btn-at-chest" class="px-2.5 py-1.5 border border-stone-800 bg-stone-100 hover:bg-stone-300 font-bold">
+                [Ngực Đá Dung Nham]
+              </button>
+              <button onclick="selectAttnToken('cube')" id="btn-at-cube" class="px-2.5 py-1.5 border border-stone-800 bg-stone-100 hover:bg-stone-300 font-bold">
+                [Khối Đá Vuông 4 Chân]
+              </button>
+            </div>
+
+            <div class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Vùng phát sáng rực rỡ đại diện cho giá trị xác suất cao trong hàng $\text{softmax}(\mathbf{Q}\mathbf{K}^T / \sqrt{d_k})$.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-cfg-dial" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">04</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="sec4_title">
+              Công Thức La Bàn: Classifier-Free Guidance (CFG)
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="sec4_sub">
+              Toán học đằng sau hệ số vặn $w$: Ép mô hình nghe lời hay để nó tự trôi tự do?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          <div class="lg:col-span-6 space-y-3 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p data-key="sec4_p1">
+              Nếu không có lực kéo cưỡng bức, mô hình Diffusion sẽ luôn bị trôi về những bức tranh "an toàn", nhạt nhòa giống như phần lớn dữ liệu trên mạng.
+            </p>
+            <p data-key="sec4_p2">
+              Để ép mạng nơ-ron phải vẽ đúng những chi tiết kỳ quái theo lệnh bạn, các nhà toán học đã sáng tạo ra <strong>Phương trình la bàn CFG</strong>:
+            </p>
+
+            <div class="math-box p-3 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Phương Trình Kéo Hướng Vector CFG:
+              </div>
+              <div class="py-1 text-center font-bold">
+                $$\vec{\epsilon}_{\text{cuối}} = \vec{\epsilon}_{\text{tự do}} + w \cdot \left(\vec{\epsilon}_{\text{theo lệnh}} - \vec{\epsilon}_{\text{tự do}}\right)$$
+              </div>
+              <div class="text-[11px] text-stone-700 space-y-1">
+                <div>&bull; $\vec{\epsilon}_{\text{tự do}}$ (Unconditional): Hướng đi tự nhiên khi mô hình không đọc câu lệnh nào.</div>
+                <div>&bull; $\vec{\epsilon}_{\text{theo lệnh}}$ (Conditional): Hướng đi bám sát câu lệnh kỳ dị của bạn.</div>
+                <div>&bull; $w$ (Guidance Scale): Trọng số phóng đại lực đẩy (thường từ 6.0 đến 8.5).</div>
+              </div>
+            </div>
+
+            <p class="text-xs sm:text-sm" data-key="sec4_p3">
+              Nếu vặn $w < 3$, máy tính bỏ ngoài tai câu lệnh. Nếu vặn chuẩn $w = 7.5$, sinh vật người đá 4 tay hiện lên sắc sảo. Nhưng nếu vặn $w > 18$, véc-tơ bị kéo quá đà dẫn đến cháy tương phản và viền ảnh vỡ nát!
+            </p>
+          </div>
+
+          <!-- PHÒNG THÍ NGHIỆM 4: THƯỚC ĐO CFG SCALE THỜI GIAN THỰC -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900" data-key="sec4_lab_head">
+                Thực Nghiệm 4: Vặn Núm La Bàn CFG Scale
+              </span>
+              <span id="cfg-metric-tag" class="text-xs font-code font-bold px-2 py-0.5 bg-amber-900 text-stone-100">
+                w = 7.5
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="cfgVisualCanvas" width="460" height="220" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="bg-stone-100 p-3 border border-stone-400 text-xs font-code space-y-2">
+              <div class="flex justify-between font-bold">
+                <span>Hệ số khuếch đại la bàn ($w$):</span>
+                <span id="cfg-status-text" class="text-amber-950">Chuẩn xác tối ưu</span>
+              </div>
+              <input type="range" id="slider-cfg-scale" min="10" max="250" value="75" class="w-full h-2 cursor-pointer">
+              <div class="flex justify-between text-[10px] text-stone-500">
+                <span>w = 1.0 (Lờ câu lệnh)</span>
+                <span>w = 7.5 (Tiêu chuẩn vàng)</span>
+                <span>w = 25.0 (Cháy tương phản)</span>
+              </div>
+            </div>
+
+            <div id="cfg-explanation-box2" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Ở $w = 7.5$, độ dài véc-tơ hiệu số $(\vec{\epsilon}_{\text{cond}} - \vec{\epsilon}_{\text{uncond}})$ vừa đủ để ép các hạt nhiễu sắp xếp thành 4 cánh tay độc lập.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-negative-prompting" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">05</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="sec5_title">
+              Chuyên Đề Sâu Về Negative Prompt: Lực Đẩy Trừ Khử Không Gian
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="sec5_sub">
+              Toán học của lực đẩy: Phá vỡ bản năng 2 tay thông thường để ép sinh vật 4 tay xuất hiện.
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <h3 class="font-bold text-stone-900 uppercase font-code text-sm" data-key="sec5_h1">
+              Tại Sao Mô Hình Cứ "Bản Năng" Muốn Vẽ 2 Cánh Tay?
+            </h3>
+            <p class="first-big-letter" data-key="sec5_p1">
+              Trong 5 tỷ bức ảnh mà mô hình được học, 99.999% ảnh con người chỉ có 2 cánh tay. Do đó, xung quanh tọa độ "Dáng người" tồn tại một <strong>"Hố hút hấp dẫn" (Attractor Well)</strong> cực mạnh kéo về dạng 2 tay thông thường.
+            </p>
+            <p data-key="sec5_p2">
+              Khi bạn chỉ viết prompt dương tính: <em>"4 arms"</em>, lực kéo dương đôi khi không đủ mạnh để thoát khỏi hố hút 2 tay này. Đó là lúc ta cần kích hoạt <strong>Negative Prompt (Lực đẩy ngược)</strong>:
+            </p>
+
+            <!-- Hộp toán học KaTeX mở rộng công thức Negative Prompt -->
+            <div class="math-box p-3.5 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Phương Trình Kéo Đẩy Hai Hướng (CFG with Negative):
+              </div>
+              <div class="py-1">
+                $$\vec{\epsilon}_{\text{cuối}} = \vec{\epsilon}_{\text{neg}} + w \cdot \left(\vec{\epsilon}_{\text{pos}} - \vec{\epsilon}_{\text{neg}}\right)$$
+              </div>
+              <div class="text-[11px] text-stone-700 leading-normal space-y-1">
+                <div>&bull; $\vec{\epsilon}_{\text{pos}}$: Vector đại diện cho <em>"4 arms, meteorite rock, cowboy"</em>.</div>
+                <div>&bull; $\vec{\epsilon}_{\text{neg}}$: Vector đại diện cho <em>"2 arms, smooth skin, human face, blur"</em>.</div>
+                <div>&bull; Hiệu số $(\vec{\epsilon}_{\text{pos}} - \vec{\epsilon}_{\text{neg}})$: <strong>Gấp đôi độ dốc thế năng</strong>, vừa kéo về phía 4 tay vừa tạo lực đẩy bài xích cực mạnh khỏi vùng 2 tay!</div>
+              </div>
+            </div>
+
+            <p data-key="sec5_p3">
+              Nhờ có phép trừ vector này, hạt nhiễu hoàn toàn bị đẩy văng ra khỏi "vùng an toàn 2 cánh tay", buộc phải lăn thẳng vào vùng tọa độ đột biến của sinh vật 4 tay kỳ dị!
+            </p>
+          </div>
+
+          <!-- PHÒNG THÍ NGHIỆM 5 MỚI: MÔ PHỎNG TRƯỜNG LỰC ĐẨY NEGATIVE PROMPT -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900" data-key="sec5_lab_head">
+                Thực Nghiệm 5: Xem Trường Lực Đẩy Của Negative Prompt
+              </span>
+              <span id="neg-force-tag" class="text-[11px] font-code bg-red-900 text-stone-100 px-2 py-0.5">
+                Lực Đẩy Âm: Đang Bật
+              </span>
+            </div>
+
+            <!-- Canvas vẽ trường lực đẩy và quỹ đạo hạt nhiễu -->
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="negativeFieldCanvas" width="460" height="240" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <!-- Điều khiển bật tắt negative prompt và độ mạnh lực đẩy -->
+            <div class="bg-stone-100 p-3 border border-stone-400 space-y-2 text-xs font-code">
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-2 cursor-pointer font-bold text-stone-900">
+                  <input type="checkbox" id="chk-enable-neg" checked onchange="toggleNegativePrompt()">
+                  <span>Kích Hoạt Negative Prompt: ["2 arms", "human skin"]</span>
+                </label>
+                <span id="neg-status-pill" class="px-2 py-0.5 bg-red-200 text-red-900 font-bold border border-red-700">Đã Phá Hố Hút</span>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-[11px] text-stone-700 mb-1">
+                  <span>Cường độ lực đẩy bài xích ($\lambda_{\text{neg}}$):</span>
+                  <span id="neg-power-val" class="font-bold text-red-950">1.0x</span>
+                </div>
+                <input type="range" id="slider-neg-power" min="0" max="200" value="100" oninput="updateNegativeForce(this.value)" class="w-full h-2 cursor-pointer">
+              </div>
+            </div>
+
+            <div id="negative-canvas-desc" class="p-2.5 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800 leading-relaxed">
+              Mũi tên đỏ thể hiện lực đẩy bài xích. Khi tắt Negative Prompt, hạt nhiễu bị hố đen <em>"Người 2 tay"</em> nuốt chửng. Khi bật lực đẩy, hạt nhiễu phóng thẳng sang vùng <em>"Sinh vật 4 tay"</em>!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-bloom-quiz" class="p-4 sm:p-6 bg-amber-50 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">06</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950" data-key="sec6_title">
+              Bài Kiểm Tra Toàn Diện: 15 Câu Theo Thang Đo Bloom
+            </h2>
+            <span class="text-xs text-stone-600 font-code" data-key="sec6_sub">
+              Chuẩn hóa 6 mức độ tư duy: Nhận biết &bull; Thông hiểu &bull; Vận dụng &bull; Phân tích &bull; Đánh giá &bull; Vận dụng cao.
+            </span>
+          </div>
+        </div>
+
+        <!-- Bộ lọc cấp độ Bloom -->
+        <div class="flex flex-wrap items-center gap-2 mb-4 pb-3 border-b border-stone-400 text-xs font-code">
+          <span class="font-bold text-stone-900">LỌC MỨC ĐỘ:</span>
+          <button onclick="filterBloom('all')" id="btn-flt-all" class="px-2 py-1 bg-stone-900 text-stone-100 font-bold border border-stone-900">Tất Cả (15)</button>
+          <button onclick="filterBloom('remember')" id="btn-flt-remember" class="px-2 py-1 bg-stone-200 hover:bg-stone-300 font-bold border border-stone-700">1. Nhận Biết (3)</button>
+          <button onclick="filterBloom('understand')" id="btn-flt-understand" class="px-2 py-1 bg-stone-200 hover:bg-stone-300 font-bold border border-stone-700">2. Thông Hiểu (3)</button>
+          <button onclick="filterBloom('apply')" id="btn-flt-apply" class="px-2 py-1 bg-stone-200 hover:bg-stone-300 font-bold border border-stone-700">3. Vận Dụng (3)</button>
+          <button onclick="filterBloom('analyze')" id="btn-flt-analyze" class="px-2 py-1 bg-stone-200 hover:bg-stone-300 font-bold border border-stone-700">4. Phân Tích (3)</button>
+          <button onclick="filterBloom('evaluate_create')" id="btn-flt-evaluate_create" class="px-2 py-1 bg-stone-200 hover:bg-stone-300 font-bold border border-stone-700">5. Đánh Giá & Vận Dụng Cao (3)</button>
+        </div>
+
+        <!-- Điểm số trực tiếp -->
+        <div class="flex justify-between items-center bg-stone-200 p-2.5 border border-stone-400 font-code text-xs mb-4">
+          <span class="font-bold text-stone-900" id="bloom-progress-text">Tiến độ: 0/15 câu đã làm</span>
+          <span class="font-bold text-amber-950" id="bloom-score-text">Điểm: 0 / 15</span>
+        </div>
+
+        <!-- Danh sách 15 câu hỏi -->
+        <div id="bloom-quiz-list" class="space-y-4">
+          <!-- Render tự động bằng JavaScript -->
+        </div>
+
+        <!-- Kết quả tổng kết chung cuộc -->
+        <div id="bloom-final-summary" class="mt-6 p-4 bg-stone-100 border-2 border-stone-800 text-xs font-code hidden"></div>
+      </section>
+
+    </main>
+
+    <!-- CHÂN TRANG TẠP CHÍ CỔ ĐIỂN -->
+    <footer class="mt-8 pt-4 border-t-2 border-stone-800 text-stone-600 text-xs font-code flex flex-wrap justify-between items-center">
+      <div>Chuyên Khảo Toán Học AI &bull; Chuyên Đề Tạo Ảnh Nâng Cao & Tọa Độ Ý Niệm</div>
+      <div class="text-stone-900 font-bold">Chuẩn Hóa KaTeX &bull; Thang Đo Bloom 6 Cấp Độ &bull; 100% Roboto</div>
+    </footer>
+
+  </div>
+
+  <script>
+    /* TRẠNG THÁI TOÀN CỤC CỦA ỨNG DỤNG */
+    const appState = {
+      lang: 'vi',
+      // Dữ liệu thực nghiệm 1
+      contrastiveEpoch: 0,
+      contrastiveRunning: false,
+      contrastiveTimer: null,
+      // Dữ liệu thực nghiệm 2 (Vector)
+      vectors: { human: true, stone: true, arms: true, mount: true },
+      // Dữ liệu thực nghiệm 3 (Attention)
+      activeToken: 'arms',
+      // Dữ liệu thực nghiệm 4 (CFG)
+      cfgScale: 7.5,
+      // Dữ liệu thực nghiệm 5 (Negative Prompt)
+      enableNegative: true,
+      negativeForce: 1.0,
+      // Dữ liệu trắc nghiệm Bloom
+      quizFilter: 'all',
+      userAnswers: {},
+      scores: 0
+    };
+
+    /* TỪ ĐIỂN BILINGUAL ANH - VIỆT */
+    const textDict = {
+      vi: {
+        header_badge: "NGUYÊN LÝ KHÔNG GIAN BIỂU DIỄN & HỌC TƯƠNG PHẢN (CONTRASTIVE LEARNING)",
+        header_title: "Giải Mã Hệ Tọa Độ Ý Niệm: Làm Sao AI Tự Tạo Ra Trục Không Gian?",
+        header_subtitle: "Tìm hiểu cách mạng nơ-ron tự động khám phá các trục đặc trưng vô hình, cơ chế đại số vector siêu chiều, lực đẩy ngược của Negative Prompt, cùng bộ 15 câu hỏi đánh giá theo Thang đo Bloom.",
+        sec1_title: "Tiêu Chí Nào Giúp Máy Tính Tự Tạo Ra Các Trục Tọa Độ?",
+        sec1_sub: "Làm sao máy biết Trục X = Đặc trưng Sinh học, Trục Y = Địa chất & Cơ khí mà không cần ai dán nhãn?",
+        sec1_p1: "Một câu hỏi hóc búa bậc nhất của người mới học là: \"Ai là người ngồi phân loại và gán nhãn xem trục nào là trục sinh học, trục nào là trục đá hay cơ khí?\". Câu trả lời gây kinh ngạc: Hoàn toàn không có con người nào làm việc đó thủ công cả!",
+        sec1_p2: "Các trục tọa độ này tự động nảy sinh thông qua một kỹ thuật học máy đột phá gọi là Học Tương Phản (Contrastive Learning) — tiêu biểu là mạng CLIP (Contrastive Language-Image Pretraining). Trong quá trình quét hàng trăm triệu cặp ảnh và chú thích trên mạng, mô hình phải giải một bài toán tối ưu:",
+        sec1_p3: "Để giảm thiểu hàm mất mát này, mạng nơ-ron buộc phải xếp các khái niệm càng khác nhau ra càng xa nhau theo các hướng trực giao (vuông góc 90 độ). Đặc trưng \"Sinh học / Có xương khớp\" và đặc trưng \"Vô cơ / Đất đá\" luôn xuất hiện trong các ngữ cảnh đối nghịch nhau, nên toán học tự động đẩy chúng thành hai chiều độc lập trên hệ trục!",
+        sec1_lab_head: "Thực Nghiệm 1: Xem Lực Tương Phản Đẩy Tự Động Các Trục",
+        sec2_title: "Không Gian Siêu Chiều: Tại Sao 2D Hay 3D Là Không Đủ?",
+        sec2_sub: "Sức chứa kỳ diệu của không gian 768 chiều ($d=768$) và phép cộng trừ vector trừu tượng.",
+        sec2_p1: "Trong thế giới thực, chúng ta chỉ hình dung được không gian 3 chiều ($X, Y, Z$). Nhưng trong các mô hình như Stable Diffusion hay Midjourney, không gian ý niệm có tới 768 hoặc 1024 chiều tọa độ!",
+        sec2_p2: "Tại sao lại cần nhiều chiều đến vậy? Trong hình học giải tích, trong không gian N chiều ta có thể vẽ được tối đa N mũi tên hoàn toàn vuông góc với nhau. Với 768 chiều, mô hình có thể chứa hàng trăm thuộc tính hoàn toàn độc lập mà không sợ cái này đè bẹp cái kia:",
+        sec2_lab_head: "Thực Nghiệm 2: Phép Cộng Vector Ý Niệm Tổng Hợp",
+        sec3_title: "Cơ Chế Attention: Phân Định Tọa Độ Không Gian Cho Từng Ý Niệm",
+        sec3_sub: "Làm sao từ \"Súng\" chỉ rọi vào tay, còn từ \"Mũ cao bồi\" chỉ rọi vào đỉnh đầu?",
+        sec3_p1: "Nếu chỉ cộng các vector lại với nhau, máy tính sẽ biết bức tranh gồm những gì nhưng chưa biết đặt thứ gì vào vị trí nào. Nếu không có bộ định vị không gian, khẩu súng sẽ bị biến thành đá núi lửa, hoặc chiếc nón lá sẽ mọc ra 4 cái chân!",
+        sec3_p2: "Để giải quyết triệt để sự \"lem màu\" (Attribute Bleeding) này, mô hình áp dụng công thức Cross-Attention (Chú ý chéo) giữa các pixel ảnh và từ ngữ:",
+        sec3_p3: "Nhờ phép nhân ma trận này, điểm ảnh ở tọa độ tay chỉ phản hồi với từ \"Súng\", điểm ảnh ở đỉnh đầu chỉ phản hồi với từ \"Mũ cao bồi\", tạo nên sự phân tách giải phẫu hoàn hảo!",
+        sec3_lab_head: "Thực Nghiệm 3: Bật Đèn Pin Soi Từng Cụm Từ",
+        sec4_title: "Công Thức La Bàn: Classifier-Free Guidance (CFG)",
+        sec4_sub: "Toán học đằng sau hệ số vặn $w$: Ép mô hình nghe lời hay để nó tự trôi tự do?",
+        sec4_p1: "Nếu không có lực kéo cưỡng bức, mô hình Diffusion sẽ luôn bị trôi về những bức tranh \"an toàn\", nhạt nhòa giống như phần lớn dữ liệu trên mạng.",
+        sec4_p2: "Để ép mạng nơ-ron phải vẽ đúng những chi tiết kỳ quái theo lệnh bạn, các nhà toán học đã sáng tạo ra Phương trình la bàn CFG:",
+        sec4_p3: "Nếu vặn $w < 3$, máy tính bỏ ngoài tai câu lệnh. Nếu vặn chuẩn $w = 7.5$, sinh vật người đá 4 tay hiện lên sắc sảo. Nhưng nếu vặn $w > 18$, véc-tơ bị kéo quá đà dẫn đến cháy tương phản và viền ảnh vỡ nát!",
+        sec4_lab_head: "Thực Nghiệm 4: Vặn Núm La Bàn CFG Scale",
+        sec5_title: "Chuyên Đề Sâu Về Negative Prompt: Lực Đẩy Trừ Khử Không Gian",
+        sec5_sub: "Toán học của lực đẩy: Phá vỡ bản năng 2 tay thông thường để ép sinh vật 4 tay xuất hiện.",
+        sec5_h1: "Tại Sao Mô Hình Cứ \"Bản Năng\" Muốn Vẽ 2 Cánh Tay?",
+        sec5_p1: "Trong 5 tỷ bức ảnh mà mô hình được học, 99.999% ảnh con người chỉ có 2 cánh tay. Do đó, xung quanh tọa độ \"Dáng người\" tồn tại một \"Hố hút hấp dẫn\" (Attractor Well) cực mạnh kéo về dạng 2 tay thông thường.",
+        sec5_p2: "Khi bạn chỉ viết prompt dương tính: \"4 arms\", lực kéo dương đôi khi không đủ mạnh để thoát khỏi hố hút 2 tay này. Đó là lúc ta cần kích hoạt Negative Prompt (Lực đẩy ngược):",
+        sec5_p3: "Nhờ có phép trừ vector này, hạt nhiễu hoàn toàn bị đẩy văng ra khỏi \"vùng an toàn 2 cánh tay\", buộc phải lăn thẳng vào vùng tọa độ đột biến của sinh vật 4 tay kỳ dị!",
+        sec5_lab_head: "Thực Nghiệm 5: Xem Trường Lực Đẩy Của Negative Prompt",
+        sec6_title: "Bài Kiểm Tra Toàn Diện: 15 Câu Theo Thang Đo Bloom",
+        sec6_sub: "Chuẩn hóa 6 mức độ tư duy: Nhận biết • Thông hiểu • Vận dụng • Phân tích • Đánh giá • Vận dụng cao."
+      },
+      en: {
+        header_badge: "REPRESENTATION LEARNING & CONTRASTIVE EMBEDDINGS (CLIP)",
+        header_title: "Demystifying Latent Concept Coordinates: How Does AI Create Space Axes?",
+        header_subtitle: "Discover how neural networks discover semantic axes autonomously, high-dimensional vector algebra, repulsive forces of Negative Prompting, and a complete 15-question Bloom's taxonomy assessment.",
+        sec1_title: "How Does The Machine Know How To Construct Space Axes?",
+        sec1_sub: "How does the computer discover Axis X = Biological vs Axis Y = Geological without manual labels?",
+        sec1_p1: "One of the most persistent freshman questions is: \"Who manually assigns which axis is biology and which is rock/mechanics?\". The astonishing reality: Zero humans manually label these axes!",
+        sec1_p2: "These coordinate axes self-organize through an algorithmic breakthrough known as Contrastive Learning (typified by OpenAI's CLIP). Over hundreds of millions of image-text pairs, the network minimizes an InfoNCE objective:",
+        sec1_p3: "To minimize this loss, the network forces dissimilar concepts apart along mutually orthogonal vectors (90 degrees). Attributes like \"Biological / Skeletal\" and \"Inorganic / Basalt Stone\" appear in opposing contexts, so gradient descent pushes them into independent coordinate axes!",
+        sec1_lab_head: "Experiment 1: Contrastive Force Field Training Simulator",
+        sec2_title: "High-Dimensional Latent Spaces: Why 2D/3D Is Insufficient",
+        sec2_sub: "The immense semantic capacity of 768-dimensional space ($d=768$) and vector algebra.",
+        sec2_p1: "In human physical reality, we are confined to 3 spatial dimensions ($X, Y, Z$). But modern generative networks construct an invisible latent space possessing 768 or 1024 coordinate dimensions!",
+        sec2_p2: "Why so many dimensions? In linear algebra, an N-dimensional space accommodates up to N mutually orthogonal basis vectors. With 768 dimensions, hundreds of concepts can coexist without destructive interference:",
+        sec2_lab_head: "Experiment 2: Multi-Concept Vector Addition",
+        sec3_title: "Cross-Attention: Spatial Grounding For Prompt Tokens",
+        sec3_sub: "Why do revolvers bind only to hands while cowboy hats bind to heads?",
+        sec3_p1: "Simply summing vectors tells the network what to draw, but not where to draw it. Without spatial grounding, revolvers would dissolve into lava rock, or cowboy hats would sprout spider legs!",
+        sec3_p2: "To eradicate this attribute bleeding, diffusion models apply Cross-Attention between spatial image pixels and textual tokens:",
+        sec3_p3: "Through this matrix multiplication, pixels at the arm coordinates listen exclusively to \"Guns\", while crown pixels heed \"Cowboy hat\", ensuring crisp anatomical segregation!",
+        sec3_lab_head: "Experiment 3: Token Spotlight Heatmap Inspector",
+        sec4_title: "The Steering Equation: Classifier-Free Guidance (CFG)",
+        sec4_sub: "The mathematics of dial $w$: Enforcing prompt fidelity versus natural noise drift.",
+        sec4_p1: "Without an active guidance force, diffusion trajectories drift toward bland, generic imagery resembling the average center of training datasets.",
+        sec4_p2: "To compel the network to sculpt your eccentric specifications, researchers derived the CFG steering equation:",
+        sec4_p3: "At $w < 3$, prompt adherence fails. At optimal $w = 7.5$, the 4-armed rock gunslinger crystallizes crisply. At $w > 18$, the vector overshoots, burning contrast and fracturing borders!",
+        sec4_lab_head: "Experiment 4: Real-time CFG Scale Dial",
+        sec5_title: "Deep Dive: The Repulsive Mathematics Of Negative Prompting",
+        sec5_sub: "Vector subtraction mechanics: Shattering the 2-armed attractor well to unlock 4-armed mutants.",
+        sec5_h1: "Why Does The Model Naturally Bias Toward 2 Arms?",
+        sec5_p1: "Out of 5 billion images, 99.999% of human figures feature 2 arms. Consequently, an immense \"Attractor Well\" exists around human coordinates pulling samples toward 2 arms.",
+        sec5_p2: "When using only positive prompts: \"4 arms\", positive pull alone can fail to escape this basin. That is where Negative Prompting exerts its decisive repulsive force:",
+        sec5_p3: "Through this vector subtraction, noise particles are violently repelled from the \"2-armed comfort zone\", compelled to settle into the exotic 4-armed mutant manifold!",
+        sec5_lab_head: "Experiment 5: Negative Prompt Force Field Simulation",
+        sec6_title: "Comprehensive Examination: 15 Questions Across Bloom's Taxonomy",
+        sec6_sub: "Covering 6 cognitive tiers: Remembering • Understanding • Applying • Analyzing • Evaluating • Creating."
+      }
+    };
+
+    const bloomQuizDatabase = [
+      // 1. NHẬN BIẾT (REMEMBERING) - 3 CÂU
+      {
+        id: 1,
+        tier: "remember",
+        tierLabel_vi: "1. Nhận Biết",
+        tierLabel_en: "1. Remembering",
+        q_vi: "Trong không gian biểu diễn (Latent Space) của CLIP, một từ ngữ hoặc cụm từ được biểu diễn dưới dạng toán học nào?",
+        q_en: "In the CLIP latent representation space, how is a word or phrase mathematically represented?",
+        opts_vi: [
+          "Một bức ảnh bitmap kích thước 64x64",
+          "Một vector tọa độ số thực nhiều chiều (ví dụ 768 chiều)",
+          "Một chuỗi ký tự ASCII đơn giản",
+          "Một ma trận nhị phân chỉ gồm các số 0 và 1"
+        ],
+        opts_en: [
+          "A 64x64 bitmap picture",
+          "A multi-dimensional real-valued coordinate vector (e.g., 768 dimensions)",
+          "A raw sequence of ASCII text characters",
+          "A binary matrix containing only 0s and 1s"
+        ],
+        ans: 1,
+        exp_vi: "Chính xác! Mọi từ ngữ đều được Text Encoder chiếu thành một vector đặc trưng trong không gian $\\mathbb{R}^{768}$.",
+        exp_en: "Correct! Every word is projected by the Text Encoder into an embedding vector in $\\mathbb{R}^{768}$."
+      },
+      {
+        id: 2,
+        tier: "remember",
+        tierLabel_vi: "1. Nhận Biết",
+        tierLabel_en: "1. Remembering",
+        q_vi: "Kỹ thuật nào được sử dụng để ép các ý niệm giống nhau ở gần nhau và khác nhau ở xa nhau trong không gian vector?",
+        q_en: "Which training paradigm pulls similar concepts together and pushes dissimilar concepts apart in vector space?",
+        opts_vi: [
+          "Học tăng cường qua phản hồi con người (RLHF)",
+          "Học tương phản (Contrastive Learning / InfoNCE Loss)",
+          "Thuật toán sắp xếp nổi bọt (Bubble Sort)",
+          "Nén ảnh JPEG tiêu chuẩn"
+        ],
+        opts_en: [
+          "Reinforcement Learning from Human Feedback (RLHF)",
+          "Contrastive Learning (InfoNCE Objective)",
+          "Bubble Sort Algorithm",
+          "Standard JPEG compression"
+        ],
+        ans: 1,
+        exp_vi: "Đúng! Học tương phản (Contrastive Learning) tối đa hóa tích vô hướng của cặp tương đồng và cực tiểu hóa cặp không liên quan.",
+        exp_en: "Spot on! Contrastive learning maximizes the inner product of positive pairs while minimizing negative pairs."
+      },
+      {
+        id: 3,
+        tier: "remember",
+        tierLabel_vi: "1. Nhận Biết",
+        tierLabel_en: "1. Remembering",
+        q_vi: "Công thức cơ bản của Classifier-Free Guidance (CFG) khi chưa có negative prompt là gì?",
+        q_en: "What is the standard Classifier-Free Guidance (CFG) vector formula?",
+        opts_vi: [
+          "$\\vec{\\epsilon} = \\vec{\\epsilon}_{\\text{tự do}} + w \\cdot (\\vec{\\epsilon}_{\\text{lệnh}} - \\vec{\\epsilon}_{\\text{tự do}})$",
+          "$\\vec{\\epsilon} = \\vec{\\epsilon}_{\\text{tự do}} \\times \\vec{\\epsilon}_{\\text{lệnh}}$",
+          "$\\vec{\\epsilon} = w \\cdot (\\vec{\\epsilon}_{\\text{lệnh}} + \\vec{\\epsilon}_{\\text{tự do}})$",
+          "$\\vec{\\epsilon} = \\vec{\\epsilon}_{\\text{lệnh}} / w$"
+        ],
+        opts_en: [
+          "$\\vec{\\epsilon} = \\vec{\\epsilon}_{\\text{uncond}} + w \\cdot (\\vec{\\epsilon}_{\\text{cond}} - \\vec{\\epsilon}_{\\text{uncond}})$",
+          "$\\vec{\\epsilon} = \\vec{\\epsilon}_{\\text{uncond}} \\times \\vec{\\epsilon}_{\\text{cond}}$",
+          "$\\vec{\\epsilon} = w \\cdot (\\vec{\\epsilon}_{\\text{cond}} + \\vec{\\epsilon}_{\\text{uncond}})$",
+          "$\\vec{\\epsilon} = \\vec{\\epsilon}_{\\text{cond}} / w$"
+        ],
+        ans: 0,
+        exp_vi: "Chính xác! Đây là phương trình kinh điển của Ho & Salimans (2021) để điều hướng các bước gọt nhiễu.",
+        exp_en: "Correct! The foundational formulation introduced by Ho & Salimans (2021) for guidance extrapolation."
+      },
+
+      // 2. THÔNG HIỂU (UNDERSTANDING) - 3 CÂU
+      {
+        id: 4,
+        tier: "understand",
+        tierLabel_vi: "2. Thông Hiểu",
+        tierLabel_en: "2. Understanding",
+        q_vi: "Vì sao mạng nơ-ron không cần con người đặt tên trục thủ công mà vẫn phân biệt được Trục Sinh Học và Trục Địa Chất?",
+        q_en: "Why does the model not require human labelers to segregate Biological vs Geological axes?",
+        opts_vi: [
+          "Vì các kỹ sư đã lập trình sẵn mã nguồn điều kiện if/else cho từng từ",
+          "Vì trong ngữ liệu tự nhiên, từ sinh học và từ đất đá xuất hiện trong các bối cảnh đối nghịch, thuật toán tối ưu tự động đẩy chúng thành các vector trực giao (vuông góc)",
+          "Vì máy tính tự tra từ điển bách khoa Wikipedia khi chạy",
+          "Vì máy tính có cảm xúc và nhận thức sinh học giống con người"
+        ],
+        opts_en: [
+          "Because engineers hardcoded manual if/else conditionals for every token",
+          "Because natural language contexts for biology vs geology contrast sharply, gradient optimization automatically drives them into mutually orthogonal vectors",
+          "Because the model queries Wikipedia online at inference runtime",
+          "Because digital computers possess biological consciousness"
+        ],
+        ans: 1,
+        exp_vi: "Đúng! Quá trình lan truyền ngược (Backpropagation) ép các đặc trưng không tương quan phải có góc $\\approx 90^\\circ$ để tối thiểu hóa hàm mất mát.",
+        exp_en: "Correct! Backpropagation forces uncorrelated semantic features toward $\\approx 90^\\circ$ orthogonality to minimize the loss."
+      },
+      {
+        id: 5,
+        tier: "understand",
+        tierLabel_vi: "2. Thông Hiểu",
+        tierLabel_en: "2. Understanding",
+        q_vi: "Khi độ tương đồng Cosine giữa hai vector ý niệm $\\cos(\\mathbf{u}, \\mathbf{v}) \\approx 0$, điều này mang ý nghĩa hình học gì?",
+        q_en: "When the Cosine Similarity between two concept vectors $\\cos(\\mathbf{u}, \\mathbf{v}) \\approx 0$, what does this signify geometrically?",
+        opts_vi: [
+          "Hai khái niệm hoàn toàn trùng khít với nhau",
+          "Hai khái niệm vuông góc, độc lập về ngữ nghĩa và có thể kết hợp mà không triệt tiêu nhau",
+          "Mô hình đang bị lỗi tràn số bộ nhớ",
+          "Hai khái niệm hoàn toàn đối nghịch 180 độ"
+        ],
+        opts_en: [
+          "The two concepts are completely identical",
+          "The two concepts are orthogonal, semantically independent, and can blend without mutual interference",
+          "The network has suffered a numerical overflow exception",
+          "The two concepts are diametrically opposed by 180 degrees"
+        ],
+        ans: 1,
+        exp_vi: "Chính xác! $\\cos(\\theta) = 0 \\iff \\theta = 90^\\circ$, nghĩa là hai chiều đặc trưng độc lập.",
+        exp_en: "Spot on! $\\cos(\\theta) = 0 \\iff \\theta = 90^\\circ$, demonstrating orthogonal, independent semantic dimensions."
+      },
+      {
+        id: 6,
+        tier: "understand",
+        tierLabel_vi: "2. Thông Hiểu",
+        tierLabel_en: "2. Understanding",
+        q_vi: "Cơ chế Cross-Attention đóng vai trò gì trong việc giải quyết hiện tượng 'lem màu' (Attribute Bleeding)?",
+        q_en: "What critical role does Cross-Attention fulfill in resolving attribute bleeding?",
+        opts_vi: [
+          "Nó làm tăng độ tương phản của toàn bộ ảnh lên mức tối đa",
+          "Nó tính toán ma trận tương quan giữa pixel và từ ngữ, đóng vai trò như 'đèn pin' chỉ rọi lệnh của từng từ vào đúng vị trí cơ thể tương ứng",
+          "Nó xóa bớt các pixel bị nhiễu hạt",
+          "Nó biến câu lệnh tiếng Anh thành tiếng Việt"
+        ],
+        opts_en: [
+          "It boosts global image contrast to peak saturation",
+          "It computes pixel-to-token correlation matrices, functioning as spotlights restricting word directives exclusively to corresponding anatomical regions",
+          "It deletes noisy background pixels entirely",
+          "It translates English text tokens into Vietnamese"
+        ],
+        ans: 1,
+        exp_vi: "Đúng! $\\text{softmax}(\\mathbf{Q}\\mathbf{K}^T / \\sqrt{d_k})$ giới hạn không gian ảnh hưởng của từng từ khóa.",
+        exp_en: "Correct! The $\\text{softmax}(\\mathbf{Q}\\mathbf{K}^T / \\sqrt{d_k})$ attention map localizes prompt influence strictly in space."
+      },
+
+      // 3. VẬN DỤNG (APPLYING) - 3 CÂU
+      {
+        id: 7,
+        tier: "apply",
+        tierLabel_vi: "3. Vận Dụng",
+        tierLabel_en: "3. Applying",
+        q_vi: "Bạn prompt '4 arms humanoid creature' nhưng AI luôn vẽ ra người 2 tay thông thường. Bạn nên điền gì vào Negative Prompt?",
+        q_en: "You prompted '4 arms humanoid creature' but the AI persistently generates standard 2 arms. What should you enter in the Negative Prompt?",
+        opts_vi: [
+          "\"4 arms, extra arms, monster\"",
+          "\"2 arms, normal anatomy, two arms, regular human body\"",
+          "\"colorful, 4k, masterpiece\"",
+          "Để trống không điền gì"
+        ],
+        opts_en: [
+          "\"4 arms, extra arms, monster\"",
+          "\"2 arms, normal anatomy, two arms, regular human body\"",
+          "\"colorful, 4k, masterpiece\"",
+          "Leave the field completely blank"
+        ],
+        ans: 1,
+        exp_vi: "Chính xác! Đưa '2 arms, regular human' vào Negative sẽ tạo lực đẩy vector xua đuổi hạt nhiễu khỏi hố hút 2 tay.",
+        exp_en: "Correct! Adding '2 arms, regular human' creates a repulsive vector pushing samples out of the 2-arm basin."
+      },
+      {
+        id: 8,
+        tier: "apply",
+        tierLabel_vi: "3. Vận Dụng",
+        tierLabel_en: "3. Applying",
+        q_vi: "Nếu người dùng đặt CFG Scale quá cao ($w = 26.0$), ảnh sinh ra bị viền răng cưa thô ráp và cháy màu. Để khắc phục, thao tác đúng là gì?",
+        q_en: "If a user sets CFG Scale excessively high ($w = 26.0$), generating burnt colors and fringed artifacts, what is the remedy?",
+        opts_vi: [
+          "Tăng tiếp $w$ lên 50.0",
+          "Hạ $w$ về vùng tối ưu từ 6.5 đến 8.5 để véc-tơ không bị phóng đại quá ngưỡng bão hòa",
+          "Xóa hoàn toàn câu lệnh prompt",
+          "Khởi động lại máy tính"
+        ],
+        opts_en: [
+          "Increase $w$ further to 50.0",
+          "Lower $w$ into the optimal range of 6.5 to 8.5 to prevent vector overshooting beyond saturation thresholds",
+          "Delete the positive text prompt entirely",
+          "Restart the local computer hardware"
+        ],
+        ans: 1,
+        exp_vi: "Chuẩn xác! Hạ CFG Scale đưa biên độ véc-tơ về dải phân phối chuẩn của các kênh tiềm ẩn (Latent channels).",
+        exp_en: "Accurate! Reducing CFG scale pulls latent channel activations back into normal distributional variance."
+      },
+      {
+        id: 9,
+        tier: "apply",
+        tierLabel_vi: "3. Vận Dụng",
+        tierLabel_en: "3. Applying",
+        q_vi: "Giả sử bạn muốn biến 'Tượng La Mã bằng đá cẩm thạch' thành 'Tượng bằng đá núi lửa đen có vân dung nham', phép toán đại số vector tương đương là gì?",
+        q_en: "To morph a 'Marble Roman Statue' into 'Black Volcanic Basalt Statue with glowing lava', what is the equivalent vector algebra?",
+        opts_vi: [
+          "$\\vec{v}_{\\text{mới}} = \\vec{v}_{\\text{Tượng La Mã}} - \\vec{v}_{\\text{Đá cẩm thạch trắng}} + \\vec{v}_{\\text{Đá núi lửa dung nham}}$",
+          "$\\vec{v}_{\\text{mới}} = \\vec{v}_{\\text{Tượng La Mã}} \\times 0$",
+          "$\\vec{v}_{\\text{mới}} = \\vec{v}_{\\text{Đá cẩm thạch}} + \\vec{v}_{\\text{Tượng La Mã}}$",
+          "$\\vec{v}_{\\text{mới}} = -\\vec{v}_{\\text{Dung nham}}$"
+        ],
+        opts_en: [
+          "$\\vec{v}_{\\text{new}} = \\vec{v}_{\\text{Roman Statue}} - \\vec{v}_{\\text{White Marble}} + \\vec{v}_{\\text{Volcanic Basalt Lava}}$",
+          "$\\vec{v}_{\\text{new}} = \\vec{v}_{\\text{Roman Statue}} \\times 0$",
+          "$\\vec{v}_{\\text{new}} = \\vec{v}_{\\text{Marble}} + \\vec{v}_{\\text{Roman Statue}}$",
+          "$\\vec{v}_{\\text{new}} = -\\vec{v}_{\\text{Lava}}$"
+        ],
+        ans: 0,
+        exp_vi: "Chính xác! Giống như phép toán kinh điển $\\vec{v}_{\\text{King}} - \\vec{v}_{\\text{Man}} + \\vec{v}_{\\text{Woman}} \\approx \\vec{v}_{\\text{Queen}}$.",
+        exp_en: "Correct! Exactly mirrors the classic embedding vector arithmetic $\\vec{v}_{\\text{King}} - \\vec{v}_{\\text{Man}} + \\vec{v}_{\\text{Woman}} \\approx \\vec{v}_{\\text{Queen}}$."
+      },
+
+      // 4. PHÂN TÍCH (ANALYZING) - 3 CÂU
+      {
+        id: 10,
+        tier: "analyze",
+        tierLabel_vi: "4. Phân Tích",
+        tierLabel_en: "4. Analyzing",
+        q_vi: "Phân tích vì sao không gian biểu diễn ý niệm phải có số chiều lớn ($d=768$) thay vì chỉ cần $d=3$?",
+        q_en: "Analyze why semantic latent spaces require high dimensionality ($d=768$) rather than simply $d=3$?",
+        opts_vi: [
+          "Để file mô hình nặng hơn và khó bị sao chép lậu",
+          "Vì trong không gian 3D chỉ có tối đa 3 vector trực giao cùng lúc; không gian 768D cho phép hàng trăm ý niệm trừu tượng cùng tồn tại vuông góc mà không gây xung đột đè bẹp nhau",
+          "Vì các card đồ họa GPU chỉ tính toán được bội số của 768",
+          "Vì số 768 là số may mắn trong toán học"
+        ],
+        opts_en: [
+          "To inflate the model weight file size and prevent piracy",
+          "Because 3D space permits at most 3 mutually orthogonal axes; a 768D manifold enables hundreds of independent semantic features to coexist orthogonally without collision",
+          "Because modern GPU architectures can only compute exact multiples of 768",
+          "Because 768 is considered a lucky number in numerical mathematics"
+        ],
+        ans: 1,
+        exp_vi: "Đúng! Sức chứa biểu diễn (Representational capacity) tăng theo cấp số mũ với số chiều trực giao.",
+        exp_en: "Correct! The expressive geometric capacity scales exponentially with the count of mutually orthogonal basis dimensions."
+      },
+      {
+        id: 11,
+        tier: "analyze",
+        tierLabel_vi: "4. Phân Tích",
+        tierLabel_en: "4. Analyzing",
+        q_vi: "Phân tích sự khác biệt về mặt toán học giữa 'Prompt rỗng' (Unconditional) và 'Negative Prompt':",
+        q_en: "Analyze the mathematical difference between an Empty Prompt (Unconditional) and an explicit Negative Prompt:",
+        opts_vi: [
+          "Hai khái niệm này hoàn toàn giống hệt nhau về mọi mặt",
+          "Prompt rỗng đại diện cho tâm phân phối trung bình tự nhiên; Negative prompt tạo ra một vector định hướng cụ thể để trừ khử và đẩy lùi khỏi vùng cấm đó",
+          "Negative prompt làm chậm thời gian sinh ảnh gấp 100 lần so với prompt rỗng",
+          "Prompt rỗng luôn tạo ra một bức tranh toàn màu đen"
+        ],
+        opts_en: [
+          "The two concepts are completely identical in every mathematical aspect",
+          "An empty prompt anchors to the dataset's natural marginal prior; a negative prompt creates a dedicated directional vector to actively repel the trajectory away from forbidden manifolds",
+          "A negative prompt decelerates inference latency by a factor of 100x compared to an empty prompt",
+          "An empty prompt always yields a pure pitch-black canvas"
+        ],
+        ans: 1,
+        exp_vi: "Chính xác! $\\vec{\\epsilon}_{\\text{uncond}}$ là kỳ vọng phân phối tự nhiên, còn $\\vec{\\epsilon}_{\\text{neg}}$ là lực đẩy có chủ đích.",
+        exp_en: "Accurate! $\\vec{\\epsilon}_{\\text{uncond}}$ reflects the dataset marginal prior, while $\\vec{\\epsilon}_{\\text{neg}}$ delivers targeted directional repulsion."
+      },
+      {
+        id: 12,
+        tier: "analyze",
+        tierLabel_vi: "4. Phân Tích",
+        tierLabel_en: "4. Analyzing",
+        q_vi: "Hiện tượng 'Attribute Bleeding' (ví dụ: chiếc mũ cao bồi bị dính màu dung nham của ngực đá) xuất phát từ nguyên nhân nào trong ma trận Attention?",
+        q_en: "Attribute bleeding (e.g., a cowboy hat contaminated with chest lava textures) stems from which flaw in the Attention matrix?",
+        opts_vi: [
+          "Do quạt tản nhiệt của máy tính chạy quá chậm",
+          "Do phân phối xác suất Softmax trải quá rộng, khiến các điểm ảnh vùng đầu vẫn nhận trọng số chú ý đáng kể từ token 'Lava' thay vì tập trung sắc nét",
+          "Do mô hình bị thiếu bộ nhớ RAM",
+          "Do màn hình máy tính bị hỏng màu"
+        ],
+        opts_en: [
+          "Due to overheating of the local hardware cooling fan",
+          "Due to an overly diffuse Softmax probability distribution, causing head pixels to retain substantial attention weights from the 'Lava' token rather than sharp localization",
+          "Due to insufficient CPU RAM capacity",
+          "Due to inaccurate display monitor color calibration"
+        ],
+        ans: 1,
+        exp_vi: "Đúng! Khi ma trận Softmax có độ phân tán cao (Entropy cao), các thuộc tính sẽ bị tràn sang các vị trí không mong muốn.",
+        exp_en: "Correct! When the Softmax attention distribution suffers high entropy, semantic attributes bleed into unintended spatial coordinates."
+      },
+
+      // 5 & 6. ĐÁNH GIÁ & VẬN DỤNG CAO (EVALUATING & CREATING) - 3 CÂU
+      {
+        id: 13,
+        tier: "evaluate_create",
+        tierLabel_vi: "5. Đánh Giá & Vận Dụng Cao",
+        tierLabel_en: "5. Evaluating & Creating",
+        q_vi: "Đánh giá chiến lược: Tại sao một câu lệnh prompt quá dài (ví dụ nhồi nhét 150 từ mô tả) lại làm giảm khả năng tạo ra thứ kỳ lạ của AI?",
+        q_en: "Strategy evaluation: Why does an overly verbose prompt (e.g., stuffing 150 tokens) degrade the AI's ability to synthesize eccentric novel concepts?",
+        opts_vi: [
+          "Vì máy tính sẽ tự động xóa bớt các từ sau từ thứ 10",
+          "Vì vector tổng hợp bị trung hòa về vùng trung tâm (Law of Large Numbers) và ma trận Softmax Attention bị chia nhỏ, làm loãng năng lượng của các từ khóa đột biến cốt lõi",
+          "Vì mạng Internet sẽ bị nghẽn đường truyền",
+          "Vì bộ gõ tiếng Việt không tương thích với câu dài"
+        ],
+        opts_en: [
+          "Because the model forcibly deletes all tokens beyond the 10th word",
+          "Because the composite vector regresses toward the dataset centroid (Law of Large Numbers) and Softmax attention entropy diffuses, diluting the gradient of eccentric tokens",
+          "Because local internet bandwidth becomes congested",
+          "Because text tokenizers fail on lengthy paragraphs"
+        ],
+        ans: 1,
+        exp_vi: "Xuất sắc! Hiện tượng pha loãng chú ý (Attention Dilution) khiến các khái niệm đột biến mất đi độ ưu tiên trọng số.",
+        exp_en: "Outstanding! Attention dilution divides the Softmax denominator across too many keys, attenuating the impact of core mutant tokens."
+      },
+      {
+        id: 14,
+        tier: "evaluate_create",
+        tierLabel_vi: "5. Đánh Giá & Vận Dụng Cao",
+        tierLabel_en: "5. Evaluating & Creating",
+        q_vi: "Thiết kế giải pháp: Bạn muốn tạo sinh vật 'Nửa người đá dung nham, nửa robot kim loại gương bóng'. Đâu là cấu hình phối hợp tối ưu nhất?",
+        q_en: "Solution Design: You want to synthesize a 'Half-magma rock, half-mirror-chrome robot'. What is the optimal engineering configuration?",
+        opts_vi: [
+          "Chỉ gõ prompt ngắn 'monster' và đặt CFG = 1.0",
+          "Sử dụng Positive Prompt phân tách rõ hai nửa cơ thể, Negative Prompt trừ khử da thịt người thường ('organic human flesh, smooth skin'), và đặt CFG $w \\approx 7.5 - 8.5$",
+          "Tắt hoàn toàn Negative prompt và tăng CFG lên 30",
+          "Không cần prompt, chỉ cần vẽ một bức tranh chì tải lên"
+        ],
+        opts_en: [
+          "Write only a single prompt 'monster' and set CFG = 1.0",
+          "Use a structured Positive Prompt isolating both anatomical halves, a Negative Prompt repelling standard human tissue ('organic human flesh, smooth skin'), and a balanced CFG $w \\approx 7.5 - 8.5$",
+          "Disable Negative prompting entirely and crank CFG to 30",
+          "Discard text prompts and upload a blank sketch"
+        ],
+        ans: 1,
+        exp_vi: "Chính xác! Phối hợp lực kéo dương, lực đẩy âm và hệ số la bàn cân bằng là chìa khóa vàng cho các thực thể siêu thực.",
+        exp_en: "Correct! Balancing positive attraction, negative repulsion, and calibrated CFG scale is the gold standard for surreal synthesis."
+      },
+      {
+        id: 15,
+        tier: "evaluate_create",
+        tierLabel_vi: "5. Đánh Giá & Vận Dụng Cao",
+        tierLabel_en: "5. Evaluating & Creating",
+        q_vi: "Vận dụng cao: Đề xuất một mô hình toán học tổng quát kết hợp cả Positive Prompt, Negative Prompt và một trọng số điều biến $\\lambda$ để kiểm soát lực đẩy độc lập:",
+        q_en: "Advanced Synthesis: Formulate a generalized vector steering equation decoupling the negative repulsion intensity via an independent parameter $\\lambda$:",
+        opts_vi: [
+          "$\\vec{\\epsilon} = \\vec{\\epsilon}_{\\text{uncond}} + w [ (\\vec{\\epsilon}_{\\text{pos}} - \\vec{\\epsilon}_{\\text{uncond}}) - \\lambda (\\vec{\\epsilon}_{\\text{neg}} - \\vec{\\epsilon}_{\\text{uncond}}) ]$",
+          "$\\vec{\\epsilon} = \\vec{\\epsilon}_{\\text{pos}} \\times \\vec{\\epsilon}_{\\text{neg}} + \\lambda$",
+          "$\\vec{\\epsilon} = (\\vec{\\epsilon}_{\\text{pos}} - \\vec{\\epsilon}_{\\text{neg}}) / w$",
+          "$\\vec{\\epsilon} = \\lambda \\cdot \\vec{\\epsilon}_{\\text{uncond}}$"
+        ],
+        opts_en: [
+          "$\\vec{\\epsilon} = \\vec{\\epsilon}_{\\text{uncond}} + w [ (\\vec{\\epsilon}_{\\text{pos}} - \\vec{\\epsilon}_{\\text{uncond}}) - \\lambda (\\vec{\\epsilon}_{\\text{neg}} - \\vec{\\epsilon}_{\\text{uncond}}) ]$",
+          "$\\vec{\\epsilon} = \\vec{\\epsilon}_{\\text{pos}} \\times \\vec{\\epsilon}_{\\text{neg}} + \\lambda$",
+          "$\\vec{\\epsilon} = (\\vec{\\epsilon}_{\\text{pos}} - \\vec{\\epsilon}_{\\text{neg}}) / w$",
+          "$\\vec{\\epsilon} = \\lambda \\cdot \\vec{\\epsilon}_{\\text{uncond}}$"
+        ],
+        ans: 0,
+        exp_vi: "Hoàn toàn chính xác! Phương trình này cho phép tinh chỉnh độc lập lực kéo mong muốn và lực bài xích vùng cấm.",
+        exp_en: "Completely correct! This equation decouples positive goal-seeking from negative constraint-satisfaction repulsion."
+      }
+    ];
+
+    function setLanguage(lang) {
+      appState.lang = lang;
+      
+      const btnVi = document.getElementById('btn-lang-vi');
+      const btnEn = document.getElementById('btn-lang-en');
+      if (lang === 'vi') {
+        btnVi.className = "px-2.5 py-0.5 border border-stone-900 bg-stone-900 text-stone-100 font-bold text-xs transition";
+        btnEn.className = "px-2.5 py-0.5 border border-stone-900 bg-stone-200 text-stone-900 font-bold hover:bg-stone-300 text-xs transition";
+      } else {
+        btnEn.className = "px-2.5 py-0.5 border border-stone-900 bg-stone-900 text-stone-100 font-bold text-xs transition";
+        btnVi.className = "px-2.5 py-0.5 border border-stone-900 bg-stone-200 text-stone-900 font-bold hover:bg-stone-300 text-xs transition";
+      }
+
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (textDict[lang] && textDict[lang][key]) {
+          el.innerHTML = textDict[lang][key];
+        }
+      });
+
+      renderAllSimulations();
+      renderBloomQuiz();
+      renderMathKaTeX();
+    }
+
+    function scrollToEl(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function renderMathKaTeX() {
+      if (window.renderMathInElement) {
+        window.renderMathInElement(document.body, {
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '\\[', right: '\\]', display: true }
+          ],
+          throwOnError: false
+        });
+      }
+    }
+
+    const contrastiveCanvas = document.getElementById('contrastiveCanvas');
+    const cCtx = contrastiveCanvas ? contrastiveCanvas.getContext('2d') : null;
+
+    // Các điểm dữ liệu ý niệm: Sinh học (xanh), Đất đá / Cơ khí (cam), Hỗn hợp (tím)
+    let contrastivePoints = [];
+
+    function initContrastivePoints() {
+      contrastivePoints = [];
+      const w = contrastiveCanvas.width;
+      const h = contrastiveCanvas.height;
+      const cx = w / 2;
+      const cy = h / 2;
+
+      // 15 điểm Sinh học (Người, tay, chân, mặt, da)
+      for (let i = 0; i < 14; i++) {
+        contrastivePoints.push({
+          x: cx + (Math.random() - 0.5) * 80,
+          y: cy + (Math.random() - 0.5) * 80,
+          targetX: w - 80 + (Math.random() - 0.5) * 50,
+          targetY: cy + (Math.random() - 0.5) * 40,
+          type: 'bio',
+          color: '#38bdf8',
+          label: i === 0 ? 'Dáng người' : (i === 1 ? 'Khớp tay' : '')
+        });
+      }
+
+      // 14 điểm Địa chất / Cơ khí (Đá bazan, súng sắt, khối vuông)
+      for (let i = 0; i < 14; i++) {
+        contrastivePoints.push({
+          x: cx + (Math.random() - 0.5) * 80,
+          y: cy + (Math.random() - 0.5) * 80,
+          targetX: cx + (Math.random() - 0.5) * 40,
+          targetY: 45 + (Math.random() - 0.5) * 35,
+          type: 'geo',
+          color: '#fb923c',
+          label: i === 0 ? 'Đá thiên thạch' : (i === 1 ? 'Khối cơ khí' : '')
+        });
+      }
+    }
+
+    function renderContrastiveCanvas() {
+      if (!cCtx) return;
+      const w = contrastiveCanvas.width;
+      const h = contrastiveCanvas.height;
+      cCtx.fillStyle = '#0a0a0c';
+      cCtx.fillRect(0, 0, w, h);
+
+      // Trục tọa độ trung tâm
+      const cx = w / 2;
+      const cy = h / 2;
+
+      cCtx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+      cCtx.lineWidth = 1.5;
+      cCtx.beginPath();
+      cCtx.moveTo(40, cy); cCtx.lineTo(w - 30, cy);
+      cCtx.moveTo(cx, h - 30); cCtx.lineTo(cx, 30);
+      cCtx.stroke();
+
+      cCtx.fillStyle = '#94a3b8';
+      cCtx.font = '10px Roboto Mono';
+      cCtx.fillText("→ Trục Sinh Học (Tự Động Sinh)", w - 180, cy - 8);
+      cCtx.fillText("↑ Trục Địa Chất & Cơ Khí (Tự Động Sinh)", cx + 10, 30);
+
+      // Vẽ các đường lực hút/đẩy mờ mờ
+      if (appState.contrastiveRunning) {
+        cCtx.strokeStyle = 'rgba(244, 63, 94, 0.2)';
+        cCtx.lineWidth = 1;
+        contrastivePoints.forEach((p, idx) => {
+          if (idx % 4 === 0) {
+            cCtx.beginPath();
+            cCtx.moveTo(cx, cy);
+            cCtx.lineTo(p.x, p.y);
+            cCtx.stroke();
+          }
+        });
+      }
+
+      // Vẽ các điểm
+      contrastivePoints.forEach(p => {
+        cCtx.fillStyle = p.color;
+        cCtx.beginPath();
+        cCtx.arc(p.x, p.y, 4.5, 0, Math.PI * 2);
+        cCtx.fill();
+
+        if (p.label) {
+          cCtx.fillStyle = '#f8fafc';
+          cCtx.font = '9px Roboto Mono';
+          cCtx.fillText(p.label, p.x + 6, p.y - 4);
+        }
+      });
+    }
+
+    function startContrastiveSim() {
+      if (appState.contrastiveRunning) return;
+      appState.contrastiveRunning = true;
+      const btn = document.getElementById('btn-run-contrastive');
+      if (btn) btn.innerText = "Đang Tối Ưu Hóa InfoNCE...";
+
+      let step = 0;
+      clearInterval(appState.contrastiveTimer);
+      appState.contrastiveTimer = setInterval(() => {
+        step++;
+        contrastivePoints.forEach(p => {
+          // Kéo dần về đích theo gradient descent
+          p.x += (p.targetX - p.x) * 0.08;
+          p.y += (p.targetY - p.y) * 0.08;
+        });
+
+        renderContrastiveCanvas();
+
+        const tag = document.getElementById('contrastive-epoch-tag');
+        if (tag) tag.innerText = `Vòng Lặp: Epoch ${step * 20}`;
+
+        if (step >= 40) {
+          clearInterval(appState.contrastiveTimer);
+          appState.contrastiveRunning = false;
+          if (btn) btn.innerText = "✓ Hoàn Tất Phân Trực Giao";
+          const expl = document.getElementById('contrastive-expl-box');
+          if (expl) {
+            expl.innerHTML = "<strong>Kết quả hoàn tất:</strong> Các đặc trưng Sinh học và Đất đá đã hoàn toàn vuông góc 90 độ! Không gian tự phân tách thành công mà không cần ai dán nhãn thủ công.";
+          }
+        }
+      }, 50);
+    }
+
+    function resetContrastiveSim() {
+      clearInterval(appState.contrastiveTimer);
+      appState.contrastiveRunning = false;
+      const btn = document.getElementById('btn-run-contrastive');
+      if (btn) btn.innerText = "▶ Chạy Quá Trình Huấn Luyện";
+      const tag = document.getElementById('contrastive-epoch-tag');
+      if (tag) tag.innerText = "Vòng Lặp: Khởi Tạo";
+      initContrastivePoints();
+      renderContrastiveCanvas();
+    }
+
+    const multiVecCanvas = document.getElementById('multiVectorCanvas');
+    const mvCtx = multiVecCanvas ? multiVecCanvas.getContext('2d') : null;
+
+    function updateMultiVectorMap() {
+      appState.vectors.human = document.getElementById('chk-v-human').checked;
+      appState.vectors.stone = document.getElementById('chk-v-stone').checked;
+      appState.vectors.arms = document.getElementById('chk-v-arms').checked;
+      appState.vectors.mount = document.getElementById('chk-v-mount').checked;
+      renderMultiVectorCanvas();
+    }
+
+    function renderMultiVectorCanvas() {
+      if (!mvCtx) return;
+      const w = multiVecCanvas.width;
+      const h = multiVecCanvas.height;
+
+      mvCtx.fillStyle = '#0a0a0c';
+      mvCtx.fillRect(0, 0, w, h);
+
+      // Lưới tọa độ
+      mvCtx.strokeStyle = 'rgba(255, 255, 255, 0.07)';
+      mvCtx.lineWidth = 1;
+      for (let x = 0; x < w; x += 30) {
+        mvCtx.beginPath(); mvCtx.moveTo(x, 0); mvCtx.lineTo(x, h); mvCtx.stroke();
+      }
+      for (let y = 0; y < h; y += 30) {
+        mvCtx.beginPath(); mvCtx.moveTo(0, y); mvCtx.lineTo(w, y); mvCtx.stroke();
+      }
+
+      const ox = 70;
+      const oy = h - 45;
+
+      // Trục tọa độ
+      mvCtx.strokeStyle = '#64748b';
+      mvCtx.lineWidth = 2;
+      mvCtx.beginPath();
+      mvCtx.moveTo(ox, oy); mvCtx.lineTo(w - 20, oy);
+      mvCtx.moveTo(ox, oy); mvCtx.lineTo(ox, 20);
+      mvCtx.stroke();
+
+      let cx = ox;
+      let cy = oy;
+
+      const drawArrow = (fx, fy, tx, ty, col, lbl) => {
+        mvCtx.strokeStyle = col;
+        mvCtx.lineWidth = 2.5;
+        mvCtx.beginPath();
+        mvCtx.moveTo(fx, fy); mvCtx.lineTo(tx, ty);
+        mvCtx.stroke();
+
+        const ang = Math.atan2(ty - fy, tx - fx);
+        mvCtx.fillStyle = col;
+        mvCtx.beginPath();
+        mvCtx.moveTo(tx, ty);
+        mvCtx.lineTo(tx - 8 * Math.cos(ang - Math.PI / 6), ty - 8 * Math.sin(ang - Math.PI / 6));
+        mvCtx.lineTo(tx - 8 * Math.cos(ang + Math.PI / 6), ty - 8 * Math.sin(ang + Math.PI / 6));
+        mvCtx.fill();
+
+        mvCtx.fillStyle = col;
+        mvCtx.font = '10px Roboto Mono';
+        mvCtx.fillText(lbl, (fx + tx) / 2 + 6, (fy + ty) / 2 - 4);
+      };
+
+      if (appState.vectors.human) {
+        const nx = cx + 85; const ny = cy - 20;
+        drawArrow(cx, cy, nx, ny, '#38bdf8', "+v(Người)");
+        cx = nx; cy = ny;
+      }
+      if (appState.vectors.stone) {
+        const nx = cx + 45; const ny = cy - 55;
+        drawArrow(cx, cy, nx, ny, '#fb923c', "+v(Đá Núi Lửa)");
+        cx = nx; cy = ny;
+      }
+      if (appState.vectors.arms) {
+        const nx = cx + 80; const ny = cy - 18;
+        drawArrow(cx, cy, nx, ny, '#4ade80', "+2v(Khớp Tay)");
+        cx = nx; cy = ny;
+      }
+      if (appState.vectors.mount) {
+        const nx = cx + 40; const ny = cy - 40;
+        drawArrow(cx, cy, nx, ny, '#c084fc', "+v(Khối Vuông)");
+        cx = nx; cy = ny;
+      }
+
+      // Điểm hội tụ đích đến
+      mvCtx.fillStyle = '#ef4444';
+      mvCtx.beginPath();
+      mvCtx.arc(cx, cy, 6, 0, Math.PI * 2);
+      mvCtx.fill();
+
+      mvCtx.strokeStyle = 'rgba(239, 68, 68, 0.4)';
+      mvCtx.lineWidth = 5;
+      mvCtx.beginPath();
+      mvCtx.arc(cx, cy, 13, 0, Math.PI * 2);
+      mvCtx.stroke();
+
+      mvCtx.fillStyle = '#fef08a';
+      mvCtx.font = 'bold 11px Roboto Mono';
+      mvCtx.fillText("🎯 Tọa độ đích v(cuối)", cx - 50, cy - 16);
+
+      const tag = document.getElementById('vec-target-coords');
+      if (tag) tag.innerText = `Đích: [X:${cx - ox}, Y:${oy - cy}]`;
+    }
+
+    const attnCanvas = document.getElementById('attnHeatmapCanvas');
+    const atCtx = attnCanvas ? attnCanvas.getContext('2d') : null;
+
+    function selectAttnToken(tok) {
+      appState.activeToken = tok;
+      ['head', 'arms', 'chest', 'cube'].forEach(t => {
+        const btn = document.getElementById(`btn-at-${t}`);
+        if (btn) {
+          if (t === tok) {
+            btn.className = "px-2.5 py-1.5 border border-stone-800 bg-amber-900 text-stone-100 font-bold";
+          } else {
+            btn.className = "px-2.5 py-1.5 border border-stone-800 bg-stone-100 hover:bg-stone-300 font-bold";
+          }
+        }
+      });
+      const badge = document.getElementById('active-attn-badge');
+      const names = {
+        head: "[2 Đầu & Mũ Cao Bồi]",
+        arms: "[4 Cánh Tay & Súng]",
+        chest: "[Ngực Đá Dung Nham]",
+        cube: "[Khối Đá Vuông 4 Chân]"
+      };
+      if (badge) badge.innerText = `Đang soi: ${names[tok]}`;
+      renderAttnCanvas();
+    }
+
+    function renderAttnCanvas() {
+      if (!atCtx) return;
+      const w = attnCanvas.width;
+      const h = attnCanvas.height;
+      const tok = appState.activeToken;
+
+      atCtx.fillStyle = '#0f172a';
+      atCtx.fillRect(0, 0, w, h);
+
+      const cx = w / 2;
+      const cy = 110;
+
+      // Bóng mờ nhân vật
+      atCtx.fillStyle = '#1e293b';
+      atCtx.fillRect(cx - 25, cy - 25, 50, 60); // Ngực
+      atCtx.beginPath();
+      atCtx.arc(cx - 15, cy - 40, 12, 0, Math.PI * 2);
+      atCtx.arc(cx + 15, cy - 40, 12, 0, Math.PI * 2);
+      atCtx.rect(cx - 40, cy + 35, 80, 45); // Khối vuông
+      atCtx.fill();
+
+      // Cánh tay mờ
+      atCtx.strokeStyle = '#1e293b';
+      atCtx.lineWidth = 10;
+      atCtx.beginPath();
+      atCtx.moveTo(cx - 20, cy - 20); atCtx.lineTo(cx - 70, cy - 35);
+      atCtx.moveTo(cx + 20, cy - 20); atCtx.lineTo(cx + 70, cy - 35);
+      atCtx.moveTo(cx - 20, cy); atCtx.lineTo(cx - 65, cy);
+      atCtx.moveTo(cx + 20, cy); atCtx.lineTo(cx + 65, cy);
+      atCtx.stroke();
+
+      const drawHeatGlow = (gx, gy, radius, colorInner) => {
+        const grad = atCtx.createRadialGradient(gx, gy, 5, gx, gy, radius);
+        grad.addColorStop(0, colorInner);
+        grad.addColorStop(0.5, 'rgba(234, 88, 12, 0.4)');
+        grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        atCtx.fillStyle = grad;
+        atCtx.beginPath();
+        atCtx.arc(gx, gy, radius, 0, Math.PI * 2);
+        atCtx.fill();
+      };
+
+      if (tok === 'head') {
+        drawHeatGlow(cx - 15, cy - 42, 35, '#fde047');
+        drawHeatGlow(cx + 15, cy - 42, 35, '#fde047');
+        atCtx.fillStyle = '#fef08a';
+        atCtx.fillRect(cx - 32, cy - 52, 64, 8);
+      } else if (tok === 'arms') {
+        drawHeatGlow(cx - 65, cy - 35, 32, '#f97316');
+        drawHeatGlow(cx + 65, cy - 35, 32, '#f97316');
+        drawHeatGlow(cx - 60, cy, 28, '#f97316');
+        drawHeatGlow(cx + 60, cy, 28, '#f97316');
+        atCtx.fillStyle = '#ffedd5';
+        atCtx.fillRect(cx - 88, cy - 38, 25, 6);
+        atCtx.fillRect(cx + 63, cy - 38, 25, 6);
+      } else if (tok === 'chest') {
+        drawHeatGlow(cx, cy + 5, 45, '#ea580c');
+        atCtx.strokeStyle = '#fed7aa';
+        atCtx.lineWidth = 3;
+        atCtx.beginPath();
+        atCtx.moveTo(cx - 10, cy - 15); atCtx.lineTo(cx + 8, cy + 5); atCtx.lineTo(cx - 5, cy + 25);
+        atCtx.stroke();
+      } else if (tok === 'cube') {
+        drawHeatGlow(cx, cy + 55, 60, '#fbbf24');
+        atCtx.strokeStyle = '#fef08a';
+        atCtx.lineWidth = 4;
+        atCtx.beginPath();
+        atCtx.moveTo(cx - 40, cy + 50); atCtx.lineTo(cx - 80, cy + 95);
+        atCtx.moveTo(cx + 40, cy + 50); atCtx.lineTo(cx + 80, cy + 95);
+        atCtx.stroke();
+      }
+    }
+
+    const cfgCanvas = document.getElementById('cfgVisualCanvas');
+    const cfgCtx = cfgCanvas ? cfgCanvas.getContext('2d') : null;
+    const cfgSlider = document.getElementById('slider-cfg-scale');
+
+    if (cfgSlider) {
+      cfgSlider.addEventListener('input', (e) => {
+        appState.cfgScale = parseFloat(e.target.value) / 10;
+        renderCfgDial();
+      });
+    }
+
+    function renderCfgDial() {
+      if (!cfgCtx) return;
+      const w = cfgCanvas.width;
+      const h = cfgCanvas.height;
+      const s = appState.cfgScale;
+
+      const tag = document.getElementById('cfg-metric-tag');
+      const stat = document.getElementById('cfg-status-text');
+      const box = document.getElementById('cfg-explanation-box2');
+      if (tag) tag.innerText = `w = ${s.toFixed(1)}`;
+
+      if (s < 3.0) {
+        if (stat) stat.innerText = "Yếu (Lờ câu lệnh)";
+        if (box) box.innerText = "Tại w < 3, chiếc la bàn quá yếu. AI hầu như không đoái hoài gì đến câu lệnh 4 tay.";
+      } else if (s <= 11.0) {
+        if (stat) stat.innerText = "Chuẩn xác tối ưu";
+        if (box) box.innerText = "Ở w = 7.5, độ dài véc-tơ hiệu số vừa đủ để ép các hạt nhiễu sắp xếp thành 4 cánh tay độc lập sắc nét.";
+      } else {
+        if (stat) stat.innerText = "Cháy tương phản";
+        if (box) box.innerText = "Tại w > 12, lực kéo bị phóng đại thái quá, viền ảnh bị xé rách và màu dung nham cháy đỏ rực.";
+      }
+
+      cfgCtx.fillStyle = '#0b0f19';
+      cfgCtx.fillRect(0, 0, w, h);
+
+      // Vẽ la bàn vector bên trái
+      const vx = 90; const vy = 110;
+      cfgCtx.strokeStyle = '#475569';
+      cfgCtx.lineWidth = 1;
+      cfgCtx.beginPath();
+      cfgCtx.arc(vx, vy, 45, 0, Math.PI * 2);
+      cfgCtx.stroke();
+
+      // Vector tự do
+      cfgCtx.strokeStyle = '#94a3b8';
+      cfgCtx.lineWidth = 2;
+      cfgCtx.beginPath();
+      cfgCtx.moveTo(vx, vy); cfgCtx.lineTo(vx + 25, vy - 10);
+      cfgCtx.stroke();
+
+      // Vector kéo lệnh
+      const pullLen = Math.min(80, 20 + s * 2.8);
+      cfgCtx.strokeStyle = s > 12 ? '#ef4444' : '#f97316';
+      cfgCtx.lineWidth = 3;
+      cfgCtx.beginPath();
+      cfgCtx.moveTo(vx, vy);
+      cfgCtx.lineTo(vx + pullLen * 0.85, vy - pullLen * 0.5);
+      cfgCtx.stroke();
+
+      // Minh họa nhân vật bên phải
+      const px = 280; const py = 110;
+      const isBurned = s > 11.0;
+      cfgCtx.fillStyle = '#1e293b';
+      cfgCtx.fillRect(px - 60, py - 65, 130, 130);
+
+      if (s < 3.0) {
+        cfgCtx.fillStyle = 'rgba(148, 163, 184, 0.4)';
+        cfgCtx.beginPath(); cfgCtx.arc(px, py, 30, 0, Math.PI * 2); cfgCtx.fill();
+        cfgCtx.fillStyle = '#94a3b8';
+        cfgCtx.font = '10px Roboto Mono';
+        cfgCtx.fillText("Mờ mịt, thiếu tay", px - 45, py + 50);
+      } else {
+        cfgCtx.fillStyle = isBurned ? '#ef4444' : '#d97706';
+        cfgCtx.fillRect(px - 15, py - 20, 30, 45); // Ngực
+
+        // 2 Đầu
+        cfgCtx.beginPath();
+        cfgCtx.arc(px - 10, py - 32, 8, 0, Math.PI * 2);
+        cfgCtx.arc(px + 10, py - 32, 8, 0, Math.PI * 2);
+        cfgCtx.fill();
+
+        // 4 Tay
+        cfgCtx.strokeStyle = isBurned ? '#f87171' : '#f59e0b';
+        cfgCtx.lineWidth = isBurned ? 5 : 3;
+        cfgCtx.beginPath();
+        cfgCtx.moveTo(px - 15, py - 15); cfgCtx.lineTo(px - 45, py - 25);
+        cfgCtx.moveTo(px + 15, py - 15); cfgCtx.lineTo(px + 45, py - 25);
+        cfgCtx.moveTo(px - 15, py); cfgCtx.lineTo(px - 40, py);
+        cfgCtx.moveTo(px + 15, py); cfgCtx.lineTo(px + 40, py);
+        cfgCtx.stroke();
+
+        if (isBurned) {
+          cfgCtx.fillStyle = '#fca5a5';
+          cfgCtx.font = 'bold 10px Roboto Mono';
+          cfgCtx.fillText("⚠️ CHÁY TƯƠNG PHẢN", px - 55, py - 48);
+        } else {
+          cfgCtx.fillStyle = '#4ade80';
+          cfgCtx.font = 'bold 10px Roboto Mono';
+          cfgCtx.fillText("✓ BÁM LỆNH SẮC NÉT", px - 50, py - 48);
+        }
+      }
+    }
+
+    const negCanvas = document.getElementById('negativeFieldCanvas');
+    const nCtx = negCanvas ? negCanvas.getContext('2d') : null;
+
+    function toggleNegativePrompt() {
+      const chk = document.getElementById('chk-enable-neg');
+      appState.enableNegative = chk.checked;
+      const tag = document.getElementById('neg-force-tag');
+      const pill = document.getElementById('neg-status-pill');
+      if (appState.enableNegative) {
+        if (tag) tag.innerText = "Lực Đẩy Âm: Đang Bật";
+        if (pill) {
+          pill.className = "px-2 py-0.5 bg-red-200 text-red-900 font-bold border border-red-700";
+          pill.innerText = "Đã Phá Hố Hút";
+        }
+      } else {
+        if (tag) tag.innerText = "Lực Đẩy Âm: Đã Tắt (Bị Hút 2 Tay)";
+        if (pill) {
+          pill.className = "px-2 py-0.5 bg-stone-300 text-stone-700 font-bold border border-stone-600";
+          pill.innerText = "Rơi Vào Hố Hút 2 Tay";
+        }
+      }
+      renderNegativeFieldCanvas();
+    }
+
+    function updateNegativeForce(val) {
+      appState.negativeForce = parseFloat(val) / 100;
+      const disp = document.getElementById('neg-power-val');
+      if (disp) disp.innerText = `${appState.negativeForce.toFixed(1)}x`;
+      renderNegativeFieldCanvas();
+    }
+
+    function renderNegativeFieldCanvas() {
+      if (!nCtx) return;
+      const w = negCanvas.width;
+      const h = negCanvas.height;
+
+      nCtx.fillStyle = '#0a0908';
+      nCtx.fillRect(0, 0, w, h);
+
+      // Tọa độ Hố hút "Người 2 tay thông thường" (Trái)
+      const hx = 120;
+      const hy = h / 2 + 10;
+
+      // Tọa độ Vùng đích "Sinh vật 4 tay kỳ dị" (Phải)
+      const tx = w - 110;
+      const ty = h / 2 - 30;
+
+      // 1. Vẽ Hố Hút 2 Tay (Attractor Well)
+      const gradWell = nCtx.createRadialGradient(hx, hy, 10, hx, hy, 85);
+      gradWell.addColorStop(0, 'rgba(56, 189, 248, 0.4)');
+      gradWell.addColorStop(0.7, 'rgba(56, 189, 248, 0.08)');
+      gradWell.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      nCtx.fillStyle = gradWell;
+      nCtx.beginPath();
+      nCtx.arc(hx, hy, 85, 0, Math.PI * 2);
+      nCtx.fill();
+
+      nCtx.fillStyle = '#38bdf8';
+      nCtx.font = 'bold 10px Roboto Mono';
+      nCtx.fillText("Hố Hút: Người 2 Tay", hx - 55, hy + 50);
+
+      // 2. Vẽ Vùng Đích 4 Tay
+      const gradTarget = nCtx.createRadialGradient(tx, ty, 10, tx, ty, 75);
+      gradTarget.addColorStop(0, 'rgba(74, 222, 128, 0.45)');
+      gradTarget.addColorStop(0.8, 'rgba(74, 222, 128, 0.08)');
+      gradTarget.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      nCtx.fillStyle = gradTarget;
+      nCtx.beginPath();
+      nCtx.arc(tx, ty, 75, 0, Math.PI * 2);
+      nCtx.fill();
+
+      nCtx.fillStyle = '#4ade80';
+      nCtx.font = 'bold 10px Roboto Mono';
+      nCtx.fillText("Đích Đến: Sinh Vật 4 Tay", tx - 70, ty + 45);
+
+      // 3. Vector Lực Đẩy Negative (Nếu bật)
+      if (appState.enableNegative && appState.negativeForce > 0) {
+        const forceLen = 60 * appState.negativeForce;
+        nCtx.strokeStyle = '#ef4444';
+        nCtx.lineWidth = 3;
+        nCtx.beginPath();
+        nCtx.moveTo(hx, hy);
+        nCtx.lineTo(hx + forceLen, hy - 35 * appState.negativeForce);
+        nCtx.stroke();
+
+        // Mũi tên đỏ lực đẩy
+        nCtx.fillStyle = '#ef4444';
+        nCtx.fillText(`Lực Đẩy Âm (-v_neg)`, hx + 10, hy - 25);
+      }
+
+      // 4. Quỹ đạo hạt nhiễu (Trajectory of Denoising Particle)
+      nCtx.lineWidth = 2.5;
+      nCtx.beginPath();
+      nCtx.moveTo(60, 40); // Điểm khởi đầu của nhiễu
+
+      if (!appState.enableNegative || appState.negativeForce < 0.3) {
+        // Bị rơi thẳng vào hố hút 2 tay
+        nCtx.strokeStyle = '#38bdf8';
+        nCtx.quadraticCurveTo(80, hy - 40, hx, hy);
+        nCtx.stroke();
+
+        // Hạt dừng lại ở hố 2 tay
+        nCtx.fillStyle = '#38bdf8';
+        nCtx.beginPath(); nCtx.arc(hx, hy, 7, 0, Math.PI * 2); nCtx.fill();
+        nCtx.fillStyle = '#fef08a';
+        nCtx.fillText("❌ Rơi Vào Dáng 2 Tay", hx - 55, hy - 15);
+      } else {
+        // Lực đẩy âm bẻ cong quỹ đạo phóng sang vùng 4 tay
+        nCtx.strokeStyle = '#4ade80';
+        nCtx.bezierCurveTo(hx + 30, hy - 70, tx - 60, ty - 50, tx, ty);
+        nCtx.stroke();
+
+        // Hạt hạ cánh an toàn ở vùng 4 tay
+        nCtx.fillStyle = '#4ade80';
+        nCtx.beginPath(); nCtx.arc(tx, ty, 7, 0, Math.PI * 2); nCtx.fill();
+        nCtx.fillStyle = '#fef08a';
+        nCtx.fillText("🎯 Thoát Hố Thành Công (Đủ 4 Tay)", tx - 80, ty - 18);
+      }
+    }
+
+    const quizContainer = document.getElementById('bloom-quiz-list');
+
+    function filterBloom(tier) {
+      appState.quizFilter = tier;
+      ['all', 'remember', 'understand', 'apply', 'analyze', 'evaluate_create'].forEach(t => {
+        const btn = document.getElementById(`btn-flt-${t}`);
+        if (btn) {
+          if (t === tier) {
+            btn.className = "px-2 py-1 bg-stone-900 text-stone-100 font-bold border border-stone-900";
+          } else {
+            btn.className = "px-2 py-1 bg-stone-200 hover:bg-stone-300 font-bold border border-stone-700";
+          }
+        }
+      });
+      renderBloomQuiz();
+    }
+
+    function renderBloomQuiz() {
+      if (!quizContainer) return;
+      quizContainer.innerHTML = '';
+
+      const filtered = appState.quizFilter === 'all'
+        ? bloomQuizDatabase
+        : bloomQuizDatabase.filter(q => q.tier === appState.quizFilter);
+
+      filtered.forEach((qItem) => {
+        const card = document.createElement('div');
+        card.className = "p-3.5 bg-stone-100 border border-stone-400 space-y-2.5 transition-all";
+
+        const qTitle = appState.lang === 'vi' ? qItem.q_vi : qItem.q_en;
+        const qTier = appState.lang === 'vi' ? qItem.tierLabel_vi : qItem.tierLabel_en;
+        const opts = appState.lang === 'vi' ? qItem.opts_vi : qItem.opts_en;
+
+        const isAnswered = appState.userAnswers.hasOwnProperty(qItem.id);
+        const chosenIdx = appState.userAnswers[qItem.id];
+
+        card.innerHTML = `
+          <div class="flex flex-wrap justify-between items-center border-b border-stone-300 pb-1.5">
+            <span class="font-bold text-stone-900 text-xs sm:text-sm font-code flex items-center gap-2">
+              <span class="px-1.5 py-0.5 bg-stone-800 text-stone-100 text-[11px]">Câu ${qItem.id}</span>
+              <span>${qTitle}</span>
+            </span>
+            <span class="text-[10px] font-code px-2 py-0.5 bg-amber-200 text-amber-950 font-bold border border-amber-400">${qTier}</span>
+          </div>
+
+          <div class="space-y-1.5 text-xs font-code">
+            ${opts.map((opt, oIdx) => `
+              <label class="flex items-start gap-2 p-2 border border-stone-300 ${isAnswered && chosenIdx === oIdx ? 'bg-amber-100 border-amber-600 font-bold' : 'bg-stone-50 hover:bg-stone-200'} cursor-pointer">
+                <input type="radio" name="bloom-q-${qItem.id}" value="${oIdx}" ${isAnswered && chosenIdx === oIdx ? 'checked' : ''} onchange="handleBloomAnswer(${qItem.id}, ${oIdx})" class="mt-0.5">
+                <span class="text-stone-800 leading-snug">${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+
+          <div id="bloom-feedback-${qItem.id}" class="text-xs font-code font-bold pt-1.5 ${isAnswered ? '' : 'hidden'}">
+            ${isAnswered ? (chosenIdx === qItem.ans 
+              ? `<span class="text-green-800">✓ ${appState.lang === 'vi' ? qItem.exp_vi : qItem.exp_en}</span>` 
+              : `<span class="text-red-800">✗ ${appState.lang === 'vi' ? 'Chưa chuẩn xác. Hãy xem kỹ lại công thức và lý giải hình học!' : 'Incorrect. Re-evaluate the geometrical mechanics!'}</span>`) : ''}
+          </div>
+        `;
+        quizContainer.appendChild(card);
+      });
+
+      renderMathKaTeX();
+    }
+
+    function handleBloomAnswer(qId, oIdx) {
+      appState.userAnswers[qId] = oIdx;
+      
+      // Tính lại điểm
+      let correctCount = 0;
+      bloomQuizDatabase.forEach(q => {
+        if (appState.userAnswers[q.id] === q.ans) correctCount++;
+      });
+      appState.scores = correctCount;
+
+      const answeredCount = Object.keys(appState.userAnswers).length;
+      const prog = document.getElementById('bloom-progress-text');
+      const score = document.getElementById('bloom-score-text');
+      if (prog) prog.innerText = `Tiến độ: ${answeredCount}/15 câu đã làm`;
+      if (score) score.innerText = `Điểm: ${correctCount} / 15`;
+
+      // Cập nhật phản hồi ngay trên thẻ câu hỏi
+      const fb = document.getElementById(`bloom-feedback-${qId}`);
+      const qObj = bloomQuizDatabase.find(x => x.id === qId);
+      if (fb && qObj) {
+        if (oIdx === qObj.ans) {
+          fb.className = "text-xs font-code font-bold pt-1.5 text-green-800";
+          fb.innerHTML = `✓ ${appState.lang === 'vi' ? qObj.exp_vi : qObj.exp_en}`;
+        } else {
+          fb.className = "text-xs font-code font-bold pt-1.5 text-red-800";
+          fb.innerHTML = `✗ ${appState.lang === 'vi' ? 'Chưa chuẩn xác. Hãy xem kỹ lại công thức và lý giải hình học!' : 'Incorrect. Re-evaluate the geometrical mechanics!'}`;
+        }
+        fb.classList.remove('hidden');
+      }
+
+      // Kiểm tra khi hoàn thành đủ 15 câu
+      if (answeredCount === 15) {
+        const sumBox = document.getElementById('bloom-final-summary');
+        if (sumBox) {
+          sumBox.classList.remove('hidden');
+          sumBox.innerHTML = `
+            <div class="border-b-2 border-stone-800 pb-2 mb-2 font-bold text-sm text-stone-900">
+              📊 KẾT QUẢ ĐÁNH GIÁ CHUYÊN MÔN THEO THANG ĐO BLOOM: ${correctCount}/15 ĐIỂM
+            </div>
+            <p class="leading-relaxed text-stone-800">
+              ${correctCount >= 13 
+                ? '<strong>XUẤT SẮC TUYỆT ĐỐI!</strong> Bạn đã đạt cấp độ Đánh giá & Sáng tạo cao nhất. Bạn hoàn toàn nắm vững bản chất toán học từ CLIP Contrastive Learning, Cross-Attention Softmax, La bàn CFG cho đến kỹ thuật Negative Decoupled Steering.'
+                : '<strong>KẾT QUẢ RẤT TỐT!</strong> Bạn đã nắm vững các mức Nhận biết và Vận dụng. Hãy xem lại các câu phân tích về ma trận chú ý Attention để đạt điểm số hoàn hảo!'}
+            </p>
+          `;
+        }
+      }
+
+      renderMathKaTeX();
+    }
+
+    function renderAllSimulations() {
+      initContrastivePoints();
+      renderContrastiveCanvas();
+      renderMultiVectorCanvas();
+      renderAttnCanvas();
+      renderCfgDial();
+      renderNegativeFieldCanvas();
+    }
+
+    /* KHỞI ĐỘNG KHI TẢI TRANG */
+    window.onload = function() {
+      renderAllSimulations();
+      renderBloomQuiz();
+      renderMathKaTeX();
+    };
+  </script>
+</body>
+</html>

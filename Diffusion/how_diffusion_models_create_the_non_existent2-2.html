@@ -1,0 +1,2269 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bản Tin Khoa Học Số 2.2: Kỷ Luật Hình Học, Siêu Cầu Đơn Vị & Chiếc Neo LayerNorm</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Roboto & Roboto Mono chuẩn tiếng Việt 100% -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,700&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- KaTeX CSS & JS hỗ trợ công thức toán học -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+  <style>
+    :root {
+      --paper-cream: #f4ede1;
+      --paper-card: #fbf8f1;
+      --paper-accent: #e5d6be;
+      --ink-dark: #1a1510;
+      --ink-muted: #594d40;
+      --accent-rust: #9e3213;
+      --accent-teal: #105959;
+      --accent-olive: #3b5722;
+      --border-dark: #292119;
+    }
+
+    body {
+      background-color: #17130f;
+      color: var(--ink-dark);
+      font-family: 'Roboto', sans-serif;
+      background-image: 
+        radial-gradient(#2d241c 1px, transparent 1px),
+        radial-gradient(#2d241c 1px, #120e0b 1px);
+      background-size: 26px 26px;
+      background-position: 0 0, 13px 13px;
+    }
+
+    .editorial-sheet {
+      background-color: var(--paper-cream);
+      background-image: 
+        radial-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 0),
+        linear-gradient(to right, rgba(0,0,0,0.015) 1px, transparent 1px);
+      background-size: 16px 16px, 100% 28px;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.85), inset 0 0 140px rgba(155, 125, 90, 0.2);
+    }
+
+    .font-code {
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    .rule-double {
+      border-top: 3px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-dark);
+      height: 6px;
+    }
+
+    .stamp-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      text-transform: uppercase;
+      font-weight: 700;
+      border: 2px dashed var(--accent-rust);
+      color: var(--accent-rust);
+      transform: rotate(-0.5deg);
+    }
+
+    .first-big-letter::first-letter {
+      float: left;
+      font-size: 3.2rem;
+      line-height: 0.85;
+      padding-top: 4px;
+      padding-right: 8px;
+      font-weight: 900;
+      color: var(--accent-rust);
+    }
+
+    .math-box {
+      background-color: #eee3cf;
+      border: 1.5px solid #4a3c2f;
+      box-shadow: 3px 3px 0px #382c21;
+    }
+
+    .analogy-box {
+      background-color: #e4ece5;
+      border-left: 4px solid var(--accent-olive);
+      box-shadow: 2px 2px 0px rgba(0,0,0,0.08);
+    }
+
+    .takeaway-box {
+      background-color: #faebd7;
+      border-left: 4px solid var(--accent-rust);
+    }
+
+    .checkpoint-box {
+      background-color: #f7f1e4;
+      border: 1.5px solid #6b5847;
+      border-left: 5px solid #854d0e;
+    }
+
+    input[type=range] {
+      accent-color: var(--accent-rust);
+    }
+
+    .katex {
+      font-size: 1.05em;
+      color: #1a140e;
+    }
+    .katex-display {
+      margin: 0.5em 0 !important;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 3px 0;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #735d4b;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+
+<body class="p-2 sm:p-4 md:p-6 min-h-screen">
+  <div class="max-w-7xl mx-auto editorial-sheet border-4 border-stone-900 p-4 sm:p-7 md:p-10 transition-all">
+    
+    <!-- MASTHEAD BÁO CHÍ CỔ ĐIỂN 1990S -->
+    <header class="border-b-2 border-stone-800 pb-4 mb-8">
+      <div class="flex flex-wrap justify-between items-center text-xs font-code uppercase tracking-wider text-stone-700 pb-2 mb-3 border-b border-stone-400">
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-stone-950 bg-amber-200 px-2.5 py-0.5 border border-stone-800 shadow-sm">
+            PHẦN 2.2 &bull; GIÁO TRÌNH CHUYỂN TIẾP SƯ PHẠM (SCAFFOLDING MODULE)
+          </span>
+          <span>&bull;</span>
+          <span class="text-stone-800 hidden sm:inline">Dành riêng cho Sinh viên Năm nhất: KHMT, TTNT & KHDL</span>
+        </div>
+        <div class="text-[11px] font-bold text-stone-900 font-code">
+          MÔ-ĐUN: TỪ HÌNH HỌC PHẲNG ĐẾN SIÊU CẦU & LAYERNORM
+        </div>
+      </div>
+
+      <div class="text-center pt-2">
+        <div class="stamp-badge text-xs mb-2">
+          HỌC THUẬT KHÔNG ÁP LỰC &bull; TỪ TRỰC GIÁC ĐỜI THƯỜNG ĐẾN KỶ LUẬT HÌNH HỌC TOÁN HỌC
+        </div>
+        <h1 class="text-2xl sm:text-4xl md:text-5xl font-black uppercase text-stone-950 tracking-tight">
+          Kỷ Luật Hình Học: Quả Cầu Đơn Vị, Chiếc Nón Dị Hướng & Neo Cân Bằng LayerNorm
+        </h1>
+        <p class="text-sm sm:text-base italic text-stone-700 max-w-5xl mx-auto mt-2.5 leading-relaxed">
+          Bước đệm trung gian nối liền thế giới "Vector trực giác 2D" sang "Siêu cầu siêu chiều CLIP". Giải thích tường tận vì sao máy tính không để vector bay tự do vô hạn, bí mật thể tích quả cam 768 chiều, và cách chiếc nút trừ bì nhà bếp giúp mạng nơ-ron không bị nổ tung.
+        </p>
+      </div>
+
+      <div class="rule-double my-4"></div>
+
+      <!-- MỤC LỤC ĐIỀU HƯỚNG NHANH 12 CHƯƠNG + 1 BÀI THI BLOOM -->
+      <nav class="overflow-x-auto custom-scrollbar pb-2">
+        <div class="flex items-center gap-2 font-code text-[11px] font-bold uppercase whitespace-nowrap">
+          <span class="text-amber-950 font-black px-2 py-1 bg-amber-200 border border-amber-800">12 CHƯƠNG CHUYÊN ĐỀ:</span>
+          <button onclick="scrollToEl('c1')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C1: Độ Dài Thất Thường</button>
+          <button onclick="scrollToEl('c2')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C2: Chuẩn L2 Pythagoras</button>
+          <button onclick="scrollToEl('c3')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C3: Bắt Đậu Vỏ Cầu</button>
+          <button onclick="scrollToEl('c4')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C4: Đi Men Vỏ Trái Đất</button>
+          <button onclick="scrollToEl('c5')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C5: Quả Cam 768 Chiều</button>
+          <button onclick="scrollToEl('c6')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C6: Lời Nguyền Vuông Góc</button>
+          <button onclick="scrollToEl('c7')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C7: Chiếc Nón Dị Hướng</button>
+          <button onclick="scrollToEl('c8')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C8: Tìm Tâm Trọng Khối</button>
+          <button onclick="scrollToEl('c9')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C9: Mở Toang 360 Độ</button>
+          <button onclick="scrollToEl('c10')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C10: Chiếc Cân Nhà Bếp</button>
+          <button onclick="scrollToEl('c11')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C11: Mổ Xẻ LayerNorm</button>
+          <button onclick="scrollToEl('c12')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C12: Cứu Nguy Softmax</button>
+          <button onclick="scrollToEl('exam')" class="px-3 py-1 bg-amber-900 text-stone-100 border border-stone-950 shadow font-black">THI TỔNG HỢP (15 CÂU)</button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="space-y-16">
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 1 -->
+      <!-- ========================================================================= -->
+      <section id="c1" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">01</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 1: Mũi Tên Dài - Ngắn Thất Thường: Cạm Bẫy Của Thước Kẻ Thông Thường
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Tại sao độ lớn (Magnitude) của vector ngôn ngữ lại hoàn toàn ngẫu nhiên và dễ đánh lừa máy tính?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter">
+              Khi mới bắt đầu học lập trình AI, chúng ta thường coi vector như những mũi tên có tọa độ $(x_1, x_2, \dots)$. Trong hình học phổ thông, nếu điểm $B$ ở xa điểm $A$, ta dùng thước kẻ thẳng đo độ dài đoạn thẳng $AB$. Nhưng khi bước vào thế giới ngôn ngữ tự nhiên, chiếc thước kẻ này lập tức trở thành một cái bẫy tai hại!
+            </p>
+            <p>
+              Hãy tưởng tượng hai người cùng mô tả một chú mèo:
+            </p>
+            <ul class="list-disc list-inside space-y-1 text-xs sm:text-sm bg-stone-200 p-2.5 border border-stone-400 font-code">
+              <li><strong>Người 1 (kiệm lời):</strong> "Con mèo." (2 từ)</li>
+              <li><strong>Người 2 (hoa mỹ):</strong> "Một chú mèo con lông màu vàng óng ả tuyệt đẹp đang nằm sưởi nắng bên hiên nhà." (16 từ)</li>
+            </ul>
+            <p>
+              Bởi vì mạng nơ-ron Transformer cộng dồn đặc trưng qua từng từ ngữ, câu văn của Người 2 sẽ tích lũy một vector có <strong>độ dài (Magnitude) khổng lồ</strong>, lớn gấp 8 đến 10 lần vector của Người 1. Nếu bạn đo khoảng cách thẳng bằng thước kẻ Euclid, máy tính sẽ kết luận: <em>"Hai câu này cách xa nhau cả cây số, chắc hẳn chúng nói về hai chủ đề hoàn toàn không liên quan!"</em>.
+            </p>
+
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-olive-950">💡 Ví dụ đời thực dễ hiểu:</div>
+              <p>
+                Hãy nghĩ đến hai chiếc xe: một chiếc xe máy chở 1 lá thư tình và một chiếc xe tải chở 100 lá thư tình. Về mặt bản chất hàng hóa, cả hai đều đang "chở thư tình". Nhưng nếu bạn chỉ đem cân chiếc xe lên bàn cân trọng lượng (đo Magnitude), chiếc xe tải nặng gấp 50 lần chiếc xe máy sẽ khiến bạn lầm tưởng nó đang chở sắt thép!
+              </p>
+            </div>
+
+            <div class="takeaway-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-amber-950">📌 Bài học cốt lõi cho sinh viên năm nhất:</div>
+              <p>
+                Trong ngữ nghĩa AI: <strong>Hướng của mũi tên (Direction)</strong> quyết định <em>"Bản chất câu chuyện là gì?"</em>, còn <strong>Độ dài mũi tên (Magnitude)</strong> chỉ là <em>"Độ dài dòng của câu văn"</em>. Muốn so sánh công bằng, việc đầu tiên là phải vô hiệu hóa sự chênh lệch độ dài ngẫu nhiên này!
+              </p>
+            </div>
+          </div>
+
+          <!-- FIGURE 1 INTERACTIVE -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 1: Thí Nghiệm Đánh Lừa Bởi Độ Dài Vector
+              </span>
+              <span id="f1-badge" class="text-[11px] font-code bg-red-900 text-stone-100 px-2 py-0.5">
+                Thước Euclid: Bị Đánh Lừa!
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="f1Canvas" width="460" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="bg-stone-100 p-3 border border-stone-400 space-y-2 text-xs font-code">
+              <div class="flex justify-between items-center">
+                <span>Kéo dài câu văn Người 2 (Tăng số tính từ):</span>
+                <span id="f1-len-txt" class="font-bold text-amber-950">Dài x3.0</span>
+              </div>
+              <input type="range" id="f1-slider" min="10" max="40" value="30" oninput="updateF1(this.value)" class="w-full h-2 cursor-pointer">
+              
+              <div id="f1-metrics" class="text-[11px] text-stone-800 pt-1 space-y-0.5 border-t border-stone-300">
+                <div>&bull; Khoảng cách thước thẳng Euclid $d_E$: <strong class="text-red-700">185 px (Tưởng rất xa nhau!)</strong></div>
+                <div>&bull; Góc lệch ngữ nghĩa $\theta$: <strong class="text-green-700">0.0° (Cùng nói về mèo 100%)</strong></div>
+              </div>
+            </div>
+
+            <div class="p-2 bg-stone-300 border border-stone-500 text-[11px] font-code text-stone-900">
+              <strong>Thao tác:</strong> Kéo thanh trượt để câu văn Người 2 dài ra. Hãy chú ý: Dù thước kẻ Euclid $d_E$ báo khoảng cách tăng vọt, hai mũi tên vẫn chỉ chung một hướng duy nhất!
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT QUIZ 1 -->
+        <div class="checkpoint-box mt-6 p-4 rounded space-y-3">
+          <div class="flex justify-between items-center border-b border-stone-400 pb-1.5 font-code">
+            <span class="font-bold text-xs uppercase text-amber-950">📝 Checkpoint 1.0: Tự Lượng Giá Kiến Thức (5 Câu)</span>
+            <span class="text-[11px] text-stone-600" id="cp1-score">Đã làm: 0/5</span>
+          </div>
+          <div id="cp1-container" class="space-y-3 text-xs"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 2 -->
+      <!-- ========================================================================= -->
+      <section id="c2" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">02</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 2: Định Lý Pythagoras Mở Rộng: Đo Chiều Dài Bằng Chuẩn $L_2$
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Từ tam giác vuông phổ thông đến công thức đo độ dài của một mũi tên 768 chiều.
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter">
+              Ở cấp 2, ai trong chúng ta cũng thuộc lòng định lý Pythagoras: Trong một tam giác vuông có hai cạnh góc vuông là $a$ và $b$, độ dài cạnh huyền $c$ bằng căn bậc hai của tổng bình phương: $c = \sqrt{a^2 + b^2}$.
+            </p>
+            <p>
+              Nếu vector nằm trong không gian 3 chiều $(x, y, z)$, độ dài của nó đơn giản là: $d = \sqrt{x^2 + y^2 + z^2}$. Và điều kỳ diệu là: <strong>Quy luật này đúng cho mọi số chiều không gian!</strong> Khi bạn bước vào không gian 768 chiều của AI, các nhà khoa học gọi chiếc thước đo này là <strong>Chuẩn $L_2$ (L2 Norm hay Euclidean Norm)</strong>, ký hiệu là $\|\mathbf{v}\|_2$:
+            </p>
+
+            <div class="math-box p-4 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Công thức Chuẩn $L_2$ trong không gian $d$ chiều:
+              </div>
+              <div class="py-1 text-center font-bold">
+                $$\|\mathbf{v}\|_2 = \sqrt{\sum_{i=1}^{d} v_i^2} = \sqrt{v_1^2 + v_2^2 + v_3^2 + \dots + v_d^2}$$
+              </div>
+              <div class="text-[11px] text-stone-700 leading-normal">
+                Mỗi con số $v_i$ đóng vai trò như một cạnh góc vuông. Chuẩn $L_2$ gom bình phương của tất cả 768 cạnh lại rồi rút căn bậc hai, trả về cho ta chính xác độ dài vật lý của mũi tên đó!
+              </div>
+            </div>
+
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-olive-950">💡 Ví dụ đời thực dễ hiểu:</div>
+              <p>
+                Tưởng tượng bạn đi tìm kho báu: bạn đi về hướng Đông 3 bước, rẽ sang hướng Bắc 4 bước. Khoảng cách đường chim bay từ vạch xuất phát đến kho báu là $\sqrt{3^2 + 4^2} = 5$ bước. Nếu bạn đào sâu thêm xuống lòng đất 12 bước, khoảng cách không gian 3D là $\sqrt{5^2 + 12^2} = 13$ bước. Trong AI, máy tính chỉ làm đúng thao tác này nhưng trên 768 hướng khác nhau!
+              </p>
+            </div>
+          </div>
+
+          <!-- FIGURE 2 INTERACTIVE -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 2: Máy Tính Pythagoras Đa Chiều Trực Quan
+              </span>
+              <span id="f2-norm-tag" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Chuẩn L2 = 5.00
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="f2Canvas" width="460" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="bg-stone-100 p-3 border border-stone-400 space-y-2 text-xs font-code">
+              <div class="grid grid-cols-3 gap-2">
+                <div>
+                  <span class="text-stone-700">Chiều X (Đông):</span>
+                  <input type="range" id="f2-x" min="-10" max="10" value="3" oninput="updateF2()" class="w-full h-1.5 cursor-pointer">
+                  <span id="f2-x-val" class="font-bold text-stone-900">3.0</span>
+                </div>
+                <div>
+                  <span class="text-stone-700">Chiều Y (Bắc):</span>
+                  <input type="range" id="f2-y" min="-10" max="10" value="4" oninput="updateF2()" class="w-full h-1.5 cursor-pointer">
+                  <span id="f2-y-val" class="font-bold text-stone-900">4.0</span>
+                </div>
+                <div>
+                  <span class="text-stone-700">Chiều Z (Độ cao):</span>
+                  <input type="range" id="f2-z" min="-10" max="10" value="0" oninput="updateF2()" class="w-full h-1.5 cursor-pointer">
+                  <span id="f2-z-val" class="font-bold text-stone-900">0.0</span>
+                </div>
+              </div>
+              <div id="f2-calc-steps" class="p-2 bg-stone-200 border border-stone-400 text-[11px] font-code text-stone-800">
+                $\|\mathbf{v}\|_2 = \sqrt{3^2 + 4^2 + 0^2} = \sqrt{9 + 16 + 0} = \sqrt{25} = 5.00$
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT QUIZ 2 -->
+        <div class="checkpoint-box mt-6 p-4 rounded space-y-3">
+          <div class="flex justify-between items-center border-b border-stone-400 pb-1.5 font-code">
+            <span class="font-bold text-xs uppercase text-amber-950">📝 Checkpoint 2.0: Tự Lượng Giá Kiến Thức (5 Câu)</span>
+            <span class="text-[11px] text-stone-600" id="cp2-score">Đã làm: 0/5</span>
+          </div>
+          <div id="cp2-container" class="space-y-3 text-xs"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 3 -->
+      <!-- ========================================================================= -->
+      <section id="c3" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">03</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 3: Trò Chơi "Bắt Mọi Thứ Đậu Lên Mặt Tròn": Phép Chuẩn Hóa L2
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Làm thế nào một phép chia đơn giản biến không gian hỗn loạn thành Siêu Cầu Đơn Vị?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter">
+              Bây giờ, chúng ta đã biết cách tính độ dài $\|\mathbf{v}\|_2$. Câu hỏi đặt ra: Làm sao để tước bỏ độ dài ngẫu nhiên này để giữ lại hướng đi tinh khiết của ý niệm?
+            </p>
+            <p>
+              Giải pháp thanh lịch đến bất ngờ: <strong>Lấy chính vector đó chia cho độ dài của chính nó!</strong>
+            </p>
+
+            <div class="math-box p-4 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Phép Chuẩn Hóa $L_2$ (L2 Normalization):
+              </div>
+              <div class="py-1 text-center font-bold">
+                $$\mathbf{e} = \frac{\mathbf{v}}{\|\mathbf{v}\|_2} \implies \|\mathbf{e}\|_2 = \sqrt{\sum \left(\frac{v_i}{\|\mathbf{v}\|_2}\right)^2} = \frac{\sqrt{\sum v_i^2}}{\|\mathbf{v}\|_2} = \mathbf{1.0}$$
+              </div>
+              <div class="text-[11px] text-stone-700 leading-normal">
+                Bất kể mũi tên ban đầu của bạn dài 10 mét hay dài 1,000 mét, sau khi chia cho chính nó, độ dài mới luôn luôn bằng đúng $1.0$ tuyệt đối!
+              </div>
+            </div>
+
+            <p>
+              Tập hợp tất cả các điểm có khoảng cách tới tâm bằng đúng $1.0$ tạo thành một <strong>Vòng tròn đơn vị</strong> (trong 2D), <strong>Mặt cầu đơn vị</strong> (trong 3D), và <strong>Siêu Cầu Đơn Vị ($S^{d-1}$)</strong> trong không gian nhiều chiều.
+            </p>
+
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-olive-950">💡 Ví dụ đời thực dễ hiểu:</div>
+              <p>
+                Hãy tưởng tượng một đàn chim bay lộn xộn trên bầu trời ở các độ cao khác nhau: con bay 10m, con bay 500m. Một hồi còi vang lên, bạn ra lệnh: <em>"Tất cả phải hạ cánh đậu ngay ngắn lên viền của chiếc lồng bàn hình vòm bán kính 1 mét!"</em>. Lúc này, không chú chim nào được phép bay cao hơn hay thấp hơn. Chúng ta chỉ cần đứng ở tâm nhìn xem chú chim nào đậu sát nhau về góc quay!
+              </p>
+            </div>
+          </div>
+
+          <!-- FIGURE 3 INTERACTIVE -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 3: Máy Chiếu Điểm Lên Vòng Tròn Đơn Vị $R=1$
+              </span>
+              <span id="f3-status" class="text-[11px] font-code bg-teal-900 text-stone-100 px-2 py-0.5">
+                Đã Chiếu: ||e|| = 1.00
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="f3Canvas" width="460" height="230" class="w-full h-auto bg-stone-950 cursor-crosshair"></canvas>
+            </div>
+
+            <div class="flex justify-between items-center bg-stone-100 p-2.5 border border-stone-400 text-xs font-code">
+              <span class="text-stone-700">Click hoặc rê chuột trên khung vẽ để đổi tọa độ v!</span>
+              <button onclick="resetF3()" class="px-2 py-1 bg-stone-200 border border-stone-800 hover:bg-stone-300 font-bold">
+                ↺ Điểm Mặc Định
+              </button>
+            </div>
+
+            <div id="f3-readout" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Vector gốc $\mathbf{v} = (1.8, 1.2), \|\mathbf{v}\| = 2.16 \xrightarrow{L_2} \mathbf{e} = (0.83, 0.55), \|\mathbf{e}\| = 1.00$.
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT QUIZ 3 -->
+        <div class="checkpoint-box mt-6 p-4 rounded space-y-3">
+          <div class="flex justify-between items-center border-b border-stone-400 pb-1.5 font-code">
+            <span class="font-bold text-xs uppercase text-amber-950">📝 Checkpoint 3.0: Tự Lượng Giá Kiến Thức (5 Câu)</span>
+            <span class="text-[11px] text-stone-600" id="cp3-score">Đã làm: 0/5</span>
+          </div>
+          <div id="cp3-container" class="space-y-3 text-xs"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 4 -->
+      <!-- ========================================================================= -->
+      <section id="c4" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">04</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 4: Đi Men Vỏ Trái Đất: Tích Vô Hướng Hóa Thân Thành Góc Cosine
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Khi mọi mũi tên đều dài bằng 1, khoảng cách chỉ còn phụ thuộc duy nhất vào góc xoay!
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter">
+              Hãy quan sát điều kỳ diệu xảy ra khi hai vector $\mathbf{u}$ và $\mathbf{v}$ đã được chuẩn hóa để có $\|\mathbf{u}\| = \|\mathbf{v}\| = 1.0$.
+            </p>
+            <p>
+              Công thức gốc của tích vô hướng: $\mathbf{u} \cdot \mathbf{v} = \|\mathbf{u}\| \|\mathbf{v}\| \cos(\theta)$. Khi cả hai độ dài đều bằng 1, hai con số 1 biến mất, để lại một phương trình thanh thoát tuyệt đẹp:
+            </p>
+
+            <div class="math-box p-3.5 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Sự Đồng Nhất Giữa Tích Vô Hướng & Độ Tương Đồng Cosine:
+              </div>
+              <div class="py-1 text-center font-bold">
+                $$\mathbf{u} \cdot \mathbf{v} = \mathbf{1} \times \mathbf{1} \times \cos(\theta) = \mathbf{\cos(\theta)}$$
+              </div>
+              <div class="text-[11px] text-stone-700 leading-normal">
+                Không cần tính mẫu số cồng kềnh nữa! Tích vô hướng đơn thuần giờ đây đã phản ánh trực tiếp góc kẹp giữa hai ý niệm.
+              </div>
+            </div>
+
+            <p>
+              Lúc này, khoảng cách giữa hai điểm trên quả cầu được đo bằng <strong>Cung trắc địa (Geodesic Arc)</strong> — chính là góc $\theta$ uốn lượn men theo bề mặt vỏ cầu: $d_g = \theta = \arccos(\mathbf{u} \cdot \mathbf{v})$.
+            </p>
+
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-olive-950">💡 Ví dụ đời thực dễ hiểu:</div>
+              <p>
+                Để bay từ Hà Nội sang New York, máy bay bay men theo lớp vỏ khí quyển của Trái Đất (bán kính $R \approx 6,371\text{ km}$). Cơ trưởng không bao giờ đào một đường hầm thẳng băng xuyên qua lõi nham thạch Trái Đất để bay cả. Mọi phép đo khoảng cách trong thế giới thực đều diễn ra men theo vỏ cầu!
+              </p>
+            </div>
+          </div>
+
+          <!-- FIGURE 4 INTERACTIVE -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 4: Cung Trắc Địa Trên Mặt Cầu Đơn Vị
+              </span>
+              <span id="f4-badge" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                θ = 60.0° | cos(θ) = 0.50
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="f4Canvas" width="460" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="bg-stone-100 p-3 border border-stone-400 space-y-2 text-xs font-code">
+              <div class="flex justify-between items-center">
+                <span>Xoay góc lệch $\theta$ giữa hai ý niệm:</span>
+                <span id="f4-angle-txt" class="font-bold text-amber-950">60°</span>
+              </div>
+              <input type="range" id="f4-slider" min="0" max="180" value="60" oninput="updateF4(this.value)" class="w-full h-2 cursor-pointer">
+              
+              <div id="f4-calc" class="text-[11px] text-stone-800 pt-1 space-y-0.5 border-t border-stone-300">
+                <div>&bull; Tích vô hướng $\mathbf{u} \cdot \mathbf{v} = \cos(60^\circ) = 0.50$ (Khá gần nghĩa).</div>
+                <div>&bull; Dây cung thẳng: $\|\mathbf{u}-\mathbf{v}\|_2 = \sqrt{2 - 2(0.5)} = 1.00$. Cung tròn: $d_g = 1.05\text{ rad}$.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT QUIZ 4 -->
+        <div class="checkpoint-box mt-6 p-4 rounded space-y-3">
+          <div class="flex justify-between items-center border-b border-stone-400 pb-1.5 font-code">
+            <span class="font-bold text-xs uppercase text-amber-950">📝 Checkpoint 4.0: Tự Lượng Giá Kiến Thức (5 Câu)</span>
+            <span class="text-[11px] text-stone-600" id="cp4-score">Đã làm: 0/5</span>
+          </div>
+          <div id="cp4-container" class="space-y-3 text-xs"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 5 -->
+      <!-- ========================================================================= -->
+      <section id="c5" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">05</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 5: Thế Giới Kỳ Lạ Của Quả Cam 768 Chiều: Hiện Tượng Vỏ Đè Ruột
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Tại sao trong không gian siêu chiều, hầu hết mọi thứ đều tự động dạt ra lớp vỏ mỏng ngoài cùng?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter">
+              Đây là một trong những nghịch lý thú vị và bất ngờ nhất của toán học hiện đại dành cho sinh viên năm nhất: <strong>Hiện tượng tập trung thể tích trên vỏ cầu (Concentration of Measure)</strong>.
+            </p>
+            <p>
+              Thể tích của một hình cầu bán kính $R$ trong không gian $d$ chiều tỉ lệ thuận với $R^d$. Hãy tưởng tượng bạn có một quả cam bán kính $R=1$, và bạn gọt đi một lớp vỏ cực mỏng chỉ dày $1\%$ ($\epsilon = 0.01$, nghĩa là phần ruột có bán kính $0.99$):
+            </p>
+
+            <div class="math-box p-3.5 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Tỉ lệ thể tích phần ruột bên trong so với toàn bộ quả cầu:
+              </div>
+              <div class="py-1 text-center font-bold">
+                $$\text{Tỉ lệ ruột} = \left(\frac{R - \epsilon}{R}\right)^d = (0.99)^d$$
+              </div>
+              <div class="text-[11px] text-stone-700 leading-normal space-y-1">
+                <div>&bull; Trong 3D: $(0.99)^3 \approx 0.97 \implies$ Ruột chiếm <strong>97%</strong> thể tích, vỏ chỉ chiếm 3%. Hoàn toàn bình thường!</div>
+                <div>&bull; Trong 768D: $(0.99)^{768} \approx 0.00045 \implies$ Ruột chỉ còn <strong>0.04%</strong>, lớp vỏ mỏng 1% đã nuốt trọn <strong>99.96%</strong> thể tích!</div>
+              </div>
+            </div>
+
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-olive-950">💡 Trực giác đời thực:</div>
+              <p>
+                Quả cam trong thế giới 768 chiều thực chất là một... <strong>quả bóng rỗng ruột</strong>! Ruột của nó gần như biến mất không còn một giọt nước nào, toàn bộ khối lượng quả cam đều bị dồn nén ra lớp vỏ ngoài cùng. Điều này giải thích tại sao việc ép vector nằm trên vỏ siêu cầu $S^{767}$ không hề làm méo mó tự nhiên: vốn dĩ dữ liệu đa chiều sinh ra đã muốn sống trên vỏ cầu rồi!
+              </p>
+            </div>
+          </div>
+
+          <!-- FIGURE 5 INTERACTIVE -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 5: Nghịch Lý Quả Cam Siêu Chiều
+              </span>
+              <span id="f5-badge" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                d = 768 Chiều: Vỏ chiếm 99.9%
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="f5Canvas" width="460" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="bg-stone-100 p-3 border border-stone-400 space-y-2 text-xs font-code">
+              <div class="flex justify-between items-center">
+                <span>Tăng dần số chiều không gian ($d$):</span>
+                <span id="f5-dim-txt" class="font-bold text-amber-950">d = 768</span>
+              </div>
+              <input type="range" id="f5-slider" min="1" max="768" value="768" oninput="updateF5(this.value)" class="w-full h-2 cursor-pointer">
+              
+              <div id="f5-stat" class="text-[11px] text-stone-800 pt-1">
+                Độ dày vỏ: 2%. Ở $d=768$, tỉ lệ thể tích nằm ở lớp vỏ ngoài đạt: <strong class="text-red-700">99.999%</strong>!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT QUIZ 5 -->
+        <div class="checkpoint-box mt-6 p-4 rounded space-y-3">
+          <div class="flex justify-between items-center border-b border-stone-400 pb-1.5 font-code">
+            <span class="font-bold text-xs uppercase text-amber-950">📝 Checkpoint 5.0: Tự Lượng Giá Kiến Thức (5 Câu)</span>
+            <span class="text-[11px] text-stone-600" id="cp5-score">Đã làm: 0/5</span>
+          </div>
+          <div id="cp5-container" class="space-y-3 text-xs"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 6 -->
+      <!-- ========================================================================= -->
+      <section id="c6" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">06</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 6: Lời Nguyền Vuông Góc: Vì Sao Mọi Thứ Ngẫu Nhiên Đều Trực Giao?
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Nếu bạn bốc ngẫu nhiên hai vector trong 768 chiều, góc giữa chúng hầu như luôn bằng đúng 90 độ!
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter">
+              Trong không gian 2D trên trang giấy, hai mũi tên có thể chỉ góc $15^\circ, 45^\circ, 120^\circ\dots$ rất đa dạng. Nhưng khi bước lên $d=768$, một hiện tượng kỳ vĩ xuất hiện: <strong>Hầu như mọi cặp vector chọn ngẫu nhiên độc lập đều vuông góc với nhau ($\mathbf{u} \cdot \mathbf{v} \approx 0, \theta \approx 90^\circ$)!</strong>
+            </p>
+            <p>
+              Lý do nằm ở phép cộng 768 con số ngẫu nhiên: $\mathbf{u} \cdot \mathbf{v} = \sum_{i=1}^{768} u_i v_i$. Vì các chiều độc lập với nhau, có chiều tích ra số dương, có chiều tích ra số âm. Theo <em>Định lý Giới hạn Trung tâm</em>, khi cộng tới 768 thành phần, các số âm và dương tự động triệt tiêu lẫn nhau, làm tổng tiến sát về số 0 với phương sai cực nhỏ $\text{Var} \approx \frac{1}{d} = \frac{1}{768} \approx 0.0013$!
+            </p>
+
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-olive-950">💡 Trò chơi tung 768 đồng xu:</div>
+              <p>
+                Tưởng tượng bạn tung 768 đồng xu cùng lúc. Xác suất để bạn tung được 700 đồng mặt ngửa là gần như bằng 0. Số đồng ngửa và sấp hầu như luôn chia đều 50-50 (khoảng 384 ngửa và 384 sấp). Khi lấy ngửa trừ sấp, kết quả luôn về quanh số 0. Tích vô hướng trong 768D cũng vậy: nó luôn cân bằng về số 0!
+              </p>
+            </div>
+
+            <div class="takeaway-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-amber-950">📌 Ý nghĩa to lớn đối với Trí Tuệ Nhân Tạo:</div>
+              <p>
+                Nhờ tính chất trực giao này, không gian siêu chiều có sức chứa khổng lồ: mô hình có thể lưu trữ hàng trăm nghìn khái niệm độc lập (từ "cái thìa", "triết học", "hạt proton"...) mà các vector hoàn toàn không sợ dẫm chân hay làm nhiễu lẫn nhau!
+              </p>
+            </div>
+          </div>
+
+          <!-- FIGURE 6 INTERACTIVE -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 6: Thí Nghiệm Tung Vector Ngẫu Nhiên Đa Chiều
+              </span>
+              <button onclick="runF6MonteCarlo()" class="text-[11px] font-code bg-stone-800 text-stone-100 px-2.5 py-0.5 border border-stone-950 hover:bg-stone-700">
+                Tung 500 Cặp Vector Mới
+              </button>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="f6Canvas" width="460" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="bg-stone-100 p-3 border border-stone-400 space-y-2 text-xs font-code">
+              <div class="flex justify-between items-center">
+                <span>Chọn số chiều không gian thử nghiệm:</span>
+                <span id="f6-dim-lbl" class="font-bold text-amber-950">d = 768 Chiều</span>
+              </div>
+              <div class="grid grid-cols-3 gap-2">
+                <button onclick="setF6Dim(2)" id="f6-btn-2" class="p-1 bg-stone-200 border border-stone-700 hover:bg-stone-300 font-bold">d = 2 (Phẳng)</button>
+                <button onclick="setF6Dim(20)" id="f6-btn-20" class="p-1 bg-stone-200 border border-stone-700 hover:bg-stone-300 font-bold">d = 20</button>
+                <button onclick="setF6Dim(768)" id="f6-btn-768" class="p-1 bg-amber-900 text-stone-100 border border-stone-900 font-bold">d = 768 (CLIP)</button>
+              </div>
+              <div id="f6-readout" class="p-2 bg-stone-200 border border-stone-400 text-[11px] text-stone-800">
+                Ở $d=768$, biểu đồ phân bố tích vô hướng co cụm nhọn hoắt quanh mốc 0.00 ($\theta \approx 90^\circ$).
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT QUIZ 6 -->
+        <div class="checkpoint-box mt-6 p-4 rounded space-y-3">
+          <div class="flex justify-between items-center border-b border-stone-400 pb-1.5 font-code">
+            <span class="font-bold text-xs uppercase text-amber-950">📝 Checkpoint 6.0: Tự Lượng Giá Kiến Thức (5 Câu)</span>
+            <span class="text-[11px] text-stone-600" id="cp6-score">Đã làm: 0/5</span>
+          </div>
+          <div id="cp6-container" class="space-y-3 text-xs"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 7 -->
+      <!-- ========================================================================= -->
+      <section id="c7" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">07</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 7: Căn Bệnh "Chen Lấn Trong Góc Hẹp": Sụp Đổ Dị Hướng (Anisotropy)
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Thực tế phũ phàng: Tại sao ngôn ngữ tự nhiên không tỏa đều mà lại dồn cục vào một góc siêu cầu?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter">
+              Ở Chương 6, lý thuyết toán học nói rằng các vector ngẫu nhiên sẽ vuông góc $90^\circ$ và tỏa đều $360^\circ$ (Đẳng hướng - Isotropy). Nhưng khi các nhà khoa học soi kính hiển vi vào các mô hình Transformer thực tế, họ đã bàng hoàng phát hiện một "căn bệnh hiểm nghèo": <strong>Sự sụp đổ dị hướng (Representation Anisotropy)</strong>.
+            </p>
+            <p>
+              Thay vì tỏa đều như pháo hoa, hàng vạn từ vựng lại bị hút chặt vào một <strong>chiếc nón hẹp (narrow cone)</strong> duy nhất trên siêu cầu! Hậu quả là hai từ hoàn toàn chẳng liên quan gì nhau: <em>"bánh mì"</em> và <em>"tàu ngầm hạt nhân"</em> khi đo góc Cosine vẫn cho ra kết quả dương rất cao ($\cos \theta \approx 0.70 - 0.85$, tương ứng góc chỉ $30^\circ - 40^\circ$)!
+            </p>
+
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-olive-950">💡 Ví dụ đời thực dễ hình dung:</div>
+              <p>
+                Hãy tưởng tượng một trường đại học tổ chức kỳ thi toán. Nếu đề thi có 10 câu thì cả 10 câu đều là: <em>"1 + 1 bằng mấy?"</em>. Hậu quả là 10,000 thí sinh đều nộp bài đạt 10 điểm tuyệt đối! Toàn bộ sinh viên bị dồn cục vào điểm 10, khiến thang điểm mất hoàn toàn khả năng phân loại xem bạn nào giỏi hình học, bạn nào giỏi giải tích. Đó chính là sự dị hướng!
+              </p>
+            </div>
+
+            <p>
+              Nguyên nhân là do ngôn ngữ loài người chứa đầy những cấu trúc ngữ pháp dùng chung (như mạo từ "the", "a", từ nối "and", tần suất xuất hiện từ bị lệch), tạo ra một lực kéo vô hình kéo cả đám mây lệch khỏi tâm quy chiếu.
+            </p>
+          </div>
+
+          <!-- FIGURE 7 INTERACTIVE -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 7: Đo Độ Chen Chúc Trong Chiếc Nón Dị Hướng
+              </span>
+              <span id="f7-badge" class="text-[11px] font-code bg-red-900 text-stone-100 px-2 py-0.5">
+                Bị Dị Hướng: Cos(θ) Trung Bình = 0.78
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="f7Canvas" width="460" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="bg-stone-100 p-3 border border-stone-400 space-y-2 text-xs font-code">
+              <div class="flex justify-between items-center">
+                <span>Góc mở của chiếc nón ngữ nghĩa:</span>
+                <span id="f7-angle-lbl" class="font-bold text-amber-950">Góc hẹp 35°</span>
+              </div>
+              <input type="range" id="f7-slider" min="15" max="180" value="35" oninput="updateF7(this.value)" class="w-full h-2 cursor-pointer">
+              
+              <div class="flex justify-between text-[10px] text-stone-600">
+                <span>Hẹp 15° (Dị hướng nặng)</span>
+                <span>35° (Thực tế ngôn ngữ)</span>
+                <span>180° (Đẳng hướng lý tưởng)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT QUIZ 7 -->
+        <div class="checkpoint-box mt-6 p-4 rounded space-y-3">
+          <div class="flex justify-between items-center border-b border-stone-400 pb-1.5 font-code">
+            <span class="font-bold text-xs uppercase text-amber-950">📝 Checkpoint 7.0: Tự Lượng Giá Kiến Thức (5 Câu)</span>
+            <span class="text-[11px] text-stone-600" id="cp7-score">Đã làm: 0/5</span>
+          </div>
+          <div id="cp7-container" class="space-y-3 text-xs"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 8 -->
+      <!-- ========================================================================= -->
+      <section id="c8" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">08</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 8: Đi Tìm "Tâm Trọng Khối" Của Lớp Học: Vector Centroid Là Gì?
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Muốn giải cứu đám mây bị dồn cục, trước tiên phải tìm ra điểm cân bằng trọng lượng của nó!
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter">
+              Để chữa trị căn bệnh dị hướng, bước đầu tiên các kỹ sư làm là xác định xem: <em>"Cả đám đông này đang nghiêng về phía nào?"</em>. Trong vật lý, điểm cân bằng đó được gọi là <strong>Trọng tâm (Center of Mass)</strong>; còn trong toán học máy học, ta gọi nó là <strong>Tâm trọng khối (Centroid $\mathbf{c}_{\text{tâm}}$)</strong>.
+            </p>
+            <p>
+              Cách tính toán vô cùng thân thiện: Chỉ cần cộng tọa độ của tất cả $M$ vector từ vựng lại rồi chia đều cho $M$ (tính trung bình cộng từng chiều):
+            </p>
+
+            <div class="math-box p-3.5 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Công Thức Tính Vector Tâm Trọng Khối:
+              </div>
+              <div class="py-1 text-center font-bold">
+                $$\mathbf{c}_{\text{tâm}} = \frac{1}{M} \sum_{k=1}^{M} \mathbf{e}_k = \left( \frac{\sum e_{k,1}}{M}, \frac{\sum e_{k,2}}{M}, \dots, \frac{\sum e_{k,d}}{M} \right)$$
+              </div>
+              <div class="text-[11px] text-stone-700 leading-normal">
+                Vector $\mathbf{c}_{\text{tâm}}$ chính là "mẫu số chung" của tất cả các từ. Nó chứa đựng thiên kiến ngữ pháp và những từ lặp đi lặp lại nhiều nhất.
+              </div>
+            </div>
+
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-olive-950">💡 Ví dụ bập bênh trẻ em:</div>
+              <p>
+                Hãy tưởng tượng một chiếc bập bênh hình tròn. Nếu các bạn nhỏ ngồi rải đều khắp các góc, chiếc bập bênh sẽ nằm thăng bằng hoàn hảo ở tâm $(0,0)$. Nhưng nếu cả lớp лом khom chạy dồn hết về một góc phía Đông Bắc, bập bênh sẽ chúi đầu nghiêng hẳn về hướng đó. Điểm chúi đầu nặng nhất chính là $\mathbf{c}_{\text{tâm}}$!
+              </p>
+            </div>
+          </div>
+
+          <!-- FIGURE 8 INTERACTIVE -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 8: Con Lắc Tìm Tâm Trọng Khối Dữ Liệu
+              </span>
+              <span id="f8-badge" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Tâm c = (+0.65, +0.48)
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="f8Canvas" width="460" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="flex flex-wrap justify-between items-center bg-stone-100 p-2.5 border border-stone-400 text-xs font-code gap-2">
+              <button onclick="f8AddPoints('cluster')" class="px-2.5 py-1 bg-stone-200 border border-stone-800 hover:bg-stone-300 font-bold">Thêm Đám Điểm Dồn Cục</button>
+              <button onclick="f8AddPoints('random')" class="px-2.5 py-1 bg-stone-200 border border-stone-800 hover:bg-stone-300 font-bold">Thêm Đám Điểm Rải Đều</button>
+              <button onclick="f8Reset()" class="px-2.5 py-1 bg-red-900 text-stone-100 border border-stone-900 font-bold">Xóa Hết</button>
+            </div>
+
+            <div class="p-2 bg-stone-200 border border-stone-400 text-[11px] font-code text-stone-800">
+              Chấm vàng lớn là Tâm trọng khối $\mathbf{c}_{\text{tâm}}$. Quan sát thấy khi các điểm xanh dồn về góc, chấm vàng lập tức bị kéo trôi dạt ra xa khỏi gốc tọa độ $(0,0)$!
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT QUIZ 8 -->
+        <div class="checkpoint-box mt-6 p-4 rounded space-y-3">
+          <div class="flex justify-between items-center border-b border-stone-400 pb-1.5 font-code">
+            <span class="font-bold text-xs uppercase text-amber-950">📝 Checkpoint 8.0: Tự Lượng Giá Kiến Thức (5 Câu)</span>
+            <span class="text-[11px] text-stone-600" id="cp8-score">Đã làm: 0/5</span>
+          </div>
+          <div id="cp8-container" class="space-y-3 text-xs"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 9 -->
+      <!-- ========================================================================= -->
+      <section id="c9" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">09</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 9: Phép Thuật "Trừ Đi Điểm Trung Bình": Khử Tâm & Giải Phóng 360 Độ
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Thao tác hình học ngoạn mục: Kéo cả đám mây về điểm số 0 để bung tỏa hết công suất.
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter">
+              Khi đã tìm được vị trí của tên "đầu sỏ" làm lệch tâm là vector $\mathbf{c}_{\text{tâm}}$, làm sao để giải phóng các từ ngữ? 
+            </p>
+            <p>
+              Câu trả lời đơn giản đến mức một học sinh lớp 6 cũng hiểu được: <strong>Lấy từng vector đem trừ đi chính vector tâm đó!</strong>
+            </p>
+
+            <div class="math-box p-3.5 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Phép Khử Tâm Hậu Kỳ (Post-hoc Centering & Re-normalization):
+              </div>
+              <div class="py-1 text-center font-bold">
+                $$\mathbf{e}'_k = \frac{\mathbf{e}_k - \mathbf{c}_{\text{tâm}}}{\|\mathbf{e}_k - \mathbf{c}_{\text{tâm}}\|_2}$$
+              </div>
+              <div class="text-[11px] text-stone-700 leading-normal space-y-1">
+                <div>1. <strong>Trừ đi $\mathbf{c}_{\text{tâm}}$:</strong> Tịnh tiến toàn bộ đám mây dữ liệu, kéo điểm trọng tâm trượt thẳng về gốc tọa độ $(0,0)$.</div>
+                <div>2. <strong>Chia lại cho độ dài:</strong> Ép các vector sau khi dời tâm đậu trở lại vỏ siêu cầu đơn vị!</div>
+              </div>
+            </div>
+
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-olive-950">💡 Ví dụ điểm thi đại học:</div>
+              <p>
+                Nếu đề thi quá khó khiến điểm trung bình của cả nước chỉ là $3.0$ điểm, trường đại học không thể tuyển sinh được. Người ta làm thao tác: lấy điểm của từng thí sinh trừ đi $3.0$. Bạn nào làm bài đúng trung bình sẽ về mốc $0$, bạn giỏi hơn sẽ được điểm dương ($+4$), bạn kém hơn nhận điểm âm ($-2$). Bất thình lình, khả năng phân loại sinh viên giỏi - kém trở nên rõ mồn một!
+              </p>
+            </div>
+          </div>
+
+          <!-- FIGURE 9 INTERACTIVE -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 9: Bấm Nút Khử Tâm Thời Gian Thực
+              </span>
+              <span id="f9-status-pill" class="text-[11px] font-code bg-red-900 text-stone-100 px-2 py-0.5">
+                Chưa Khử Tâm (Bị Co Cụm)
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="f9Canvas" width="460" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="flex justify-between items-center bg-stone-100 p-3 border border-stone-400 text-xs font-code">
+              <label class="flex items-center gap-2 cursor-pointer font-bold text-stone-900">
+                <input type="checkbox" id="f9-toggle" onchange="updateF9()">
+                <span>KÍCH HOẠT PHÉP TRỪ TÂM TRỌNG KHỐI ($\mathbf{e} - \mathbf{c}_{\text{tâm}}$)</span>
+              </label>
+            </div>
+
+            <div id="f9-desc" class="p-2 bg-stone-200 border border-stone-400 text-[11px] font-code text-stone-800">
+              Hãy đánh dấu vào ô checkbox phía trên để chứng kiến phép màu: Đám mây bị nghẽn góc lập tức bung tỏa đều khắp 360 độ trên vòng tròn!
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT QUIZ 9 -->
+        <div class="checkpoint-box mt-6 p-4 rounded space-y-3">
+          <div class="flex justify-between items-center border-b border-stone-400 pb-1.5 font-code">
+            <span class="font-bold text-xs uppercase text-amber-950">📝 Checkpoint 9.0: Tự Lượng Giá Kiến Thức (5 Câu)</span>
+            <span class="text-[11px] text-stone-600" id="cp9-score">Đã làm: 0/5</span>
+          </div>
+          <div id="cp9-container" class="space-y-3 text-xs"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 10 -->
+      <!-- ========================================================================= -->
+      <section id="c10" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">10</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 10: Chiếc Cân Tiểu Ly Nhà Bếp: Khám Phá Trung Bình $\mu$ & Độ Lệch Chuẩn $\sigma$
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Hai con số quyền lực giúp mạng nơ-ron đo đạc "vị trí tâm" và "độ xòe" của từng token.
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter">
+              Trước khi mổ xẻ cơ chế LayerNorm đình đám trong Transformer, sinh viên năm nhất cần làm quen với hai người bạn thân thiết trong môn Xác suất thống kê: <strong>Kỳ vọng trung bình ($\mu$)</strong> và <strong>Độ lệch chuẩn ($\sigma$)</strong>.
+            </p>
+            <p>
+              Giả sử một token của bạn có 768 con số đặc trưng: $\mathbf{x} = [x_1, x_2, \dots, x_{768}]$.
+            </p>
+            <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm bg-stone-200 p-3 border border-stone-400">
+              <li><strong>Giá trị trung bình ($\mu$ - Mean):</strong> Điểm neo trọng tâm của 768 con số: $\mu = \frac{1}{d} \sum_{i=1}^d x_i$. Nó cho biết trung bình tín hiệu đang mang giá trị dương hay âm.</li>
+              <li><strong>Phương sai ($\sigma^2$ - Variance):</strong> Thước đo độ bung xòe rộng hay co cụm hẹp của dữ liệu quanh mốc $\mu$: $\sigma^2 = \frac{1}{d} \sum_{i=1}^d (x_i - \mu)^2$. Độ lệch chuẩn là $\sigma = \sqrt{\sigma^2}$.</li>
+            </ul>
+
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-olive-950">💡 Chiếc nút "Tare" trừ bì của cân điện tử:</div>
+              <p>
+                Khi bạn làm bánh, bạn đặt một chiếc bát sứ nặng 350g lên chiếc cân tiểu ly. Giá trị hiển thị nhảy lên số 350 (đó chính là độ lệch tâm $\mu = 350$). Bạn bấm nút <strong>Tare (Trừ bì)</strong>, màn hình lập tức nhảy về số 0.00g! Nhờ đó, lượng bột mì bạn đổ thêm vào sẽ được cân đo độc lập tuyệt đối, không bị phụ thuộc vào độ nặng của chiếc bát.
+              </p>
+            </div>
+          </div>
+
+          <!-- FIGURE 10 INTERACTIVE -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 10: Máy Đo & Cân Bằng Độ Lệch Chuẩn
+              </span>
+              <span id="f10-badge" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                μ = +2.40 | σ = 1.80
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="f10Canvas" width="460" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="bg-stone-100 p-3 border border-stone-400 space-y-2 text-xs font-code">
+              <div class="flex justify-between items-center">
+                <span>Chỉnh độ lệch tâm ban đầu ($\mu_{\text{raw}}$):</span>
+                <span id="f10-mu-disp" class="font-bold text-amber-950">+2.4</span>
+              </div>
+              <input type="range" id="f10-slider-mu" min="-50" max="50" value="24" oninput="updateF10()" class="w-full h-2 cursor-pointer">
+              
+              <div class="flex justify-between items-center pt-1">
+                <span>Chỉnh độ phân tán xòe rộng ($\sigma_{\text{raw}}$):</span>
+                <span id="f10-sig-disp" class="font-bold text-amber-950">1.8</span>
+              </div>
+              <input type="range" id="f10-slider-sig" min="5" max="40" value="18" oninput="updateF10()" class="w-full h-2 cursor-pointer">
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT QUIZ 10 -->
+        <div class="checkpoint-box mt-6 p-4 rounded space-y-3">
+          <div class="flex justify-between items-center border-b border-stone-400 pb-1.5 font-code">
+            <span class="font-bold text-xs uppercase text-amber-950">📝 Checkpoint 10.0: Tự Lượng Giá Kiến Thức (5 Câu)</span>
+            <span class="text-[11px] text-stone-600" id="cp10-score">Đã làm: 0/5</span>
+          </div>
+          <div id="cp10-container" class="space-y-3 text-xs"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 11 -->
+      <!-- ========================================================================= -->
+      <section id="c11" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">11</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 11: Mổ Xẻ Công Thức LayerNorm: Từng Nấc Thang Tái Thiết Tín Hiệu
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Tháo rời từng chi tiết máy: Phép trừ $\mu$, phép chia $\sqrt{\sigma^2+\epsilon}$ và hai núm vặn $\gamma, \beta$.
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter">
+              Đến đây, bạn đã có đủ 100% vũ khí để đọc hiểu phương trình toán học thực thụ của <strong>Layer Normalization</strong> mà không hề sợ hãi!
+            </p>
+
+            <div class="math-box p-4 font-code text-xs sm:text-sm text-stone-900 space-y-2">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
+                Phương Trình Layer Normalization Hoàn Chỉnh:
+              </div>
+              <div class="py-1 text-center font-bold">
+                $$\hat{x}_i = \frac{x_i - \mu}{\sqrt{\sigma^2 + \epsilon}} \cdot \gamma + \beta$$
+              </div>
+              <div class="text-[11px] text-stone-700 leading-normal space-y-1.5">
+                <div>1. <strong>Bước 1 ($x_i - \mu$):</strong> Kéo điểm trung bình của token về đúng mốc $0.0$ (Khử tâm).</div>
+                <div>2. <strong>Bước 2 (Chia $\sqrt{\sigma^2 + \epsilon}$):</strong> Co bóp độ phân tán để phương sai đúng bằng $1.0$. Con số cực nhỏ $\epsilon \approx 10^{-5}$ là "phao cứu sinh" chống lỗi chia cho 0 nếu phương sai vô tình bằng phẳng tuyệt đối.</div>
+                <div>3. <strong>Bước 3 (Nhân $\gamma$ và cộng $\beta$):</strong> Hai thông số học được (Learnable parameters). Nếu mạng nơ-ron nhận thấy sau khi chuẩn hóa về $(0, 1)$ mà cần hơi co giãn hoặc dịch chuyển nhẹ để tiếp thu bài học tốt hơn, nó sẽ tự vặn hai núm này!</div>
+              </div>
+            </div>
+
+            <div class="takeaway-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-amber-950">📌 So sánh kinh điển: LayerNorm vs BatchNorm:</div>
+              <p>
+                <strong>BatchNorm</strong> gom 100 bức ảnh của 100 người khác nhau lại để tính trung bình chung (rất cồng kềnh, phụ thuộc người khác). 
+                <br><strong>LayerNorm</strong> là người tự chủ: mỗi từ ngữ tự nhìn vào 768 con số của chính bản thân mình để trừ đi trung bình của chính nó. Không cần nhìn ngó hay phụ thuộc vào bất kỳ từ nào khác trong câu!
+              </p>
+            </div>
+          </div>
+
+          <!-- FIGURE 11 INTERACTIVE -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 11: Phòng Phẫu Thuật Từng Nấc Của LayerNorm
+              </span>
+              <span id="f11-step-badge" class="text-[11px] font-code bg-teal-900 text-stone-100 px-2 py-0.5">
+                Nấc 3: Chuẩn Hóa Hoàn Tất
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="f11Canvas" width="460" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="bg-stone-100 p-3 border border-stone-400 space-y-2 text-xs font-code">
+              <span class="font-bold text-stone-900">Xem diễn biến vector qua 3 giai đoạn:</span>
+              <div class="grid grid-cols-3 gap-2">
+                <button onclick="setF11Stage(1)" id="f11-b1" class="p-1.5 bg-stone-200 border border-stone-700 font-bold hover:bg-stone-300">1. Vector Thô</button>
+                <button onclick="setF11Stage(2)" id="f11-b2" class="p-1.5 bg-stone-200 border border-stone-700 font-bold hover:bg-stone-300">2. Trừ Tâm (x - μ)</button>
+                <button onclick="setF11Stage(3)" id="f11-b3" class="p-1.5 bg-amber-900 text-stone-100 border border-stone-900 font-bold">3. Chia Độ Lệch σ</button>
+              </div>
+              <div id="f11-expl" class="p-2 bg-stone-200 border border-stone-400 text-[11px] text-stone-800">
+                Giai đoạn 3: Chia cho độ lệch chuẩn $\sigma$ giúp các cột biên độ thu nhỏ gọn gàng trong dải an toàn $[-2.0, +2.0]$.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT QUIZ 11 -->
+        <div class="checkpoint-box mt-6 p-4 rounded space-y-3">
+          <div class="flex justify-between items-center border-b border-stone-400 pb-1.5 font-code">
+            <span class="font-bold text-xs uppercase text-amber-950">📝 Checkpoint 11.0: Tự Lượng Giá Kiến Thức (5 Câu)</span>
+            <span class="text-[11px] text-stone-600" id="cp11-score">Đã làm: 0/5</span>
+          </div>
+          <div id="cp11-container" class="space-y-3 text-xs"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 12 -->
+      <!-- ========================================================================= -->
+      <section id="c12" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2 mb-4">
+          <span class="text-2xl font-black text-amber-900 font-code">12</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 12: Giữ Lửa Cho Softmax: Tại Sao Thiếu LayerNorm Thì AI Sẽ "Chết Não"?
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Cứu tinh của Transformer trước hai căn bệnh thời đại: Bùng nổ và Triệt tiêu Gradient.
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="first-big-letter">
+              Tại sao trong một mạng Transformer có 12 đến 24 tầng, cứ sau mỗi phép tính Chú ý (Self-Attention) hay Mạng truyền thẳng (Feed-Forward), các kỹ sư lại phải đặt một trạm gác LayerNorm?
+            </p>
+            <p>
+              Thủ phạm nằm ở hàm <strong>Softmax</strong>: $\text{softmax}(z_i) = \frac{e^{z_i}}{\sum e^{z_j}}$. 
+            </p>
+            <p>
+              Hàm Softmax hoạt động dựa trên hàm số mũ $e^z$. Nếu không có LayerNorm kiềm chế, các con số qua từng tầng nhân ma trận sẽ bị thổi phồng lên cực lớn (ví dụ $z = +50$ hoặc $z = -50$). Khi đó:
+            </p>
+            <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm bg-stone-200 p-3 border border-stone-400">
+              <li>Xác suất rơi vào cực đoan: một giá trị chiếm trọn $100\%$, tất cả các giá trị còn lại bị đè bẹp về $0\%$.</li>
+              <li><strong>Đạo hàm (Gradient) rơi vào vùng phẳng lì:</strong> Đạo hàm của Softmax khi đó xấp xỉ bằng $0.000000$. Khi gradient bằng 0, thuật toán Lan truyền ngược (Backpropagation) ngừng hoạt động. Mạng nơ-ron hoàn toàn "chết não" và không thể học thêm bất kỳ điều gì!</li>
+            </ul>
+
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-olive-950">💡 Chiếc núm vặn điều chỉnh ánh sáng:</div>
+              <p>
+                LayerNorm giống như một người bảo vệ giữ cho bóng đèn bàn học luôn ở mức công suất vừa vặn. Nếu điện áp quá cao, bóng đèn sẽ nổ tung cháy đen (Exploding Gradient); nếu điện áp tụt về 0, phòng tối om không đọc được chữ (Vanishing Gradient). LayerNorm giữ điện áp luôn ổn định để mắt bạn học tập hiệu quả nhất!
+              </p>
+            </div>
+          </div>
+
+          <!-- FIGURE 12 INTERACTIVE -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 12: Thí Nghiệm Vùng Nhạy Cảm Của Hàm Softmax
+              </span>
+              <span id="f12-badge" class="text-[11px] font-code bg-green-900 text-stone-100 px-2 py-0.5">
+                Trạng thái: Có LayerNorm (Gradient Tối Ưu)
+              </span>
+            </div>
+
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="f12Canvas" width="460" height="230" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+
+            <div class="bg-stone-100 p-3 border border-stone-400 space-y-2 text-xs font-code">
+              <div class="flex justify-between items-center">
+                <span>Mức độ bùng nổ tín hiệu đầu vào Softmax:</span>
+                <span id="f12-val-lbl" class="font-bold text-amber-950">z = 1.0 (An toàn)</span>
+              </div>
+              <input type="range" id="f12-slider" min="5" max="60" value="10" oninput="updateF12(this.value)" class="w-full h-2 cursor-pointer">
+              
+              <div id="f12-status-txt" class="text-[11px] text-stone-800 pt-1">
+                Tín hiệu nằm trong vùng dốc nhạy cảm: Đạo hàm $\frac{\partial \mathcal{L}}{\partial z} \approx 0.24$ (Mô hình cập nhật trơn tru).
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT QUIZ 12 -->
+        <div class="checkpoint-box mt-6 p-4 rounded space-y-3">
+          <div class="flex justify-between items-center border-b border-stone-400 pb-1.5 font-code">
+            <span class="font-bold text-xs uppercase text-amber-950">📝 Checkpoint 12.0: Tự Lượng Giá Kiến Thức (5 Câu)</span>
+            <span class="text-[11px] text-stone-600" id="cp12-score">Đã làm: 0/5</span>
+          </div>
+          <div id="cp12-container" class="space-y-3 text-xs"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- BÀI THI TỔNG HỢP TOÀN PHẦN 2.2: 15 CÂU HỎI BLOOM TỪ BẬC 1 ĐẾN BẬC 6 -->
+      <!-- ========================================================================= -->
+      <section id="exam" class="p-4 sm:p-7 bg-amber-50 border-4 border-stone-900 space-y-6">
+        <div class="border-b-2 border-stone-800 pb-3">
+          <div class="flex flex-wrap justify-between items-center gap-2">
+            <span class="text-xl sm:text-2xl font-black uppercase text-amber-950 font-code">
+              BÀI THI TỔNG HỢP TOÀN DIỆN PHẦN 2.2 (15 CÂU HỎI THANG ĐO BLOOM)
+            </span>
+            <span class="text-xs font-code bg-amber-200 px-3 py-1 border border-amber-900 font-bold">
+              Tiêu chuẩn Đánh giá Sinh viên Đại học
+            </span>
+          </div>
+          <p class="text-xs sm:text-sm text-stone-700 italic mt-1.5">
+            Bao phủ trọn vẹn 6 cấp độ nhận thức từ Nhận biết, Thông hiểu, Vận dụng, Phân tích, đến Đánh giá và Sáng tạo Vận dụng cao.
+          </p>
+        </div>
+
+        <div class="flex justify-between items-center bg-stone-200 p-3 border border-stone-400 font-code text-xs">
+          <span class="font-bold text-stone-900" id="exam-prog">Tiến độ bài thi: 0/15 câu</span>
+          <span class="font-bold text-amber-950" id="exam-score">Điểm số: 0 / 15</span>
+        </div>
+
+        <div id="exam-container" class="space-y-4"></div>
+
+        <div id="exam-summary" class="hidden p-4 bg-stone-100 border-2 border-stone-800 text-xs font-code space-y-2"></div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER BÁO IN -->
+    <footer class="mt-14 pt-4 border-t-2 border-stone-800 text-stone-600 text-xs font-code flex flex-wrap justify-between items-center gap-2">
+      <div>Bản Tin Khoa Học Số 2.2 &bull; Giáo Trình Cầu Nối Sư Phạm &bull; 12 Chương + 75 Câu Hỏi &bull; 12 Figures</div>
+      <div class="text-stone-900 font-bold">Bản quyền học thuật dành cho sinh viên năm nhất &bull; 100% KaTeX & Roboto</div>
+    </footer>
+
+  </div>
+
+  <script>
+    /* ========================================================================= */
+    /* QUẢN LÝ TRẠNG THÁI & TIỆN ÍCH */
+    /* ========================================================================= */
+    function scrollToEl(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function renderMath() {
+      if (window.renderMathInElement) {
+        window.renderMathInElement(document.body, {
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false }
+          ],
+          throwOnError: false
+        });
+      }
+    }
+
+    /* ========================================================================= */
+    /* FIGURE 1: THƯỚC ĐO LỪA ĐẢO */
+    /* ========================================================================= */
+    let f1Scale = 3.0;
+    const f1Canvas = document.getElementById('f1Canvas');
+    const f1Ctx = f1Canvas ? f1Canvas.getContext('2d') : null;
+
+    function updateF1(val) {
+      f1Scale = parseFloat(val) / 10;
+      document.getElementById('f1-len-txt').innerText = `Dài x${f1Scale.toFixed(1)}`;
+      renderF1();
+    }
+
+    function renderF1() {
+      if (!f1Ctx) return;
+      const w = f1Canvas.width, h = f1Canvas.height;
+      const ox = 50, oy = h - 40;
+      f1Ctx.fillStyle = '#0a0a0c'; f1Ctx.fillRect(0, 0, w, h);
+
+      // Trục
+      f1Ctx.strokeStyle = 'rgba(255,255,255,0.15)'; f1Ctx.lineWidth = 1;
+      f1Ctx.beginPath();
+      f1Ctx.moveTo(ox, oy); f1Ctx.lineTo(w - 20, oy);
+      f1Ctx.moveTo(ox, oy); f1Ctx.lineTo(ox, 20);
+      f1Ctx.stroke();
+
+      const ang = -Math.PI / 4;
+      const baseLen = 50;
+
+      // Vector 1 (Kiệm lời)
+      const x1 = ox + baseLen * Math.cos(ang);
+      const y1 = oy + baseLen * Math.sin(ang);
+      f1Ctx.strokeStyle = '#38bdf8'; f1Ctx.lineWidth = 3.5;
+      f1Ctx.beginPath(); f1Ctx.moveTo(ox, oy); f1Ctx.lineTo(x1, y1); f1Ctx.stroke();
+      f1Ctx.fillStyle = '#38bdf8'; f1Ctx.beginPath(); f1Ctx.arc(x1, y1, 5, 0, Math.PI*2); f1Ctx.fill();
+      f1Ctx.font = '10px Roboto Mono'; f1Ctx.fillText("v1 (Con mèo - ngắn)", x1 + 8, y1 - 4);
+
+      // Vector 2 (Hoa mỹ)
+      const len2 = baseLen * f1Scale;
+      const x2 = ox + len2 * Math.cos(ang);
+      const y2 = oy + len2 * Math.sin(ang);
+      f1Ctx.strokeStyle = '#f97316'; f1Ctx.lineWidth = 2.5;
+      f1Ctx.beginPath(); f1Ctx.moveTo(ox, oy); f1Ctx.lineTo(x2, y2); f1Ctx.stroke();
+      f1Ctx.fillStyle = '#fb923c'; f1Ctx.beginPath(); f1Ctx.arc(x2, y2, 5, 0, Math.PI*2); f1Ctx.fill();
+      f1Ctx.fillText(`v2 (Mèo hoa mỹ x${f1Scale.toFixed(1)})`, x2 + 8, y2 - 4);
+
+      // Đoạn nối Euclid thẳng
+      f1Ctx.strokeStyle = '#ef4444'; f1Ctx.lineWidth = 1.5; f1Ctx.setLineDash([4, 4]);
+      f1Ctx.beginPath(); f1Ctx.moveTo(x1, y1); f1Ctx.lineTo(x2, y2); f1Ctx.stroke();
+      f1Ctx.setLineDash([]);
+
+      const distE = Math.round(len2 - baseLen);
+      const midX = (x1 + x2) / 2 + 12, midY = (y1 + y2) / 2 - 10;
+      f1Ctx.fillStyle = '#f87171';
+      f1Ctx.fillText(`Thước d_E = ${distE}px`, midX, midY);
+
+      document.getElementById('f1-metrics').innerHTML = `
+        <div>&bull; Khoảng cách thước thẳng Euclid $d_E$: <strong class="text-red-700">${distE} px (Tưởng rất xa nhau!)</strong></div>
+        <div>&bull; Góc lệch ngữ nghĩa $\theta$: <strong class="text-green-700">0.0° (Cùng nói về mèo 100%)</strong></div>
+      `;
+      renderMath();
+    }
+
+    /* ========================================================================= */
+    /* FIGURE 2: PYTHAGORAS ĐA CHIỀU */
+    /* ========================================================================= */
+    const f2Canvas = document.getElementById('f2Canvas');
+    const f2Ctx = f2Canvas ? f2Canvas.getContext('2d') : null;
+
+    function updateF2() {
+      const vx = parseFloat(document.getElementById('f2-x').value);
+      const vy = parseFloat(document.getElementById('f2-y').value);
+      const vz = parseFloat(document.getElementById('f2-z').value);
+
+      document.getElementById('f2-x-val').innerText = vx.toFixed(1);
+      document.getElementById('f2-y-val').innerText = vy.toFixed(1);
+      document.getElementById('f2-z-val').innerText = vz.toFixed(1);
+
+      const norm = Math.sqrt(vx*vx + vy*vy + vz*vz);
+      document.getElementById('f2-norm-tag').innerText = `Chuẩn L2 = ${norm.toFixed(2)}`;
+      document.getElementById('f2-calc-steps').innerHTML = `
+        $\\|\\mathbf{v}\\|_2 = \\sqrt{(${vx})^2 + (${vy})^2 + (${vz})^2} = \\sqrt{${(vx*vx).toFixed(1)} + ${(vy*vy).toFixed(1)} + ${(vz*vz).toFixed(1)}} = \\mathbf{${norm.toFixed(2)}}$
+      `;
+      renderF2(vx, vy, vz, norm);
+      renderMath();
+    }
+
+    function renderF2(vx, vy, vz, norm) {
+      if (!f2Ctx) return;
+      const w = f2Canvas.width, h = f2Canvas.height;
+      const ox = w / 2, oy = h - 40;
+      f2Ctx.fillStyle = '#0a0a0c'; f2Ctx.fillRect(0, 0, w, h);
+
+      // Trục 3D giả lập
+      f2Ctx.strokeStyle = 'rgba(255,255,255,0.12)'; f2Ctx.lineWidth = 1;
+      f2Ctx.beginPath();
+      f2Ctx.moveTo(ox, oy); f2Ctx.lineTo(ox + 160, oy - 20); // Trục X
+      f2Ctx.moveTo(ox, oy); f2Ctx.lineTo(ox, 20); // Trục Y
+      f2Ctx.moveTo(ox, oy); f2Ctx.lineTo(ox - 140, oy - 40); // Trục Z
+      f2Ctx.stroke();
+
+      const scale = 14;
+      const px = ox + vx * scale * 0.9 - vz * scale * 0.6;
+      const py = oy - vy * scale - vz * scale * 0.25;
+
+      // Cạnh góc vuông trên mặt đáy
+      const basePx = ox + vx * scale * 0.9 - vz * scale * 0.6;
+      const basePy = oy - vz * scale * 0.25;
+
+      f2Ctx.strokeStyle = 'rgba(251,191,36,0.4)'; f2Ctx.setLineDash([3,3]);
+      f2Ctx.beginPath(); f2Ctx.moveTo(ox, oy); f2Ctx.lineTo(basePx, basePy); f2Ctx.lineTo(px, py); f2Ctx.stroke();
+      f2Ctx.setLineDash([]);
+
+      // Cạnh huyền (Vector v)
+      f2Ctx.strokeStyle = '#38bdf8'; f2Ctx.lineWidth = 3;
+      f2Ctx.beginPath(); f2Ctx.moveTo(ox, oy); f2Ctx.lineTo(px, py); f2Ctx.stroke();
+
+      f2Ctx.fillStyle = '#38bdf8'; f2Ctx.beginPath(); f2Ctx.arc(px, py, 6, 0, Math.PI*2); f2Ctx.fill();
+      f2Ctx.font = '10px Roboto Mono';
+      f2Ctx.fillText(`v (Độ dài: ${norm.toFixed(2)})`, px + 8, py - 6);
+    }
+
+    /* ========================================================================= */
+    /* FIGURE 3: PHÉP CHIẾU L2 */
+    /* ========================================================================= */
+    let f3RawX = 1.8, f3RawY = 1.2;
+    const f3Canvas = document.getElementById('f3Canvas');
+    const f3Ctx = f3Canvas ? f3Canvas.getContext('2d') : null;
+
+    if (f3Canvas) {
+      f3Canvas.addEventListener('mousemove', (e) => {
+        const rect = f3Canvas.getBoundingClientRect();
+        const mx = (e.clientX - rect.left) * (f3Canvas.width / rect.width);
+        const my = (e.clientY - rect.top) * (f3Canvas.height / rect.height);
+        const cx = f3Canvas.width / 2, cy = f3Canvas.height / 2;
+        f3RawX = (mx - cx) / 60;
+        f3RawY = (cy - my) / 60;
+        renderF3();
+      });
+    }
+
+    function resetF3() {
+      f3RawX = 1.8; f3RawY = 1.2;
+      renderF3();
+    }
+
+    function renderF3() {
+      if (!f3Ctx) return;
+      const w = f3Canvas.width, h = f3Canvas.height;
+      const cx = w / 2, cy = h / 2;
+      const R = 60; // 1.0 unit = 60px
+      f3Ctx.fillStyle = '#0a0a0c'; f3Ctx.fillRect(0, 0, w, h);
+
+      // Trục
+      f3Ctx.strokeStyle = 'rgba(255,255,255,0.15)'; f3Ctx.lineWidth = 1;
+      f3Ctx.beginPath();
+      f3Ctx.moveTo(20, cy); f3Ctx.lineTo(w-20, cy);
+      f3Ctx.moveTo(cx, 20); f3Ctx.lineTo(cx, h-20);
+      f3Ctx.stroke();
+
+      // Vòng tròn R = 1.0
+      f3Ctx.strokeStyle = '#4ade80'; f3Ctx.lineWidth = 2;
+      f3Ctx.beginPath(); f3Ctx.arc(cx, cy, R, 0, Math.PI*2); f3Ctx.stroke();
+      f3Ctx.fillStyle = '#86efac'; f3Ctx.font = '10px Roboto Mono';
+      f3Ctx.fillText("Vòng tròn đơn vị R = 1.0", cx + R + 6, cy - 8);
+
+      const rawMag = Math.sqrt(f3RawX*f3RawX + f3RawY*f3RawY);
+      if (rawMag > 0.05) {
+        const normX = f3RawX / rawMag;
+        const normY = f3RawY / rawMag;
+
+        const rawPxX = cx + f3RawX * R;
+        const rawPxY = cy - f3RawY * R;
+        const normPxX = cx + normX * R;
+        const normPxY = cy - normY * R;
+
+        // Tia chiếu
+        f3Ctx.strokeStyle = 'rgba(251,146,60,0.4)'; f3Ctx.setLineDash([3,3]);
+        f3Ctx.beginPath(); f3Ctx.moveTo(rawPxX, rawPxY); f3Ctx.lineTo(normPxX, normPxY); f3Ctx.stroke();
+        f3Ctx.setLineDash([]);
+
+        // Vector thô
+        f3Ctx.strokeStyle = '#f97316'; f3Ctx.lineWidth = 2;
+        f3Ctx.beginPath(); f3Ctx.moveTo(cx, cy); f3Ctx.lineTo(rawPxX, rawPxY); f3Ctx.stroke();
+        f3Ctx.fillStyle = '#fb923c'; f3Ctx.beginPath(); f3Ctx.arc(rawPxX, rawPxY, 4, 0, Math.PI*2); f3Ctx.fill();
+        f3Ctx.fillText(`v (${rawMag.toFixed(2)})`, rawPxX + 6, rawPxY - 6);
+
+        // Vector đơn vị
+        f3Ctx.strokeStyle = '#4ade80'; f3Ctx.lineWidth = 3.5;
+        f3Ctx.beginPath(); f3Ctx.moveTo(cx, cy); f3Ctx.lineTo(normPxX, normPxY); f3Ctx.stroke();
+        f3Ctx.fillStyle = '#4ade80'; f3Ctx.beginPath(); f3Ctx.arc(normPxX, normPxY, 5, 0, Math.PI*2); f3Ctx.fill();
+        f3Ctx.fillText(`e (1.0)`, normPxX + 6, normPxY + 12);
+
+        document.getElementById('f3-readout').innerHTML = `
+          Vector gốc $\\mathbf{v} = (${f3RawX.toFixed(2)}, ${f3RawY.toFixed(2)}), \\|\\mathbf{v}\\| = ${rawMag.toFixed(2)} \\xrightarrow{L_2} \\mathbf{e} = (${normX.toFixed(2)}, ${normY.toFixed(2)}), \\|\\mathbf{e}\\| = 1.00$.
+        `;
+        renderMath();
+      }
+    }
+
+    /* ========================================================================= */
+    /* FIGURE 4: CUNG TRẮC ĐỊA & COSINE */
+    /* ========================================================================= */
+    let f4Theta = 60;
+    const f4Canvas = document.getElementById('f4Canvas');
+    const f4Ctx = f4Canvas ? f4Canvas.getContext('2d') : null;
+
+    function updateF4(val) {
+      f4Theta = parseInt(val, 10);
+      document.getElementById('f4-angle-txt').innerText = `${f4Theta}°`;
+      renderF4();
+    }
+
+    function renderF4() {
+      if (!f4Ctx) return;
+      const w = f4Canvas.width, h = f4Canvas.height;
+      const cx = w / 2, cy = h / 2;
+      const R = 75;
+      f4Ctx.fillStyle = '#0a0a0c'; f4Ctx.fillRect(0, 0, w, h);
+
+      // Mặt cầu
+      f4Ctx.strokeStyle = 'rgba(255,255,255,0.15)'; f4Ctx.lineWidth = 1.5;
+      f4Ctx.beginPath(); f4Ctx.arc(cx, cy, R, 0, Math.PI*2); f4Ctx.stroke();
+
+      const rad = f4Theta * Math.PI / 180;
+      const cosVal = Math.cos(rad);
+      const chord = Math.sqrt(2 - 2 * cosVal);
+
+      // Vector u cố định tại 0 độ (trục hoành)
+      const ux = cx + R, uy = cy;
+      f4Ctx.strokeStyle = '#38bdf8'; f4Ctx.lineWidth = 3;
+      f4Ctx.beginPath(); f4Ctx.moveTo(cx, cy); f4Ctx.lineTo(ux, uy); f4Ctx.stroke();
+      f4Ctx.fillStyle = '#38bdf8'; f4Ctx.fillText("u (Ý niệm 1)", ux + 6, uy + 4);
+
+      // Vector v xoay góc theta
+      const vx = cx + R * Math.cos(-rad);
+      const vy = cy + R * Math.sin(-rad);
+      f4Ctx.strokeStyle = '#fb923c'; f4Ctx.lineWidth = 3;
+      f4Ctx.beginPath(); f4Ctx.moveTo(cx, cy); f4Ctx.lineTo(vx, vy); f4Ctx.stroke();
+      f4Ctx.fillStyle = '#fb923c'; f4Ctx.fillText("v (Ý niệm 2)", vx + 6, vy - 6);
+
+      // Dây cung thẳng (Euclid chord)
+      f4Ctx.strokeStyle = '#f87171'; f4Ctx.lineWidth = 2; f4Ctx.setLineDash([3,3]);
+      f4Ctx.beginPath(); f4Ctx.moveTo(ux, uy); f4Ctx.lineTo(vx, vy); f4Ctx.stroke();
+      f4Ctx.setLineDash([]);
+
+      // Cung trắc địa (Arc)
+      f4Ctx.strokeStyle = '#4ade80'; f4Ctx.lineWidth = 3.5;
+      f4Ctx.beginPath(); f4Ctx.arc(cx, cy, R, -rad, 0); f4Ctx.stroke();
+
+      document.getElementById('f4-badge').innerText = `θ = ${f4Theta}° | cos(θ) = ${cosVal.toFixed(2)}`;
+      document.getElementById('f4-calc').innerHTML = `
+        <div>&bull; Tích vô hướng $\\mathbf{u} \\cdot \\mathbf{v} = \\cos(${f4Theta}^\\circ) = ${cosVal.toFixed(2)}$.</div>
+        <div>&bull; Dây cung thẳng: $\\|\\mathbf{u}-\\mathbf{v}\\|_2 = \\sqrt{2 - 2(${cosVal.toFixed(2)})} = ${chord.toFixed(2)}$. Cung tròn: $d_g = ${rad.toFixed(2)}\\text{ rad}$.</div>
+      `;
+      renderMath();
+    }
+
+    /* ========================================================================= */
+    /* FIGURE 5: QUẢ CAM SIÊU CHIỀU */
+    /* ========================================================================= */
+    let f5Dim = 768;
+    const f5Canvas = document.getElementById('f5Canvas');
+    const f5Ctx = f5Canvas ? f5Canvas.getContext('2d') : null;
+
+    function updateF5(val) {
+      f5Dim = parseInt(val, 10);
+      document.getElementById('f5-dim-txt').innerText = `d = ${f5Dim}`;
+      renderF5();
+    }
+
+    function renderF5() {
+      if (!f5Ctx) return;
+      const w = f5Canvas.width, h = f5Canvas.height;
+      const cx = 110, cy = h / 2;
+      const R = 80;
+      const eps = 0.03; // vỏ 3%
+      f5Ctx.fillStyle = '#0a0a0c'; f5Ctx.fillRect(0, 0, w, h);
+
+      // Vẽ quả cam ngoài
+      f5Ctx.fillStyle = '#ea580c';
+      f5Ctx.beginPath(); f5Ctx.arc(cx, cy, R, 0, Math.PI*2); f5Ctx.fill();
+
+      // Phần ruột
+      const ratioRuot = Math.pow(1 - eps, f5Dim);
+      const rRuot = R * Math.pow(ratioRuot, 1/Math.min(3, f5Dim));
+
+      f5Ctx.fillStyle = '#fef08a';
+      f5Ctx.beginPath(); f5Ctx.arc(cx, cy, Math.max(2, rRuot), 0, Math.PI*2); f5Ctx.fill();
+
+      f5Ctx.fillStyle = '#f8fafc'; f5Ctx.font = '10px Roboto Mono';
+      f5Ctx.fillText(`Vỏ cam (d = ${f5Dim})`, cx - 35, cy - R - 6);
+
+      // Biểu đồ cột bên phải
+      const bx = 240, by = h - 40;
+      f5Ctx.strokeStyle = 'rgba(255,255,255,0.2)'; f5Ctx.lineWidth = 1;
+      f5Ctx.strokeRect(bx, 30, 180, 140);
+
+      const hVo = (1 - ratioRuot) * 140;
+      const hRuot = ratioRuot * 140;
+
+      f5Ctx.fillStyle = '#ea580c';
+      f5Ctx.fillRect(bx + 20, by - hVo, 50, hVo);
+      f5Ctx.fillStyle = '#fef08a';
+      f5Ctx.fillRect(bx + 100, by - hRuot, 50, hRuot);
+
+      f5Ctx.fillStyle = '#f8fafc';
+      f5Ctx.fillText(`Vỏ: ${((1-ratioRuot)*100).toFixed(1)}%`, bx + 15, by + 18);
+      f5Ctx.fillText(`Ruột: ${(ratioRuot*100).toFixed(1)}%`, bx + 95, by + 18);
+
+      document.getElementById('f5-badge').innerText = `d = ${f5Dim}: Vỏ chiếm ${((1-ratioRuot)*100).toFixed(1)}%`;
+      document.getElementById('f5-stat').innerHTML = `
+        Ở $d=${f5Dim}$ chiều, với độ dày vỏ chỉ 3%, tỉ lệ thể tích tập trung ngoài vỏ đạt: <strong class="text-red-700">${((1-ratioRuot)*100).toFixed(3)}%</strong>!
+      `;
+      renderMath();
+    }
+
+    /* ========================================================================= */
+    /* FIGURE 6: LỜI NGUYỄN VUÔNG GÓC */
+    /* ========================================================================= */
+    let f6Dim = 768;
+    const f6Canvas = document.getElementById('f6Canvas');
+    const f6Ctx = f6Canvas ? f6Canvas.getContext('2d') : null;
+
+    function setF6Dim(d) {
+      f6Dim = d;
+      document.getElementById('f6-dim-lbl').innerText = `d = ${d} Chiều`;
+      [2, 20, 768].forEach(x => {
+        const btn = document.getElementById(`f6-btn-${x}`);
+        if (btn) btn.className = x === d ? "p-1 bg-amber-900 text-stone-100 border border-stone-900 font-bold" : "p-1 bg-stone-200 border border-stone-700 font-bold hover:bg-stone-300";
+      });
+      runF6MonteCarlo();
+    }
+
+    function runF6MonteCarlo() {
+      if (!f6Ctx) return;
+      const w = f6Canvas.width, h = f6Canvas.height;
+      f6Ctx.fillStyle = '#0a0a0c'; f6Ctx.fillRect(0, 0, w, h);
+
+      // Sinh 500 cặp vector ngẫu nhiên Gaussian, chuẩn hóa L2, tính tích vô hướng
+      const bins = new Array(21).fill(0); // -1.0 đến +1.0
+      for (let i = 0; i < 500; i++) {
+        let dot = 0, normU = 0, normV = 0;
+        for (let j = 0; j < f6Dim; j++) {
+          const u = (Math.random() - 0.5) * 2;
+          const v = (Math.random() - 0.5) * 2;
+          dot += u * v;
+          normU += u * u;
+          normV += v * v;
+        }
+        const cos = dot / (Math.sqrt(normU) * Math.sqrt(normV));
+        const binIdx = Math.min(20, Math.max(0, Math.floor((cos + 1.0) / 2 * 21)));
+        bins[binIdx]++;
+      }
+
+      // Vẽ histogram
+      const maxCount = Math.max(...bins, 20);
+      const barW = (w - 80) / 21;
+      const ox = 40, oy = h - 30;
+
+      for (let i = 0; i < 21; i++) {
+        const bh = (bins[i] / maxCount) * 140;
+        const bx = ox + i * barW;
+        const by = oy - bh;
+        f6Ctx.fillStyle = (i >= 9 && i <= 11) ? '#4ade80' : '#f87171';
+        f6Ctx.fillRect(bx, by, barW - 2, bh);
+      }
+
+      // Trục
+      f6Ctx.strokeStyle = 'rgba(255,255,255,0.2)'; f6Ctx.lineWidth = 1;
+      f6Ctx.beginPath(); f6Ctx.moveTo(ox, oy); f6Ctx.lineTo(w - 20, oy); f6Ctx.stroke();
+      f6Ctx.fillStyle = '#f8fafc'; f6Ctx.font = '10px Roboto Mono';
+      f6Ctx.fillText("-1.0 (Đối đầu)", ox, oy + 16);
+      f6Ctx.fillText("0.0 (Vuông góc)", ox + 10 * barW - 25, oy + 16);
+      f6Ctx.fillText("+1.0 (Trùng)", w - 75, oy + 16);
+
+      document.getElementById('f6-readout').innerHTML = `
+        Ở $d=${f6Dim}$, độ lệch chuẩn tích vô hướng $\\sigma \\approx \\frac{1}{\\sqrt{${f6Dim}}} = ${(1/Math.sqrt(f6Dim)).toFixed(3)}$. Hầu hết mọi cặp vector đều có tích $\\mathbf{u} \\cdot \\mathbf{v} \\approx 0.0$!
+      `;
+      renderMath();
+    }
+
+    /* ========================================================================= */
+    /* FIGURE 7: NÓN DỊ HƯỚNG */
+    /* ========================================================================= */
+    let f7Cone = 35;
+    const f7Canvas = document.getElementById('f7Canvas');
+    const f7Ctx = f7Canvas ? f7Canvas.getContext('2d') : null;
+
+    function updateF7(val) {
+      f7Cone = parseInt(val, 10);
+      document.getElementById('f7-angle-lbl').innerText = `Góc hẹp ${f7Cone}°`;
+      renderF7();
+    }
+
+    function renderF7() {
+      if (!f7Ctx) return;
+      const w = f7Canvas.width, h = f7Canvas.height;
+      const cx = w / 2, cy = h / 2;
+      const R = 80;
+      f7Ctx.fillStyle = '#0a0a0c'; f7Ctx.fillRect(0, 0, w, h);
+
+      // Vòng tròn
+      f7Ctx.strokeStyle = 'rgba(255,255,255,0.15)'; f7Ctx.lineWidth = 1.5;
+      f7Ctx.beginPath(); f7Ctx.arc(cx, cy, R, 0, Math.PI*2); f7Ctx.stroke();
+
+      const halfRad = (f7Cone / 2) * Math.PI / 180;
+      const baseAng = -Math.PI / 4;
+
+      // Chiếc nón hẹp
+      f7Ctx.fillStyle = 'rgba(239, 68, 68, 0.2)';
+      f7Ctx.beginPath();
+      f7Ctx.moveTo(cx, cy);
+      f7Ctx.arc(cx, cy, R, baseAng - halfRad, baseAng + halfRad);
+      f7Ctx.closePath(); f7Ctx.fill();
+
+      // Vẽ các vector bị nhốt
+      const count = 20;
+      for (let i = 0; i < count; i++) {
+        const rOffset = ((i - count/2) / (count/2)) * halfRad * 0.9;
+        const a = baseAng + rOffset;
+        const px = cx + R * Math.cos(a);
+        const py = cy + R * Math.sin(a);
+        f7Ctx.strokeStyle = '#f87171'; f7Ctx.lineWidth = 1;
+        f7Ctx.beginPath(); f7Ctx.moveTo(cx, cy); f7Ctx.lineTo(px, py); f7Ctx.stroke();
+        f7Ctx.fillStyle = '#f87171'; f7Ctx.beginPath(); f7Ctx.arc(px, py, 3, 0, Math.PI*2); f7Ctx.fill();
+      }
+
+      const meanCos = Math.cos(halfRad * 0.7);
+      document.getElementById('f7-badge').innerText = `Góc nón: ${f7Cone}° | Cos(θ) TB = ${meanCos.toFixed(2)}`;
+    }
+
+    /* ========================================================================= */
+    /* FIGURE 8: TÂM TRỌNG KHỐI */
+    /* ========================================================================= */
+    let f8Points = [];
+    const f8Canvas = document.getElementById('f8Canvas');
+    const f8Ctx = f8Canvas ? f8Canvas.getContext('2d') : null;
+
+    function f8AddPoints(mode) {
+      for (let i = 0; i < 15; i++) {
+        if (mode === 'cluster') {
+          f8Points.push({ x: 0.6 + (Math.random()-0.5)*0.3, y: 0.5 + (Math.random()-0.5)*0.3 });
+        } else {
+          f8Points.push({ x: (Math.random()-0.5)*1.6, y: (Math.random()-0.5)*1.6 });
+        }
+      }
+      renderF8();
+    }
+
+    function f8Reset() {
+      f8Points = [];
+      renderF8();
+    }
+
+    function renderF8() {
+      if (!f8Ctx) return;
+      const w = f8Canvas.width, h = f8Canvas.height;
+      const cx = w / 2, cy = h / 2;
+      const scale = 75;
+      f8Ctx.fillStyle = '#0a0a0c'; f8Ctx.fillRect(0, 0, w, h);
+
+      // Trục
+      f8Ctx.strokeStyle = 'rgba(255,255,255,0.15)'; f8Ctx.lineWidth = 1;
+      f8Ctx.beginPath(); f8Ctx.moveTo(20, cy); f8Ctx.lineTo(w-20, cy); f8Ctx.moveTo(cx, 20); f8Ctx.lineTo(cx, h-20); f8Ctx.stroke();
+
+      let sumX = 0, sumY = 0;
+      f8Points.forEach(p => {
+        sumX += p.x; sumY += p.y;
+        f8Ctx.fillStyle = '#38bdf8';
+        f8Ctx.beginPath(); f8Ctx.arc(cx + p.x * scale, cy - p.y * scale, 3.5, 0, Math.PI*2); f8Ctx.fill();
+      });
+
+      if (f8Points.length > 0) {
+        const cX = sumX / f8Points.length;
+        const cY = sumY / f8Points.length;
+
+        // Trọng tâm vàng
+        f8Ctx.strokeStyle = '#fbbf24'; f8Ctx.lineWidth = 2;
+        f8Ctx.beginPath(); f8Ctx.moveTo(cx, cy); f8Ctx.lineTo(cx + cX * scale, cy - cY * scale); f8Ctx.stroke();
+        f8Ctx.fillStyle = '#fbbf24';
+        f8Ctx.beginPath(); f8Ctx.arc(cx + cX * scale, cy - cY * scale, 7, 0, Math.PI*2); f8Ctx.fill();
+        f8Ctx.fillStyle = '#fef08a'; f8Ctx.font = '10px Roboto Mono';
+        f8Ctx.fillText(`Tâm c (${cX.toFixed(2)}, ${cY.toFixed(2)})`, cx + cX * scale + 10, cy - cY * scale);
+
+        document.getElementById('f8-badge').innerText = `Tâm c = (${cX >= 0 ? '+' : ''}${cX.toFixed(2)}, ${cY >= 0 ? '+' : ''}${cY.toFixed(2)})`;
+      } else {
+        document.getElementById('f8-badge').innerText = "Chưa có dữ liệu";
+      }
+    }
+
+    /* ========================================================================= */
+    /* FIGURE 9: KHỬ TÂM 360 ĐỘ */
+    /* ========================================================================= */
+    let f9Centered = false;
+    const f9Canvas = document.getElementById('f9Canvas');
+    const f9Ctx = f9Canvas ? f9Canvas.getContext('2d') : null;
+
+    function updateF9() {
+      f9Centered = document.getElementById('f9-toggle').checked;
+      const pill = document.getElementById('f9-status-pill');
+      const desc = document.getElementById('f9-desc');
+      if (f9Centered) {
+        pill.className = "text-[11px] font-code bg-green-900 text-stone-100 px-2 py-0.5 font-bold";
+        pill.innerText = "Đã Khử Tâm: Đẳng Hướng 360°!";
+        desc.innerHTML = "<strong>Thành công rực rỡ!</strong> Điểm tâm $\\mathbf{c}_{\\text{tâm}}$ đã được trừ triệt tiêu, kéo toàn bộ các vector bung tỏa đều khắp 360 độ trên mặt cầu!";
+      } else {
+        pill.className = "text-[11px] font-code bg-red-900 text-stone-100 px-2 py-0.5";
+        pill.innerText = "Chưa Khử Tâm (Bị Co Cụm)";
+        desc.innerText = "Mọi vector bị dồn ứ trong góc nón hẹp. Hãy đánh dấu vào checkbox để thực hiện phép trừ tâm!";
+      }
+      renderF9();
+      renderMath();
+    }
+
+    function renderF9() {
+      if (!f9Ctx) return;
+      const w = f9Canvas.width, h = f9Canvas.height;
+      const cx = w / 2, cy = h / 2;
+      const R = 80;
+      f9Ctx.fillStyle = '#0a0a0c'; f9Ctx.fillRect(0, 0, w, h);
+
+      // Vòng tròn
+      f9Ctx.strokeStyle = 'rgba(255,255,255,0.15)'; f9Ctx.lineWidth = 1.5;
+      f9Ctx.beginPath(); f9Ctx.arc(cx, cy, R, 0, Math.PI*2); f9Ctx.stroke();
+
+      const count = 28;
+      for (let i = 0; i < count; i++) {
+        let ang;
+        if (f9Centered) {
+          ang = (i / count) * Math.PI * 2;
+        } else {
+          ang = -Math.PI / 4 + ((i - count/2) / (count/2)) * (30 * Math.PI / 180);
+        }
+        const px = cx + R * Math.cos(ang);
+        const py = cy + R * Math.sin(ang);
+
+        f9Ctx.strokeStyle = f9Centered ? 'rgba(74, 222, 128, 0.4)' : 'rgba(248, 113, 113, 0.4)';
+        f9Ctx.lineWidth = 1;
+        f9Ctx.beginPath(); f9Ctx.moveTo(cx, cy); f9Ctx.lineTo(px, py); f9Ctx.stroke();
+
+        f9Ctx.fillStyle = f9Centered ? '#4ade80' : '#f87171';
+        f9Ctx.beginPath(); f9Ctx.arc(px, py, 4, 0, Math.PI*2); f9Ctx.fill();
+      }
+    }
+
+    /* ========================================================================= */
+    /* FIGURE 10: CÂN TIỂU LY NHÀ BẾP */
+    /* ========================================================================= */
+    let f10Mu = 2.4, f10Sig = 1.8;
+    const f10Canvas = document.getElementById('f10Canvas');
+    const f10Ctx = f10Canvas ? f10Canvas.getContext('2d') : null;
+
+    function updateF10() {
+      f10Mu = parseFloat(document.getElementById('f10-slider-mu').value) / 10;
+      f10Sig = parseFloat(document.getElementById('f10-slider-sig').value) / 10;
+      document.getElementById('f10-mu-disp').innerText = (f10Mu >= 0 ? '+' : '') + f10Mu.toFixed(1);
+      document.getElementById('f10-sig-disp').innerText = f10Sig.toFixed(1);
+      document.getElementById('f10-badge').innerText = `μ = ${(f10Mu>=0?'+':'')}${f10Mu.toFixed(2)} | σ = ${f10Sig.toFixed(2)}`;
+      renderF10();
+    }
+
+    function renderF10() {
+      if (!f10Ctx) return;
+      const w = f10Canvas.width, h = f10Canvas.height;
+      const cx = w / 2, cy = h - 35;
+      f10Ctx.fillStyle = '#0a0a0c'; f10Ctx.fillRect(0, 0, w, h);
+
+      // Trục ngang
+      f10Ctx.strokeStyle = 'rgba(255,255,255,0.2)'; f10Ctx.lineWidth = 1.5;
+      f10Ctx.beginPath(); f10Ctx.moveTo(20, cy); f10Ctx.lineTo(w-20, cy); f10Ctx.stroke();
+
+      // Mốc 0 chuẩn
+      f10Ctx.strokeStyle = '#64748b'; f10Ctx.lineWidth = 2;
+      f10Ctx.beginPath(); f10Ctx.moveTo(cx, cy); f10Ctx.lineTo(cx, 25); f10Ctx.stroke();
+      f10Ctx.fillStyle = '#94a3b8'; f10Ctx.font = '10px Roboto Mono';
+      f10Ctx.fillText("0 (Gốc mốc chuẩn)", cx - 45, cy + 18);
+
+      const muPx = cx + f10Mu * 25;
+      const sigPx = f10Sig * 18;
+
+      // Phân phối thô
+      f10Ctx.strokeStyle = '#f87171'; f10Ctx.lineWidth = 2.5; f10Ctx.setLineDash([4,3]);
+      f10Ctx.beginPath();
+      for (let x = 30; x < w - 30; x += 3) {
+        const z = (x - muPx) / Math.max(8, sigPx);
+        const y = cy - 130 * Math.exp(-0.5 * z * z);
+        if (x === 30) f10Ctx.moveTo(x, y); else f10Ctx.lineTo(x, y);
+      }
+      f10Ctx.stroke();
+      f10Ctx.setLineDash([]);
+      f10Ctx.fillStyle = '#f87171';
+      f10Ctx.fillText(`Phân phối thô lệch tâm (μ = ${f10Mu.toFixed(1)}, σ = ${f10Sig.toFixed(1)})`, muPx - 60, 45);
+    }
+
+    /* ========================================================================= */
+    /* FIGURE 11: PHÒNG PHẪU THUẬT LAYERNORM */
+    /* ========================================================================= */
+    let f11Stage = 3;
+    const f11Canvas = document.getElementById('f11Canvas');
+    const f11Ctx = f11Canvas ? f11Canvas.getContext('2d') : null;
+
+    function setF11Stage(s) {
+      f11Stage = s;
+      [1, 2, 3].forEach(x => {
+        const btn = document.getElementById(`f11-b${x}`);
+        if (btn) btn.className = x === s ? "p-1.5 bg-amber-900 text-stone-100 border border-stone-900 font-bold" : "p-1.5 bg-stone-200 border border-stone-700 font-bold hover:bg-stone-300";
+      });
+      const badge = document.getElementById('f11-step-badge');
+      const expl = document.getElementById('f11-expl');
+      if (s === 1) {
+        badge.innerText = "Nấc 1: Vector Thô Ban Đầu";
+        expl.innerText = "Nấc 1: Tín hiệu bị lệch dương lớn (trung bình μ = 4.2), các giá trị phân tán hỗn loạn.";
+      } else if (s === 2) {
+        badge.innerText = "Nấc 2: Đã Trừ Tâm (x - μ)";
+        expl.innerText = "Nấc 2: Điểm trung bình kéo tụt về 0.00, nhưng các giá trị vẫn còn quá to.";
+      } else {
+        badge.innerText = "Nấc 3: Chuẩn Hóa Hoàn Tất (μ = 0, σ = 1)";
+        expl.innerText = "Nấc 3: Chia cho độ lệch chuẩn σ giúp tất cả các chiều nằm trọn vẹn trong dải an toàn [-1.5, +1.5]!";
+      }
+      renderF11();
+    }
+
+    function renderF11() {
+      if (!f11Ctx) return;
+      const w = f11Canvas.width, h = f11Canvas.height;
+      const cy = h / 2;
+      f11Ctx.fillStyle = '#0a0a0c'; f11Ctx.fillRect(0, 0, w, h);
+
+      // Trục 0
+      f11Ctx.strokeStyle = 'rgba(255,255,255,0.2)'; f11Ctx.lineWidth = 1;
+      f11Ctx.beginPath(); f11Ctx.moveTo(30, cy); f11Ctx.lineTo(w-30, cy); f11Ctx.stroke();
+      f11Ctx.fillStyle = '#94a3b8'; f11Ctx.font = '10px Roboto Mono';
+      f11Ctx.fillText("0.0", 10, cy + 4);
+
+      const rawVals = [5.2, 3.8, 6.5, 2.1, 4.9, 7.2, 1.5, 4.0];
+      const mu = rawVals.reduce((a,b)=>a+b, 0) / rawVals.length; // ~4.4
+      const sig = Math.sqrt(rawVals.reduce((a,b)=>a + (b-mu)*(b-mu), 0) / rawVals.length); // ~1.7
+
+      const barW = 32;
+      const startX = 60;
+
+      rawVals.forEach((val, idx) => {
+        let displayVal = val;
+        if (f11Stage === 2) displayVal = val - mu;
+        if (f11Stage === 3) displayVal = (val - mu) / sig;
+
+        const x = startX + idx * 46;
+        const barH = displayVal * (f11Stage === 3 ? 35 : 12);
+        const y = cy - barH;
+
+        f11Ctx.fillStyle = displayVal >= 0 ? '#38bdf8' : '#f43f5e';
+        f11Ctx.fillRect(x, Math.min(cy, y), barW, Math.abs(barH));
+
+        f11Ctx.fillStyle = '#f8fafc';
+        f11Ctx.fillText(displayVal.toFixed(1), x + 4, y + (displayVal >= 0 ? -6 : 14));
+      });
+    }
+
+    /* ========================================================================= */
+    /* FIGURE 12: CỨU NGUY SOFTMAX */
+    /* ========================================================================= */
+    let f12Val = 10;
+    const f12Canvas = document.getElementById('f12Canvas');
+    const f12Ctx = f12Canvas ? f12Canvas.getContext('2d') : null;
+
+    function updateF12(v) {
+      f12Val = parseInt(v, 10);
+      const z = f12Val / 10;
+      document.getElementById('f12-val-lbl').innerText = `z = ${z.toFixed(1)} ${z > 3 ? '(Quá lớn - Bão hòa!)' : '(An toàn)'}`;
+      renderF12(z);
+    }
+
+    function renderF12(z) {
+      if (!f12Ctx) return;
+      const w = f12Canvas.width, h = f12Canvas.height;
+      f12Ctx.fillStyle = '#0a0a0c'; f12Ctx.fillRect(0, 0, w, h);
+
+      // Đồ thị hàm Sigmoid/Softmax
+      const ox = 40, oy = h - 30;
+      f12Ctx.strokeStyle = 'rgba(255,255,255,0.2)'; f12Ctx.lineWidth = 1;
+      f12Ctx.beginPath(); f12Ctx.moveTo(ox, oy); f12Ctx.lineTo(w-30, oy); f12Ctx.moveTo(w/2, 20); f12Ctx.lineTo(w/2, oy); f12Ctx.stroke();
+
+      f12Ctx.strokeStyle = '#38bdf8'; f12Ctx.lineWidth = 2.5;
+      f12Ctx.beginPath();
+      for (let x = -6; x <= 6; x += 0.2) {
+        const px = w/2 + x * 30;
+        const prob = 1 / (1 + Math.exp(-x));
+        const py = oy - prob * 140;
+        if (x === -6) f12Ctx.moveTo(px, py); else f12Ctx.lineTo(px, py);
+      }
+      f12Ctx.stroke();
+
+      // Điểm hiện tại
+      const curPx = w/2 + z * 30;
+      const curProb = 1 / (1 + Math.exp(-z));
+      const curPy = oy - curProb * 140;
+      const grad = curProb * (1 - curProb);
+
+      f12Ctx.fillStyle = z > 3 ? '#ef4444' : '#4ade80';
+      f12Ctx.beginPath(); f12Ctx.arc(curPx, curPy, 7, 0, Math.PI*2); f12Ctx.fill();
+
+      // Tiếp tuyến độ dốc
+      f12Ctx.strokeStyle = z > 3 ? '#ef4444' : '#4ade80'; f12Ctx.lineWidth = 2;
+      f12Ctx.beginPath();
+      f12Ctx.moveTo(curPx - 30, curPy + grad * 30);
+      f12Ctx.lineTo(curPx + 30, curPy - grad * 30);
+      f12Ctx.stroke();
+
+      const badge = document.getElementById('f12-badge');
+      const txt = document.getElementById('f12-status-txt');
+      if (z > 3.0) {
+        badge.className = "text-[11px] font-code bg-red-900 text-stone-100 px-2 py-0.5 font-bold";
+        badge.innerText = "BÃO HÒA: Triệt Tiêu Gradient!";
+        txt.innerHTML = `<strong class="text-red-700">NGUY HIỂM:</strong> Đạo hàm tiệm cận về 0: $\\frac{\\partial \\mathcal{L}}{\\partial z} \\approx ${grad.toFixed(4)}$. Mạng nơ-ron hoàn toàn ngưng cập nhật trọng số!`;
+      } else {
+        badge.className = "text-[11px] font-code bg-green-900 text-stone-100 px-2 py-0.5 font-bold";
+        badge.innerText = "Trạng thái: Có LayerNorm (Vùng Nhạy Cảm)";
+        txt.innerHTML = `Tín hiệu an toàn: Đạo hàm $\\frac{\\partial \\mathcal{L}}{\\partial z} \\approx ${grad.toFixed(3)}$ nằm trong vùng dốc vàng, học tập tối ưu!`;
+      }
+      renderMath();
+    }
+
+    /* ========================================================================= */
+    /* CƠ SỞ DỮ LIỆU ĐỀ THI CHECKPOINT (12 CHƯƠNG X 5 CÂU = 60 CÂU) */
+    /* ========================================================================= */
+    const checkpointDB = {
+      1: [
+        { q: "Trong không gian ngôn ngữ, độ dài (Magnitude) của vector phản ánh điều gì?", a: 1, opts: ["Bản chất cốt lõi của chủ đề", "Độ dài dòng, số lượng từ ngữ ngẫu nhiên", "Độ phân giải của bức tranh", "Khối lượng của máy tính"], exp: "Chính xác! Độ dài vector chỉ phản ánh việc người viết dùng nhiều hay ít từ, không quyết định bản chất ý niệm." },
+        { q: "Nếu dùng thước đo thẳng Euclid để so sánh câu ngắn và câu dài cùng nói về 'mèo', điều gì sẽ xảy ra?", a: 0, opts: ["Thước đo báo khoảng cách rất xa, đánh lừa máy tính", "Thước đo báo khoảng cách bằng 0", "Máy tính tự động xóa câu dài", "Mô hình tạo ra ảnh độ nét cao"], exp: "Đúng! Sự chênh lệch độ dài ngẫu nhiên làm khoảng cách dây cung phình to giả tạo." },
+        { q: "Yếu tố nào sau đây quyết định bản chất ý niệm trong không gian ngữ nghĩa?", a: 2, opts: ["Màu sắc font chữ", "Độ nặng của file", "Hướng đi (Direction) của vector", "Số ký tự khoảng trắng"], exp: "Chính xác! Hướng mũi tên là chiếc la bàn định vị ý nghĩa trừu tượng." },
+        { q: "Ẩn dụ về chiếc xe máy chở 1 lá thư và chiếc xe tải chở 100 lá thư nói lên điều gì?", a: 1, opts: ["Nên đi xe máy cho đỡ tắc đường", "Không nên dùng bàn cân trọng lượng (Magnitude) để đo nội dung hàng hóa", "Thư tình viết càng dài càng hay", "Xe tải chạy chậm hơn xe máy"], exp: "Xuất sắc! Bàn cân trọng lượng bị đánh lừa bởi phương tiện thay vì nhìn vào bản chất lá thư." },
+        { q: "Mục đích đầu tiên của việc xử lý vector ngôn ngữ là gì?", a: 0, opts: ["Vô hiệu hóa sự chênh lệch độ dài ngẫu nhiên", "Tăng số chiều lên vô cực", "Đổi số thực thành số nguyên", "Xóa hết nguyên âm"], exp: "Đúng! Phải đưa các vector về cùng một thang đo độ dài công bằng." }
+      ],
+      2: [
+        { q: "Chuẩn L2 (L2 Norm) của vector được tính bằng cách nào?", a: 1, opts: ["Cộng tất cả các số lại rồi chia đôi", "Rút căn bậc hai của tổng bình phương các tọa độ", "Lấy số lớn nhất trừ số nhỏ nhất", "Nhân tất cả các số lại với nhau"], exp: "Chính xác! Đó chính là định lý Pythagoras mở rộng cho không gian nhiều chiều." },
+        { q: "Cho vector v = (3, 4) trong 2D. Chuẩn L2 ||v|| bằng bao nhiêu?", a: 2, opts: ["7", "12", "5", "25"], exp: "Đúng! ||v|| = √(3² + 4²) = √25 = 5." },
+        { q: "Trong không gian 768 chiều, công thức chuẩn L2 có bao nhiêu số hạng dưới dấu căn?", a: 0, opts: ["768 số hạng bình phương", "2 số hạng", "3 số hạng", "Vô số"], exp: "Chính xác! Mỗi chiều trong 768 chiều đóng góp một số hạng v_i²." },
+        { q: "Ký hiệu chuẩn L2 của vector v trong toán học là gì?", a: 1, opts: ["|v|", "||v||₂", "v²", "det(v)"], exp: "Đúng! Chuẩn Euclid thường được ký hiệu là ||v||₂." },
+        { q: "Khi tọa độ của vector tăng gấp đôi (2v), chuẩn L2 của nó thay đổi thế nào?", a: 2, opts: ["Không đổi", "Tăng gấp 4", "Tăng gấp 2", "Giảm một nửa"], exp: "Chính xác! ||2v|| = 2||v|| (Tính chất thuần nhất)." }
+      ],
+      3: [
+        { q: "Phép chuẩn hóa L2 (L2 Normalization) biến đổi vector bằng cách nào?", a: 0, opts: ["Lấy vector chia cho chính độ dài L2 của nó", "Cộng thêm 1 vào mọi chiều", "Lấy 1 trừ đi vector", "Bình phương vector"], exp: "Chính xác! e = v / ||v||₂." },
+        { q: "Sau khi thực hiện chuẩn hóa L2, độ dài mới của vector luôn bằng bao nhiêu?", a: 2, opts: ["0.0", "768.0", "1.0 tuyệt đối", "Tùy thuộc câu văn"], exp: "Đúng! Mọi vector sau chuẩn hóa đều có ||e||₂ = 1.0." },
+        { q: "Tập hợp các vector có chuẩn L2 bằng 1 trong không gian d chiều tạo thành hình học gì?", a: 1, opts: ["Hình lập phương", "Siêu Cầu Đơn Vị (Unit Hypersphere)", "Hình chóp tam giác", "Mặt phẳng 2D"], exp: "Chính xác! Ký hiệu là S^(d-1)." },
+        { q: "Ẩn dụ đàn chim hạ cánh lên lồng bàn bán kính 1m minh họa cho điều gì?", a: 0, opts: ["Ép mọi vector có độ dài lộn xộn đậu lên vỏ quả cầu đơn vị R=1", "Các chú chim rất thích ăn bánh", "Độ cao của chim là bất biến", "Hình học không gian không áp dụng cho loài chim"], exp: "Tuyệt vời! Chiếc lồng bàn R=1 chính là Siêu Cầu Đơn Vị." },
+        { q: "Cho v = (0, 6). Vector đơn vị e sau chuẩn hóa là gì?", a: 1, opts: ["(0, 6)", "(0, 1)", "(1, 1)", "(0, 0)"], exp: "Đúng! ||v|| = 6 => e = (0/6, 6/6) = (0, 1)." }
+      ],
+      4: [
+        { q: "Khi hai vector u và v đều có độ dài bằng 1, tích vô hướng u · v bằng gì?", a: 2, opts: ["Bằng 0", "Bằng 1", "Bằng chính cos(θ)", "Bằng vô cực"], exp: "Chính xác! u · v = 1 * 1 * cos(θ) = cos(θ)." },
+        { q: "Cung trắc địa (Geodesic Arc) giữa hai điểm trên mặt cầu đơn vị được tính như thế nào?", a: 0, opts: ["d_g = θ = arccos(u · v)", "d_g = u + v", "d_g = u / v", "d_g = sin(θ)"], exp: "Đúng! Đường đi ngắn nhất uốn lượn men theo vỏ cầu bằng đúng góc θ tính bằng radian." },
+        { q: "Tại sao máy bay bay từ Hà Nội đi New York không đào đường hầm xuyên tâm Trái Đất?", a: 1, opts: ["Vì không có xẻng", "Vì mọi vật thể trên địa cầu đều di chuyển men theo vỏ cầu bán kính R", "Vì đường hầm đắt hơn", "Vì lòng đất có quái vật"], exp: "Chính xác! Trong hình học siêu cầu, ta chỉ quan tâm đường đi trên mặt cầu." },
+        { q: "Nếu hai vector đơn vị u và v vuông góc nhau (θ = 90°), tích vô hướng bằng bao nhiêu?", a: 1, opts: ["1.0", "0.0", "-1.0", "0.5"], exp: "Đúng! cos(90°) = 0." },
+        { q: "Mối liên hệ giữa khoảng cách dây cung thẳng và góc cos(θ) trên siêu cầu đơn vị là gì?", a: 0, opts: ["||u - v||² = 2 - 2·cos(θ)", "||u - v||² = cos²(θ)", "||u - v|| = 2", "||u - v|| = sin(θ)"], exp: "Chính xác! Khai triển: 1² + 1² - 2(u·v) = 2 - 2cos(θ)." }
+      ],
+      5: [
+        { q: "Trong không gian 768 chiều, thể tích của quả cầu tập trung chủ yếu ở đâu?", a: 1, opts: ["Ở chính giữa tâm lõi", "Ở sát lớp vỏ mỏng ngoài cùng", "Rải đều khắp nơi", "Không thể xác định"], exp: "Đúng! Hiện tượng Concentration of Measure khiến 99.9% thể tích dạt ra vỏ." },
+        { q: "Nếu quả cam 768D bị gọt đi lớp vỏ mỏng 1%, phần ruột bên trong còn lại khoảng bao nhiêu?", a: 0, opts: ["Gần như bằng 0% (khoảng 0.04%)", "Còn lại 99%", "Còn lại 50%", "Còn lại 75%"], exp: "Chính xác! (0.99)^768 ≈ 0.00045." },
+        { q: "Ẩn dụ 'Quả cam siêu chiều thực chất là quả bóng rỗng ruột' nói lên điều gì?", a: 2, opts: ["Không nên mua cam", "Toán học bị sai", "Dữ liệu đa chiều vốn dĩ đã tự nhiên phân bố dạt ra vỏ siêu cầu", "Không gian 3D giống hệt 768D"], exp: "Xuất sắc! Việc chuẩn hóa L2 lên vỏ cầu hoàn toàn phù hợp với bản chất hình học siêu chiều." },
+        { q: "Công thức tính tỉ lệ thể tích phần ruột bán kính (R - ε) so với quả cầu R trong d chiều là gì?", a: 0, opts: ["((R - ε) / R)^d", "(R - ε) * d", "d / (R - ε)", "R^d - ε"], exp: "Đúng! Tỉ lệ này giảm theo hàm lũy thừa bậc d." },
+        { q: "Tại sao trong 3D ta không thấy hiện tượng quả cam rỗng ruột?", a: 1, opts: ["Vì quả cam 3D có nhiều nước hơn", "Vì số mũ d=3 quá nhỏ, (0.99)³ vẫn còn chiếm tới 97% thể tích ruột", "Vì mắt người bị lừa", "Vì dao gọt hoa quả không sắc"], exp: "Chính xác! Chỉ khi d lớn (hàng trăm chiều), lũy thừa mới kéo ruột về 0." }
+      ],
+      6: [
+        { q: "Nếu bốc ngẫu nhiên hai vector độc lập trong không gian 768 chiều, góc giữa chúng xấp xỉ bao nhiêu?", a: 2, opts: ["0 độ", "45 độ", "90 độ (Vuông góc)", "180 độ"], exp: "Đúng! Hiện tượng 'Lời nguyền vuông góc' khiến mọi cặp ngẫu nhiên đều trực giao." },
+        { q: "Tại sao tích vô hướng của hai vector ngẫu nhiên trong 768D lại xấp xỉ bằng 0?", a: 0, opts: ["Vì tổng của 768 tích con có các số âm và dương tự triệt tiêu lẫn nhau", "Vì máy tính làm tròn số", "Vì các vector đều bằng 0", "Vì các số đều là số nguyên"], exp: "Chính xác! Theo định lý giới hạn trung tâm, tổng dao động quanh mốc 0." },
+        { q: "Ẩn dụ tung 768 đồng xu cùng lúc minh họa cho điều gì?", a: 1, opts: ["Nên chơi trò cá cược", "Số mặt ngửa và sấp hầu như luôn cân bằng 50-50, triệt tiêu độ lệch", "Đồng xu luôn rơi đứng", "Không gian 768D rất may rủi"], exp: "Tuyệt vời! Sự cân bằng thống kê triệt tiêu tích vô hướng." },
+        { q: "Tính chất trực giao ngẫu nhiên mang lại lợi ích gì cho mô hình AI?", a: 2, opts: ["Làm mô hình chạy chậm lại", "Xóa bớt bộ nhớ", "Cho phép chứa hàng vạn ý niệm độc lập mà không dẫm chân lên nhau", "Tăng độ sáng màn hình"], exp: "Chính xác! Các khái niệm không liên quan tự động không làm nhiễu lẫn nhau." },
+        { q: "Phương sai của tích vô hướng hai vector đơn vị ngẫu nhiên trong d chiều tỉ lệ với gì?", a: 0, opts: ["1 / d", "d²", "√d", "d"], exp: "Đúng! Var ≈ 1/d, d càng lớn thì phương sai càng teo tóp quanh 0." }
+      ],
+      7: [
+        { q: "Hiện tượng Sụp đổ dị hướng (Representation Anisotropy) là gì?", a: 1, opts: ["Các vector nổ tung thành số vô cực", "Các vector từ vựng tự nhiên bị dồn cục vào một chiếc nón hẹp duy nhất", "Màn hình máy tính bị đen", "Mô hình quên mất tiếng Anh"], exp: "Chính xác! Dị hướng là hiện tượng mất cân bằng phân bố không gian." },
+        { q: "Hậu quả tai hại của căn bệnh chiếc nón dị hướng là gì?", a: 0, opts: ["Hai từ hoàn toàn không liên quan vẫn có độ tương đồng Cosine dương rất cao", "Mô hình không thể vẽ được hình vuông", "Máy tính bị nóng", "Câu prompt bị cắt ngắn"], exp: "Đúng! Khoảng cách góc bị bão hòa dương giả tạo (0.7 - 0.85)." },
+        { q: "Nguyên nhân cốt lõi gây ra hiện tượng dị hướng trong mô hình ngôn ngữ là gì?", a: 2, opts: ["Do lỗi phần cứng GPU", "Do mạng Internet chập chờn", "Do cấu trúc ngữ pháp dùng chung và tần suất xuất hiện từ vựng bị lệch", "Do bàn phím máy tính"], exp: "Chính xác! Các từ nối, cấu trúc câu tạo ra lực kéo thiên kiến dùng chung." },
+        { q: "Ẩn dụ kỳ thi tốt nghiệp mà đề thi chỉ có câu '1 + 1 = 2' minh họa cho điều gì?", a: 1, opts: ["Học sinh rất lười học", "Thang điểm bị dồn cục về điểm 10, làm mất khả năng phân loại thí sinh", "Nên bỏ kỳ thi tốt nghiệp", "Toán học rất dễ"], exp: "Xuất sắc! Sự dồn cục làm mất năng lực phân biệt ý nghĩa của các từ." },
+        { q: "Trong trạng thái đẳng hướng lý tưởng (Isotropic), các vector phân bố như thế nào?", a: 0, opts: ["Tỏa đều 360 độ khắp mọi ngóc ngách siêu cầu", "Dồn hết về bán cầu Bắc", "Nằm trên một đường thẳng", "Nằm tại gốc tọa độ"], exp: "Đúng! Đẳng hướng là phân bố đối xứng hoàn hảo." }
+      ],
+      8: [
+        { q: "Tâm trọng khối (Centroid) của một tập hợp vector là gì?", a: 1, opts: ["Điểm có tọa độ lớn nhất", "Vector trung bình cộng của toàn bộ các vector trong tập hợp", "Vector nhỏ nhất", "Gốc tọa độ (0,0)"], exp: "Chính xác! c = (1/M) * Σ e_k." },
+        { q: "Khi đám mây vector bị dồn cục về góc Đông Bắc, tâm trọng khối c sẽ nằm ở đâu?", a: 0, opts: ["Bị trôi dạt lệch hẳn về góc Đông Bắc", "Vẫn nằm yên ở tâm (0,0)", "Nhảy sang góc Tây Nam", "Biến mất"], exp: "Đúng! Trọng tâm bị hút theo hướng tập trung đông đúc nhất." },
+        { q: "Ẩn dụ chiếc bập bênh trẻ em minh họa điều gì về tâm trọng khối?", a: 2, opts: ["Trẻ em rất thích chơi bập bênh", "Bập bênh luôn đứng yên", "Nếu cả lớp dồn về một phía, điểm thăng bằng sẽ bị chúi nghiêng theo hướng đó", "Không nên chơi bập bênh"], exp: "Chính xác! c_tâm phản ánh hướng nghiêng của cả lớp dữ liệu." },
+        { q: "Công thức tính tọa độ chiều thứ j của vector tâm trọng khối c là gì?", a: 1, opts: ["c_j = max(e_j)", "c_j = (1/M) * Σ e_k,j", "c_j = e_j²", "c_j = 0"], exp: "Đúng! Lấy trung bình cộng của chiều j trên tất cả M mẫu." },
+        { q: "Nếu dữ liệu phân bố đẳng hướng hoàn hảo quanh gốc tọa độ, tâm trọng khối c sẽ xấp xỉ bằng gì?", a: 0, opts: ["Vector toàn số 0: (0, 0, ..., 0)", "Vector toàn số 1", "Vô cùng", "Bằng chính vector đầu tiên"], exp: "Chính xác! Khi đối xứng hoàn hảo, tổng các vector triệt tiêu về 0." }
+      ],
+      9: [
+        { q: "Phép khử tâm hậu kỳ (Post-hoc Centering) thực hiện phép tính gì?", a: 0, opts: ["Lấy từng vector trừ đi vector tâm trọng khối: e - c_tâm", "Lấy vector nhân với c_tâm", "Lấy vector cộng với 1", "Xóa vector c_tâm"], exp: "Đúng! Trừ tâm giúp dời gốc quy chiếu về đúng điểm thăng bằng của dữ liệu." },
+        { q: "Sau khi trừ tâm (e - c_tâm), bước tiếp theo bắt buộc phải làm là gì?", a: 2, opts: ["Nhân với 10", "Xóa bớt chiều", "Chuẩn hóa lại L2 để vector đậu lại lên vỏ siêu cầu", "Không cần làm gì"], exp: "Chính xác! Trừ tâm làm thay đổi độ dài, cần chia lại cho chuẩn để ||e'||=1." },
+        { q: "Tác dụng hình học của phép khử tâm là gì?", a: 1, opts: ["Thu hẹp các vector lại gần nhau hơn", "Mở toang chiếc nón hẹp, giải phóng các vector tỏa đều 360 độ", "Biến hình tròn thành hình vuông", "Làm mất dữ liệu"], exp: "Tuyệt vời! Centering triệt tiêu thiên kiến chung, phục hồi tính đẳng hướng." },
+        { q: "Ẩn dụ trừ điểm trung bình trong kỳ thi đại học minh họa cho điều gì?", a: 0, opts: ["Kéo tâm về mốc 0 để phân loại rõ ràng bạn giỏi (dương) và bạn kém (âm)", "Cộng điểm cho tất cả thí sinh", "Hạ chuẩn tuyển sinh", "Đổi thang điểm 10 sang thang 100"], exp: "Đúng! Trừ tâm giúp làm nổi bật độ tương phản ngữ nghĩa." },
+        { q: "Điều gì xảy ra với độ tương đồng Cosine giữa hai từ bất tương quan sau khi khử tâm?", a: 2, opts: ["Tăng lên 1.0", "Không đổi", "Tụt từ mức cao (0.8) về xấp xỉ 0.0 (đúng bản chất)", "Bị lỗi phép chia"], exp: "Chính xác! Trả lại sự độc lập vuông góc thực sự cho các từ không liên quan." }
+      ],
+      10: [
+        { q: "Kỳ vọng trung bình μ (Mean) của một token 768 chiều đo lường điều gì?", a: 1, opts: ["Độ phân tán của dữ liệu", "Giá trị trung tâm (tâm trọng lực) của 768 con số đặc trưng", "Số lượng từ trong câu", "Thời gian huấn luyện"], exp: "Đúng! μ là mốc trung bình cộng 768 chiều của token." },
+        { q: "Phương sai σ² (Variance) đo lường đặc tính nào của vector?", a: 0, opts: ["Độ xòe rộng hay co cụm của các giá trị xung quanh mốc trung bình μ", "Độ dài của câu lệnh prompt", "Số lượng tầng Transformer", "Màu sắc của ảnh"], exp: "Chính xác! σ² đo mức độ biến thiên dao động." },
+        { q: "Độ lệch chuẩn σ có mối quan hệ như thế nào với phương sai σ²?", a: 2, opts: ["σ = σ² * 2", "σ = σ² + 1", "σ = √(σ²)", "σ = 1 / σ²"], exp: "Đúng! Độ lệch chuẩn là căn bậc hai của phương sai." },
+        { q: "Ẩn dụ chiếc nút 'Tare' trên cân tiểu ly nhà bếp tương ứng với thao tác nào?", a: 1, opts: ["Chia cho độ lệch chuẩn", "Trừ đi giá trị trung bình μ để kéo màn hình về mốc 0.00", "Tắt nguồn chiếc cân", "Đặt thêm quả cân nặng"], exp: "Xuất sắc! Nút Tare chính là thao tác khử tâm x - μ." },
+        { q: "Nếu một vector có tất cả các chiều đều bằng 5.0, phương sai σ² của nó bằng bao nhiêu?", a: 0, opts: ["Bằng 0.0 tuyệt đối (không có dao động)", "Bằng 5.0", "Bằng 25.0", "Bằng 768.0"], exp: "Chính xác! Dữ liệu phẳng lì thì không có độ phân tán." }
+      ],
+      11: [
+        { q: "Trong công thức LayerNorm, con số ε (epsilon ≈ 10⁻⁵) đóng vai trò gì?", a: 1, opts: ["Để làm tròn số nguyên", "Phao cứu sinh chống lỗi chia cho 0 khi phương sai σ² bằng 0", "Tăng tốc độ mạng Internet", "Tạo số ngẫu nhiên"], exp: "Đúng! Tránh lỗi ZeroDivisionError trong phần mềm." },
+        { q: "Hai hệ số γ (gamma) và β (beta) trong LayerNorm có tính chất gì?", a: 0, opts: ["Là các tham số có thể học được (Learnable parameters) để tự điều chỉnh tỷ lệ sau chuẩn hóa", "Là các hằng số cố định bất di bất dịch", "Luôn luôn bằng 0", "Do người dùng tự nhập bằng tay"], exp: "Chính xác! Mạng nơ-ron tự tối ưu γ và β qua Backpropagation." },
+        { q: "Khác biệt căn bản giữa LayerNorm và BatchNorm là gì?", a: 2, opts: ["LayerNorm chạy chậm hơn", "BatchNorm không dùng phép chia", "LayerNorm chuẩn hóa độc lập trên từng token; BatchNorm gom cả batch nhiều mẫu ảnh lại", "Hai phép tính hoàn toàn giống hệt nhau"], exp: "Tuyệt vời! LayerNorm hoàn toàn tự chủ trên từng token riêng biệt." },
+        { q: "Thao tác (x_i - μ) / √(σ² + ε) đưa phân phối dữ liệu về trạng thái nào?", a: 0, opts: ["Trung bình μ = 0 và độ lệch chuẩn σ = 1", "Trung bình μ = 100", "Tất cả các số thành số âm", "Tất cả các số thành số 1"], exp: "Đúng! Đây là phân phối chuẩn tắc (Standard Normal)." },
+        { q: "Tại sao LayerNorm đặc biệt phù hợp cho các mô hình xử lý văn bản như Transformer?", a: 1, opts: ["Vì văn bản không có màu sắc", "Vì các câu có độ dài ngắn khác nhau, chuẩn hóa độc lập theo từng từ không phụ thuộc batch size", "Vì LayerNorm tiết kiệm giấy in", "Vì tiếng Anh có 26 chữ cái"], exp: "Chính xác! Độc lập với độ dài chuỗi và kích thước lô dữ liệu." }
+      ],
+      12: [
+        { q: "Điều gì xảy ra với hàm Softmax nếu tín hiệu đầu vào z quá lớn (ví dụ z = +50)?", a: 1, opts: ["Hàm Softmax chạy nhanh hơn", "Rơi vào vùng bão hòa bằng phẳng, đạo hàm tiệm cận về 0 (Gradient Vanishing)", "Mô hình tạo ra ảnh 8K", "Tất cả xác suất chia đều"], exp: "Đúng! Đạo hàm triệt tiêu khiến mạng nơ-ron ngừng học." },
+        { q: "LayerNorm cứu mạng mạng nơ-ron sâu bằng cách nào?", a: 0, opts: ["Giữ cho phương sai và tín hiệu luôn nằm trong vùng dốc nhạy cảm của Softmax", "Xóa bỏ các tầng Transformer thừa", "Giảm số chiều từ 768 về 2", "Ngắt kết nối khi quá tải"], exp: "Chính xác! Đảm bảo dòng chảy gradient thông suốt không bị triệt tiêu hay nổ tung." },
+        { q: "Ẩn dụ 'Chiếc núm vặn điều chỉnh ánh sáng đèn học' minh họa cho điều gì?", a: 2, opts: ["Học sinh nên đi ngủ sớm", "Tiền điện rất đắt", "LayerNorm giữ điện áp tín hiệu ở mức tối ưu: không quá sáng gây lóa (bão hòa), không quá tối (triệt tiêu)", "Bóng đèn sợi đốt tốt hơn đèn LED"], exp: "Xuất sắc! Giữ tín hiệu trong Goldilocks zone." },
+        { q: "Hiện tượng Bùng nổ Gradient (Exploding Gradient) xảy ra khi nào?", a: 0, opts: ["Khi các phép nhân ma trận liên tiếp làm độ lớn tín hiệu tăng theo cấp số nhân không kiểm soát", "Khi máy tính bị sét đánh", "Khi mạng nơ-ron học quá nhanh", "Khi số token nhỏ hơn 10"], exp: "Đúng! Không có chuẩn hóa, tín hiệu sẽ phình to vô cực." },
+        { q: "Sau bài học 2.2 này, sinh viên đã sẵn sàng đón nhận điều gì ở Phần 2.3 và Phần 3?", a: 1, opts: ["Nghỉ học", "Hiểu bản chất hình học siêu cầu, LayerNorm và tích vô hướng mà không sợ hãi công thức giải tích", "Chỉ học lập trình game", "Quên hết kiến thức phần 2"], exp: "Hoàn hảo! Bạn đã nắm chắc nền tảng hình học và đại số để bước vào thế giới chuyên sâu!" }
+      ]
+    };
+
+    /* ========================================================================= */
+    /* CƠ SỞ DỮ LIỆU ĐỀ THI BLOOM TỔNG HỢP (15 CÂU) */
+    /* ========================================================================= */
+    const bloomExamDB = [
+      { id: 1, tier: "1. Nhận Biết", ans: 1, q: "Chuẩn L2 của một vector 768 chiều được tính theo nguyên lý nào?", opts: ["Tổng giá trị tuyệt đối của các phần tử", "Căn bậc hai của tổng bình phương tất cả 768 tọa độ", "Giá trị lớn nhất trong 768 chiều", "Trung bình cộng của 768 chiều"], exp: "Chính xác! Chuẩn L2 là khoảng cách Euclid từ gốc tọa độ đến điểm vector." },
+      { id: 2, tier: "1. Nhận Biết", ans: 2, q: "Sau khi thực hiện chuẩn hóa L2 (v / ||v||₂), độ dài của vector mới bằng bao nhiêu?", opts: ["0.0", "768.0", "Đúng 1.0 (Unit Norm)", "Phụ thuộc vào câu prompt"], exp: "Đúng! Mọi vector sau chuẩn hóa L2 đều nằm trên Siêu Cầu Đơn Vị R=1." },
+      { id: 3, tier: "1. Nhận Biết", ans: 0, q: "Hiện tượng Sụp đổ dị hướng (Representation Anisotropy) khiến các vector từ ngữ tự nhiên có xu hướng như thế nào?", opts: ["Dồn cục vào một chiếc nón hẹp duy nhất trên siêu cầu", "Tỏa đều 360 độ hoàn hảo", "Tất cả co về điểm (0,0)", "Nổ tung thành các giá trị vô cực"], exp: "Chính xác! Dị hướng là căn bệnh co cụm góc trong không gian biểu diễn." },
+      { id: 4, tier: "2. Thông Hiểu", ans: 1, q: "Vì sao việc câu văn dài hay ngắn lại tạo ra cạm bẫy đối với thước đo khoảng cách Euclid?", opts: ["Vì máy tính không đếm được số từ", "Vì câu dài tích lũy độ lớn vector khổng lồ, làm khoảng cách dây cung phình to dù nội dung cùng nói về một chủ đề", "Vì câu dài luôn có nghĩa phức tạp hơn", "Vì câu ngắn bị lỗi font chữ"], exp: "Đúng! Magnitude ngẫu nhiên đánh lừa thước đo thẳng Euclid." },
+      { id: 5, tier: "2. Thông Hiểu", ans: 0, q: "Tại sao khi cả hai vector đã có độ dài bằng 1, tích vô hướng u · v lại đồng nhất hoàn toàn với độ tương đồng Cosine?", opts: ["Vì công thức u · v = ||u|| ||v|| cos(θ) mà ||u||=||v||=1 nên chỉ còn lại cos(θ)", "Vì cos(θ) luôn luôn bằng 1", "Vì phép nhân bị vô hiệu hóa", "Vì máy tính tự động xóa mẫu số"], exp: "Chính xác! Mẫu số ||u|| ||v|| = 1 giúp tích vô hướng đo trực tiếp góc xoay." },
+      { id: 6, tier: "2. Thông Hiểu", ans: 2, q: "Nghịch lý 'Quả cam 768 chiều' rút ra bài học gì về mặt hình học siêu chiều?", opts: ["Ruột quả cam chiếm 99% thể tích", "Quả cam không thể tồn tại trong máy tính", "Hầu như toàn bộ thể tích không gian siêu chiều đều dạt ra lớp vỏ mỏng ngoài cùng", "Không gian 768D giống hệt 3D"], exp: "Đúng! (0.99)^768 ≈ 0.00045, ruột gần như rỗng tuếch." },
+      { id: 7, tier: "3. Vận Dụng", ans: 1, q: "Cho vector thô v = (0, 3, 4). Sau khi thực hiện chuẩn hóa L2, vector đơn vị e là gì?", opts: ["(0, 1, 1)", "(0, 0.6, 0.8)", "(0, 3, 4)", "(0, 0, 0)"], exp: "Chính xác! ||v|| = √(0² + 3² + 4²) = 5 => e = (0/5, 3/5, 4/5) = (0, 0.6, 0.8)." },
+      { id: 8, tier: "3. Vận Dụng", ans: 0, q: "Một tập dữ liệu 100 vector bị lệch tâm với c_tâm = (+2.0, +3.0). Sau khi áp dụng phép trừ tâm (v - c_tâm), tọa độ tâm trọng khối mới của tập dữ liệu sẽ là bao nhiêu?", opts: ["(0.0, 0.0)", "(+2.0, +3.0)", "(+4.0, +6.0)", "(-2.0, -3.0)"], exp: "Đúng! Trừ đi chính giá trị trung bình sẽ kéo tâm dữ liệu về đúng mốc (0, 0)." },
+      { id: 9, tier: "3. Vận Dụng", ans: 2, q: "Một token có trung bình μ = 3.0 và phương sai σ² = 4.0 (độ lệch chuẩn σ = 2.0). Nếu một chiều có giá trị thô x_i = 7.0, giá trị chuẩn hóa x̂_i (bỏ qua ε, γ=1, β=0) là bao nhiêu?", opts: ["1.0", "4.0", "2.0", "0.5"], exp: "Chính xác! x̂ = (x - μ) / σ = (7.0 - 3.0) / 2.0 = 4.0 / 2.0 = 2.0." },
+      { id: 10, tier: "4. Phân Tích", ans: 1, q: "Phân tích hiện tượng: Tại sao bốc ngẫu nhiên hai vector độc lập trong 768D thì chúng hầu như luôn vuông góc (cos θ ≈ 0)?", opts: ["Do lỗi phần mềm ngẫu nhiên", "Do tổng của 768 tích con độc lập triệt tiêu lẫn nhau theo Định lý Giới hạn Trung tâm, phương sai co hẹp về 1/d", "Vì máy tính thích góc 90 độ", "Vì số 768 chia hết cho 4"], exp: "Đúng! Biến thiên thống kê triệt tiêu tổng tích vô hướng về 0." },
+      { id: 11, tier: "4. Phân Tích", ans: 0, q: "Phân tích vai trò của hằng số ε trong mẫu số LayerNorm: x̂ = (x - μ) / √(σ² + ε):", opts: ["Ngăn chặn thảm họa chia cho số 0 nếu phương sai của token vô tình bằng phẳng tuyệt đối (σ² = 0)", "Để làm tròn số thập phân", "Để tăng tốc độ tính toán của GPU", "Để biến số âm thành số dương"], exp: "Chính xác! ε là phao cứu sinh chống lỗi ZeroDivisionError." },
+      { id: 12, tier: "4. Phân Tích", ans: 2, q: "Tại sao trong mô hình ngôn ngữ Transformer, LayerNorm lại vượt trội hơn BatchNorm?", opts: ["Vì BatchNorm không dùng được cho số thực", "Vì LayerNorm chạy tốn ít điện hơn", "Vì các câu có độ dài ngắn khác nhau; LayerNorm chuẩn hóa nội tại từng token độc lập mà không phụ thuộc vào các câu khác trong lô (batch)", "Vì BatchNorm bị cấm trong AI"], exp: "Tuyệt vời! Tính tự chủ trên từng token của LayerNorm hoàn hảo cho chuỗi biến thiên." },
+      { id: 13, tier: "5. Đánh Giá", ans: 1, q: "Đánh giá nhận định: 'Nếu bỏ qua LayerNorm trong Transformer, chỉ cần giảm tốc độ học (Learning Rate) thật nhỏ là mô hình vẫn học tốt' — Đúng hay Sai?", opts: ["Đúng, Learning Rate nhỏ giải quyết được mọi vấn đề", "Sai, vì qua hàng chục tầng nhân ma trận, tín hiệu sẽ bùng nổ hoặc triệt tiêu khiến Softmax bị bão hòa phẳng lì (gradient = 0), mạng ngừng học hoàn toàn", "Đúng, các mô hình hiện đại không cần LayerNorm", "Sai, vì máy tính sẽ bị cháy chip"], exp: "Xuất sắc! Softmax bão hòa sẽ triệt tiêu gradient bất kể learning rate là bao nhiêu." },
+      { id: 14, tier: "5. Đánh Giá", ans: 0, q: "Một nhóm nghiên cứu phát hiện hai từ 'bánh bao' và 'tên lửa' có độ tương đồng Cosine = 0.82. Giải pháp kỹ thuật nào sau đây là chuẩn xác nhất để đánh giá đúng tương quan ngữ nghĩa?", opts: ["Thực hiện phép trừ tâm trọng khối (Post-hoc Centering) trên toàn bộ không gian từ vựng rồi đo lại góc Cosine", "Tăng số chiều vector lên gấp đôi", "Đổi tên hai từ vựng", "Xóa bỏ từ 'tên lửa' khỏi từ điển"], exp: "Chính xác! Phép trừ tâm sẽ triệt tiêu thiên kiến ngữ pháp chung, đưa độ tương đồng về đúng mức thực tế." },
+      { id: 15, tier: "6. Vận Dụng Cao", ans: 1, q: "Vận dụng cao: Thiết kế quy trình hoàn chỉnh 3 bước để biến một tập hợp vector biểu diễn thô lộn xộn thành không gian siêu cầu đẳng hướng chuẩn mực cho CLIP:", opts: ["1. Chuẩn hóa L2 -> 2. Tăng số chiều -> 3. Giữ nguyên", "1. Chuẩn hóa L2 ban đầu -> 2. Tính tâm trọng khối c_tâm và thực hiện phép trừ tâm (e - c_tâm) -> 3. Tái chuẩn hóa L2 lên mặt siêu cầu đơn vị", "1. Chia cho 768 -> 2. Nhân với 0 -> 3. Cộng 1", "1. Xóa hết số âm -> 2. Lấy căn bậc hai -> 3. Làm tròn"], exp: "Hoàn hảo! Đây chính là quy trình chuẩn tắc (Normalize -> Center -> Re-normalize) để thiết lập không gian đẳng hướng tối ưu!" }
+    ];
+
+    /* ========================================================================= */
+    /* QUẢN LÝ THI CỬ VÀ GIAO DIỆN TRẮC NGHIỆM */
+    /* ========================================================================= */
+    const checkpointAnswers = {};
+    const examAnswers = {};
+
+    function renderCheckpoint(chNum) {
+      const container = document.getElementById(`cp${chNum}-container`);
+      if (!container) return;
+      const questions = checkpointDB[chNum];
+      if (!questions) return;
+
+      container.innerHTML = questions.map((item, qIdx) => {
+        const key = `${chNum}_${qIdx}`;
+        const answered = checkpointAnswers.hasOwnProperty(key);
+        const userChoice = checkpointAnswers[key];
+
+        return `
+          <div class="p-2.5 bg-stone-50 border border-stone-300 space-y-1.5">
+            <div class="font-bold text-stone-900 leading-snug">
+              Câu ${qIdx + 1}: ${item.q}
+            </div>
+            <div class="space-y-1">
+              ${item.opts.map((opt, oIdx) => `
+                <label class="flex items-start gap-2 p-1.5 border border-stone-200 ${answered && userChoice === oIdx ? 'bg-amber-100 border-amber-600 font-bold' : 'hover:bg-stone-100'} cursor-pointer">
+                  <input type="radio" name="cp_${key}" value="${oIdx}" ${answered && userChoice === oIdx ? 'checked' : ''} onchange="handleCPAnswer(${chNum}, ${qIdx}, ${oIdx})" class="mt-0.5">
+                  <span class="text-stone-800 leading-tight">${opt}</span>
+                </label>
+              `).join('')}
+            </div>
+            <div id="fb_cp_${key}" class="text-[11px] font-bold ${answered ? '' : 'hidden'}">
+              ${answered ? (userChoice === item.a ? `<span class="text-green-800">✓ ${item.exp}</span>` : `<span class="text-red-800">✗ Chưa đúng. Hãy xem lại bài đọc và thử lại nhé!</span>`) : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+      renderMath();
+    }
+
+    function handleCPAnswer(chNum, qIdx, oIdx) {
+      const key = `${chNum}_${qIdx}`;
+      checkpointAnswers[key] = oIdx;
+      const qObj = checkpointDB[chNum][qIdx];
+
+      // Đếm tiến độ chương
+      let count = 0;
+      for (let i = 0; i < 5; i++) {
+        if (checkpointAnswers.hasOwnProperty(`${chNum}_${i}`)) count++;
+      }
+      const scoreTxt = document.getElementById(`cp${chNum}-score`);
+      if (scoreTxt) scoreTxt.innerText = `Đã làm: ${count}/5`;
+
+      const fb = document.getElementById(`fb_cp_${key}`);
+      if (fb) {
+        if (oIdx === qObj.a) {
+          fb.className = "text-[11px] font-bold pt-1 text-green-800";
+          fb.innerHTML = `✓ ${qObj.exp}`;
+        } else {
+          fb.className = "text-[11px] font-bold pt-1 text-red-800";
+          fb.innerHTML = `✗ Chưa chính xác. Hãy đọc kỹ lại phần lý thuyết phía trên!`;
+        }
+        fb.classList.remove('hidden');
+      }
+      renderMath();
+    }
+
+    function renderExam() {
+      const container = document.getElementById('exam-container');
+      if (!container) return;
+
+      container.innerHTML = bloomExamDB.map((item) => {
+        const answered = examAnswers.hasOwnProperty(item.id);
+        const userChoice = examAnswers[item.id];
+
+        return `
+          <div class="p-3 bg-stone-100 border border-stone-400 space-y-2">
+            <div class="flex flex-wrap justify-between items-center border-b border-stone-300 pb-1">
+              <span class="font-bold text-stone-900 text-xs sm:text-sm font-code flex items-center gap-2">
+                <span class="px-1.5 py-0.5 bg-stone-800 text-stone-100 text-[11px]">Câu ${item.id}</span>
+                <span>${item.q}</span>
+              </span>
+              <span class="text-[10px] font-code px-2 py-0.5 bg-amber-200 text-amber-950 font-bold border border-amber-400">${item.tier}</span>
+            </div>
+
+            <div class="space-y-1 text-xs font-code">
+              ${item.opts.map((opt, oIdx) => `
+                <label class="flex items-start gap-2 p-1.5 border border-stone-300 ${answered && userChoice === oIdx ? 'bg-amber-100 border-amber-600 font-bold' : 'bg-stone-50 hover:bg-stone-200'} cursor-pointer">
+                  <input type="radio" name="exam_q_${item.id}" value="${oIdx}" ${answered && userChoice === oIdx ? 'checked' : ''} onchange="handleExamAnswer(${item.id}, ${oIdx})" class="mt-0.5">
+                  <span class="text-stone-800 leading-snug">${opt}</span>
+                </label>
+              `).join('')}
+            </div>
+
+            <div id="fb_exam_${item.id}" class="text-xs font-code font-bold pt-1 ${answered ? '' : 'hidden'}">
+              ${answered ? (userChoice === item.ans ? `<span class="text-green-800">✓ ${item.exp}</span>` : `<span class="text-red-800">✗ Chưa đúng. Hãy rà soát lại công thức toán học và nguyên lý hình học!</span>`) : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+      renderMath();
+    }
+
+    function handleExamAnswer(qId, oIdx) {
+      examAnswers[qId] = oIdx;
+
+      let correct = 0;
+      bloomExamDB.forEach(q => {
+        if (examAnswers[q.id] === q.ans) correct++;
+      });
+
+      const answeredCount = Object.keys(examAnswers).length;
+      document.getElementById('exam-prog').innerText = `Tiến độ bài thi: ${answeredCount}/15 câu`;
+      document.getElementById('exam-score').innerText = `Điểm số: ${correct} / 15`;
+
+      const fb = document.getElementById(`fb_exam_${qId}`);
+      const qObj = bloomExamDB.find(x => x.id === qId);
+      if (fb && qObj) {
+        if (oIdx === qObj.ans) {
+          fb.className = "text-xs font-code font-bold pt-1 text-green-800";
+          fb.innerHTML = `✓ ${qObj.exp}`;
+        } else {
+          fb.className = "text-xs font-code font-bold pt-1 text-red-800";
+          fb.innerHTML = `✗ Chưa đúng. Hãy suy ngẫm lại định lý và cấu trúc hình học!`;
+        }
+        fb.classList.remove('hidden');
+      }
+
+      if (answeredCount === 15) {
+        const sum = document.getElementById('exam-summary');
+        if (sum) {
+          sum.classList.remove('hidden');
+          sum.innerHTML = `
+            <div class="border-b-2 border-stone-800 pb-2 mb-2 font-bold text-sm text-stone-900">
+              📊 KẾT QUẢ ĐÁNH GIÁ CHUYÊN ĐỀ PHẦN 2.2: ${correct}/15 ĐIỂM
+            </div>
+            <p class="leading-relaxed text-stone-800">
+              ${correct >= 13 
+                ? '<strong>XUẤT SẮC ĐẲNG CẤP!</strong> Bạn đã làm chủ hoàn toàn các khái niệm về Siêu cầu đơn vị $S^{d-1}$, Chuẩn hóa $L_2$, Trừ tâm dị hướng và Cơ chế cân bằng LayerNorm. Bạn đã sẵn sàng 100% để bước tiếp vào Phần 2.3 và Phần 3!' 
+                : '<strong>KẾT QUẢ RẤT ĐÁNG KHÍCH LỆ!</strong> Bạn đã nắm vững các mức Nhận biết và Vận dụng cơ bản. Hãy dành ít phút xem lại các câu trả lời sai để củng cố tư duy hình học trước khi chuyển phần nhé!'}
+            </p>
+          `;
+        }
+      }
+      renderMath();
+    }
+
+    /* ========================================================================= */
+    /* KHỞI ĐỘNG ỨNG DỤNG */
+    /* ========================================================================= */
+    window.onload = function() {
+      renderF1();
+      updateF2();
+      renderF3();
+      renderF4();
+      renderF5();
+      runF6MonteCarlo();
+      renderF7();
+      f8AddPoints('cluster');
+      renderF9();
+      updateF10();
+      setF11Stage(3);
+      renderF12(1.0);
+
+      // Render 12 Checkpoint Quizzes
+      for (let ch = 1; ch <= 12; ch++) {
+        renderCheckpoint(ch);
+      }
+
+      // Render Exam
+      renderExam();
+      renderMath();
+    };
+  </script>
+</body>
+</html>

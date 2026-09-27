@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bản Tin Khoa Học Số 02.3: Đại Hành Trình Từ Chữ Viết Đến Tọa Độ & Bản Đồ Gặp Gỡ Ảnh - Chữ CLIP</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Roboto & Roboto Mono chuẩn tiếng Việt 100% -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,700&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- KaTeX CSS & JS hỗ trợ render công thức toán học chuẩn xác -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+  <style>
+    :root {
+      --paper-cream: #f4ede1;
+      --paper-card: #fdfbf7;
+      --paper-accent: #e8dcc6;
+      --ink-dark: #1a1612;
+      --ink-muted: #53483e;
+      --accent-rust: #9c3319;
+      --accent-teal: #0d5c5c;
+      --accent-forest: #1b5e39;
+      --border-dark: #29211b;
+    }
+
+    body {
+      background-color: #171310;
+      color: var(--ink-dark);
+      font-family: 'Roboto', sans-serif;
+      background-image: 
+        radial-gradient(#2d241d 1px, transparent 1px),
+        radial-gradient(#2d241d 1px, #120e0b 1px);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+    }
+
+    .editorial-sheet {
+      background-color: var(--paper-cream);
+      background-image: 
+        radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 0),
+        linear-gradient(to right, rgba(0,0,0,0.015) 1px, transparent 1px);
+      background-size: 16px 16px, 100% 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.85), inset 0 0 160px rgba(160, 130, 95, 0.18);
+    }
+
+    .font-code {
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    .rule-double {
+      border-top: 3px solid var(--border-dark);
+      border-bottom: 1px solid var(--border-dark);
+      height: 6px;
+    }
+
+    .stamp-badge {
+      display: inline-block;
+      padding: 3px 9px;
+      text-transform: uppercase;
+      font-weight: 700;
+      border: 2px dashed var(--accent-rust);
+      color: var(--accent-rust);
+      transform: rotate(-0.5deg);
+    }
+
+    .dropcap::first-letter {
+      float: left;
+      font-size: 3.2rem;
+      line-height: 0.85;
+      padding-top: 4px;
+      padding-right: 10px;
+      font-weight: 900;
+      color: var(--accent-rust);
+    }
+
+    .math-box {
+      background-color: #eee3ce;
+      border: 1.5px solid #48392d;
+      box-shadow: 3px 3px 0px #352920;
+    }
+
+    .analogy-box {
+      background-color: #e2ede6;
+      border-left: 4px solid var(--accent-forest);
+      box-shadow: 2px 2px 0px rgba(0,0,0,0.08);
+    }
+
+    .takeaway-box {
+      background-color: #faebd7;
+      border-left: 4px solid var(--accent-rust);
+    }
+
+    .checkpoint-box {
+      background-color: #f7f1e4;
+      border: 2px solid #5a493a;
+      box-shadow: 4px 4px 0px #3c2f24;
+    }
+
+    input[type=range] {
+      accent-color: var(--accent-rust);
+    }
+
+    .katex {
+      font-size: 1.05em;
+      color: #17110c;
+    }
+    .katex-display {
+      margin: 0.5em 0 !important;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 4px 0;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #78614e;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+
+<body class="p-2 sm:p-4 md:p-6 min-h-screen">
+  <div class="max-w-7xl mx-auto editorial-sheet border-4 border-stone-900 p-4 sm:p-7 md:p-10 transition-all">
+    
+    <!-- MASTHEAD PHONG CÁCH BÁO IN CỔ ĐIỂN 1990S -->
+    <header class="border-b-2 border-stone-800 pb-4 mb-8">
+      <div class="flex flex-wrap justify-between items-center text-xs font-code uppercase tracking-wider text-stone-700 pb-2 mb-3 border-b border-stone-400">
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-stone-950 bg-amber-200 px-2.5 py-0.5 border border-stone-800 shadow-sm">
+            TẬP II.3 &bull; CHUYÊN KHẢO CHUYỂN TIẾP CHO TÂN SINH VIÊN CS & AI
+          </span>
+          <span>&bull;</span>
+          <span class="text-stone-800 hidden sm:inline">Phân Viện Nhập Môn Biểu Diễn Ngôn Ngữ & Thị Giác Máy Tính</span>
+        </div>
+        <div class="text-[11px] font-bold text-stone-900 font-code">
+          MÃ MÔ-ĐUN: CS101-BRIDGE-2.3
+        </div>
+      </div>
+
+      <div class="text-center pt-2">
+        <div class="stamp-badge text-xs mb-2">
+          CẦU NỐI SƯ PHẠM: TỪ CHỮ VIẾT ĐẾN TỌA ĐỘ NGỮ NGHĨA & HỌC TƯƠNG PHẢN CLIP
+        </div>
+        <h1 class="text-2xl sm:text-4xl md:text-5xl font-black uppercase text-stone-950 tracking-tight">
+          Hành Trình Chữ Viết Hóa Thành Tọa Độ: BPE Lego & Bản Đồ Gặp Gỡ Ảnh - Chữ
+        </h1>
+        <p class="text-sm sm:text-base italic text-stone-700 max-w-5xl mx-auto mt-2.5 leading-relaxed">
+          Được thiết kế tỉ mỉ cho sinh viên năm nhất: Bẻ khóa trọn vẹn từ chiếc bàn phím gõ ký tự, thuật toán ghép Lego BPE, tủ hồ sơ 49,408 ngăn kéo, cách Attention đổi màu ý niệm, đến cách hai tòa tháp Chữ và Ảnh bắt tay nhau trên cùng một tọa độ siêu chiều.
+        </p>
+      </div>
+
+      <div class="rule-double my-4"></div>
+
+      <!-- MỤC LỤC TRUY CẬP NHANH TOÀN BỘ 13 PHẦN (12 CHƯƠNG + 1 BÀI TỔNG KẾT) -->
+      <nav class="overflow-x-auto custom-scrollbar pb-2">
+        <div class="flex items-center gap-1.5 font-code text-[11px] font-bold uppercase whitespace-nowrap">
+          <span class="text-amber-950 font-black px-2 py-1 bg-amber-200 border border-amber-800">MỤC LỤC:</span>
+          <button onclick="scrollToEl('c1')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C1: ASCII vs Tọa Độ</button>
+          <button onclick="scrollToEl('c2')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C2: Ba Cách Băm Từ</button>
+          <button onclick="scrollToEl('c3')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C3: Thuật Toán BPE</button>
+          <button onclick="scrollToEl('c4')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C4: Tủ Kéo $W_e$</button>
+          <button onclick="scrollToEl('c5')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C5: Vị Trí Positional</button>
+          <button onclick="scrollToEl('c6')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C6: Từ Đa Nghĩa</button>
+          <button onclick="scrollToEl('c7')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C7: Trực Giác Q-K-V</button>
+          <button onclick="scrollToEl('c8')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C8: Tắc Kè Đa Đầu</button>
+          <button onclick="scrollToEl('c9')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C9: Hai Tòa Tháp</button>
+          <button onclick="scrollToEl('c10')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C10: Ma Trận Chiếu</button>
+          <button onclick="scrollToEl('c11')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C11: Nam Châm Tương Phản</button>
+          <button onclick="scrollToEl('c12')" class="px-2 py-1 bg-stone-200 border border-stone-700 hover:bg-stone-300">C12: Chạm Ngõ Phần 3</button>
+          <button onclick="scrollToEl('c-exam')" class="px-2.5 py-1 bg-amber-900 text-stone-100 border border-stone-950 shadow">Bài Thi Tổng Kết (15 Câu)</button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="space-y-16">
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 1 -->
+      <!-- ========================================================================= -->
+      <section id="c1" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
+          <span class="text-2xl font-black text-amber-900 font-code">01</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 1: Tại Sao Máy Tính Không Hiểu Chữ Viết? Giới Hạn Của Mã ASCII
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Từ mã nhị phân vô tri đến giấc mơ biểu diễn khoảng cách ngữ nghĩa
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="dropcap">
+              Khi bạn gõ từ <em>"con mèo"</em> vào bàn phím máy tính, hệ điều hành chỉ đơn thuần nhìn thấy một chuỗi các tín hiệu điện bật/tắt: các byte nhị phân `01000011 01000001 01010100` theo bảng mã tiêu chuẩn ASCII hoặc Unicode. Đối với máy tính cổ điển, chữ cái chỉ là những ký hiệu đồ họa vô tri để hiển thị lên màn hình.
+            </p>
+            <p>
+              Nếu chúng ta chỉ dùng mã số ASCII để làm việc:
+              Từ <strong>"cat"</strong> (mèo) có mã ASCII lần lượt là $99, 97, 116$.
+              Từ <strong>"dog"</strong> (chó) có mã ASCII là $100, 111, 103$.
+              Từ <strong>"car"</strong> (ô tô) có mã ASCII là $99, 97, 114$.
+            </p>
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-forest-950">💡 Nghịch lý khoảng cách chữ cái:</div>
+              <p>
+                Nếu đo theo khoảng cách ký tự, <strong>"cat"</strong> và <strong>"car"</strong> chỉ khác nhau đúng 1 chữ cái cuối (khoảng cách cực gần), trong khi <strong>"cat"</strong> và <strong>"dog"</strong> chẳng giống nhau chữ nào! Nhưng về mặt bản chất sinh học, "mèo" và "chó" đều là thú cưng 4 chân có lông, còn "ô tô" là một cỗ máy kim loại vô cơ. Bảng mã ký tự hoàn toàn bất lực trong việc phản ánh bản chất thế giới!
+              </p>
+            </div>
+            <p>
+              <strong>Mục tiêu của AI Hiện đại:</strong> Chúng ta không muốn lưu từ ngữ bằng mã chữ cái vô hồn. Chúng ta cần tìm cho mỗi từ một <strong>Tọa Độ Ngữ Nghĩa (Semantic Coordinates)</strong> trong không gian nhiều chiều, sao cho những gì cùng bản chất phải tự động nằm sát cạnh nhau!
+            </p>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 1: ASCII VS SEMANTIC SPACE -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 1: Nghịch Lý ASCII vs Bản Đồ Tọa Độ Ngữ Nghĩa
+              </span>
+              <span id="fig1-badge" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Chế độ: Xem Mã Ký Tự ASCII
+              </span>
+            </div>
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig1Canvas" width="480" height="220" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+            <div class="flex gap-2 font-code text-xs">
+              <button onclick="setFig1Mode('ascii')" id="btn-f1-ascii" class="px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800">1. Không Gian Ký Tự ASCII (Sai Lệch)</button>
+              <button onclick="setFig1Mode('semantic')" id="btn-f1-sem" class="px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">2. Không Gian Ý Niệm AI (Hợp Lý)</button>
+            </div>
+            <div id="fig1-desc" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800 leading-snug">
+              Ở mã ASCII: "cat" và "car" đứng rất gần nhau vì cùng bắt đầu bằng "ca-", trong khi "dog" bị văng ra xa!
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT 1 (5 CÂU HỎI BLOOM CƠ BẢN) -->
+        <div class="checkpoint-box p-4 rounded space-y-3 mt-4">
+          <div class="flex justify-between items-center border-b border-stone-500 pb-1.5">
+            <span class="font-bold text-stone-950 font-code text-sm">🎯 CHECKPOINT CHƯƠNG 1 (5 Câu Kiểm Tra Nhanh)</span>
+            <span id="cp1-score" class="font-code text-xs font-bold text-amber-950">Chưa làm: 0/5</span>
+          </div>
+          <div id="cp1-container" class="space-y-3"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 2 -->
+      <!-- ========================================================================= -->
+      <section id="c2" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
+          <span class="text-2xl font-black text-amber-900 font-code">02</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 2: Cuộc Cách Mạng Tách Từ: Nỗi Khổ Của Chữ Cái vs Từ Nguyên Khối
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Tại sao không thể chia theo từng chữ cái A-B-C hay lưu mọi từ trong từ điển?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="dropcap">
+              Trước khi đưa một câu văn vào mạng nơ-ron, ta phải chia nhỏ nó thành các đơn vị cơ bản gọi là <strong>Token</strong>. Nhưng chia như thế nào mới là thông minh? Các nhà khoa học máy tính ban đầu đã vấp phải hai thái cực đau đầu:
+            </p>
+            <ol class="list-decimal list-inside space-y-2 text-xs sm:text-sm bg-stone-200 p-3 border border-stone-400">
+              <li>
+                <strong>Cách 1: Tách theo từng chữ cái (Character-level):</strong>
+                Biến từ "cat" thành 3 token `['c', 'a', 't']`. 
+                <br><em>Ưu điểm:</em> Bộ từ vựng siêu nhỏ, chỉ cần 26 chữ cái tiếng Anh.
+                <br><em>Thảm họa:</em> Chữ 'c' đứng một mình không có nghĩa gì cả. Câu văn trở nên quá dài ngoằng, làm mạng Transformer kiệt sức vì phải tính tương tác giữa hàng ngàn chữ cái li ti!
+              </li>
+              <li>
+                <strong>Cách 2: Tách theo cả từ nguyên khối (Word-level):</strong>
+                Lấy khoảng trắng làm ranh giới: `["chàng", "cao", "bồi"]`.
+                <br><em>Ưu điểm:</em> Mỗi từ đều có nghĩa rõ ràng, câu văn ngắn gọn.
+                <br><em>Thảm họa:</em> Ngôn ngữ có hàng triệu từ (từ ghép, từ địa phương, từ viết sai chính tả, từ mới như "tiktok", "vape"). Bạn không thể tạo một cuốn từ điển vô hạn để chứa hết được! Gặp từ lạ là máy tính đầu hàng ngay (Lỗi <code>[UNK] - Unknown Token</code>).
+              </li>
+            </ol>
+            <div class="takeaway-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-amber-950">📌 Nhu cầu sinh ra một giải pháp dung hòa:</div>
+              <p>
+                Ta cần một giải pháp nằm ở giữa: Vừa giữ được độ ngắn gọn của từ ngữ, vừa có thể linh hoạt lắp ráp các từ chưa từng thấy từ những mẩu âm tiết quen thuộc. Đó chính là sự ra đời của **Mảnh Từ Vựng (Subword Tokenization)**!
+              </p>
+            </div>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 2: TOKENIZATION STRATEGIES -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 2: Thí Nghiệm So Sánh 3 Chiến Lược Tách Từ
+              </span>
+              <span id="fig2-badge" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Xem: Subword (Tối Ưu Nhất)
+              </span>
+            </div>
+            <div class="space-y-2 font-code text-xs bg-stone-100 p-2.5 border border-stone-400">
+              <div>Câu mẫu đầu vào: <span class="font-bold text-amber-950">"unbelievable meteorites"</span></div>
+              <div class="flex gap-2 pt-1">
+                <button onclick="setFig2Strategy('char')" id="btn-f2-char" class="px-2 py-1 bg-stone-200 border border-stone-800 hover:bg-stone-300">Tách Từng Chữ Cái</button>
+                <button onclick="setFig2Strategy('word')" id="btn-f2-word" class="px-2 py-1 bg-stone-200 border border-stone-800 hover:bg-stone-300">Tách Từ Nguyên Khối</button>
+                <button onclick="setFig2Strategy('subword')" id="btn-f2-sub" class="px-2 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800">Tách Mảnh Subword</button>
+              </div>
+            </div>
+            <div id="fig2-output-display" class="border border-stone-700 bg-stone-950 p-3 rounded min-h-[110px] text-xs font-code flex flex-wrap gap-1.5 items-center">
+              <!-- Render by JS -->
+            </div>
+            <div id="fig2-verdict" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Chiến lược Subword: Băm thành các mảnh quen thuộc ["un", "believ", "able", "meteor", "ites"]. Linh hoạt 100%!
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT 2 -->
+        <div class="checkpoint-box p-4 rounded space-y-3 mt-4">
+          <div class="flex justify-between items-center border-b border-stone-500 pb-1.5">
+            <span class="font-bold text-stone-950 font-code text-sm">🎯 CHECKPOINT CHƯƠNG 2 (5 Câu Kiểm Tra Nhanh)</span>
+            <span id="cp2-score" class="font-code text-xs font-bold text-amber-950">Chưa làm: 0/5</span>
+          </div>
+          <div id="cp2-container" class="space-y-3"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 3 -->
+      <!-- ========================================================================= -->
+      <section id="c3" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
+          <span class="text-2xl font-black text-amber-900 font-code">03</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 3: Thuật Toán Ghép Lego BPE (Byte-Pair Encoding) Từng Bước
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Cách máy tính tự động đúc các viên gạch ngôn ngữ thông qua tần suất xuất hiện
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="dropcap">
+              Thuật toán <strong>Byte-Pair Encoding (BPE)</strong> vốn là một giải thuật nén dữ liệu cũ từ năm 1994, nhưng khi áp dụng vào AI xử lý ngôn ngữ, nó đã trở thành một hiện tượng đột phá. BPE hoạt động như một đứa trẻ chơi trò ghép gạch Lego:
+            </p>
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-forest-950">💡 Quy trình ghép Lego BPE trong 4 bước:</div>
+              <ol class="list-decimal list-inside space-y-1">
+                <li><strong>Bước 0:</strong> Ban đầu, đập vỡ mọi từ trong toàn bộ kho sách báo thành từng mảnh chữ cái đơn lẻ kèm ký hiệu kết thúc từ `</w>`.</li>
+                <li><strong>Bước 1:</strong> Đếm xem cặp hai mảnh nào đứng cạnh nhau nhiều nhất trong toàn bộ văn bản.</li>
+                <li><strong>Bước 2:</strong> Dán dính hai mảnh đó lại thành một viên gạch mới to hơn và bổ sung nó vào Từ điển vĩnh viễn!</li>
+                <li><strong>Bước 3:</strong> Lặp lại Bước 1 & Bước 2 hàng chục ngàn lần cho đến khi đạt được kích thước từ vựng mong muốn (ví dụ 49,408 mảnh trong CLIP).</li>
+              </ol>
+            </div>
+            <p>
+              Ví dụ: Nếu trong kho dữ liệu có rất nhiều từ <em>"playing", "waiting", "jumping"</em>, BPE sẽ thấy hai mảnh `i` và `n` đi liền nhau liên tục $\to$ gộp thành `in`. Sau đó thấy `in` và `g` đi liền nhau $\to$ gộp thành `ing`. Kể từ đó, `ing` trở thành một mảnh Lego độc lập!
+            </p>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 3: BPE MERGE SIMULATOR -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 3: Mô Phỏng Thuật Toán Ghép Mảnh BPE Theo Thời Gian Thực
+              </span>
+              <span id="fig3-step-pill" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Bước Hiện Tại: 0 (Chưa Ghép)
+              </span>
+            </div>
+            <div class="border border-stone-700 bg-stone-950 p-3 rounded font-code text-xs space-y-2 text-stone-100">
+              <div class="text-stone-400 text-[11px]">Văn bản mẫu huấn luyện: "low lower newest widest"</div>
+              <div class="border-t border-stone-800 pt-2">
+                <div>Trạng thái các mảnh ghép:</div>
+                <div id="fig3-tokens-view" class="flex flex-wrap gap-1.5 pt-1 text-amber-200"></div>
+              </div>
+              <div class="border-t border-stone-800 pt-2 text-[11px] text-emerald-400" id="fig3-merge-log">
+                Cặp xuất hiện nhiều nhất: 'e' + 'r' (Tần suất: 2 lần). Hãy bấm nút ghép!
+              </div>
+            </div>
+            <div class="flex gap-2 font-code text-xs">
+              <button onclick="nextFig3Step()" id="btn-f3-next" class="px-3 py-1.5 bg-amber-900 text-stone-100 font-bold border border-stone-800 hover:bg-amber-800">Ghép Cặp Kế Tiếp ➔</button>
+              <button onclick="resetFig3()" class="px-2.5 py-1.5 bg-stone-100 border border-stone-800 hover:bg-stone-300 font-bold">↺ Bắt Đầu Lại</button>
+            </div>
+            <div class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Quan sát: Các chữ cái đơn lẻ sẽ dần được hàn dính lại thành các âm tiết lớn hơn (`er`, `est`, `low`) hoàn toàn tự động!
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT 3 -->
+        <div class="checkpoint-box p-4 rounded space-y-3 mt-4">
+          <div class="flex justify-between items-center border-b border-stone-500 pb-1.5">
+            <span class="font-bold text-stone-950 font-code text-sm">🎯 CHECKPOINT CHƯƠNG 3 (5 Câu Kiểm Tra Nhanh)</span>
+            <span id="cp3-score" class="font-code text-xs font-bold text-amber-950">Chưa làm: 0/5</span>
+          </div>
+          <div id="cp3-container" class="space-y-3"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 4 -->
+      <!-- ========================================================================= -->
+      <section id="c4" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
+          <span class="text-2xl font-black text-amber-900 font-code">04</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 4: Chiếc Tủ Kéo 49,408 Ngăn: Bảng Tra Embedding ($W_e$) Là Gì?
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Cách mỗi mã số nguyên ID lập tức được cấp một tọa độ 768 chiều ban đầu
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="dropcap">
+              Sau khi thuật toán BPE cắt câu văn của bạn thành các mảnh Lego, mỗi mảnh được cấp một <strong>Số Thẻ Độc Nhất (Token ID)</strong> từ $0$ đến $49,407$. Nhưng số ID chỉ là một con số nguyên vô hồn (ví dụ từ "rock" có mã `9832`). Mạng nơ-ron không thể suy luận chỉ bằng một con số nguyên đơn độc như vậy.
+            </p>
+            <p>
+              Đó là lúc <strong>Ma Trận Tra Cứu Embedding ($W_e \in \mathbb{R}^{49408 \times 768}$)</strong> phát huy tác dụng:
+            </p>
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-forest-950">💡 Ẩn dụ Tủ gửi đồ nhà ga có 49,408 ngăn kéo:</div>
+              <p>
+                Hãy tưởng tượng một chiếc tủ gỗ khổng lồ có đúng $49,408$ hàng ngăn kéo. 
+                Khi token mang số thẻ ID = `9832`, người phụ trách chỉ việc chạy tới đúng ngăn kéo số `9832`, rút ra một thanh kim loại gồm đúng **768 con số thực**: 
+                `[+0.25, -0.71, +0.14, ..., -0.88]`.
+              </p>
+            </div>
+            <p>
+              Đây chính là <strong>Tọa Độ Khởi Điểm Tĩnh (Static Initial Embedding)</strong> của từ đó! Mỗi hàng trong ma trận $W_e$ chính là vị trí tọa độ của một từ trong không gian 768 chiều.
+            </p>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 4: EMBEDDING LOOKUP DRAWER -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 4: Thí Nghiệm Rút Ngăn Kéo Tra Cứu Ma Trận $W_e$
+              </span>
+              <span id="fig4-badge" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Token Đang Chọn: "rock" (ID: 9832)
+              </span>
+            </div>
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig4Canvas" width="480" height="200" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+            <div class="flex flex-wrap gap-2 font-code text-xs">
+              <button onclick="pickFig4('rock', 9832)" class="px-2 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800">"rock" (#9832)</button>
+              <button onclick="pickFig4('cowboy', 14205)" class="px-2 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">"cowboy" (#14205)</button>
+              <button onclick="pickFig4('space', 3120)" class="px-2 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">"space" (#3120)</button>
+              <button onclick="pickFig4('gun', 6241)" class="px-2 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">"gun" (#6241)</button>
+            </div>
+            <div id="fig4-preview" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800 truncate">
+              Rút trích 6 chiều đầu tiên: `[+0.45, -0.62, +0.81, -0.19, +0.33, -0.05]`.
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT 4 -->
+        <div class="checkpoint-box p-4 rounded space-y-3 mt-4">
+          <div class="flex justify-between items-center border-b border-stone-500 pb-1.5">
+            <span class="font-bold text-stone-950 font-code text-sm">🎯 CHECKPOINT CHƯƠNG 4 (5 Câu Kiểm Tra Nhanh)</span>
+            <span id="cp4-score" class="font-code text-xs font-bold text-amber-950">Chưa làm: 0/5</span>
+          </div>
+          <div id="cp4-container" class="space-y-3"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 5 -->
+      <!-- ========================================================================= -->
+      <section id="c5" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
+          <span class="text-2xl font-black text-amber-900 font-code">05</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 5: Trò Chơi Hoán Đổi Vị Trí: "Chó Cắn Người" vs "Người Cắn Chó"
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Bí ẩn phép cộng Mã Hóa Vị Trí (Positional Encoding) cứu nguy cho mạng nơ-ron
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="dropcap">
+              Hãy tưởng tượng bạn ném các từ vào một chiếc túi: trong túi có từ *"chó"*, từ *"cắn"*, và từ *"người"*. Cơ chế chú ý (Attention) ban đầu có một nhược điểm chí mạng gọi là **Tính Bất Biến Hoán Vị (Permutation Invariance)**: Nó nhìn câu văn như một mớ từ lộn xộn không có thứ tự trước sau!
+            </p>
+            <p>
+              Nếu không có giải pháp nào can thiệp:
+              $$\text{Câu A: "Chó cắn người"} \iff \text{Câu B: "Người cắn chó"}$$
+              Đối với máy tính, hai câu trên có tập hợp vector hoàn toàn giống hệt nhau! Nhưng về mặt ý nghĩa đời thực, một câu là chuyện bình thường, còn một câu là tin tức giật gân chấn động.
+            </p>
+            <div class="math-box p-3.5 font-code text-xs sm:text-sm text-stone-900 space-y-1.5">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">Giải pháp Positional Encoding (PE):</div>
+              <div>$$\mathbf{x}_{\text{đầu vào}} = W_e[\text{token}] + PE(\text{vị trí})$$</div>
+              <div class="text-[11px] text-stone-700 leading-normal">
+                Mỗi vị trí (Thứ nhất, Thứ hai, Thứ ba...) được tạo sẵn một chiếc vector sóng hình sin/cos độc nhất. Bằng cách cộng chiếc vector này vào tọa độ từ vựng, từ đứng ở vị trí số 1 sẽ có tọa độ khác hẳn khi nó đứng ở vị trí số 3!
+              </div>
+            </div>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 5: POSITIONAL ENCODING PLAYGROUND -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 5: Thí Nghiệm Đảo Vị Trí & Hiệu Ứng Cộng Sóng $PE$
+              </span>
+              <span id="fig5-badge" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Thứ tự: "Chó cắn Người"
+              </span>
+            </div>
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig5Canvas" width="480" height="200" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+            <div class="flex gap-2 font-code text-xs">
+              <button onclick="setFig5Order('dog_bites_man')" id="btn-f5-1" class="px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800">1. "Chó cắn người"</button>
+              <button onclick="setFig5Order('man_bites_dog')" id="btn-f5-2" class="px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">2. "Người cắn chó"</button>
+            </div>
+            <div id="fig5-desc" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Nhờ có vector $PE$ cộng thêm vào, vector của từ "Chó" ở vị trí số 1 (xanh lam) tách biệt hoàn toàn so với khi nó nằm ở vị trí số 3!
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT 5 -->
+        <div class="checkpoint-box p-4 rounded space-y-3 mt-4">
+          <div class="flex justify-between items-center border-b border-stone-500 pb-1.5">
+            <span class="font-bold text-stone-950 font-code text-sm">🎯 CHECKPOINT CHƯƠNG 5 (5 Câu Kiểm Tra Nhanh)</span>
+            <span id="cp5-score" class="font-code text-xs font-bold text-amber-950">Chưa làm: 0/5</span>
+          </div>
+          <div id="cp5-container" class="space-y-3"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 6 -->
+      <!-- ========================================================================= -->
+      <section id="c6" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
+          <span class="text-2xl font-black text-amber-900 font-code">06</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 6: Bi Kịch Của Từ Đa Nghĩa: Tại Sao Tọa Độ Tĩnh Thất Bại?
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Từ "Rock" là hòn đá cuội hay là thể loại nhạc Rock sôi động?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="dropcap">
+              Trong các mô hình thế hệ cũ như Word2Vec (năm 2013), mỗi từ chỉ có duy nhất một tọa độ tĩnh trong từ điển. Điều này gây ra một bi kịch nhận thức khủng khiếp đối với các **từ đa nghĩa (Polysemous Words)**:
+            </p>
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-forest-950">💡 Hãy thử thách từ "Apple" và "Rock":</div>
+              <ul class="list-disc list-inside space-y-1">
+                <li><em>"Tôi ăn một quả <strong>táo (apple)</strong> giòn rụm"</em> $\to$ Loại quả tự nhiên ngọt lành.</li>
+                <li><em>"Cổ phiếu tập đoàn <strong>Apple</strong> tăng vọt"</em> $\to$ Công ty công nghệ tỷ đô.</li>
+                <li><em>"Viên <strong>đá (rock)</strong> thiên thạch"</em> vs <em>"Ban nhạc <strong>Rock</strong> nổi tiếng"</em>.</li>
+              </ul>
+            </div>
+            <p>
+              Nếu ép từ "Rock" phải mang một vector cố định, nó sẽ phải nằm lơ lửng ở vị trí vô nghĩa nằm giữa tiệm bán đĩa nhạc và bãi khai thác đá xây dựng! Để hiểu đúng, ta cần một cơ chế thông minh: Tọa độ của từ phải **tự động uốn cong và dịch chuyển theo những người bạn đứng cạnh nó**. Đó chính là lý do cơ chế **Attention (Chú Ý)** ra đời!
+            </p>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 6: STATIC COLLISION VS DYNAMIC AMBIGUITY -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 6: Thí Nghiệm Xung Đột Tọa Độ Từ Đa Nghĩa
+              </span>
+              <span id="fig6-badge" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Chế độ: Tọa Độ Tĩnh (Mắc Kẹt Ở Giữa)
+              </span>
+            </div>
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig6Canvas" width="480" height="200" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+            <div class="flex gap-2 font-code text-xs">
+              <button onclick="setFig6Mode('static')" id="btn-f6-static" class="px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800">1. Vector Tĩnh (Kẹt Giữa)</button>
+              <button onclick="setFig6Mode('music')" id="btn-f6-music" class="px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">2. Ngữ Cảnh: "Band / Concert"</button>
+              <button onclick="setFig6Mode('geology')" id="btn-f6-geo" class="px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">3. Ngữ Cảnh: "Meteorite / Cave"</button>
+            </div>
+            <div id="fig6-desc" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Ở dạng vector tĩnh, "Rock" đứng chết dí ở giữa, vừa không đúng nghĩa âm nhạc, vừa không đúng nghĩa địa chất!
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT 6 -->
+        <div class="checkpoint-box p-4 rounded space-y-3 mt-4">
+          <div class="flex justify-between items-center border-b border-stone-500 pb-1.5">
+            <span class="font-bold text-stone-950 font-code text-sm">🎯 CHECKPOINT CHƯƠNG 6 (5 Câu Kiểm Tra Nhanh)</span>
+            <span id="cp6-score" class="font-code text-xs font-bold text-amber-950">Chưa làm: 0/5</span>
+          </div>
+          <div id="cp6-container" class="space-y-3"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 7 -->
+      <!-- ========================================================================= -->
+      <section id="c7" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
+          <span class="text-2xl font-black text-amber-900 font-code">07</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 7: Trực Giác Query, Key, Value: Đèn Pin Đi Tìm Manh Mối
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Hiểu bản chất phép toán Chú Ý mà không cần ngập chìm trong ma trận
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="dropcap">
+              Khi đọc tài liệu nghiên cứu, bạn sẽ bắt gặp công thức nổi tiếng: 
+              $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{Q K^T}{\sqrt{d_k}}\right) V$$
+              Đừng hoảng sợ! Hãy hiểu ba chữ cái $Q, K, V$ qua một ví dụ đời thường vô cùng gần gũi:
+            </p>
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1.5">
+              <div class="font-bold text-forest-950">💡 Ẩn dụ Đi Tìm Sách Ở Thư Viện:</div>
+              <p>
+                1. <strong>$Q$ (Query - Câu hỏi tìm kiếm):</strong> Bạn cầm mảnh giấy ghi: <em>"Tôi cần tìm sách về khủng long kỷ Jura"</em>.
+              </p>
+              <p>
+                2. <strong>$K$ (Key - Nhãn gáy sách):</strong> Hàng ngàn cuốn sách trên kệ đều có nhãn dán: cuốn ghi *"Nấu ăn"*, cuốn ghi *"Lịch sử La Mã"*, cuốn ghi *"Khủng long bạo chúa"*. Phép nhân $Q \cdot K^T$ chỉ đơn giản là việc so khớp câu hỏi của bạn với từng nhãn gáy sách để chấm điểm tương đồng!
+              </p>
+              <p>
+                3. <strong>$V$ (Value - Nội dung kiến thức bên trong cuốn sách):</strong> Cuốn sách nào có nhãn $K$ khớp nhất với $Q$ sẽ được mở toang ra để bạn đọc nội dung $V$ bên trong!
+              </p>
+            </div>
+            <p>
+              Khi từ *"meteorite"* phát câu hỏi $Q$, từ *"rock"* nhận thấy nhãn $K$ của mình trùng khớp $\to$ lập tức chia sẻ nội dung $V$ để giúp *"rock"* biến hóa thành đá thiên thạch vũ trụ!
+            </p>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 7: Q-K-V MATCHMAKER SIMULATOR -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 7: Thí Nghiệm Rọi Đèn Pin So Khớp Query & Key
+              </span>
+              <span id="fig7-score-tag" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Độ Khớp: 94.2%
+              </span>
+            </div>
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig7Canvas" width="480" height="200" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+            <div class="space-y-1.5 font-code text-xs bg-stone-100 p-2.5 border border-stone-400">
+              <div class="text-stone-700">Chọn câu hỏi Query ($Q$) từ từ vựng:</div>
+              <div class="flex gap-2">
+                <button onclick="setFig7Query('space')" id="btn-f7-q1" class="px-2 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800">Q = "Khí quyển / Vũ trụ"</button>
+                <button onclick="setFig7Query('music')" id="btn-f7-q2" class="px-2 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">Q = "Giai điệu / Sân khấu"</button>
+              </div>
+            </div>
+            <div id="fig7-desc" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Khi Query hỏi về vũ trụ, Key của "meteorite" bắt sóng cực mạnh! Trọng số chú ý vọt lên chiếm trọn tâm điểm.
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT 7 -->
+        <div class="checkpoint-box p-4 rounded space-y-3 mt-4">
+          <div class="flex justify-between items-center border-b border-stone-500 pb-1.5">
+            <span class="font-bold text-stone-950 font-code text-sm">🎯 CHECKPOINT CHƯƠNG 7 (5 Câu Kiểm Tra Nhanh)</span>
+            <span id="cp7-score" class="font-code text-xs font-bold text-amber-950">Chưa làm: 0/5</span>
+          </div>
+          <div id="cp7-container" class="space-y-3"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 8 -->
+      <!-- ========================================================================= -->
+      <section id="c8" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
+          <span class="text-2xl font-black text-amber-900 font-code">08</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 8: Multi-Head Self-Attention: Chú Tắc Kè Hoa Uốn Nắn Hướng Vector
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Tại sao lại cần nhiều "Đầu chú ý" (Multi-Head) hoạt động song song?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="dropcap">
+              Trong câu lệnh mô tả nhân vật: <em>"Một sinh vật người đá 4 tay, đội mũ cao bồi, cưỡi tảng đá vuông"</em>, một từ có thể có nhiều mối quan hệ cùng một lúc. Từ *"cao bồi"* vừa phải liên kết với chiếc mũ, vừa phải thể hiện tư thế cưỡi, vừa phải gắn liền với vũ khí trong tay.
+            </p>
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-forest-950">💡 Tại sao phải là "Đa Đầu" (Multi-Head)?</div>
+              <p>
+                Nếu chỉ có một đầu chú ý duy nhất, mô hình sẽ bị "thiển cận": nếu nó tập trung nhìn màu sắc thì sẽ quên mất hình dáng giải phẫu. 
+                Vì vậy, Transformer chia 768 chiều thành **8 hoặc 12 chiếc đầu nhỏ (Heads)**:
+                <br>&bull; <strong>Đầu 1:</strong> Chuyên theo dõi giải phẫu sinh học (4 tay, 2 đầu).
+                <br>&bull; <strong>Đầu 2:</strong> Chuyên theo dõi chất liệu bề mặt (đá thiên thạch xốp, nham thạch).
+                <br>&bull; <strong>Đầu 3:</strong> Chuyên theo dõi phong cách và hành động (cao bồi, cưỡi thú).
+              </p>
+            </div>
+            <p>
+              Nhờ vậy, vector của từ ngữ như một **chú tắc kè hoa**, được uốn nắn một cách toàn diện từ mọi góc nhìn ngữ nghĩa trước khi bước sang giai đoạn kết nối với thị giác!
+            </p>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 8: MULTI-HEAD CONCURRENT ATTENTION -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 8: Quan Sát Các Đầu Chú Ý Độc Lập Hoạt Động Song Song
+              </span>
+              <span id="fig8-head-pill" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Đang Xem: Head #1 (Giải Phẫu Cơ Thể)
+              </span>
+            </div>
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig8Canvas" width="480" height="200" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+            <div class="flex gap-2 font-code text-xs">
+              <button onclick="setFig8Head(1)" id="btn-f8-h1" class="px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800">Head 1: Giải Phẫu</button>
+              <button onclick="setFig8Head(2)" id="btn-f8-h2" class="px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">Head 2: Chất Liệu Đá</button>
+              <button onclick="setFig8Head(3)" id="btn-f8-h3" class="px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">Head 3: Phong Cách Cao Bồi</button>
+            </div>
+            <div id="fig8-desc" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Head 1 bỏ qua màu sắc, chỉ tập trung nối dây giữa "creature" với "4 arms" và "2 heads"!
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT 8 -->
+        <div class="checkpoint-box p-4 rounded space-y-3 mt-4">
+          <div class="flex justify-between items-center border-b border-stone-500 pb-1.5">
+            <span class="font-bold text-stone-950 font-code text-sm">🎯 CHECKPOINT CHƯƠNG 8 (5 Câu Kiểm Tra Nhanh)</span>
+            <span id="cp8-score" class="font-code text-xs font-bold text-amber-950">Chưa làm: 0/5</span>
+          </div>
+          <div id="cp8-container" class="space-y-3"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 9 -->
+      <!-- ========================================================================= -->
+      <section id="c9" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
+          <span class="text-2xl font-black text-amber-900 font-code">09</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 9: Hai Thế Giới Song Song: Tòa Tháp Chữ & Tòa Tháp Ảnh Của CLIP
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Text Encoder và Vision Encoder hoạt động độc lập như thế nào trước khi hội ngộ?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="dropcap">
+              Mô hình CLIP (Contrastive Language-Image Pre-training) của OpenAI giống như một tổ chức gồm hai tòa tháp biệt lập xây cạnh nhau:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-xs sm:text-sm bg-stone-200 p-3 border border-stone-400">
+              <li>
+                <strong>Tòa Tháp Chữ (Text Encoder):</strong> Là một mạng Transformer chuyên nhận câu chữ từ bàn phím. Nó am hiểu ngữ pháp, vị trí từ ngữ, đại từ quan hệ và chuyển câu văn thành một vector đặc trưng $h_{\text{text}}$.
+              </li>
+              <li>
+                <strong>Tòa Tháp Ảnh (Vision Encoder - ViT):</strong> Là một mạng Vision Transformer chuyên nhận ảnh thô (ma trận điểm ảnh pixel RGB). Nó cắt bức ảnh thành các ô vuông nhỏ $16 \times 16$ pixel (như những mảnh ghép tranh cát), đọc đường nét, màu sắc, bóng tối và biến bức ảnh thành một vector đặc trưng $h_{\text{image}}$.
+              </li>
+            </ul>
+            <div class="takeaway-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-amber-950">📌 Bài toán đặt ra:</div>
+              <p>
+                Hai tòa tháp này ban đầu nói hai ngôn ngữ hoàn toàn khác nhau: Một bên nói bằng ngữ pháp tiếng Anh, một bên nói bằng độ sáng pixel! Làm sao để chúng có thể hiểu được rằng bức ảnh một chú chó xù và dòng chữ *"a fluffy dog"* đang cùng nói về một thực thể duy nhất?
+              </p>
+            </div>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 9: DUAL-TOWER ARCHITECTURE -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 9: Hai Luồng Xử Lý Song Song Trong Kiến Trúc CLIP
+              </span>
+              <span class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Kiến Trúc Hai Nhánh (Dual-Tower)
+              </span>
+            </div>
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig9Canvas" width="480" height="200" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+            <div class="flex gap-2 font-code text-xs">
+              <button onclick="highlightFig9('text')" class="px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">Xem Nhánh Text (Chữ)</button>
+              <button onclick="highlightFig9('vision')" class="px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">Xem Nhánh Vision (Ảnh)</button>
+              <button onclick="highlightFig9('both')" class="px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800">Xem Toàn Cảnh Hội Tụ</button>
+            </div>
+            <div id="fig9-desc" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Hai dòng dữ liệu hoàn toàn tách rời: Văn bản đi từ bên trái, Điểm ảnh đi từ bên phải, chuẩn bị gặp nhau ở chiếc cầu chiếu!
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT 9 -->
+        <div class="checkpoint-box p-4 rounded space-y-3 mt-4">
+          <div class="flex justify-between items-center border-b border-stone-500 pb-1.5">
+            <span class="font-bold text-stone-950 font-code text-sm">🎯 CHECKPOINT CHƯƠNG 9 (5 Câu Kiểm Tra Nhanh)</span>
+            <span id="cp9-score" class="font-code text-xs font-bold text-amber-950">Chưa làm: 0/5</span>
+          </div>
+          <div id="cp9-container" class="space-y-3"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 10 -->
+      <!-- ========================================================================= -->
+      <section id="c10" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
+          <span class="text-2xl font-black text-amber-900 font-code">10</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 10: Chiếc Cầu Thông Dịch Viên: Ma Trận Chiếu Tuyến Tính $W_t, W_v$
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Làm thế nào để xoay hai hệ quy chiếu khác biệt về chung một mặt phẳng?
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="dropcap">
+              Để hai tòa tháp Chữ và Ảnh tìm được tiếng nói chung, các kỹ sư lắp đặt ở đỉnh mỗi tòa tháp một chiếc thấu kính biến hình gọi là **Ma Trận Chiếu (Linear Projection Head)**:
+            </p>
+            <div class="math-box p-3.5 font-code text-xs sm:text-sm text-stone-900 space-y-1.5">
+              <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">Công thức chiếc cầu thông dịch viên:</div>
+              <div>$$\mathbf{u} = \mathbf{h}_{\text{text}} \cdot W_t, \qquad \mathbf{v} = \mathbf{h}_{\text{image}} \cdot W_v$$</div>
+              <div class="text-[11px] text-stone-700 leading-normal">
+                $W_t$ và $W_v$ đóng vai trò như hai người phiên dịch viên xuất sắc. Họ uốn nắn và xoay chuyển vector chữ $\mathbf{h}_{\text{text}}$ và vector ảnh $\mathbf{h}_{\text{image}}$ sao cho chúng cùng rơi vào một không gian nhúng chung 512 chiều (hoặc 768 chiều)!
+              </div>
+            </div>
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-forest-950">💡 Ví dụ phiên dịch viên hội nghị:</div>
+              <p>
+                Người Pháp nói: *"un chien"*. Người Nhật nói: *"犬 (inu)"*. Nếu không có người thông dịch, hai bên sẽ nghĩ người kia đang nói điều vô nghĩa. Nhưng khi qua tay người thông dịch (Ma trận chiếu), cả hai từ đều được dịch thành chung một khái niệm: `[Loài vật 4 chân, sủa gâu gâu]`.
+              </p>
+            </div>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 10: PROJECTION MATRIX SIMULATOR -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 10: Mô Phỏng Ma Trận Chiếu Xoay Trục Đồng Quy
+              </span>
+              <span id="fig10-badge" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Đã Khớp Trục Tọa Độ
+              </span>
+            </div>
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig10Canvas" width="480" height="200" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+            <div class="flex gap-2 font-code text-xs">
+              <button onclick="setFig10Alignment(false)" id="btn-f10-unaligned" class="px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300">Trước Khi Chiếu (Lệch Nhau)</button>
+              <button onclick="setFig10Alignment(true)" id="btn-f10-aligned" class="px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800">Sau Khi Qua $W_t, W_v$ (Đồng Quy)</button>
+            </div>
+            <div id="fig10-desc" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Nhờ ma trận Wt và Wv, vector của chữ "chú chó" (xanh lam) và bức ảnh chú chó (vàng cam) xoay trùng khít lên cùng một hướng!
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT 10 -->
+        <div class="checkpoint-box p-4 rounded space-y-3 mt-4">
+          <div class="flex justify-between items-center border-b border-stone-500 pb-1.5">
+            <span class="font-bold text-stone-950 font-code text-sm">🎯 CHECKPOINT CHƯƠNG 10 (5 Câu Kiểm Tra Nhanh)</span>
+            <span id="cp10-score" class="font-code text-xs font-bold text-amber-950">Chưa làm: 0/5</span>
+          </div>
+          <div id="cp10-container" class="space-y-3"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 11 -->
+      <!-- ========================================================================= -->
+      <section id="c11" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
+          <span class="text-2xl font-black text-amber-900 font-code">11</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 11: Trò Chơi Nam Châm Tương Phản: Kéo Cặp Đúng, Đạp Cặp Sai
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Trực giác cốt lõi của Học Tương Phản (Contrastive Learning)
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="dropcap">
+              Làm thế nào máy tính biết cách điều chỉnh hai ma trận $W_t$ và $W_v$? CLIP không thuê hàng triệu người ngồi gán nhãn thủ công từng bức ảnh. Thay vào đó, nó thu thập 400 triệu cặp ảnh-chữ có sẵn trên Internet và tổ chức một **Trò chơi ghép thẻ bài khổng lồ**:
+            </p>
+            <div class="analogy-box p-3 text-xs sm:text-sm text-stone-900 space-y-1.5">
+              <div class="font-bold text-forest-950">💡 Luật chơi trò chơi Nam Châm Tương Phản:</div>
+              <p>
+                Trong một mẻ bài gồm 10,000 bức ảnh và 10,000 dòng chữ:
+                <br>&bull; <strong>Lực Hút Nam Châm (Positive Force):</strong> Bức ảnh chú mèo ĐÚNG phải bị kéo dính chặt vào dòng chữ <em>"a cute kitten"</em> ($\cos \theta \to 1.0$).
+                <br>&bull; <strong>Lực Đẩy Nam Châm (Negative Repulsion):</strong> Đồng thời, bức ảnh chú mèo đó phải tạo ra một lực đẩy cực mạnh để **đạp văng tất cả 9,999 dòng chữ sai còn lại** (như xe tăng, bánh mì, máy bay) ra thật xa ($\cos \theta \to 0$ hoặc âm)!
+              </p>
+            </div>
+            <p>
+              Khi lặp lại trò chơi này hàng tỷ lần, toàn bộ không gian tọa độ sẽ tự động ổn định một cách thần kỳ: những gì tương đồng tự động tụ họp thành từng cụm, và những gì trái ngược bị đẩy sang các góc đối diện!
+            </p>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 11: CONTRASTIVE MAGNET SIMULATOR -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 11: Mô Phỏng Trường Lực Kéo - Đẩy Của Nam Châm CLIP
+              </span>
+              <span id="fig11-state-badge" class="text-[11px] font-code bg-amber-900 text-stone-100 px-2 py-0.5">
+                Cặp Đúng: Hút Lại Gần (θ -> 0°)
+              </span>
+            </div>
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig11Canvas" width="480" height="200" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+            <div class="flex gap-2 font-code text-xs">
+              <button onclick="stepFig11Training()" id="btn-f11-step" class="px-3 py-1.5 bg-amber-900 text-stone-100 font-bold border border-stone-800 hover:bg-amber-800">⚡ Chạy 1 Bước Huấn Luyện (Kéo/Đẩy)</button>
+              <button onclick="resetFig11()" class="px-2.5 py-1.5 bg-stone-100 border border-stone-800 hover:bg-stone-300 font-bold">↺ Đặt Lại</button>
+            </div>
+            <div id="fig11-desc" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Hãy bấm nút huấn luyện nhiều lần: Bạn sẽ thấy thẻ đúng (mèo) bị kéo áp sát vào ảnh mèo, trong khi các thẻ sai (tàu hỏa, chuối) bị bắn văng ra xa!
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT 11 -->
+        <div class="checkpoint-box p-4 rounded space-y-3 mt-4">
+          <div class="flex justify-between items-center border-b border-stone-500 pb-1.5">
+            <span class="font-bold text-stone-950 font-code text-sm">🎯 CHECKPOINT CHƯƠNG 11 (5 Câu Kiểm Tra Nhanh)</span>
+            <span id="cp11-score" class="font-code text-xs font-bold text-amber-950">Chưa làm: 0/5</span>
+          </div>
+          <div id="cp11-container" class="space-y-3"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 12 -->
+      <!-- ========================================================================= -->
+      <section id="c12" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
+          <span class="text-2xl font-black text-amber-900 font-code">12</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Chương 12: Chạm Ngõ Phần 3: CLIP Trở Thành Người Dẫn Đường Cho Diffusion Ra Sao?
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              Bức tranh toàn cảnh: Từ câu chữ gõ phím đến hình ảnh hoàn chỉnh
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-6 space-y-3.5 text-justify text-sm sm:text-base leading-relaxed text-stone-800">
+            <p class="dropcap">
+              Giờ đây, bạn đã sở hữu trọn vẹn chìa khóa hiểu biết về nửa đầu của cỗ máy tạo ảnh:
+            </p>
+            <ol class="list-decimal list-inside space-y-1.5 text-xs sm:text-sm bg-stone-200 p-3 border border-stone-400">
+              <li>Bạn gõ dòng lệnh: <em>"Chàng cao bồi đá thiên thạch 4 tay..."</em>.</li>
+              <li>Thuật toán <strong>BPE</strong> băm nhỏ thành chuỗi Token ID.</li>
+              <li>Bảng tra <strong>$W_e$</strong> cấp cho mỗi mảnh một vector 768 chiều.</li>
+              <li><strong>Positional Encoding</strong> gắn biển số thứ tự thời gian.</li>
+              <li><strong>Multi-Head Self-Attention</strong> uốn nắn các từ hòa quyện ngữ cảnh vào nhau.</li>
+              <li>Ma trận <strong>$W_t$</strong> biến chuỗi chữ đó thành một tọa độ chuẩn xác trong không gian gặp gỡ chung với thị giác!</li>
+            </ol>
+            <div class="takeaway-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
+              <div class="font-bold text-amber-950">📌 Bước nhảy sang Phần 3:</div>
+              <p>
+                Tọa độ này sẽ được chuyển giao sang mạng Diffusion (U-Net) như một chiếc **bản đồ chỉ đường**. Trong Phần 3, bạn sẽ được khám phá: Tại sao không gian này phải là một Siêu Cầu Đơn Vị bán kính $R=1$? Gốc $(0,0,\dots,0)$ nguy hiểm thế nào? Và bí mật con số 77 Token đến từ đâu!
+              </p>
+            </div>
+          </div>
+
+          <!-- INTERACTIVE FIGURE 12: THE FULL PIPELINE OVERVIEW -->
+          <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
+            <div class="flex justify-between items-center border-b border-stone-400 pb-2">
+              <span class="font-code text-xs font-bold uppercase text-stone-900">
+                Figure 12: Toàn Cảnh Chuỗi Dây Chuyền Từ Prompt Đến Tọa Độ CLIP
+              </span>
+              <span class="text-[11px] font-code bg-emerald-900 text-stone-100 px-2 py-0.5">
+                Sẵn Sàng Cho Phần 3
+              </span>
+            </div>
+            <div class="border border-stone-700 bg-stone-950 p-2 rounded">
+              <canvas id="fig12Canvas" width="480" height="200" class="w-full h-auto bg-stone-950"></canvas>
+            </div>
+            <div class="flex justify-between items-center bg-stone-100 p-2.5 border border-stone-400 font-code text-xs">
+              <span>Trạng thái luồng xử lý:</span>
+              <button onclick="playPipelineAnim()" class="px-3 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800 hover:bg-amber-800">▶ Bấm Xem Dòng Chảy Dữ Liệu</button>
+            </div>
+            <div id="fig12-pipeline-log" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
+              Văn bản thô ➔ BPE Tokens ➔ Ma trận Tra cứu We ➔ Self-Attention ➔ Ma trận Chiếu Wt ➔ Tọa độ CLIP sẵn sàng!
+            </div>
+          </div>
+        </div>
+
+        <!-- CHECKPOINT 12 -->
+        <div class="checkpoint-box p-4 rounded space-y-3 mt-4">
+          <div class="flex justify-between items-center border-b border-stone-500 pb-1.5">
+            <span class="font-bold text-stone-950 font-code text-sm">🎯 CHECKPOINT CHƯƠNG 12 (5 Câu Kiểm Tra Nhanh)</span>
+            <span id="cp12-score" class="font-code text-xs font-bold text-amber-950">Chưa làm: 0/5</span>
+          </div>
+          <div id="cp12-container" class="space-y-3"></div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- BÀI KIỂM TRA TỔNG KẾT PHẦN 2.3 (15 CÂU HỎI BLOOM TỔNG HỢP) -->
+      <!-- ========================================================================= -->
+      <section id="c-exam" class="p-4 sm:p-6 bg-amber-50 border-2 border-stone-800 space-y-4">
+        <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
+          <span class="text-2xl font-black text-amber-900 font-code">TEST 2.3</span>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black uppercase text-stone-950">
+              Bài Kiểm Tra Tổng Kết Mô-Đun 2.3: Từ Chữ Viết Đến Tọa Độ & Bản Đồ CLIP
+            </h2>
+            <span class="text-xs text-stone-600 font-code">
+              15 câu hỏi chuẩn Thang đo Bloom từ Cấp 1 (Nhận biết) đến Cấp 6 (Vận dụng cao & Sáng tạo)
+            </span>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center bg-stone-200 p-2.5 border border-stone-400 font-code text-xs">
+          <span class="font-bold text-stone-900" id="final-progress-text">Tiến độ bài thi: 0 / 15 câu đã làm</span>
+          <span class="font-bold text-amber-950" id="final-score-text">Điểm: 0 / 15</span>
+        </div>
+
+        <div id="final-exam-container" class="space-y-4">
+          <!-- Render tự động 15 câu bằng JS -->
+        </div>
+
+        <div id="final-exam-summary" class="mt-6 p-4 bg-stone-100 border-2 border-stone-800 text-xs font-code hidden"></div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER TỔNG KẾT PHẦN 2.3 -->
+    <footer class="mt-14 pt-5 border-t-2 border-stone-800 text-stone-600 text-xs font-code flex flex-wrap justify-between items-center gap-2">
+      <div>Bản Tin Khoa Học Số 02.3 &bull; Trọn Vẹn 12 Chương &bull; 75 Câu Trắc Nghiệm Tương Tác</div>
+      <div class="text-stone-900 font-bold">100% KaTeX Math &bull; 100% Roboto Font &bull; 12 Interactive Figures Thời Gian Thực</div>
+    </footer>
+
+  </div>
+
+  <!-- JAVASCRIPT ĐIỀU KHIỂN TOÀN BỘ 12 INTERACTIVE FIGURES & 75 CÂU HỎI -->
+  <script>
+    /* TOÀN BỘ CƠ SỞ DỮ LIỆU CỦA 12 BỘ CHECKPOINT (12 x 5 = 60 CÂU HỎI) */
+    const checkpointData = {
+      cp1: [
+        { q: "Mã ASCII biểu diễn các ký tự chữ cái trên máy tính bằng gì?", opts: ["Bằng tọa độ hình học 768 chiều", "Bằng các số nguyên nhị phân (byte) cố định vô tri", "Bằng hình ảnh chụp từ vệ tinh", "Bằng cảm xúc của con người"], ans: 1, exp: "Đúng! ASCII chỉ gán mỗi chữ cái một con số như 'c'=99, hoàn toàn không chứa ngữ nghĩa sinh học hay vật lý." },
+        { q: "Tại sao khoảng cách ký tự ASCII giữa 'cat' và 'car' lại đánh lừa máy tính?", opts: ["Vì chúng cùng phát ra âm thanh giống nhau", "Vì chúng chỉ khác nhau 1 chữ cái cuối nên rất gần nhau về mã ký tự, dù bản chất con mèo và ô tô khác biệt hoàn toàn", "Vì máy tính bị virus", "Vì từ 'cat' dài hơn từ 'car'"], ans: 1, exp: "Chính xác! Mã ký tự chỉ đo hình thức chữ viết, hoàn toàn bất lực trong việc phản ánh bản chất của thế giới." },
+        { q: "Tọa độ ngữ nghĩa (Semantic Coordinates) trong AI là gì?", opts: ["Là số trang của từ điển Oxford", "Là địa chỉ IP của máy chủ", "Là một vector nhiều chiều định vị ý niệm, sao cho các khái niệm gần nghĩa tự động nằm sát nhau", "Là số ký tự trong câu"], ans: 2, exp: "Đúng! Tọa độ ngữ nghĩa ánh xạ ý niệm trừu tượng vào không gian hình học để tính toán khoảng cách." },
+        { q: "Nếu đo bằng khoảng cách ngữ nghĩa, cặp từ nào sau đây PHẢI nằm gần nhau nhất?", opts: ["'mèo' và 'ô tô'", "'mèo' và 'chó'", "'mèo' và 'máy bay'", "'mèo' và 'bánh quy'"], ans: 1, exp: "Chính xác! 'Mèo' và 'chó' cùng là động vật bốn chân có lông, cùng thuộc nhóm thú nuôi." },
+        { q: "Mục tiêu tối thượng của việc biểu diễn từ vựng trong mô hình AI là gì?", opts: ["Để lưu trữ được nhiều chữ cái nhất vào ổ cứng", "Để máy tính có thể cộng trừ và so sánh các ý niệm như những vector toán học", "Để dịch toàn bộ văn bản sang tiếng Latin", "Để xóa bỏ khoảng trắng giữa các từ"], ans: 1, exp: "Đúng! Biến chữ thành vector giúp máy tính thực hiện các phép đại số ngữ nghĩa kỳ diệu." }
+      ],
+      cp2: [
+        { q: "Nhược điểm chí mạng của phương pháp tách theo từng chữ cái (Character-level) là gì?", opts: ["Bộ từ vựng quá lớn", "Từng chữ cái riêng lẻ ('c', 'a', 't') không mang ngữ nghĩa trọn vẹn và làm câu văn dài ngoặc khiến Transformer kiệt sức", "Không thể viết hoa được chữ cái", "Làm mất kết nối mạng Internet"], ans: 1, exp: "Chính xác! Chuỗi quá dài làm chi phí bộ nhớ của Attention bùng nổ mà không nắm bắt được nghĩa của từ." },
+        { q: "Nhược điểm lớn nhất của phương pháp tách theo cả từ nguyên khối (Word-level) là gì?", opts: ["Gặp từ mới, từ ghép hoặc viết sai chính tả là mô hình đầu hàng ngay (Lỗi Unknown Token [UNK])", "Mô hình chạy quá nhanh", "Bộ từ vựng chỉ có 26 từ", "Không đọc được dấu câu"], ans: 0, exp: "Đúng! Bạn không thể lập từ điển chứa hết hàng triệu từ của ngôn ngữ nhân loại." },
+        { q: "Phương pháp tách mảnh từ (Subword Tokenization) giải quyết bài toán trên bằng cách nào?", opts: ["Xóa bỏ mọi nguyên âm trong câu", "Dung hòa ở giữa: giữ lại các từ thông dụng, đồng thời băm các từ lạ thành các mẩu âm tiết quen thuộc để lắp ghép", "Chỉ đọc từ đầu tiên trong câu", "Bắt buộc người dùng phải gõ tiếng Anh"], ans: 1, exp: "Chính xác! Mọi từ mới lạ đều có thể ghép lại từ các mảnh Lego quen thuộc mà không bao giờ gặp lỗi [UNK]." },
+        { q: "Từ 'meteorite' (đá thiên thạch) trong CLIP thường được băm thành những mảnh subword nào?", opts: ["['m', 'e', 't', 'e', 'o', 'r', 'i', 't', 'e']", "['meteor', 'ite</w>']", "['meteorite'] nguyên khối", "['met', 'eor', 'ite']"], ans: 1, exp: "Đúng! Mảnh 'meteor' (thiên thạch) quen thuộc kết hợp với hậu tố khoáng vật 'ite'." },
+        { q: "Tại sao tiếng Việt có dấu thường bị tách thành nhiều mảnh token hơn tiếng Anh trong CLIP?", opts: ["Vì người Việt Nam gõ máy tính nhanh hơn", "Vì CLIP được huấn luyện chủ yếu bằng dữ liệu tiếng Anh, các ký tự có dấu tiếng Việt là ký tự hiếm nên bị băm nhỏ thành các mảnh byte", "Vì tiếng Việt có ít từ hơn", "Do màn hình hiển thị không hỗ trợ"], ans: 1, exp: "Chính xác! BPE của CLIP tối ưu cho bảng chữ cái tiếng Anh, khiến ký tự có dấu bị chẻ vụn thành 2-4 mảnh." }
+      ],
+      cp3: [
+        { q: "Thuật toán Byte-Pair Encoding (BPE) ban đầu vốn là giải thuật dùng để làm gì vào năm 1994?", opts: ["Dùng để vẽ tranh hoạt hình", "Dùng để nén dữ liệu chuỗi ký tự", "Dùng để dự báo thời tiết", "Dùng để lái xe tự hành"], ans: 1, exp: "Đúng! BPE là thuật toán nén dữ liệu không mất mát dựa trên việc thay thế cặp ký tự lặp lại nhiều lần." },
+        { q: "Trong BPE, tiêu chí nào quyết định hai mảnh ghép sẽ được hàn dính lại thành một viên gạch mới?", opts: ["Do người lập trình viên tự chọn theo cảm tính", "Cặp hai mảnh nào đứng cạnh nhau với tần suất xuất hiện cao nhất trong kho văn bản", "Cặp mảnh nào có ít chữ cái nhất", "Cặp mảnh nào bắt đầu bằng chữ 'A'"], ans: 1, exp: "Chính xác! Thống kê tần suất xuất hiện liên tiếp là nguyên lý cốt lõi của BPE." },
+        { q: "Ký hiệu `</w>` thường gắn ở đuôi một mảnh ghép BPE mang ý nghĩa gì?", opts: ["Đánh dấu đó là một từ viết sai chính tả", "Đánh dấu mảnh ghép đó nằm ở vị trí kết thúc của một từ hoàn chỉnh (End-of-word)", "Là ký hiệu của trang web", "Là lệnh xóa ký tự"], ans: 1, exp: "Đúng! Ký hiệu này giúp máy tính phân biệt mảnh đứng ở đầu/giữa từ với mảnh nằm ở đuôi từ." },
+        { q: "Nếu hai mảnh 'in' và 'g' xuất hiện cạnh nhau hàng triệu lần, BPE sẽ làm gì?", opts: ["Xóa bỏ cả hai mảnh", "Tạo ra mảnh mới 'ing' và bổ sung vĩnh viễn vào bảng từ vựng", "Báo lỗi tràn bộ nhớ", "Đảo ngược thứ tự thành 'gni'"], ans: 1, exp: "Chính xác! 'ing' trở thành một viên gạch Lego hoàn chỉnh sẵn sàng cho các lần ghép tiếp theo." },
+        { q: "Quá trình hợp nhất của BPE sẽ dừng lại khi nào?", opts: ["Khi máy tính hết pin", "Khi đạt đủ số lượng mảnh từ vựng mong muốn (ví dụ đúng 49,408 mảnh trong CLIP)", "Sau đúng 10 phút", "Khi không còn chữ cái nào trên bàn phím"], ans: 1, exp: "Đúng! Kích thước bộ từ vựng (Vocabulary Size) là tham số cố định do nhà khoa học thiết lập trước." }
+      ],
+      cp4: [
+        { q: "Kích thước bảng từ vựng (Vocabulary Size) của mô hình CLIP chuẩn OpenAI là bao nhiêu mảnh?", opts: ["1,000 mảnh", "10,000 mảnh", "49,408 mảnh", "1,000,000 mảnh"], ans: 2, exp: "Chính xác! CLIP có đúng 49,408 ngăn kéo từ vựng BPE." },
+        { q: "Ma trận Tra cứu Embedding We có kích thước hình học là gì trong CLIP ViT-B/32?", opts: ["49408 × 768", "768 × 768", "512 × 512", "77 × 77"], ans: 0, exp: "Đúng! Gồm 49,408 hàng (tương ứng từng token) và mỗi hàng chứa một vector 768 chiều." },
+        { q: "Mã Token ID (ví dụ số 9832 của từ 'rock') đóng vai trò gì trong ma trận We?", opts: ["Là số lượng ký tự của từ", "Là số thứ tự hàng để rút trích vector 768 chiều tương ứng", "Là điểm thi đại học", "Là góc quay của bức ảnh"], ans: 1, exp: "Chính xác! Token ID chính là chỉ mục hàng (Row Index) để tra cứu vector." },
+        { q: "Tọa độ rút ra từ ma trận We được gọi là gì?", opts: ["Tọa độ động phụ thuộc ngữ cảnh", "Tọa độ khởi điểm tĩnh (Static Initial Embedding)", "Tọa độ màu sắc pixel", "Tọa độ vị trí địa lý GPS"], ans: 1, exp: "Đúng! Tọa độ này chưa hề biết các từ xung quanh nó là gì, nên gọi là tọa độ tĩnh." },
+        { q: "Nếu hai từ hoàn toàn khác nhau cùng xuất hiện, chúng có thể dùng chung một hàng trong ma trận We không?", opts: ["Có, nếu hai từ đó cùng vần", "Không bao giờ, mỗi mã Token ID duy nhất sở hữu một hàng vector riêng biệt", "Tùy thuộc vào thời tiết", "Có, nếu câu văn quá ngắn"], ans: 1, exp: "Chính xác! Mỗi token trong bộ từ vựng 49,408 đều có ngăn kéo độc lập của riêng mình." }
+      ],
+      cp5: [
+        { q: "Nhược điểm 'Tính bất biến hoán vị' (Permutation Invariance) của Self-Attention nghĩa là gì?", opts: ["Máy tính không thể dịch tiếng nước ngoài", "Máy tính xem tập hợp các từ như một chiếc túi lộn xộn, coi 'chó cắn người' giống hệt 'người cắn chó'", "Máy tính không đọc được số chẵn", "Mô hình chỉ chạy được trên CPU"], ans: 1, exp: "Đúng! Bản thân phép chú ý không có khái niệm trước sau nếu không được cấp thêm thông tin vị trí." },
+        { q: "Positional Encoding (PE) được đưa vào mô hình bằng phép toán nào?", opts: ["Nhân với ma trận We", "Cộng trực tiếp vector PE vào vector từ vựng (x = We[token] + PE[pos])", "Chia vector cho số thứ tự", "Trừ vector về số 0"], ans: 1, exp: "Chính xác! PE được cộng trực tiếp (element-wise addition) vào vector nhúng ban đầu." },
+        { q: "Vector Positional Encoding cổ điển trong Transformer thường được tạo ra từ hàm số nào?", opts: ["Hàm xúc xắc ngẫu nhiên", "Hàm sóng tuần hoàn hình Sin và Cosin ở các tần số khác nhau", "Hàm số mũ tăng dần tới vô cùng", "Hàm logarit tự nhiên"], ans: 1, exp: "Đúng! Các hàm sin/cos giúp mô hình dễ dàng học được khoảng cách tương đối giữa các vị trí." },
+        { q: "Điều gì xảy ra với từ 'mèo' khi nó nằm ở vị trí số 1 so với khi nó nằm ở vị trí số 10?", opts: ["Nó vẫn có tọa độ hoàn toàn giống hệt nhau", "Nhờ được cộng thêm PE(1) và PE(10) khác nhau, tọa độ tổng hợp của chúng trở nên khác biệt rõ rệt", "Nó bị xóa khỏi câu", "Nó biến thành từ 'chó'"], ans: 1, exp: "Chính xác! PE tạo ra con dấu bưu điện đánh dấu chính xác vị trí thời gian của từ." },
+        { q: "Nếu không có Positional Encoding, mô hình tạo ảnh sẽ bị hậu quả gì?", opts: ["Ảnh sinh ra bị mờ nhạt", "Mô hình không phân biệt được chủ thể và tân ngữ, ví dụ vẽ 'người cưỡi ngựa' thành 'ngựa cưỡi người'", "Mô hình vẽ ảnh chậm gấp 10 lần", "Máy tính bị tắt nguồn"], ans: 1, exp: "Đúng! Trật tự cú pháp bị đảo lộn hoàn toàn làm hỏng cấu trúc logic của bức tranh." }
+      ],
+      cp6: [
+        { q: "Hiện tượng từ đa nghĩa (Polysemy) là gì?", opts: ["Một từ chỉ xuất hiện một lần trong đời", "Một từ có thể mang nhiều tầng ý nghĩa hoàn toàn khác nhau tùy thuộc vào ngữ cảnh xung quanh", "Từ viết hoa tất cả chữ cái", "Từ mượn tiếng nước ngoài"], ans: 1, exp: "Chính xác! Ví dụ 'rock' vừa là hòn đá vừa là nhạc rock sôi động." },
+        { q: "Tại sao mô hình Word2Vec (năm 2013) lại bất lực trước các từ đa nghĩa?", opts: ["Vì Word2Vec chạy trên điện thoại", "Vì nó gán cứng duy nhất một vector tĩnh cho mỗi từ, khiến từ bị kẹt ở giữa các nghĩa bất tương quan", "Vì Word2Vec không biết tiếng Anh", "Vì nó không có bộ nhớ RAM"], ans: 1, exp: "Đúng! Tọa độ cố định làm mất khả năng thích ứng linh hoạt theo câu văn." },
+        { q: "Để hiểu đúng từ 'apple' trong câu 'Apple ra mắt điện thoại mới', máy tính cần nhìn vào đâu?", opts: ["Nhìn vào chữ cái đầu tiên", "Nhìn vào các từ xung quanh như 'ra mắt', 'điện thoại' để kéo nghĩa về công nghệ", "Nhìn vào số trang sách", "Không cần nhìn gì cả"], ans: 1, exp: "Chính xác! Các từ lân cận cung cấp ngữ cảnh sinh tử định hình bản chất khái niệm." },
+        { q: "Khái niệm 'Contextual Embedding' (Nhúng phụ thuộc ngữ cảnh) ra đời để giải quyết điều gì?", opts: ["Để tăng tốc độ gõ phím", "Để cho phép hướng vector của từ tự động biến hóa và xoay góc tùy theo bạn bè xung quanh nó", "Để dịch từ sang tiếng Pháp", "Để nén file ảnh"], ans: 1, exp: "Đúng! Đó chính là bước nhảy vĩ đại từ Word2Vec lên kỷ nguyên Transformer." },
+        { q: "Khi từ 'rock' đứng cạnh 'meteorite, space', hướng vector của nó sẽ bị kéo về đâu?", opts: ["Về phía ban nhạc và đàn guitar", "Về phía cụm thiên văn học, địa chất và vật chất vô cơ ngoài vũ trụ", "Về phía món ăn ngon", "Về gốc tọa độ số 0"], ans: 1, exp: "Chính xác! Lực kéo ngữ nghĩa sẽ định hướng lại góc quay của vector một cách chuẩn xác." }
+      ],
+      cp7: [
+        { q: "Trong cơ chế Chú Ý (Attention), thành phần Query (Q) đóng vai trò tương tự như hình ảnh nào?", opts: ["Cuốn từ điển dày cộp", "Chiếc đèn pin rọi đi tìm kiếm hoặc câu hỏi thắc mắc của từ vựng", "Chiếc kệ để sách", "Bóng đèn bị cháy"], ans: 1, exp: "Đúng! Query chính là câu hỏi phát đi: 'Tôi đang tìm manh mối tương thích với tôi'." },
+        { q: "Thành phần Key (K) trong Attention đóng vai trò gì?", opts: ["Là chìa khóa mở cửa phòng", "Là tấm nhãn dán tóm tắt đặc trưng của từng từ để so khớp độ tương thích với Query", "Là mật khẩu máy tính", "Là số thứ tự trang sách"], ans: 1, exp: "Chính xác! Phép nhân vô hướng Q và K cho biết mức độ ăn khớp giữa câu hỏi và nhãn dán." },
+        { q: "Thành phần Value (V) chứa đựng thông tin gì?", opts: ["Chứa giá tiền của mô hình", "Chứa nội dung thông tin thực sự sẽ được trích xuất và truyền đi nếu Key khớp với Query", "Chứa mã nguồn Python", "Chứa độ phân giải màn hình"], ans: 1, exp: "Đúng! Value là gói dữ liệu ngữ nghĩa được chuyển giao sau khi vượt qua bộ lọc Softmax." },
+        { q: "Phép nhân vô hướng Q · K^T cho kết quả càng lớn thì hàm Softmax sẽ làm gì?", opts: ["Bỏ qua từ đó", "Gán cho từ đó một trọng số chú ý (Attention Weight) càng cao, tập trung toàn bộ năng lượng vào đó", "Xóa từ đó khỏi bộ nhớ", "Biến giá trị thành số âm"], ans: 1, exp: "Chính xác! Softmax biến điểm số tương thích thành phân phối xác suất tập trung vào mảnh quan trọng nhất." },
+        { q: "Tại sao trong công thức Attention lại có phép chia cho căn bậc hai của d_k (√d_k)?", opts: ["Để tính diện tích hình tròn", "Để kiềm chế phương sai của tích vô hướng không phình to, ngăn chặn Softmax rơi vào vùng bão hòa mất gradient", "Để làm tròn số", "Để tiết kiệm điện năng"], ans: 1, exp: "Đúng! Đây là bước chuẩn hóa toán học sống còn giúp mạng nơ-ron học tập ổn định." }
+      ],
+      cp8: [
+        { q: "Cơ chế Multi-Head Attention trong CLIP Text Encoder thường chia vector thành bao nhiêu đầu?", opts: ["1 đầu duy nhất", "8 hoặc 12 đầu độc lập", "1,000 đầu", "50,000 đầu"], ans: 1, exp: "Chính xác! CLIP ViT-B/32 sử dụng 12 đầu chú ý hoạt động song song trong mỗi tầng." },
+        { q: "Lợi ích cốt lõi của việc có nhiều đầu chú ý (Multi-Head) là gì?", opts: ["Làm cho máy tính nóng hơn", "Cho phép mô hình đồng thời theo dõi các khía cạnh ngữ nghĩa khác nhau (giải phẫu, chất liệu, phong cách) mà không bị che khuất nhau", "Tăng kích thước file ảnh", "Chỉ để làm đẹp mã nguồn"], ans: 1, exp: "Đúng! Mỗi đầu học một không gian con đặc trưng riêng biệt." },
+        { q: "Ẩn dụ 'chú tắc kè hoa' trong bài học mô tả đặc tính nào của vector ngữ nghĩa?", opts: ["Khả năng đổi màu da ngụy trang", "Khả năng linh hoạt xoay chuyển và uốn nắn góc vector để hòa hợp với môi trường câu lệnh xung quanh", "Khả năng ăn sâu bọ", "Khả năng leo trèo"], ans: 1, exp: "Chính xác! Tắc kè hoa đổi màu theo cành cây y hệt như từ ngữ đổi hướng vector theo bạn bè." },
+        { q: "Nếu một đầu chú ý theo dõi chất liệu, nó sẽ kết nối từ 'creature' mạnh nhất với từ nào trong câu 'meteorite rock creature'?", opts: ["Từ 'the'", "Từ 'rock' và 'meteorite'", "Từ 'a'", "Dấu chấm câu"], ans: 1, exp: "Đúng! Đầu chất liệu sẽ bỏ qua ngữ pháp và bắt chặt các từ mô tả cấu trúc vật chất." },
+        { q: "Sau khi đi qua 12 tầng Transformer Self-Attention, vector ban đầu thay đổi như thế nào?", opts: ["Bị biến thành số 0", "Trở thành vector ngữ cảnh hóa sâu sắc, tích hợp trọn vẹn thông tin của toàn bộ câu lệnh", "Bị chia đôi độ dài", "Không thay đổi gì cả"], ans: 1, exp: "Chính xác! Đó là sản phẩm trí tuệ hoàn chỉnh mang đầy đủ linh hồn của câu lệnh prompt." }
+      ],
+      cp9: [
+        { q: "Mô hình CLIP gồm hai thành phần kiến trúc cốt lõi nào?", opts: ["Text Encoder và Vision Encoder", "Bàn phím và Chuột máy tính", "CPU và Bộ nguồn", "Camera và Màn hình"], ans: 0, exp: "Đúng! Hai nhánh song song: một nhánh xử lý chữ (Text) và một nhánh xử lý ảnh (Vision)." },
+        { q: "Vision Transformer (ViT) trong CLIP xử lý bức ảnh thô bằng cách nào?", opts: ["Đọc từng dòng chữ trên ảnh", "Cắt bức ảnh thành các mẩu ô vuông nhỏ (ví dụ 16x16 pixel) như tranh cát rồi đưa qua Transformer", "Biến cả bức ảnh thành màu đen trắng", "Xóa bỏ 50% số pixel"], ans: 1, exp: "Chính xác! ViT coi các mẩu patch ảnh tương tự như các token từ ngữ trong văn bản." },
+        { q: "Trước khi bước vào không gian chiếu, hai tòa tháp Chữ và Ảnh có đặc điểm gì?", opts: ["Đã hoàn toàn hiểu nhau", "Nói hai ngôn ngữ hình học nội bộ hoàn toàn khác nhau: một bên hiểu theo cú pháp, một bên hiểu theo lưới pixel", "Cùng nằm trong một file ảnh", "Không có tham số nào"], ans: 1, exp: "Đúng! Cơ sở trực chuẩn và cách phân bổ tọa độ ban đầu của chúng hoàn toàn lệch pha." },
+        { q: "Số lượng tham số của Text Encoder và Vision Encoder có bắt buộc phải giống hệt nhau không?", opts: ["Bắt buộc phải bằng nhau đến từng con số", "Không bắt buộc, mỗi nhánh có kích thước và số tầng phù hợp với phương thức dữ liệu của nó", "Vision Encoder luôn nhỏ hơn Text Encoder 100 lần", "Tùy thuộc vào thời gian sạc pin"], ans: 1, exp: "Chính xác! Hai nhánh độc lập về cấu trúc kiến trúc bên trong." },
+        { q: "Đầu ra của mỗi nhánh trước khi chiếu được gọi là gì?", opts: ["Vector đặc trưng tiềm ẩn (Latent feature representation)", "File ảnh JPEG", "Chuỗi ký tự ASCII", "Đoạn ghi âm giọng nói"], ans: 0, exp: "Đúng! Đó là các vector cô đọng tinh hoa thông tin của bức ảnh hoặc câu chữ." }
+      ],
+      cp10: [
+        { q: "Ma trận chiếu Wt và Wv đóng vai trò gì trong kiến trúc CLIP?", opts: ["Dùng để nén dung lượng bộ nhớ", "Đóng vai trò như phòng thông dịch viên, xoay và ánh xạ hai luồng Chữ và Ảnh vào cùng một không gian nhúng chung", "Dùng để tăng độ nét của ảnh", "Dùng để lọc virus"], ans: 1, exp: "Chính xác! Chúng là chiếc cầu nối tuyến tính đồng quy hai thế giới." },
+        { q: "Kích thước của không gian nhúng chung sau phép chiếu thường là bao nhiêu chiều trong CLIP?", opts: ["2 chiều", "512 chiều hoặc 768 chiều", "10,000 chiều", "1 chiều"], ans: 1, exp: "Đúng! Không gian nhúng chung thường có số chiều $d_e = 512$ hoặc $768$." },
+        { q: "Phép toán nào được thực hiện ngay sau khi vector đi qua ma trận chiếu Wt và Wv?", opts: ["Cộng thêm 100", "Chuẩn hóa độ dài L2 để đưa vector về độ dài bằng đúng 1.0 (Unit Norm)", "Làm tròn thành số nguyên", "Đảo ngược dấu âm dương"], ans: 1, exp: "Chính xác! Chuẩn hóa L2 ép mọi ý niệm đậu lên bề mặt quả cầu đơn vị." },
+        { q: "Nếu ma trận Wt và Wv chưa được huấn luyện (khởi tạo ngẫu nhiên), góc giữa ảnh chú chó và chữ 'con chó' sẽ ra sao?", opts: ["Trùng khít 0 độ", "Xoay lệch hướng ngẫu nhiên (góc lớn, không liên quan nhau)", "Luôn vuông góc 90 độ", "Luôn bằng 180 độ"], ans: 1, exp: "Đúng! Khi chưa học, thấu kính chiếu hai vector đi hai hướng hoàn toàn mất kiểm soát." },
+        { q: "Sau khi huấn luyện thành công, điều gì xảy ra với vector của chữ 'chàng cao bồi' và vector của bức ảnh chàng cao bồi?", opts: ["Chúng bị đẩy ra xa nhau", "Chúng xoay trùng khít hoặc tạo góc cực nhỏ tiệm cận 0 độ trên siêu cầu", "Chúng triệt tiêu nhau về 0", "Một vector biến mất"], ans: 1, exp: "Chính xác! Chúng tìm thấy nhau và cùng chỉ về một hướng ý niệm!" }
+      ],
+      cp11: [
+        { q: "Trong một mẻ huấn luyện (Batch) của CLIP, cặp Đúng (Positive Pair) là gì?", opts: ["Hai câu văn tiếng Anh giống nhau", "Bức ảnh chính xác và dòng chữ mô tả nguyên bản đi kèm của chính bức ảnh đó", "Hai bức ảnh chụp cùng một địa điểm", "Hai vector toàn số 1"], ans: 1, exp: "Đúng! Cặp ảnh-chữ đi liền với nhau từ bài viết gốc trên Internet là cặp dương tính." },
+        { q: "Trong cùng mẻ huấn luyện đó, các cặp Sai (Negative Pairs) là gì?", opts: ["Các bức ảnh bị mờ", "Bức ảnh đó ghép cặp với tất cả các dòng chữ mô tả của các bức ảnh khác trong batch", "Các từ viết sai chính tả", "Các dòng code bị lỗi"], ans: 1, exp: "Chính xác! Hàng ngàn câu chữ không khớp trong cùng một đợt đóng vai trò là mẫu âm tính." },
+        { q: "Lực hút tương phản làm gì với độ tương đồng Cosine của cặp Đúng?", opts: ["Kéo độ tương đồng Cosine tiến gần về mức cực đại 1.0 (góc θ tiến về 0 độ)", "Ép độ tương đồng về 0", "Ép độ tương đồng về -1.0", "Không thay đổi gì"], ans: 0, exp: "Đúng! Cặp đúng phải dính chặt vào nhau như nam châm trái dấu." },
+        { q: "Lực đẩy tương phản làm gì với các cặp Sai?", opts: ["Hút chúng lại gần", "Đẩy văng góc của chúng ra xa, ép độ tương đồng Cosine giảm sâu về mức 0 hoặc âm", "Biến chúng thành màu trắng", "Tăng gấp đôi độ lớn vector"], ans: 1, exp: "Chính xác! Lực bài xích giúp dọn sạch không gian xung quanh khái niệm đúng." },
+        { q: "Tại sao CLIP lại cần kích thước mẻ dữ liệu cực lớn (Batch Size khổng lồ = 32,768)?", opts: ["Để máy tính nhanh đầy bộ nhớ", "Càng nhiều mẫu âm tính cạnh tranh trong một mẻ, lực đẩy hình học càng phong phú và bề mặt siêu cầu càng được gọt giũa hoàn hảo", "Vì OpenAI thích số to", "Để giảm độ phân giải của ảnh"], ans: 1, exp: "Đúng! Đám đông đối thủ cạnh tranh càng lớn thì ranh giới nhận diện càng sắc sảo." }
+      ],
+      cp12: [
+        { q: "Tọa độ CLIP của prompt văn bản đóng vai trò gì khi chuyển giao sang mạng Diffusion (U-Net)?", opts: ["Là bức ảnh hoàn chỉnh", "Là chiếc la bàn định hướng (Guiding Signal) để U-Net gọt nhiễu từng bước theo đúng nội dung", "Là phần mềm diệt virus", "Là bộ nhớ đệm"], ans: 1, exp: "Chính xác! Vector CLIP là kim chỉ nam dẫn đường cho quá trình gọt giọt sương nhiễu." },
+        { q: "Cơ chế nào bên trong U-Net nhận lãnh vector tọa độ từ CLIP để tác động lên từng pixel?", opts: ["Self-Attention nội bộ", "Cross-Attention (Chú ý chéo giữa Pixel và Token)", "Convolution 1x1", "LayerNorm"], ans: 1, exp: "Đúng! Cross-Attention là cánh cổng đón nhận dữ liệu từ Text Encoder sang Denoiser." },
+        { q: "Tại sao một câu lệnh prompt phức tạp như 'Người đá 4 tay cao bồi' vẫn tạo được ảnh hợp lý?", opts: ["Vì AI sao chép ảnh có sẵn trên Google", "Vì tọa độ CLIP đã uốn nắn và cộng hưởng các đặc tính thành một điểm hội tụ độc nhất trong không gian liên tục", "Do sự may mắn ngẫu nhiên", "Vì có họa sĩ vẽ hộ ngầm phía sau"], ans: 1, exp: "Chính xác! Không gian biểu diễn liên tục cho phép tổng hòa các ý niệm kỳ dị chưa từng có trong đời thực." },
+        { q: "Khái niệm nào ở Phần 3 sẽ giải thích vì sao độ dài mọi vector ý niệm luôn bị khóa cứng ở 1.0?", opts: ["Giải tích Siêu Cầu Đơn Vị L2 (Unit Hypersphere S^(d-1))", "Mạng nơ-ron hồi quy", "Bộ nhớ RAM", "Cổng kết nối USB"], ans: 0, exp: "Đúng! Đó là chủ đề trọng tâm của Chương 2 Phần 3." },
+        { q: "Sau khi hoàn thành Phần 2.3, tâm thế học tập của bạn trước Phần 3 là gì?", opts: ["Vẫn cảm thấy hoang mang và sợ công thức", "Tự tin mỉm cười vì đã hiểu bản chất từ chữ viết, BPE, ma trận We đến cơ chế kéo-đẩy tương phản của CLIP!", "Muốn bỏ học", "Quên sạch kiến thức"], ans: 1, exp: "Tuyệt vời! Bạn đã có một nền tảng trực giác vững chắc như đá tảng để bước vào đại chuyên khảo toán học Phần 3!" }
+      ]
+    };
+
+    /* CƠ SỞ DỮ LIỆU BÀI THI TỔNG KẾT 15 CÂU BLOOM TOÀN DIỆN */
+    const finalExamData = [
+      {
+        id: 1, tier: "1. Nhận Biết", ans: 1,
+        q: "Bảng mã ASCII biểu diễn văn bản trên máy tính như thế nào?",
+        opts: ["Bằng các vector 768 chiều mang ý niệm trừu tượng", "Bằng các số nguyên nhị phân tương ứng với từng ký tự đồ họa vô tri", "Bằng hình ảnh nén JPEG", "Bằng tần số âm thanh"],
+        exp: "Chính xác! ASCII là bảng mã ký tự cơ bản của thế kỷ 20, chỉ định danh hình thức chữ cái chứ không hiểu ngữ nghĩa."
+      },
+      {
+        id: 2, tier: "1. Nhận Biết", ans: 2,
+        q: "Bộ từ vựng BPE chuẩn của mô hình CLIP bao gồm chính xác bao nhiêu mảnh token?",
+        opts: ["26 mảnh chữ cái", "10,000 mảnh từ vựng", "49,408 mảnh token", "1 triệu mảnh"],
+        exp: "Đúng! Kích thước từ vựng Vocabulary Size của CLIP được cố định ở con số 49,408."
+      },
+      {
+        id: 3, tier: "1. Nhận Biết", ans: 0,
+        q: "Ma trận Tra cứu ban đầu We có chức năng gì trong chuỗi xử lý ngôn ngữ?",
+        opts: ["Rút trích vector 768 chiều tĩnh cho mỗi mã Token ID từ tủ hồ sơ 49,408 ngăn", "Tự động dịch tiếng Anh sang tiếng Việt", "Tạo ảnh từ các điểm pixel", "Tính toán đạo hàm suy giảm"],
+        exp: "Chính xác! We là bảng tra cứu tĩnh biến số nguyên ID thành vector tọa độ sơ khai."
+      },
+      {
+        id: 4, tier: "2. Thông Hiểu", ans: 1,
+        q: "Vì sao thuật toán BPE lại vượt trội hơn phương pháp tách từ nguyên khối (Word-level)?",
+        opts: ["Vì BPE chạy chậm hơn giúp GPU nghỉ ngơi", "Vì BPE giải quyết triệt để vấn đề từ mới lạ và từ hiếm bằng cách ghép các mảnh âm tiết con, không bao giờ bị lỗi [UNK]", "Vì BPE làm tăng độ dài câu văn lên gấp 10 lần", "Vì BPE chỉ dùng cho tiếng Pháp"],
+        exp: "Đúng! Khả năng chia nhỏ và tái lắp ghép các mảnh phụ âm/nguyên âm quen thuộc giúp BPE bao quát từ vựng vô hạn."
+      },
+      {
+        id: 5, tier: "2. Thông Hiểu", ans: 0,
+        q: "Nếu loại bỏ hoàn toàn Positional Encoding (PE), mạng Transformer sẽ hiểu hai câu 'A đánh B' và 'B đánh A' ra sao?",
+        opts: ["Hiểu hai câu hoàn toàn giống hệt nhau do tính chất bất biến hoán vị của Self-Attention", "Hiểu câu thứ hai là câu khẳng định", "Bị ngắt kết nối mạng", "Tự động đổi chỗ chữ cái"],
+        exp: "Chính xác! Thiếu PE, phép tính tích vô hướng Attention không thể phân biệt trật tự trước-sau của từ."
+      },
+      {
+        id: 6, tier: "2. Thông Hiểu", ans: 2,
+        q: "Bản chất toán học của phép nhân vô hướng Q · K^T trong cơ chế Chú Ý là gì?",
+        opts: ["Tính chu vi hình tam giác", "Tìm nghiệm phương trình bậc hai", "Đo lường mức độ tương thích và đồng điệu hướng giữa câu hỏi tìm kiếm và nhãn đặc trưng", "Đổi số thực thành số phức"],
+        exp: "Đúng! Tích vô hướng cực đại hóa khi hai vector chỉ cùng hướng, biểu thị mức độ liên quan cao nhất."
+      },
+      {
+        id: 7, tier: "3. Vận Dụng", ans: 1,
+        q: "Từ 'unbelievable' (không thể tin được) khi đi qua thuật toán BPE sẽ có xu hướng được băm thành:",
+        opts: ["12 token chữ cái đơn lẻ", "Các mảnh có nghĩa ngữ pháp: ['un', 'believ', 'able']", "Bị xóa vì là từ quá dài", "Biến thành mã ASCII"],
+        exp: "Chính xác! BPE nhận diện các tiền tố 'un-', gốc từ 'believe' và hậu tố tính từ '-able'."
+      },
+      {
+        id: 8, tier: "3. Vận Dụng", ans: 0,
+        q: "Trong câu 'The astronaut landed on the rock', cơ chế Self-Attention sẽ làm gì với vector của từ 'rock'?",
+        opts: ["Kéo góc xoay của 'rock' về phía địa chất thiên thể ngoài hành tinh nhờ lực chú ý mạnh từ 'astronaut' và 'landed'", "Ép 'rock' mang nghĩa nhạc Rock sôi động", "Biến 'rock' thành số 0", "Không thay đổi gì"],
+        exp: "Đúng! Sự tương tác ngữ cảnh uốn nắn vector 'rock' theo đúng trường nghĩa vũ trụ."
+      },
+      {
+        id: 9, tier: "3. Vận Dụng", ans: 2,
+        q: "Cho hai vector u_text và v_image đã qua chuẩn hóa L2 (độ dài bằng 1). Nếu tích vô hướng u · v = 0.98, điều này chứng minh:",
+        opts: ["Hai vector hoàn toàn đối nghịch nhau", "Hai vector vuông góc không liên quan", "Bức ảnh và dòng chữ mô tả có độ tương thích ngữ nghĩa cực kỳ cao, góc lệch gần như bằng 0 độ", "Mô hình bị tràn số"],
+        exp: "Chính xác! Cosine xấp xỉ 1.0 nghĩa là chữ và ảnh đang nói về cùng một đối tượng."
+      },
+      {
+        id: 10, tier: "4. Phân Tích", ans: 1,
+        q: "Phân tích vì sao ma trận chiếu Wt và Wv là bắt buộc, kể cả khi Text Encoder và Vision Encoder đều có số chiều ẩn 768:",
+        q: "Analyze why linear projection heads Wt and Wv are strictly required:",
+        opts: ["Chỉ để làm tốn thêm RAM của card màn hình", "Vì cơ sở trực chuẩn và phân phối nội tại của không gian ngôn ngữ và không gian quang học là hoàn toàn khác biệt; cần ma trận chiếu xoay hai hệ quy chiếu về đồng quy", "Vì luật bản quyền của OpenAI", "Để chuyển đổi font chữ"],
+        exp: "Đúng! Cùng số chiều không có nghĩa là cùng hệ tọa độ. Chiếu tuyến tính là chiếc cầu xoay trục tương thích."
+      },
+      {
+        id: 11, tier: "4. Phân Tích", ans: 0,
+        q: "Phân tích vai trò của các cặp Sai (Negative Pairs) trong hàm mất mát tương phản của CLIP:",
+        opts: ["Tạo ra lực đẩy bài xích xung quanh khái niệm đúng, giúp bề mặt siêu cầu hình thành các cụm ngữ nghĩa sắc nét và tách bạch", "Làm mô hình bị chậm lại", "Để AI học thêm các từ chửi bậy", "Không có tác dụng gì"],
+        exp: "Chính xác! Thiếu mẫu âm tính, toàn bộ không gian sẽ bị sụp đổ thành một điểm duy nhất (Representation Collapse)."
+      },
+      {
+        id: 12, tier: "4. Phân Tích", ans: 2,
+        q: "Tại sao một prompt viết bằng tiếng Việt có dấu lại nhanh chạm tới giới hạn bộ nhớ hơn prompt tiếng Anh tương đương?",
+        opts: ["Vì người Việt viết câu dài hơn", "Do màn hình hiển thị tiếng Việt tốn nhiều điện hơn", "Vì các ký tự Unicode tiếng Việt có dấu bị BPE phân mảnh thành nhiều mảnh byte nhỏ (2-4 token/từ), làm số lượng token tăng vọt", "Do lỗi đường truyền cáp quang"],
+        exp: "Đúng! Sự phân mảnh byte của bộ từ vựng Anh-ngữ khiến token tiếng Việt bị đội lên gấp nhiều lần."
+      },
+      {
+        id: 13, tier: "5. Đánh Giá", ans: 1,
+        q: "Đánh giá chiến lược: Tại sao các nhà khoa học không huấn luyện CLIP bằng cách phân loại 1,000 nhãn cố định như ImageNet?",
+        opts: ["Vì phân loại ImageNet tốn ít tiền hơn", "Vì gán nhãn cố định bị đóng khung hạn hẹp; học tương phản trực tiếp từ câu chữ tự do giúp mô hình có khả năng phân loại Zero-shot với mọi khái niệm trên đời", "Vì ImageNet là phần mềm có bản quyền", "Vì ảnh ImageNet không có màu"],
+        exp: "Xuất sắc! Văn bản tự nhiên phong phú gấp triệu lần bất kỳ danh sách nhãn đóng cứng nhắc nào."
+      },
+      {
+        id: 14, tier: "5. Đánh Giá", ans: 0,
+        q: "Nếu một mô hình tạo ảnh sinh ra con mèo có 3 đuôi khi nhận prompt 'a cat with one tail', điểm yếu nào trong chuỗi xử lý chữ gây ra lỗi này?",
+        opts: ["Cơ chế chú ý bị pha loãng hoặc mạng quá quen với các hình ảnh mèo tự nhiên, khiến vector điều hướng không đủ lực kéo phá vỡ thiên kiến tiên nghiệm", "Do máy tính bị mất điện đột ngột", "Do bàn phím gõ sai chữ", "Do mô hình bị thiếu bộ nhớ cache"],
+        exp: "Chính xác! Lực kéo của token 'one tail' chưa đủ mạnh để thắng được phân phối tiên nghiệm khổng lồ của loài mèo."
+      },
+      {
+        id: 15, tier: "6. Vận Dụng Cao & Sáng Tạo", ans: 1,
+        q: "Vận dụng cao: Hãy đề xuất giải pháp kỹ thuật giúp sinh viên năm nhất thiết kế một prompt hiệu quả nhất để vẽ 'Người đá 4 tay':",
+        opts: ["Viết một đoạn văn dài 500 từ kể câu chuyện lịch sử của người đá", "Đặt các cụm từ đột biến cốt lõi ở đầu với định danh rõ ràng: '(meteorite rock creature:1.2), (four arms:1.3)', dùng các từ ghép quen thuộc trong BPE, và hạn chế từ rác vô nghĩa", "Gõ duy nhất một từ 'monster'", "Tắt hoàn toàn cơ chế Attention"],
+        exp: "Hoàn hảo! Đây là chiến lược đỉnh cao: Nắm rõ bản chất BPE + Khuếch đại trọng số chú ý + Tối ưu hóa mật độ thông tin!"
+      }
+    ];
+
+    /* KHỞI TẠO TRẠNG THÁI TOÀN CỤC CỦA MÔ-ĐUN 2.3 */
+    const state23 = {
+      fig1Mode: 'ascii',
+      fig2Strat: 'subword',
+      fig3Step: 0,
+      fig4Token: 'rock',
+      fig4Id: 9832,
+      fig5Order: 'dog_bites_man',
+      fig6Mode: 'static',
+      fig7Query: 'space',
+      fig8Head: 1,
+      fig9Highlight: 'both',
+      fig10Aligned: true,
+      fig11Sim: 0.15,
+      fig12AnimProgress: 0,
+      checkpointScores: {},
+      finalExamAnswers: {}
+    };
+
+    function scrollToEl(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function renderMathKaTeX() {
+      if (window.renderMathInElement) {
+        window.renderMathInElement(document.body, {
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false }
+          ],
+          throwOnError: false
+        });
+      }
+    }
+
+    /* RENDER TẤT CẢ 12 BỘ CHECKPOINT */
+    function renderAllCheckpoints() {
+      for (let i = 1; i <= 12; i++) {
+        const cpKey = `cp${i}`;
+        const container = document.getElementById(`${cpKey}-container`);
+        if (!container || !checkpointData[cpKey]) continue;
+
+        container.innerHTML = '';
+        checkpointData[cpKey].forEach((qObj, idx) => {
+          const itemDiv = document.createElement('div');
+          itemDiv.className = "p-2.5 bg-stone-50 border border-stone-300 space-y-1.5 text-xs font-code";
+
+          itemDiv.innerHTML = `
+            <div class="font-bold text-stone-900 leading-snug">
+              <span class="text-amber-900 font-black">#${idx+1}.</span> ${qObj.q}
+            </div>
+            <div class="space-y-1 pt-1">
+              ${qObj.opts.map((opt, oIdx) => `
+                <label class="flex items-start gap-2 p-1.5 border border-stone-200 bg-white hover:bg-stone-200 cursor-pointer rounded">
+                  <input type="radio" name="${cpKey}-q${idx}" value="${oIdx}" onchange="gradeCheckpoint('${cpKey}', ${idx}, ${oIdx})" class="mt-0.5">
+                  <span class="text-stone-800 leading-snug">${opt}</span>
+                </label>
+              `).join('')}
+            </div>
+            <div id="${cpKey}-fb-${idx}" class="text-[11px] font-bold pt-1 hidden"></div>
+          `;
+          container.appendChild(itemDiv);
+        });
+      }
+    }
+
+    function gradeCheckpoint(cpKey, qIdx, chosenIdx) {
+      if (!state23.checkpointScores[cpKey]) {
+        state23.checkpointScores[cpKey] = {};
+      }
+      state23.checkpointScores[cpKey][qIdx] = chosenIdx;
+
+      const qObj = checkpointData[cpKey][qIdx];
+      const fb = document.getElementById(`${cpKey}-fb-${qIdx}`);
+      if (fb && qObj) {
+        fb.classList.remove('hidden');
+        if (chosenIdx === qObj.ans) {
+          fb.className = "text-[11px] font-bold pt-1 text-green-800";
+          fb.innerHTML = `✓ ${qObj.exp}`;
+        } else {
+          fb.className = "text-[11px] font-bold pt-1 text-red-800";
+          fb.innerHTML = `✗ Chưa chính xác! Hãy đọc lại nội dung bài học phía trên để hiểu bản chất nhé.`;
+        }
+      }
+
+      // Cập nhật điểm số checkpoint
+      let correct = 0;
+      checkpointData[cpKey].forEach((item, idx) => {
+        if (state23.checkpointScores[cpKey][idx] === item.ans) correct++;
+      });
+      const answered = Object.keys(state23.checkpointScores[cpKey]).length;
+      const scoreDisp = document.getElementById(`${cpKey}-score`);
+      if (scoreDisp) {
+        scoreDisp.innerText = `Đã làm: ${answered}/5 | Đúng: ${correct}/5`;
+      }
+    }
+
+    /* RENDER BÀI KIỂM TRA TỔNG KẾT (15 CÂU) */
+    function renderFinalExam() {
+      const container = document.getElementById('final-exam-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      finalExamData.forEach(item => {
+        const card = document.createElement('div');
+        card.className = "p-3.5 bg-stone-100 border border-stone-400 space-y-2.5 transition-all";
+
+        const isAnswered = state23.finalExamAnswers.hasOwnProperty(item.id);
+        const chosen = state23.finalExamAnswers[item.id];
+
+        card.innerHTML = `
+          <div class="flex flex-wrap justify-between items-center border-b border-stone-300 pb-1.5">
+            <span class="font-bold text-stone-900 text-xs sm:text-sm font-code flex items-center gap-2">
+              <span class="px-1.5 py-0.5 bg-stone-800 text-stone-100 text-[11px]">Câu ${item.id}</span>
+              <span>${item.q}</span>
+            </span>
+            <span class="text-[10px] font-code px-2 py-0.5 bg-amber-200 text-amber-950 font-bold border border-amber-400">${item.tier}</span>
+          </div>
+
+          <div class="space-y-1.5 text-xs font-code">
+            ${item.opts.map((opt, oIdx) => `
+              <label class="flex items-start gap-2 p-2 border border-stone-300 ${isAnswered && chosen === oIdx ? 'bg-amber-100 border-amber-600 font-bold' : 'bg-stone-50 hover:bg-stone-200'} cursor-pointer">
+                <input type="radio" name="final-q-${item.id}" value="${oIdx}" ${isAnswered && chosen === oIdx ? 'checked' : ''} onchange="handleFinalAnswer(${item.id}, ${oIdx})" class="mt-0.5">
+                <span class="text-stone-800 leading-snug">${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+
+          <div id="final-fb-${item.id}" class="text-xs font-code font-bold pt-1.5 ${isAnswered ? '' : 'hidden'}">
+            ${isAnswered ? (chosen === item.ans 
+              ? `<span class="text-green-800">✓ ${item.exp}</span>` 
+              : `<span class="text-red-800">✗ Chưa đúng! Hãy xem lại các chương lý thuyết tương ứng nhé.</span>`) : ''}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      renderMathKaTeX();
+    }
+
+    function handleFinalAnswer(qId, oIdx) {
+      state23.finalExamAnswers[qId] = oIdx;
+
+      let correct = 0;
+      finalExamData.forEach(q => {
+        if (state23.finalExamAnswers[q.id] === q.ans) correct++;
+      });
+
+      const answeredCount = Object.keys(state23.finalExamAnswers).length;
+      const prog = document.getElementById('final-progress-text');
+      const score = document.getElementById('final-score-text');
+      if (prog) prog.innerText = `Tiến độ bài thi: ${answeredCount} / 15 câu đã làm`;
+      if (score) score.innerText = `Điểm: ${correct} / 15`;
+
+      const fb = document.getElementById(`final-fb-${qId}`);
+      const qObj = finalExamData.find(x => x.id === qId);
+      if (fb && qObj) {
+        if (oIdx === qObj.ans) {
+          fb.className = "text-xs font-code font-bold pt-1.5 text-green-800";
+          fb.innerHTML = `✓ ${qObj.exp}`;
+        } else {
+          fb.className = "text-xs font-code font-bold pt-1.5 text-red-800";
+          fb.innerHTML = `✗ Chưa chính xác! Hãy rà soát lại nguyên lý nhé.`;
+        }
+        fb.classList.remove('hidden');
+      }
+
+      if (answeredCount === 15) {
+        const sum = document.getElementById('final-exam-summary');
+        if (sum) {
+          sum.classList.remove('hidden');
+          sum.innerHTML = `
+            <div class="border-b-2 border-stone-800 pb-2 mb-2 font-bold text-sm text-stone-900">
+              📊 KẾT QUẢ TỔNG KẾT MÔ-ĐUN 2.3: ĐẠT ${correct}/15 ĐIỂM
+            </div>
+            <p class="leading-relaxed text-stone-800">
+              ${correct >= 13 
+                ? '<strong>XUẤT SẮC TUYỆT VỜI!</strong> Bạn đã làm chủ 100% bản chất từ chữ viết, thuật toán Lego BPE đến cơ chế nam châm tương phản CLIP. Bạn đã hoàn toàn sẵn sàng bước vào Phần 3 để làm chủ giải tích siêu cầu!' 
+                : '<strong>KẾT QUẢ RẤT ĐÁNG KHÍCH LỆ!</strong> Bạn đã nắm vững các trực giác cơ bản. Hãy kiểm tra lại các câu sai để củng cố triệt để kiến thức trước khi sang Phần 3 nhé!'}
+            </p>
+          `;
+        }
+      }
+    }
+
+    /* ========================================================================= */
+    /* MÃ NGUỒN ĐIỀU KHIỂN 12 PHÒNG THÍ NGHIỆM TƯƠNG TÁC (INTERACTIVE FIGURES) */
+    /* ========================================================================= */
+
+    // FIGURE 1: ASCII VS SEMANTIC
+    const f1Canvas = document.getElementById('fig1Canvas');
+    const f1Ctx = f1Canvas ? f1Canvas.getContext('2d') : null;
+
+    function setFig1Mode(mode) {
+      state23.fig1Mode = mode;
+      const bAscii = document.getElementById('btn-f1-ascii');
+      const bSem = document.getElementById('btn-f1-sem');
+      const badge = document.getElementById('fig1-badge');
+      const desc = document.getElementById('fig1-desc');
+
+      if (mode === 'ascii') {
+        bAscii.className = "px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800";
+        bSem.className = "px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300";
+        badge.innerText = "Chế độ: Xem Mã Ký Tự ASCII";
+        desc.innerText = "Ở mã ASCII: 'cat' và 'car' đứng sát cạnh nhau vì cùng bắt đầu bằng 'ca-', trong khi 'dog' bị đẩy tít ra xa vô lý!";
+      } else {
+        bSem.className = "px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800";
+        bAscii.className = "px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300";
+        badge.innerText = "Chế độ: Không Gian Ý Niệm AI";
+        desc.innerText = "Trong không gian ý niệm: 'cat' và 'dog' tự động ôm sát lấy nhau trong cụm thú cưng, còn 'car' bị đẩy sang cụm cơ khí!";
+      }
+      renderFig1();
+    }
+
+    function renderFig1() {
+      if (!f1Ctx) return;
+      const w = f1Canvas.width, h = f1Canvas.height;
+      f1Ctx.fillStyle = '#0a0a0c';
+      f1Ctx.fillRect(0, 0, w, h);
+
+      // Trục tọa độ
+      f1Ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+      f1Ctx.lineWidth = 1;
+      f1Ctx.beginPath();
+      f1Ctx.moveTo(30, h/2); f1Ctx.lineTo(w-30, h/2);
+      f1Ctx.moveTo(w/2, 20); f1Ctx.lineTo(w/2, h-20);
+      f1Ctx.stroke();
+
+      let catPos, carPos, dogPos;
+      if (state23.fig1Mode === 'ascii') {
+        catPos = { x: 120, y: 90 };
+        carPos = { x: 140, y: 95 };
+        dogPos = { x: 380, y: 150 };
+      } else {
+        catPos = { x: 130, y: 80 };
+        dogPos = { x: 155, y: 105 };
+        carPos = { x: 370, y: 140 };
+      }
+
+      // Vẽ các điểm
+      const points = [
+        { label: "cat (mèo)", pos: catPos, color: "#38bdf8" },
+        { label: "car (ô tô)", pos: carPos, color: "#f87171" },
+        { label: "dog (chó)", pos: dogPos, color: "#4ade80" }
+      ];
+
+      points.forEach(p => {
+        f1Ctx.fillStyle = p.color;
+        f1Ctx.beginPath(); f1Ctx.arc(p.pos.x, p.pos.y, 6, 0, Math.PI * 2); f1Ctx.fill();
+        f1Ctx.font = '10px Roboto Mono';
+        f1Ctx.fillText(p.label, p.pos.x + 8, p.pos.y + 3);
+      });
+
+      // Nối đường khoảng cách giữa cat và đối tượng gần
+      f1Ctx.strokeStyle = state23.fig1Mode === 'ascii' ? '#f87171' : '#4ade80';
+      f1Ctx.lineWidth = 1.5;
+      f1Ctx.setLineDash([3, 3]);
+      f1Ctx.beginPath();
+      f1Ctx.moveTo(catPos.x, catPos.y);
+      if (state23.fig1Mode === 'ascii') f1Ctx.lineTo(carPos.x, carPos.y);
+      else f1Ctx.lineTo(dogPos.x, dogPos.y);
+      f1Ctx.stroke();
+      f1Ctx.setLineDash([]);
+    }
+
+    // FIGURE 2: TOKENIZATION STRATEGIES
+    function setFig2Strategy(strat) {
+      state23.fig2Strat = strat;
+      const bC = document.getElementById('btn-f2-char');
+      const bW = document.getElementById('btn-f2-word');
+      const bS = document.getElementById('btn-f2-sub');
+      const badge = document.getElementById('fig2-badge');
+      const out = document.getElementById('fig2-output-display');
+      const verd = document.getElementById('fig2-verdict');
+
+      [bC, bW, bS].forEach(b => b.className = "px-2 py-1 bg-stone-200 border border-stone-800 hover:bg-stone-300");
+
+      let tokens = [];
+      if (strat === 'char') {
+        bC.className = "px-2 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800";
+        badge.innerText = "Xem: Character-level (Chữ Cái)";
+        tokens = ["u", "n", "b", "e", "l", "i", "e", "v", "a", "b", "l", "e", " ", "m", "e", "t", "e", "o", "r", "i", "t", "e", "s"];
+        verd.innerText = "Tách từng chữ: Tận 23 token tí hon! Câu văn bị kéo dài quá mức, làm Attention kiệt sức và mất sạch nghĩa từ.";
+      } else if (strat === 'word') {
+        bW.className = "px-2 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800";
+        badge.innerText = "Xem: Word-level (Nguyên Khối)";
+        tokens = ["unbelievable", "[UNK: meteorites]"];
+        verd.innerText = "Tách từ nguyên khối: Nếu từ điển không có 'meteorites', từ này lập tức bị lỗi Unknown [UNK] hoàn toàn mù tịt!";
+      } else {
+        bS.className = "px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800";
+        badge.innerText = "Xem: Subword (Tối Ưu Nhất)";
+        tokens = ["un", "believ", "able", "meteor", "ites"];
+        verd.innerText = "Chiến lược Subword: Băm thành 5 mảnh Lego quen thuộc. Vừa ngắn gọn, vừa linh hoạt biểu diễn 100% từ mới!";
+      }
+
+      if (out) {
+        out.innerHTML = tokens.map(t => `<span class="px-2 py-1 bg-stone-800 text-amber-200 border border-stone-600 rounded">${t}</span>`).join('');
+      }
+    }
+
+    // FIGURE 3: BPE MERGE SIMULATOR
+    const bpeSteps = [
+      { step: 0, tokens: ["l", "o", "w", "</w>", "l", "o", "w", "e", "r", "</w>", "n", "e", "w", "e", "s", "t", "</w>", "w", "i", "d", "e", "s", "t", "</w>"], log: "Bước 0: Mọi từ bị chém thành chữ cái đơn lẻ. Cặp phổ biến nhất: 'e' + 'r' (2 lần)." },
+      { step: 1, tokens: ["l", "o", "w", "</w>", "l", "o", "w", "er", "</w>", "n", "e", "w", "e", "s", "t", "</w>", "w", "i", "d", "e", "s", "t", "</w>"], log: "Bước 1: Ghép 'e' + 'r' ➔ 'er'. Mảnh 'er' được thêm vào từ điển! Cặp tiếp theo: 'e' + 's'." },
+      { step: 2, tokens: ["l", "o", "w", "</w>", "l", "o", "w", "er", "</w>", "n", "e", "w", "es", "t", "</w>", "w", "i", "d", "es", "t", "</w>"], log: "Bước 2: Ghép 'e' + 's' ➔ 'es'. Mảnh 'es' được thêm vào từ điển! Cặp tiếp theo: 'es' + 't'." },
+      { step: 3, tokens: ["l", "o", "w", "</w>", "l", "o", "w", "er", "</w>", "n", "e", "w", "est", "</w>", "w", "i", "d", "est", "</w>"], log: "Bước 3: Ghép 'es' + 't' ➔ 'est'. Ta có viên gạch siêu quen thuộc 'est'! Cặp tiếp theo: 'l' + 'o'." },
+      { step: 4, tokens: ["low", "</w>", "low", "er", "</w>", "n", "e", "w", "est", "</w>", "w", "i", "d", "est", "</w>"], log: "Bước 4: Hoàn tất ghép gốc từ 'low'! Các từ phức tạp đã được cô đọng thành các mảnh Lego hoàn hảo." }
+    ];
+
+    function renderFig3() {
+      const cur = bpeSteps[state23.fig3Step];
+      const pill = document.getElementById('fig3-step-pill');
+      const view = document.getElementById('fig3-tokens-view');
+      const log = document.getElementById('fig3-merge-log');
+      const btn = document.getElementById('btn-f3-next');
+
+      if (pill) pill.innerText = `Bước Hiện Tại: ${cur.step} / 4`;
+      if (view) {
+        view.innerHTML = cur.tokens.map(t => `<span class="px-1.5 py-0.5 bg-stone-800 border border-stone-600 rounded text-[11px]">${t}</span>`).join('');
+      }
+      if (log) log.innerText = cur.log;
+      if (btn) btn.disabled = state23.fig3Step >= bpeSteps.length - 1;
+    }
+
+    function nextFig3Step() {
+      if (state23.fig3Step < bpeSteps.length - 1) {
+        state23.fig3Step++;
+        renderFig3();
+      }
+    }
+
+    function resetFig3() {
+      state23.fig3Step = 0;
+      renderFig3();
+    }
+
+    // FIGURE 4: EMBEDDING LOOKUP
+    const f4Canvas = document.getElementById('fig4Canvas');
+    const f4Ctx = f4Canvas ? f4Canvas.getContext('2d') : null;
+
+    function pickFig4(tok, id) {
+      state23.fig4Token = tok;
+      state23.fig4Id = id;
+      const b = document.getElementById('fig4-badge');
+      const p = document.getElementById('fig4-preview');
+      if (b) b.innerText = `Token Đang Chọn: "${tok}" (ID: ${id})`;
+
+      const seed = id * 777;
+      let dims = [];
+      for (let i = 0; i < 6; i++) {
+        const val = Math.sin(seed + i * 2.1) * 0.9;
+        dims.push((val >= 0 ? '+' : '') + val.toFixed(2));
+      }
+      if (p) p.innerText = `Rút trích 6 chiều đầu tiên từ ngăn #${id}: [${dims.join(', ')}]...`;
+      renderFig4();
+    }
+
+    function renderFig4() {
+      if (!f4Ctx) return;
+      const w = f4Canvas.width, h = f4Canvas.height;
+      f4Ctx.fillStyle = '#0a0a0c';
+      f4Ctx.fillRect(0, 0, w, h);
+
+      f4Ctx.strokeStyle = '#475569';
+      f4Ctx.strokeRect(30, 25, 180, 150);
+      f4Ctx.fillStyle = '#94a3b8';
+      f4Ctx.font = '10px Roboto Mono';
+      f4Ctx.fillText("Tủ Gỗ We [49408 Ngăn]", 45, 18);
+
+      const rowY = 25 + (state23.fig4Id % 130) + 10;
+      f4Ctx.fillStyle = 'rgba(234, 88, 12, 0.45)';
+      f4Ctx.fillRect(31, rowY - 4, 178, 8);
+
+      f4Ctx.fillStyle = '#f97316';
+      f4Ctx.fillText(`Ngăn #${state23.fig4Id} ➔`, 215, rowY + 3);
+
+      f4Ctx.strokeRect(330, 25, 120, 150);
+      f4Ctx.fillText("Vector 768 Chiều", 340, 18);
+
+      const seed = state23.fig4Id * 777;
+      for (let i = 0; i < 12; i++) {
+        const val = Math.sin(seed + i * 1.9);
+        f4Ctx.fillStyle = val > 0 ? `rgba(56, 189, 248, ${Math.abs(val)})` : `rgba(244, 63, 94, ${Math.abs(val)})`;
+        f4Ctx.fillRect(335, 30 + i * 11, 110, 8);
+      }
+    }
+
+    // FIGURE 5: POSITIONAL ENCODING
+    const f5Canvas = document.getElementById('fig5Canvas');
+    const f5Ctx = f5Canvas ? f5Canvas.getContext('2d') : null;
+
+    function setFig5Order(order) {
+      state23.fig5Order = order;
+      const b1 = document.getElementById('btn-f5-1');
+      const b2 = document.getElementById('btn-f5-2');
+      const badge = document.getElementById('fig5-badge');
+      const desc = document.getElementById('fig5-desc');
+
+      if (order === 'dog_bites_man') {
+        b1.className = "px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800";
+        b2.className = "px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300";
+        badge.innerText = "Thứ tự: 'Chó cắn Người'";
+        desc.innerText = "Nhờ vector PE cộng thêm, từ 'Chó' ở vị trí số 1 (xanh lam) khác hẳn so với khi 'Chó' ở vị trí số 3!";
+      } else {
+        b2.className = "px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800";
+        b1.className = "px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300";
+        badge.innerText = "Thứ tự: 'Người cắn Chó'";
+        desc.innerText = "Vị trí đảo ngược: Giờ đây 'Người' mang PE vị trí 1 và 'Chó' mang PE vị trí 3, ý nghĩa đảo lộn 100%!";
+      }
+      renderFig5();
+    }
+
+    function renderFig5() {
+      if (!f5Ctx) return;
+      const w = f5Canvas.width, h = f5Canvas.height;
+      f5Ctx.fillStyle = '#0a0a0c';
+      f5Ctx.fillRect(0, 0, w, h);
+
+      // Đường sóng sin Positional Encoding
+      f5Ctx.strokeStyle = 'rgba(251, 191, 36, 0.25)';
+      f5Ctx.lineWidth = 1.5;
+      f5Ctx.beginPath();
+      for (let x = 0; x < w; x += 4) {
+        const y = h/2 + Math.sin(x * 0.04) * 45;
+        if (x === 0) f5Ctx.moveTo(x, y); else f5Ctx.lineTo(x, y);
+      }
+      f5Ctx.stroke();
+
+      const isOrder1 = state23.fig5Order === 'dog_bites_man';
+      const words = isOrder1 ? ["Chó (Pos #1)", "cắn (Pos #2)", "Người (Pos #3)"] : ["Người (Pos #1)", "cắn (Pos #2)", "Chó (Pos #3)"];
+      const colors = isOrder1 ? ["#38bdf8", "#94a3b8", "#f43f5e"] : ["#f43f5e", "#94a3b8", "#38bdf8"];
+
+      [80, 240, 400].forEach((x, idx) => {
+        const peY = h/2 + Math.sin(x * 0.04) * 45;
+        f5Ctx.strokeStyle = colors[idx];
+        f5Ctx.lineWidth = 2;
+        f5Ctx.beginPath();
+        f5Ctx.moveTo(x, h - 30);
+        f5Ctx.lineTo(x, peY);
+        f5Ctx.stroke();
+
+        f5Ctx.fillStyle = colors[idx];
+        f5Ctx.beginPath(); f5Ctx.arc(x, peY, 6, 0, Math.PI * 2); f5Ctx.fill();
+        f5Ctx.font = '11px Roboto Mono';
+        f5Ctx.fillText(words[idx], x - 35, h - 12);
+        f5Ctx.fillText(`+PE(${idx+1})`, x - 20, peY - 10);
+      });
+    }
+
+    // FIGURE 6: STATIC VS CONTEXTUAL
+    const f6Canvas = document.getElementById('fig6Canvas');
+    const f6Ctx = f6Canvas ? f6Canvas.getContext('2d') : null;
+
+    function setFig6Mode(mode) {
+      state23.fig6Mode = mode;
+      const bSt = document.getElementById('btn-f6-static');
+      const bMu = document.getElementById('btn-f6-music');
+      const bGe = document.getElementById('btn-f6-geo');
+      const badge = document.getElementById('fig6-badge');
+      const desc = document.getElementById('fig6-desc');
+
+      [bSt, bMu, bGe].forEach(b => b.className = "px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300");
+
+      if (mode === 'static') {
+        bSt.className = "px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800";
+        badge.innerText = "Chế độ: Tọa Độ Tĩnh (Mắc Kẹt Ở Giữa)";
+        desc.innerText = "Ở dạng vector tĩnh, 'Rock' đứng chết dí ở giữa, vừa không đúng nghĩa âm nhạc, vừa không đúng nghĩa địa chất!";
+      } else if (mode === 'music') {
+        bMu.className = "px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800";
+        badge.innerText = "Chế độ: Ngữ Cảnh Nhạc Rock";
+        desc.innerText = "Khi đứng cạnh 'Band / Concert', Attention bẻ ngoặt vector của 'Rock' bay thẳng vào cụm nghệ thuật!";
+      } else {
+        bGe.className = "px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800";
+        badge.innerText = "Chế độ: Ngữ Cảnh Thiên Văn - Địa Chất";
+        desc.innerText = "Khi đứng cạnh 'Meteorite / Cave', vector của 'Rock' quay tắp lự sang cụm khoáng vật vũ trụ!";
+      }
+      renderFig6();
+    }
+
+    function renderFig6() {
+      if (!f6Ctx) return;
+      const w = f6Canvas.width, h = f6Canvas.height;
+      f6Ctx.fillStyle = '#0a0a0c';
+      f6Ctx.fillRect(0, 0, w, h);
+
+      // Cụm Music & Cụm Geology
+      f6Ctx.fillStyle = 'rgba(236, 72, 153, 0.15)';
+      f6Ctx.beginPath(); f6Ctx.arc(100, 70, 50, 0, Math.PI*2); f6Ctx.fill();
+      f6Ctx.fillStyle = '#f472b6';
+      f6Ctx.font = '10px Roboto Mono';
+      f6Ctx.fillText("Cụm Âm Nhạc (Music)", 50, 40);
+
+      f6Ctx.fillStyle = 'rgba(56, 189, 248, 0.15)';
+      f6Ctx.beginPath(); f6Ctx.arc(380, 130, 50, 0, Math.PI*2); f6Ctx.fill();
+      f6Ctx.fillStyle = '#38bdf8';
+      f6Ctx.fillText("Cụm Địa Chất (Geology)", 310, 175);
+
+      let rockX = w/2, rockY = h/2;
+      if (state23.fig6Mode === 'music') { rockX = 100; rockY = 70; }
+      else if (state23.fig6Mode === 'geology') { rockX = 380; rockY = 130; }
+
+      // Vẽ vector Rock
+      f6Ctx.strokeStyle = '#f97316';
+      f6Ctx.lineWidth = 3;
+      f6Ctx.beginPath();
+      f6Ctx.moveTo(w/2, h - 20);
+      f6Ctx.lineTo(rockX, rockY);
+      f6Ctx.stroke();
+
+      f6Ctx.fillStyle = '#f97316';
+      f6Ctx.beginPath(); f6Ctx.arc(rockX, rockY, 7, 0, Math.PI*2); f6Ctx.fill();
+      f6Ctx.fillStyle = '#fde047';
+      f6Ctx.fillText("Vector 'Rock'", rockX + 10, rockY + 4);
+    }
+
+    // FIGURE 7: Q-K-V MATCHMAKER
+    const f7Canvas = document.getElementById('fig7Canvas');
+    const f7Ctx = f7Canvas ? f7Canvas.getContext('2d') : null;
+
+    function setFig7Query(q) {
+      state23.fig7Query = q;
+      const b1 = document.getElementById('btn-f7-q1');
+      const b2 = document.getElementById('btn-f7-q2');
+      const tag = document.getElementById('fig7-score-tag');
+      const desc = document.getElementById('fig7-desc');
+
+      if (q === 'space') {
+        b1.className = "px-2 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800";
+        b2.className = "px-2 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300";
+        tag.innerText = "Độ Khớp: 94.2% (Meteorite)";
+        desc.innerText = "Khi Query hỏi về vũ trụ, Key của 'meteorite' bắt sóng cực mạnh! Trọng số chú ý vọt lên chiếm trọn tâm điểm.";
+      } else {
+        b2.className = "px-2 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800";
+        b1.className = "px-2 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300";
+        tag.innerText = "Độ Khớp: 91.8% (Electric Guitar)";
+        desc.innerText = "Khi Query hỏi về sân khấu/giai điệu, Key của 'electric guitar' lập tức chiếm ưu thế áp đảo!";
+      }
+      renderFig7();
+    }
+
+    function renderFig7() {
+      if (!f7Ctx) return;
+      const w = f7Canvas.width, h = f7Canvas.height;
+      f7Ctx.fillStyle = '#0a0a0c';
+      f7Ctx.fillRect(0, 0, w, h);
+
+      // Điểm phát Query
+      f7Ctx.fillStyle = '#38bdf8';
+      f7Ctx.beginPath(); f7Ctx.arc(70, h/2, 8, 0, Math.PI*2); f7Ctx.fill();
+      f7Ctx.font = '10px Roboto Mono';
+      f7Ctx.fillText(`Q: ${state23.fig7Query === 'space' ? '"Vũ trụ"' : '"Sân khấu"'}`, 30, h/2 - 14);
+
+      const isSpace = state23.fig7Query === 'space';
+      const keys = [
+        { label: "K1: 'meteorite'", score: isSpace ? 0.94 : 0.05, y: 45 },
+        { label: "K2: 'electric guitar'", score: isSpace ? 0.04 : 0.92, y: 100 },
+        { label: "K3: 'sandwich'", score: 0.02, y: 155 }
+      ];
+
+      keys.forEach(k => {
+        f7Ctx.fillStyle = k.score > 0.5 ? '#4ade80' : '#475569';
+        f7Ctx.fillRect(280, k.y - 12, 170, 24);
+        f7Ctx.fillStyle = k.score > 0.5 ? '#052e16' : '#f8fafc';
+        f7Ctx.fillText(`${k.label} (Softmax: ${(k.score*100).toFixed(1)}%)`, 290, k.y + 4);
+
+        // Chùm tia sáng Attention
+        f7Ctx.strokeStyle = k.score > 0.5 ? 'rgba(74, 222, 128, 0.85)' : 'rgba(255, 255, 255, 0.06)';
+        f7Ctx.lineWidth = k.score > 0.5 ? 3.5 : 1;
+        f7Ctx.beginPath();
+        f7Ctx.moveTo(70, h/2);
+        f7Ctx.lineTo(280, k.y);
+        f7Ctx.stroke();
+      });
+    }
+
+    // FIGURE 8: MULTI-HEAD CONCURRENT
+    const f8Canvas = document.getElementById('fig8Canvas');
+    const f8Ctx = f8Canvas ? f8Canvas.getContext('2d') : null;
+
+    function setFig8Head(hId) {
+      state23.fig8Head = hId;
+      const b1 = document.getElementById('btn-f8-h1');
+      const b2 = document.getElementById('btn-f8-h2');
+      const b3 = document.getElementById('btn-f8-h3');
+      const pill = document.getElementById('fig8-head-pill');
+      const desc = document.getElementById('fig8-desc');
+
+      [b1, b2, b3].forEach(b => b.className = "px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300");
+
+      if (hId === 1) {
+        b1.className = "px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800";
+        pill.innerText = "Đang Xem: Head #1 (Giải Phẫu Cơ Thể)";
+        desc.innerText = "Head 1 bỏ qua màu sắc và chất liệu, chỉ tập trung nối dây giữa 'creature' với '4 arms' và '2 heads'!";
+      } else if (hId === 2) {
+        b2.className = "px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800";
+        pill.innerText = "Đang Xem: Head #2 (Chất Liệu Địa Chất)";
+        desc.innerText = "Head 2 lọc bỏ cấu trúc cơ thể, bắt dính thuộc tính 'meteorite' và 'rock' để định hình bề mặt xốp nham thạch!";
+      } else {
+        b3.className = "px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800";
+        pill.innerText = "Đang Xem: Head #3 (Phong Cách Cao Bồi)";
+        desc.innerText = "Head 3 kết nối 'cowboy' với 'space gun' và 'riding a square rock' để định hình tư thế!";
+      }
+      renderFig8();
+    }
+
+    function renderFig8() {
+      if (!f8Ctx) return;
+      const w = f8Canvas.width, h = f8Canvas.height;
+      f8Ctx.fillStyle = '#0a0a0c';
+      f8Ctx.fillRect(0, 0, w, h);
+
+      const words = ["creature", "meteorite", "4 arms", "cowboy", "square rock"];
+      const coords = [
+        { x: 80, y: 100 },
+        { x: 170, y: 50 },
+        { x: 260, y: 150 },
+        { x: 350, y: 60 },
+        { x: 420, y: 130 }
+      ];
+
+      coords.forEach((c, i) => {
+        f8Ctx.fillStyle = '#64748b';
+        f8Ctx.beginPath(); f8Ctx.arc(c.x, c.y, 6, 0, Math.PI*2); f8Ctx.fill();
+        f8Ctx.fillStyle = '#cbd5e1';
+        f8Ctx.font = '10px Roboto Mono';
+        f8Ctx.fillText(words[i], c.x - 20, c.y - 10);
+      });
+
+      // Vẽ liên kết theo Head
+      f8Ctx.lineWidth = 2.5;
+      if (state23.fig8Head === 1) {
+        f8Ctx.strokeStyle = '#38bdf8';
+        f8Ctx.beginPath();
+        f8Ctx.moveTo(coords[0].x, coords[0].y); f8Ctx.lineTo(coords[2].x, coords[2].y);
+        f8Ctx.stroke();
+      } else if (state23.fig8Head === 2) {
+        f8Ctx.strokeStyle = '#f59e0b';
+        f8Ctx.beginPath();
+        f8Ctx.moveTo(coords[0].x, coords[0].y); f8Ctx.lineTo(coords[1].x, coords[1].y);
+        f8Ctx.stroke();
+      } else {
+        f8Ctx.strokeStyle = '#ec4899';
+        f8Ctx.beginPath();
+        f8Ctx.moveTo(coords[3].x, coords[3].y); f8Ctx.lineTo(coords[4].x, coords[4].y);
+        f8Ctx.stroke();
+      }
+    }
+
+    // FIGURE 9: DUAL TOWER
+    const f9Canvas = document.getElementById('fig9Canvas');
+    const f9Ctx = f9Canvas ? f9Canvas.getContext('2d') : null;
+
+    function highlightFig9(mode) {
+      state23.fig9Highlight = mode;
+      renderFig9();
+    }
+
+    function renderFig9() {
+      if (!f9Ctx) return;
+      const w = f9Canvas.width, h = f9Canvas.height;
+      f9Ctx.fillStyle = '#0a0a0c';
+      f9Ctx.fillRect(0, 0, w, h);
+
+      const hMode = state23.fig9Highlight;
+      const showT = hMode === 'both' || hMode === 'text';
+      const showV = hMode === 'both' || hMode === 'vision';
+
+      // Tòa tháp Text
+      f9Ctx.fillStyle = showT ? 'rgba(56, 189, 248, 0.2)' : 'rgba(255, 255, 255, 0.05)';
+      f9Ctx.strokeStyle = showT ? '#38bdf8' : '#334155';
+      f9Ctx.strokeRect(40, 40, 160, 110);
+      f9Ctx.fillRect(40, 40, 160, 110);
+      f9Ctx.fillStyle = showT ? '#38bdf8' : '#64748b';
+      f9Ctx.font = '11px Roboto Mono';
+      f9Ctx.fillText("TEXT ENCODER", 70, 70);
+      f9Ctx.font = '9px Roboto Mono';
+      f9Ctx.fillText("(Transformer 768D)", 65, 90);
+
+      // Tòa tháp Vision
+      f9Ctx.fillStyle = showV ? 'rgba(251, 146, 60, 0.2)' : 'rgba(255, 255, 255, 0.05)';
+      f9Ctx.strokeStyle = showV ? '#fb923c' : '#334155';
+      f9Ctx.strokeRect(280, 40, 160, 110);
+      f9Ctx.fillRect(280, 40, 160, 110);
+      f9Ctx.fillStyle = showV ? '#fb923c' : '#64748b';
+      f9Ctx.font = '11px Roboto Mono';
+      f9Ctx.fillText("VISION ENCODER", 310, 70);
+      f9Ctx.font = '9px Roboto Mono';
+      f9Ctx.fillText("(ViT 16x16 Patches)", 305, 90);
+
+      // Mũi tên hội tụ xuống
+      f9Ctx.strokeStyle = '#fbbf24';
+      f9Ctx.lineWidth = 2;
+      f9Ctx.setLineDash([4, 4]);
+      f9Ctx.beginPath();
+      f9Ctx.moveTo(120, 150); f9Ctx.lineTo(240, 180);
+      f9Ctx.moveTo(360, 150); f9Ctx.lineTo(240, 180);
+      f9Ctx.stroke();
+      f9Ctx.setLineDash([]);
+
+      f9Ctx.fillStyle = '#fbbf24';
+      f9Ctx.beginPath(); f9Ctx.arc(240, 180, 5, 0, Math.PI*2); f9Ctx.fill();
+      f9Ctx.fillText("Không Gian Nhúng Chung", 175, 195);
+    }
+
+    // FIGURE 10: PROJECTION
+    const f10Canvas = document.getElementById('fig10Canvas');
+    const f10Ctx = f10Canvas ? f10Canvas.getContext('2d') : null;
+
+    function setFig10Alignment(isAligned) {
+      state23.fig10Aligned = isAligned;
+      const bU = document.getElementById('btn-f10-unaligned');
+      const bA = document.getElementById('btn-f10-aligned');
+      const badge = document.getElementById('fig10-badge');
+      const desc = document.getElementById('fig10-desc');
+
+      if (isAligned) {
+        bA.className = "px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800";
+        bU.className = "px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300";
+        badge.innerText = "Đã Khớp Trục Tọa Độ";
+        desc.innerText = "Nhờ ma trận Wt và Wv, vector chữ 'chú chó' (xanh lam) và ảnh chú chó (cam) xoay trùng khít lên cùng một hướng!";
+      } else {
+        bU.className = "px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800";
+        bA.className = "px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300";
+        badge.innerText = "Chưa Khớp (Lệch Trục)";
+        desc.innerText = "Trước khi có ma trận chiếu thông dịch, vector chữ và vector ảnh xoay lệch hướng nhau hoàn toàn!";
+      }
+      renderFig10();
+    }
+
+    function renderFig10() {
+      if (!f10Ctx) return;
+      const w = f10Canvas.width, h = f10Canvas.height;
+      const cx = w/2, cy = h/2;
+      f10Ctx.fillStyle = '#0a0a0c';
+      f10Ctx.fillRect(0, 0, w, h);
+
+      // Vòng tròn đơn vị R=70
+      f10Ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+      f10Ctx.lineWidth = 1.5;
+      f10Ctx.beginPath(); f10Ctx.arc(cx, cy, 70, 0, Math.PI*2); f10Ctx.stroke();
+
+      const textAng = -Math.PI / 4;
+      const imgAng = state23.fig10Aligned ? (-Math.PI / 4 + 0.05) : (Math.PI / 2.5);
+
+      // Vector Text
+      const tx = cx + 70 * Math.cos(textAng);
+      const ty = cy + 70 * Math.sin(textAng);
+      f10Ctx.strokeStyle = '#38bdf8';
+      f10Ctx.lineWidth = 3;
+      f10Ctx.beginPath(); f10Ctx.moveTo(cx, cy); f10Ctx.lineTo(tx, ty); f10Ctx.stroke();
+      f10Ctx.fillStyle = '#38bdf8';
+      f10Ctx.fillText("u_text (Chữ)", tx + 8, ty);
+
+      // Vector Image
+      const ix = cx + 70 * Math.cos(imgAng);
+      const iy = cy + 70 * Math.sin(imgAng);
+      f10Ctx.strokeStyle = '#fb923c';
+      f10Ctx.lineWidth = 3;
+      f10Ctx.beginPath(); f10Ctx.moveTo(cx, cy); f10Ctx.lineTo(ix, iy); f10Ctx.stroke();
+      f10Ctx.fillStyle = '#fb923c';
+      f10Ctx.fillText("v_image (Ảnh)", ix + 8, iy + 10);
+    }
+
+    // FIGURE 11: CONTRASTIVE MAGNET
+    const f11Canvas = document.getElementById('fig11Canvas');
+    const f11Ctx = f11Canvas ? f11Canvas.getContext('2d') : null;
+
+    function stepFig11Training() {
+      state23.fig11Sim = Math.min(1.0, state23.fig11Sim + 0.25);
+      renderFig11();
+    }
+
+    function resetFig11() {
+      state23.fig11Sim = 0.15;
+      renderFig11();
+    }
+
+    function renderFig11() {
+      if (!f11Ctx) return;
+      const w = f11Canvas.width, h = f11Canvas.height;
+      f11Ctx.fillStyle = '#0a0a0c';
+      f11Ctx.fillRect(0, 0, w, h);
+
+      const sim = state23.fig11Sim;
+      const badge = document.getElementById('fig11-state-badge');
+      if (badge) badge.innerText = `Độ Hút Cặp Đúng: ${(sim * 100).toFixed(0)}%`;
+
+      // Vị trí ảnh mèo trung tâm
+      const imgX = 140, imgY = h/2;
+      f11Ctx.fillStyle = '#f59e0b';
+      f11Ctx.beginPath(); f11Ctx.arc(imgX, imgY, 12, 0, Math.PI*2); f11Ctx.fill();
+      f11Ctx.font = '10px Roboto Mono';
+      f11Ctx.fillStyle = '#fef08a';
+      f11Ctx.fillText("Ảnh [Mèo]", imgX - 25, imgY - 18);
+
+      // Thẻ chữ đúng (bị hút lại gần)
+      const targetTxtX = imgX + 180 - sim * 120;
+      const targetTxtY = imgY;
+
+      f11Ctx.fillStyle = '#4ade80';
+      f11Ctx.beginPath(); f11Ctx.arc(targetTxtX, targetTxtY, 10, 0, Math.PI*2); f11Ctx.fill();
+      f11Ctx.fillText("Chữ: 'Mèo con'", targetTxtX + 14, targetTxtY + 4);
+
+      // Dây lò xo hút
+      f11Ctx.strokeStyle = 'rgba(74, 222, 128, 0.6)';
+      f11Ctx.lineWidth = 2.5;
+      f11Ctx.beginPath(); f11Ctx.moveTo(imgX, imgY); f11Ctx.lineTo(targetTxtX, targetTxtY); f11Ctx.stroke();
+
+      // Thẻ chữ sai (bị đẩy văng ra góc)
+      const negX1 = imgX + 80 + sim * 160, negY1 = 40;
+      const negX2 = imgX + 80 + sim * 160, negY2 = h - 40;
+
+      [ { x: negX1, y: negY1, label: "Chữ: 'Xe tăng'" }, { x: negX2, y: negY2, label: "Chữ: 'Quả chuối'" } ].forEach(neg => {
+        f11Ctx.fillStyle = '#f87171';
+        f11Ctx.beginPath(); f11Ctx.arc(neg.x, neg.y, 8, 0, Math.PI*2); f11Ctx.fill();
+        f11Ctx.fillText(neg.label, neg.x + 12, neg.y + 4);
+
+        // Mũi tên đẩy bài xích
+        f11Ctx.strokeStyle = 'rgba(248, 113, 113, 0.3)';
+        f11Ctx.lineWidth = 1;
+        f11Ctx.setLineDash([3, 3]);
+        f11Ctx.beginPath(); f11Ctx.moveTo(imgX, imgY); f11Ctx.lineTo(neg.x, neg.y); f11Ctx.stroke();
+        f11Ctx.setLineDash([]);
+      });
+    }
+
+    // FIGURE 12: PIPELINE OVERVIEW
+    const f12Canvas = document.getElementById('fig12Canvas');
+    const f12Ctx = f12Canvas ? f12Canvas.getContext('2d') : null;
+
+    function playPipelineAnim() {
+      state23.fig12AnimProgress = 0;
+      const interval = setInterval(() => {
+        state23.fig12AnimProgress += 0.05;
+        renderFig12();
+        if (state23.fig12AnimProgress >= 1.0) clearInterval(interval);
+      }, 50);
+    }
+
+    function renderFig12() {
+      if (!f12Ctx) return;
+      const w = f12Canvas.width, h = f12Canvas.height;
+      f12Ctx.fillStyle = '#0a0a0c';
+      f12Ctx.fillRect(0, 0, w, h);
+
+      const stages = ["1. Prompt", "2. BPE Lego", "3. Tủ We", "4. Attention", "5. Chiếu Wt", "6. Tọa Độ CLIP"];
+      const stepW = (w - 60) / (stages.length - 1);
+
+      stages.forEach((st, idx) => {
+        const x = 30 + idx * stepW;
+        const y = h/2;
+
+        const isPassed = state23.fig12AnimProgress >= idx / (stages.length - 1);
+
+        f12Ctx.fillStyle = isPassed ? '#4ade80' : '#475569';
+        f12Ctx.beginPath(); f12Ctx.arc(x, y, 9, 0, Math.PI*2); f12Ctx.fill();
+
+        f12Ctx.font = '9px Roboto Mono';
+        f12Ctx.fillStyle = isPassed ? '#fde047' : '#94a3b8';
+        f12Ctx.fillText(st, x - 25, idx % 2 === 0 ? y - 18 : y + 25);
+
+        if (idx < stages.length - 1) {
+          f12Ctx.strokeStyle = isPassed ? '#4ade80' : '#334155';
+          f12Ctx.lineWidth = 2;
+          f12Ctx.beginPath(); f12Ctx.moveTo(x + 9, y); f12Ctx.lineTo(x + stepW - 9, y); f12Ctx.stroke();
+        }
+      });
+    }
+
+    function renderAllFigures() {
+      renderFig1();
+      setFig2Strategy('subword');
+      renderFig3();
+      renderFig4();
+      renderFig5();
+      renderFig6();
+      renderFig7();
+      renderFig8();
+      renderFig9();
+      renderFig10();
+      renderFig11();
+      renderFig12();
+    }
+
+    /* KHỞI ĐỘNG ỨNG DỤNG */
+    window.onload = function() {
+      renderAllCheckpoints();
+      renderFinalExam();
+      renderAllFigures();
+      renderMathKaTeX();
+    };
+  </script>
+</body>
+</html>

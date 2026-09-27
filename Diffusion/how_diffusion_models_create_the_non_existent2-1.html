@@ -5,15 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bản Tin Khoa Học 2.1: Nhập Môn Không Gian Siêu Chiều & Thước Đo Góc Ngữ Nghĩa Cho Tân Sinh Viên</title>
 
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts: Roboto & Roboto Mono chuẩn tiếng Việt 100% -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,700&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- KaTeX CSS & JS hỗ trợ render công thức toán học chuyên nghiệp -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
@@ -51,9 +48,7 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.85), inset 0 0 140px rgba(160, 130, 95, 0.2);
     }
 
-    .font-code {
-      font-family: 'Roboto Mono', monospace;
-    }
+    .font-code { font-family: 'Roboto Mono', monospace; }
 
     .rule-double {
       border-top: 3px solid var(--border-dark);
@@ -95,14 +90,9 @@
       box-shadow: 2px 2px 0px rgba(0,0,0,0.08);
     }
 
-    input[type=range] {
-      accent-color: var(--accent-rust);
-    }
+    input[type=range] { accent-color: var(--accent-rust); }
 
-    .katex {
-      font-size: 1.05em;
-      color: #17110c;
-    }
+    .katex { font-size: 1.05em; color: #17110c; }
     .katex-display {
       margin: 0.5em 0 !important;
       overflow-x: auto;
@@ -110,18 +100,9 @@
       padding: 3px 0;
     }
 
-    .custom-scrollbar::-webkit-scrollbar {
-      height: 6px;
-      width: 6px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #776250;
-      border-radius: 3px;
-    }
+    .custom-scrollbar::-webkit-scrollbar { height: 6px; width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #776250; border-radius: 3px; }
 
-    /* ========================================================
-       HOME FAB: Hiệu ứng trồi lên / thụt xuống êm ái
-       ======================================================== */
     #homeFab {
       transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
                   transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -138,7 +119,6 @@
 <body class="p-2 sm:p-4 md:p-6 min-h-screen">
   <div class="max-w-7xl mx-auto editorial-sheet border-4 border-stone-900 p-4 sm:p-7 md:p-10 transition-all">
     
-    <!-- MASTHEAD BÁO CHÍ KHOA HỌC & ĐÀO TẠO ĐẠI HỌC -->
     <header class="border-b-2 border-stone-800 pb-4 mb-8">
       <div class="flex flex-wrap justify-between items-center text-xs font-code uppercase tracking-wider text-stone-700 pb-2 mb-3 border-b border-stone-400">
         <div class="flex items-center gap-2">
@@ -167,7 +147,6 @@
 
       <div class="rule-double my-4"></div>
 
-      <!-- MỤC LỤC TRUY CẬP NHANH 12 CHƯƠNG + 1 BÀI TỔNG HỢP -->
       <nav class="overflow-x-auto custom-scrollbar pb-2">
         <div class="flex items-center gap-1.5 font-code text-[11px] font-bold uppercase whitespace-nowrap">
           <span class="text-amber-950 px-2 py-1 bg-amber-200 border border-amber-800">12 CHƯƠNG BÀI HỌC:</span>
@@ -190,9 +169,7 @@
 
     <main class="space-y-12">
 
-      <!-- ========================================================================= -->
-      <!-- CHƯƠNG 1: TỪ HỒ SƠ SINH VIÊN ĐẾN KHÔNG GIAN NHIỀU CHIỀU -->
-      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 1 -->
       <section id="c1" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
         <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
           <span class="text-2xl font-black text-amber-900 font-code">CHƯƠNG 01</span>
@@ -245,7 +222,6 @@
             </div>
           </div>
 
-          <!-- INTERACTIVE FIGURE 1 -->
           <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
             <div class="flex justify-between items-center border-b border-stone-400 pb-2">
               <span class="font-code text-xs font-bold uppercase text-stone-900">
@@ -299,7 +275,6 @@
           </div>
         </div>
 
-        <!-- CHECKPOINT QUIZ 1 -->
         <div class="mt-4 pt-3 border-t border-stone-400">
           <div class="font-code text-xs font-black uppercase text-amber-900 mb-2 flex items-center gap-2">
             <span>📝 Checkpoint 1.1: Tự Lượng Giá Hiểu Biết (5 Câu)</span>
@@ -308,9 +283,7 @@
         </div>
       </section>
 
-      <!-- ========================================================================= -->
-      <!-- CHƯƠNG 2: TẠI SAO 2D VÀ 3D LẠI QUÁ CHẬT CHỘI? -->
-      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 2 -->
       <section id="c2" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
         <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
           <span class="text-2xl font-black text-amber-900 font-code">CHƯƠNG 02</span>
@@ -329,9 +302,7 @@
             <p class="first-big-letter">
               Một câu hỏi ngây thơ nhưng vô cùng sâu sắc mà các tân sinh viên thường đặt ra là: <em>"Tại sao các kỹ sư AI không dùng mặt phẳng 2D (trục $x, y$) hoặc không gian 3D (trục $x, y, z$) cho dễ vẽ biểu đồ, mà lại phải làm phức tạp hóa vấn đề lên tới 768 chiều?"</em>
             </p>
-            <p>
-              Câu trả lời nằm ở hiện tượng <strong>Sự chèn ép ý niệm (The Crowding Problem)</strong>.
-            </p>
+            <p>Câu trả lời nằm ở hiện tượng <strong>Sự chèn ép ý niệm (The Crowding Problem)</strong>.</p>
 
             <div class="analogy-box p-3.5 text-xs sm:text-sm text-stone-900 space-y-1">
               <div class="font-bold text-emerald-950">💡 Ví dụ thực tế: Tủ quần áo 1 ngăn vs Tủ 100 ngăn</div>
@@ -341,9 +312,7 @@
               </p>
             </div>
 
-            <p>
-              Trong ngôn ngữ loài người, các khái niệm có vô số đặc tính độc lập:
-            </p>
+            <p>Trong ngôn ngữ loài người, các khái niệm có vô số đặc tính độc lập:</p>
             <ul class="list-disc list-inside space-y-1 text-xs sm:text-sm bg-stone-200 p-3 border border-stone-400 font-code">
               <li>Thuộc tính 1: Là sinh vật sống $\leftrightarrow$ Đồ vật vô tri</li>
               <li>Thuộc tính 2: Kích thước khổng lồ $\leftrightarrow$ Nhỏ li ti</li>
@@ -363,7 +332,6 @@
             </div>
           </div>
 
-          <!-- INTERACTIVE FIGURE 2 -->
           <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
             <div class="flex justify-between items-center border-b border-stone-400 pb-2">
               <span class="font-code text-xs font-bold uppercase text-stone-900">
@@ -389,7 +357,6 @@
           </div>
         </div>
 
-        <!-- CHECKPOINT QUIZ 2 -->
         <div class="mt-4 pt-3 border-t border-stone-400">
           <div class="font-code text-xs font-black uppercase text-amber-900 mb-2 flex items-center gap-2">
             <span>📝 Checkpoint 1.2: Tự Lượng Giá Hiểu Biết (5 Câu)</span>
@@ -398,9 +365,7 @@
         </div>
       </section>
 
-      <!-- ========================================================================= -->
-      <!-- CHƯƠNG 3: VECTOR TRONG KHÔNG GIAN D CHIỀU -->
-      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 3 -->
       <section id="c3" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
         <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
           <span class="text-2xl font-black text-amber-900 font-code">CHƯƠNG 03</span>
@@ -427,9 +392,7 @@
               $$\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_d \end{bmatrix} \in \mathbb{R}^d \quad \iff \quad \text{Python: } \texttt{v = np.array([v1, v2, ..., vd])}$$
             </div>
 
-            <p>
-              Tại sao cả hai cách nhìn này lại đồng nhất?
-            </p>
+            <p>Tại sao cả hai cách nhìn này lại đồng nhất?</p>
             <ol class="list-decimal list-inside space-y-1.5 text-xs sm:text-sm bg-stone-200 p-3 border border-stone-400">
               <li><strong>Góc nhìn Đại số (Để tính toán):</strong> Máy tính lưu trữ các con số $v_i$ trong thanh ghi RAM/VRAM và thực hiện các phép cộng mảng, nhân mảng với tốc độ hàng tỷ phép tính mỗi giây.</li>
               <li><strong>Góc nhìn Hình học (Để con người tư duy):</strong> Mỗi danh sách số đó vẫn mang đầy đủ tính chất của một mũi tên: nó có một <strong>độ dài (Magnitude)</strong> và trỏ về một <strong>hướng (Direction)</strong> cụ thể trong không gian!</li>
@@ -443,7 +406,6 @@
             </div>
           </div>
 
-          <!-- INTERACTIVE FIGURE 3 -->
           <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
             <div class="flex justify-between items-center border-b border-stone-400 pb-2">
               <span class="font-code text-xs font-bold uppercase text-stone-900">
@@ -475,7 +437,6 @@
           </div>
         </div>
 
-        <!-- CHECKPOINT QUIZ 3 -->
         <div class="mt-4 pt-3 border-t border-stone-400">
           <div class="font-code text-xs font-black uppercase text-amber-900 mb-2 flex items-center gap-2">
             <span>📝 Checkpoint 1.3: Tự Lượng Giá Hiểu Biết (5 Câu)</span>
@@ -484,9 +445,7 @@
         </div>
       </section>
 
-      <!-- ========================================================================= -->
-      <!-- CHƯƠNG 4: ĐỘ DÀI VECTOR (NORM) -->
-      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 4 -->
       <section id="c4" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
         <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
           <span class="text-2xl font-black text-amber-900 font-code">CHƯƠNG 04</span>
@@ -531,7 +490,6 @@
             </div>
           </div>
 
-          <!-- INTERACTIVE FIGURE 4 -->
           <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
             <div class="flex justify-between items-center border-b border-stone-400 pb-2">
               <span class="font-code text-xs font-bold uppercase text-stone-900">
@@ -560,7 +518,6 @@
           </div>
         </div>
 
-        <!-- CHECKPOINT QUIZ 4 -->
         <div class="mt-4 pt-3 border-t border-stone-400">
           <div class="font-code text-xs font-black uppercase text-amber-900 mb-2 flex items-center gap-2">
             <span>📝 Checkpoint 1.4: Tự Lượng Giá Hiểu Biết (5 Câu)</span>
@@ -569,9 +526,7 @@
         </div>
       </section>
 
-      <!-- ========================================================================= -->
-      <!-- CHƯƠNG 5: CẠM BẪY THƯỚC KẺ THẲNG EUCLID -->
-      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 5 -->
       <section id="c5" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
         <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
           <span class="text-2xl font-black text-amber-900 font-code">CHƯƠNG 05</span>
@@ -590,9 +545,7 @@
             <p class="first-big-letter">
               Đây là một trong những bài học quan trọng nhất của cả chuyên đề: <strong>Tại sao các nhà khoa học không dùng khoảng cách Euclid thông thường $d(\mathbf{u}, \mathbf{v}) = \|\mathbf{u} - \mathbf{v}\|_2$ để đo độ tương đồng giữa hai câu nói?</strong>
             </p>
-            <p>
-              Hãy cùng quan sát một thí nghiệm tư duy rất thực tế:
-            </p>
+            <p>Hãy cùng quan sát một thí nghiệm tư duy rất thực tế:</p>
 
             <div class="warning-box p-3 text-xs sm:text-sm text-stone-900 space-y-1">
               <div class="font-bold text-amber-950">⚠️ Nghịch lý độ dài câu văn:</div>
@@ -625,7 +578,6 @@
             </div>
           </div>
 
-          <!-- INTERACTIVE FIGURE 5 -->
           <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
             <div class="flex justify-between items-center border-b border-stone-400 pb-2">
               <span class="font-code text-xs font-bold uppercase text-stone-900">
@@ -654,7 +606,6 @@
           </div>
         </div>
 
-        <!-- CHECKPOINT QUIZ 5 -->
         <div class="mt-4 pt-3 border-t border-stone-400">
           <div class="font-code text-xs font-black uppercase text-amber-900 mb-2 flex items-center gap-2">
             <span>📝 Checkpoint 1.5: Tự Lượng Giá Hiểu Biết (5 Câu)</span>
@@ -663,9 +614,7 @@
         </div>
       </section>
 
-      <!-- ========================================================================= -->
-      <!-- CHƯƠNG 6: HƯỚNG ĐI VS ĐỘ LỚN -->
-      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 6 -->
       <section id="c6" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
         <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
           <span class="text-2xl font-black text-amber-900 font-code">CHƯƠNG 06</span>
@@ -692,9 +641,7 @@
               </div>
             </div>
 
-            <p>
-              Ý nghĩa thực tế của hai thành phần này là gì?
-            </p>
+            <p>Ý nghĩa thực tế của hai thành phần này là gì?</p>
             <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm bg-stone-200 p-3 border border-stone-400">
               <li><strong>Độ lớn $\|\mathbf{v}\|_2$ (Kích thước ngẫu nhiên):</strong> Đo lường tần suất xuất hiện, độ dài câu chữ, độ tương phản của ảnh. Đây là thông số phụ thuộc vào hình thức bên ngoài.</li>
               <li><strong>Hướng đi $\hat{\mathbf{v}}$ (Bản chất ngữ nghĩa):</strong> Quyết định câu chuyện đang nói về cái gì: Động vật? Thiên văn học? Phong cách viễn tưởng? Hay cao bồi miền Tây?</li>
@@ -715,7 +662,6 @@
             </div>
           </div>
 
-          <!-- INTERACTIVE FIGURE 6 -->
           <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
             <div class="flex justify-between items-center border-b border-stone-400 pb-2">
               <span class="font-code text-xs font-bold uppercase text-stone-900">
@@ -750,7 +696,6 @@
           </div>
         </div>
 
-        <!-- CHECKPOINT QUIZ 6 -->
         <div class="mt-4 pt-3 border-t border-stone-400">
           <div class="font-code text-xs font-black uppercase text-amber-900 mb-2 flex items-center gap-2">
             <span>📝 Checkpoint 1.6: Tự Lượng Giá Hiểu Biết (5 Câu)</span>
@@ -759,9 +704,7 @@
         </div>
       </section>
 
-      <!-- ========================================================================= -->
-      <!-- CHƯƠNG 7: TÍCH VÔ HƯỚNG TRỰC QUAN -->
-      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 7 -->
       <section id="c7" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
         <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
           <span class="text-2xl font-black text-amber-900 font-code">CHƯƠNG 07</span>
@@ -780,9 +723,7 @@
             <p class="first-big-letter">
               Trước khi học công thức Cosine đầy đủ, chúng ta cần làm quen với phép toán nền tảng của mọi mạng nơ-ron: <strong>Tích vô hướng (Dot Product)</strong>, ký hiệu là $\mathbf{u} \cdot \mathbf{v}$.
             </p>
-            <p>
-              Đừng vội nhìn vào công thức cộng dồn $\sum u_i v_i$. Hãy nhắm mắt lại và tưởng tượng hình ảnh sau:
-            </p>
+            <p>Đừng vội nhìn vào công thức cộng dồn $\sum u_i v_i$. Hãy nhắm mắt lại và tưởng tượng hình ảnh sau:</p>
 
             <div class="analogy-box p-3.5 text-xs sm:text-sm text-stone-900 space-y-1">
               <div class="font-bold text-emerald-950">💡 Chiếc bóng dưới ánh đèn chiếu thẳng:</div>
@@ -813,7 +754,6 @@
             </div>
           </div>
 
-          <!-- INTERACTIVE FIGURE 7 -->
           <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
             <div class="flex justify-between items-center border-b border-stone-400 pb-2">
               <span class="font-code text-xs font-bold uppercase text-stone-900">
@@ -842,7 +782,6 @@
           </div>
         </div>
 
-        <!-- CHECKPOINT QUIZ 7 -->
         <div class="mt-4 pt-3 border-t border-stone-400">
           <div class="font-code text-xs font-black uppercase text-amber-900 mb-2 flex items-center gap-2">
             <span>📝 Checkpoint 1.7: Tự Lượng Giá Hiểu Biết (5 Câu)</span>
@@ -851,9 +790,7 @@
         </div>
       </section>
 
-      <!-- ========================================================================= -->
-      <!-- CHƯƠNG 8: THƯỚC ĐO GÓC COSINE -->
-      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 8 -->
       <section id="c8" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
         <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
           <span class="text-2xl font-black text-amber-900 font-code">CHƯƠNG 08</span>
@@ -872,9 +809,7 @@
             <p class="first-big-letter">
               Từ công thức hình học ở Chương 7: $\mathbf{u} \cdot \mathbf{v} = \|\mathbf{u}\|_2 \|\mathbf{v}\|_2 \cos(\theta)$, ta chỉ cần một thao tác biến đổi đại số cơ bản: <strong>Chuyển vế chia độ dài $\|\mathbf{u}\|_2 \|\mathbf{v}\|_2$ sang vế trái!</strong>
             </p>
-            <p>
-              Chúng ta thu được công thức kinh điển của <strong>Độ Tương Đồng Cosine</strong>:
-            </p>
+            <p>Chúng ta thu được công thức kinh điển của <strong>Độ Tương Đồng Cosine</strong>:</p>
 
             <div class="math-box p-4 font-code text-xs sm:text-sm text-stone-900 space-y-2">
               <div class="font-bold text-amber-950 border-b border-stone-400 pb-1">
@@ -885,9 +820,7 @@
               </div>
             </div>
 
-            <p>
-              Hãy nhìn vào công thức trên và nhận ra các ưu điểm thiết thực của nó:
-            </p>
+            <p>Hãy nhìn vào công thức trên và nhận ra các ưu điểm thiết thực của nó:</p>
             <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm bg-stone-200 p-3 border border-stone-400">
               <li>Mẫu số $\|\mathbf{u}\|_2 \|\mathbf{v}\|_2$ thực hiện nhiệm vụ <strong>triệt tiêu hoàn toàn sự chênh lệch độ dài</strong> giữa câu ngắn và câu dài.</li>
               <li>Kết quả thu được là hàm số $\cos(\theta)$, và hàm Cosine luôn luôn bị chặn trong đoạn:
@@ -903,7 +836,6 @@
             </div>
           </div>
 
-          <!-- INTERACTIVE FIGURE 8 -->
           <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
             <div class="flex justify-between items-center border-b border-stone-400 pb-2">
               <span class="font-code text-xs font-bold uppercase text-stone-900">
@@ -938,7 +870,6 @@
           </div>
         </div>
 
-        <!-- CHECKPOINT QUIZ 8 -->
         <div class="mt-4 pt-3 border-t border-stone-400">
           <div class="font-code text-xs font-black uppercase text-amber-900 mb-2 flex items-center gap-2">
             <span>📝 Checkpoint 1.8: Tự Lượng Giá Hiểu Biết (5 Câu)</span>
@@ -947,9 +878,7 @@
         </div>
       </section>
 
-      <!-- ========================================================================= -->
-      <!-- CHƯƠNG 9: CÁC GÓC ĐẶC BIỆT VÀ MỐI QUAN HỆ NGỮ NGHĨA -->
-      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 9 -->
       <section id="c9" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
         <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
           <span class="text-2xl font-black text-amber-900 font-code">CHƯƠNG 09</span>
@@ -994,7 +923,6 @@
             </div>
           </div>
 
-          <!-- INTERACTIVE FIGURE 9 -->
           <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
             <div class="flex justify-between items-center border-b border-stone-400 pb-2">
               <span class="font-code text-xs font-bold uppercase text-stone-900">
@@ -1026,7 +954,6 @@
           </div>
         </div>
 
-        <!-- CHECKPOINT QUIZ 9 -->
         <div class="mt-4 pt-3 border-t border-stone-400">
           <div class="font-code text-xs font-black uppercase text-amber-900 mb-2 flex items-center gap-2">
             <span>📝 Checkpoint 1.9: Tự Lượng Giá Hiểu Biết (5 Câu)</span>
@@ -1035,9 +962,7 @@
         </div>
       </section>
 
-      <!-- ========================================================================= -->
-      <!-- CHƯƠNG 10: NHẬP MÔN SIÊU CẦU ĐƠN VỊ -->
-      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 10 -->
       <section id="c10" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
         <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
           <span class="text-2xl font-black text-amber-900 font-code">CHƯƠNG 10</span>
@@ -1061,9 +986,7 @@
               $$\mathbf{e} = \frac{\mathbf{v}}{\|\mathbf{v}\|_2} \implies \|\mathbf{e}\|_2 = 1.0$$
             </div>
 
-            <p>
-              Về mặt hình học, điều gì sẽ xảy ra khi mọi mũi tên xuất phát từ gốc tọa độ đều dài bằng $1.0$?
-            </p>
+            <p>Về mặt hình học, điều gì sẽ xảy ra khi mọi mũi tên xuất phát từ gốc tọa độ đều dài bằng $1.0$?</p>
             <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm bg-stone-200 p-3 border border-stone-400">
               <li>Trong không gian 2 chiều: Tập hợp các mũi tên dài bằng 1 tạo thành <strong>Đường tròn đơn vị ($S^1$)</strong>.</li>
               <li>Trong không gian 3 chiều: Đầu các mũi tên chạm vào <strong>Vỏ quả bóng tròn ($S^2$)</strong>.</li>
@@ -1080,7 +1003,6 @@
             </div>
           </div>
 
-          <!-- INTERACTIVE FIGURE 10 -->
           <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
             <div class="flex justify-between items-center border-b border-stone-400 pb-2">
               <span class="font-code text-xs font-bold uppercase text-stone-900">
@@ -1106,7 +1028,6 @@
           </div>
         </div>
 
-        <!-- CHECKPOINT QUIZ 10 -->
         <div class="mt-4 pt-3 border-t border-stone-400">
           <div class="font-code text-xs font-black uppercase text-amber-900 mb-2 flex items-center gap-2">
             <span>📝 Checkpoint 1.10: Tự Lượng Giá Hiểu Biết (5 Câu)</span>
@@ -1115,9 +1036,7 @@
         </div>
       </section>
 
-      <!-- ========================================================================= -->
-      <!-- CHƯƠNG 11: HIỆN TƯỢNG TRỰC GIAO NGẪU NHIÊN -->
-      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 11 -->
       <section id="c11" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
         <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
           <span class="text-2xl font-black text-amber-900 font-code">CHƯƠNG 11</span>
@@ -1144,9 +1063,7 @@
               $$\text{Khi } d \to \infty: \quad \mathbf{u} \cdot \mathbf{v} = \sum_{i=1}^{d} u_i v_i \xrightarrow{\text{Định lý giới hạn}} 0 \implies \theta \approx 90^\circ$$
             </div>
 
-            <p>
-              Tại sao lại có hiện tượng này?
-            </p>
+            <p>Tại sao lại có hiện tượng này?</p>
             <p>
               Trong 768 chiều, mỗi tích $u_i v_i$ là một con số ngẫu nhiên (nửa số chiều mang dấu dương, nửa số chiều mang dấu âm). Khi cộng dồn 768 con số này lại, các giá trị dương và âm tự động bù trừ lẫn nhau, khiến tổng tích vô hướng co cụm sát quanh mốc số 0!
             </p>
@@ -1159,7 +1076,6 @@
             </div>
           </div>
 
-          <!-- INTERACTIVE FIGURE 11 -->
           <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
             <div class="flex justify-between items-center border-b border-stone-400 pb-2">
               <span class="font-code text-xs font-bold uppercase text-stone-900">
@@ -1193,7 +1109,6 @@
           </div>
         </div>
 
-        <!-- CHECKPOINT QUIZ 11 -->
         <div class="mt-4 pt-3 border-t border-stone-400">
           <div class="font-code text-xs font-black uppercase text-amber-900 mb-2 flex items-center gap-2">
             <span>📝 Checkpoint 1.11: Tự Lượng Giá Hiểu Biết (5 Câu)</span>
@@ -1202,9 +1117,7 @@
         </div>
       </section>
 
-      <!-- ========================================================================= -->
-      <!-- CHƯƠNG 12: ĐẠI SỐ VECTOR Ý NIỆM -->
-      <!-- ========================================================================= -->
+      <!-- CHƯƠNG 12 -->
       <section id="c12" class="p-4 sm:p-6 bg-stone-100 border-2 border-stone-800 space-y-4">
         <div class="flex items-center gap-3 border-b-2 border-stone-700 pb-2">
           <span class="text-2xl font-black text-amber-900 font-code">CHƯƠNG 12</span>
@@ -1248,7 +1161,6 @@
             </div>
           </div>
 
-          <!-- INTERACTIVE FIGURE 12 -->
           <div class="lg:col-span-6 border-2 border-stone-800 p-4 bg-stone-200 space-y-3">
             <div class="flex justify-between items-center border-b border-stone-400 pb-2">
               <span class="font-code text-xs font-bold uppercase text-stone-900">
@@ -1279,7 +1191,6 @@
           </div>
         </div>
 
-        <!-- CHECKPOINT QUIZ 12 -->
         <div class="mt-4 pt-3 border-t border-stone-400">
           <div class="font-code text-xs font-black uppercase text-amber-900 mb-2 flex items-center gap-2">
             <span>📝 Checkpoint 1.12: Tự Lượng Giá Hiểu Biết (5 Câu)</span>
@@ -1288,9 +1199,7 @@
         </div>
       </section>
 
-      <!-- ========================================================================= -->
-      <!-- BÀI KIỂM TRA TỔNG HỢP BLOOM 15 CÂU (CAPSTONE EXAM) -->
-      <!-- ========================================================================= -->
+      <!-- CAPSTONE -->
       <section id="exam-capstone" class="p-4 sm:p-6 bg-amber-50 border-4 border-stone-900 space-y-4">
         <div class="flex items-center gap-3 border-b-2 border-stone-800 pb-2">
           <span class="text-3xl font-black text-amber-950 font-code">BÀI THI 2.1</span>
@@ -1309,16 +1218,13 @@
           <span class="font-bold text-amber-950 text-sm" id="capstone-score-text">Điểm: 0 / 15</span>
         </div>
 
-        <div id="capstone-exam-container" class="space-y-4">
-          <!-- Render tự động 15 câu bài thi Bloom bằng JS -->
-        </div>
+        <div id="capstone-exam-container" class="space-y-4"></div>
 
         <div id="capstone-summary" class="mt-6 p-4 bg-stone-100 border-2 border-stone-800 text-xs font-code hidden"></div>
       </section>
 
     </main>
 
-    <!-- CHÂN TRANG BÁO CHÍ -->
     <footer class="mt-12 pt-5 border-t-2 border-stone-800 text-stone-600 text-xs font-code flex flex-wrap justify-between items-center gap-2">
       <div>Giáo Trình Chuyển Tiếp Phần 2.1 &bull; 12 Chương Đầy Đủ &bull; 12 Interactive Labs &bull; 75 Câu Hỏi Bloom</div>
       <div class="text-stone-900 font-bold">100% KaTeX Math &bull; 100% Phông Roboto Bản Chuẩn Tiếng Việt</div>
@@ -1326,9 +1232,6 @@
 
   </div>
 
-  <!-- ============================================================ -->
-  <!-- NÚT FAB QUAY VỀ TRANG MẸ (index.html)                        -->
-  <!-- ============================================================ -->
   <a id="homeFab" href="index.html"
      class="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-2.5
             bg-stone-900 text-stone-100 border-2 border-stone-800 shadow-2xl
@@ -1343,7 +1246,6 @@
   </a>
 
   <script>
-    /* TRẠNG THÁI ỨNG DỤNG TOÀN CỤC PHẦN 2.1 */
     const state = {
       f1Values: [3.5, 15, 8, 5],
       f2Dim: 2,
@@ -1386,11 +1288,7 @@
       }
     }
 
-    /* ========================================================================= */
-    /* LOGIC 12 INTERACTIVE FIGURES */
-    /* ========================================================================= */
-
-    // FIGURE 1
+    /* ============ FIGURES ============ */
     const f1Canvas = document.getElementById('fig1Canvas');
     const f1Ctx = f1Canvas ? f1Canvas.getContext('2d') : null;
     function updateFig1() {
@@ -1399,12 +1297,10 @@
       const s3 = parseFloat(document.getElementById('f1-s3').value);
       const s4 = parseFloat(document.getElementById('f1-s4').value);
       state.f1Values = [s1, s2, s3, s4];
-
       document.getElementById('f1-val-1').innerText = s1.toFixed(1);
       document.getElementById('f1-val-2').innerText = s2 + 'h';
       document.getElementById('f1-val-3').innerText = s3 + 'h';
       document.getElementById('f1-val-4').innerText = s4 + 'h';
-
       document.getElementById('f1-readout').innerHTML = 
         `Vector sinh viên: $\\mathbf{x} = [${s1.toFixed(1)}, ${s2.toFixed(1)}, ${s3.toFixed(1)}, ${s4.toFixed(1)}]^T$. Điểm tọa độ này nằm duy nhất tại một vị trí trong không gian 4 chiều!`;
       renderFig1();
@@ -1414,19 +1310,15 @@
       if (!f1Ctx) return;
       const w = f1Canvas.width, h = f1Canvas.height;
       f1Ctx.fillStyle = '#0a0a0c'; f1Ctx.fillRect(0, 0, w, h);
-
       const labels = ['GPA (/4.0)', 'Tự học (/40h)', 'Thể thao (/20h)', 'Game (/30h)'];
       const maxs = [4.0, 40.0, 20.0, 30.0];
       const startX = 40, barW = 75, gap = 25;
-
       state.f1Values.forEach((val, i) => {
         const normH = (val / maxs[i]) * 130;
         const x = startX + i * (barW + gap);
         const y = h - 35 - normH;
-
         f1Ctx.fillStyle = '#38bdf8';
         f1Ctx.fillRect(x, y, barW, normH);
-
         f1Ctx.fillStyle = '#f8fafc';
         f1Ctx.font = '10px Roboto Mono';
         f1Ctx.fillText(val.toFixed(1), x + 25, y - 6);
@@ -1434,7 +1326,6 @@
       });
     }
 
-    // FIGURE 2
     const f2Canvas = document.getElementById('fig2Canvas');
     const f2Ctx = f2Canvas ? f2Canvas.getContext('2d') : null;
     function setFig2Dim(dim) {
@@ -1443,7 +1334,6 @@
       const b5 = document.getElementById('btn-f2-5d');
       const tag = document.getElementById('f2-badge');
       const desc = document.getElementById('f2-desc');
-
       if (dim === 2) {
         b2.className = "px-2.5 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-900";
         b5.className = "px-2.5 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300";
@@ -1463,21 +1353,17 @@
       if (!f2Ctx) return;
       const w = f2Canvas.width, h = f2Canvas.height;
       f2Ctx.fillStyle = '#0a0a0c'; f2Ctx.fillRect(0, 0, w, h);
-
       const cx = w / 2, cy = h / 2;
       f2Ctx.strokeStyle = 'rgba(255,255,255,0.12)'; f2Ctx.strokeRect(30, 20, w - 60, h - 40);
-
       const dino = state.f2Dim === 2 ? { x: cx - 20, y: cy - 25, label: 'T-Rex' } : { x: cx - 120, y: cy - 40, label: 'T-Rex (Sinh học)' };
       const excavator = state.f2Dim === 2 ? { x: cx + 15, y: cy - 15, label: 'Máy xúc' } : { x: cx + 110, y: cy + 30, label: 'Máy xúc (Cơ khí)' };
       const cat = { x: cx - 130, y: cy + 45, label: 'Mèo con' };
-
       [dino, excavator, cat].forEach(item => {
         f2Ctx.fillStyle = item.label.includes('T-Rex') ? '#ef4444' : (item.label.includes('Máy xúc') ? '#f59e0b' : '#10b981');
         f2Ctx.beginPath(); f2Ctx.arc(item.x, item.y, 6, 0, Math.PI * 2); f2Ctx.fill();
         f2Ctx.fillStyle = '#f8fafc'; f2Ctx.font = '11px Roboto Mono';
         f2Ctx.fillText(item.label, item.x + 8, item.y + 4);
       });
-
       if (state.f2Dim === 2) {
         f2Ctx.strokeStyle = '#ef4444'; f2Ctx.setLineDash([3, 3]);
         f2Ctx.strokeRect(cx - 35, cy - 40, 95, 45);
@@ -1486,7 +1372,6 @@
       }
     }
 
-    // FIGURE 3
     const f3Canvas = document.getElementById('fig3Canvas');
     const f3Ctx = f3Canvas ? f3Canvas.getContext('2d') : null;
     const f3Data = {
@@ -1512,11 +1397,9 @@
       if (!f3Ctx) return;
       const w = f3Canvas.width, h = f3Canvas.height;
       f3Ctx.fillStyle = '#0a0a0c'; f3Ctx.fillRect(0, 0, w, h);
-
       const cy = h / 2;
       f3Ctx.strokeStyle = 'rgba(255,255,255,0.2)'; f3Ctx.beginPath();
       f3Ctx.moveTo(25, cy); f3Ctx.lineTo(w - 25, cy); f3Ctx.stroke();
-
       const arr = f3Data[state.f3Word];
       const barW = 35, startX = 40, gap = 16;
       arr.forEach((v, i) => {
@@ -1529,7 +1412,6 @@
       });
     }
 
-    // FIGURE 4
     const f4Canvas = document.getElementById('fig4Canvas');
     const f4Ctx = f4Canvas ? f4Canvas.getContext('2d') : null;
     function updateFig4FromSlider(val) {
@@ -1542,29 +1424,20 @@
       if (!f4Ctx) return;
       const w = f4Canvas.width, h = f4Canvas.height;
       f4Ctx.fillStyle = '#0a0a0c'; f4Ctx.fillRect(0, 0, w, h);
-
       const ox = 70, oy = h - 35, scale = 25;
       f4Ctx.strokeStyle = 'rgba(255,255,255,0.15)';
       f4Ctx.beginPath(); f4Ctx.moveTo(ox, oy); f4Ctx.lineTo(w - 30, oy);
       f4Ctx.moveTo(ox, oy); f4Ctx.lineTo(ox, 20); f4Ctx.stroke();
-
       const px = ox + state.f4Coord.x * scale;
       const py = oy - state.f4Coord.y * scale;
-
-      // L1 Taxi
       f4Ctx.strokeStyle = '#f59e0b'; f4Ctx.lineWidth = 2; f4Ctx.setLineDash([4, 4]);
       f4Ctx.beginPath(); f4Ctx.moveTo(ox, oy); f4Ctx.lineTo(px, oy); f4Ctx.lineTo(px, py); f4Ctx.stroke();
       f4Ctx.setLineDash([]);
-
-      // L2 Bird
       f4Ctx.strokeStyle = '#38bdf8'; f4Ctx.lineWidth = 3;
       f4Ctx.beginPath(); f4Ctx.moveTo(ox, oy); f4Ctx.lineTo(px, py); f4Ctx.stroke();
-
       f4Ctx.fillStyle = '#38bdf8'; f4Ctx.beginPath(); f4Ctx.arc(px, py, 6, 0, Math.PI * 2); f4Ctx.fill();
-
       const l2 = Math.sqrt(state.f4Coord.x ** 2 + state.f4Coord.y ** 2);
       const l1 = state.f4Coord.x + state.f4Coord.y;
-
       document.getElementById('f4-badge').innerText = `||v||₂ = ${l2.toFixed(2)}`;
       document.getElementById('f4-coords').innerText = `x = ${state.f4Coord.x.toFixed(1)}, y = ${state.f4Coord.y.toFixed(1)}`;
       document.getElementById('f4-readout').innerHTML = 
@@ -1572,7 +1445,6 @@
       renderMathKaTeX();
     }
 
-    // FIGURE 5
     const f5Canvas = document.getElementById('fig5Canvas');
     const f5Ctx = f5Canvas ? f5Canvas.getContext('2d') : null;
     function updateFig5(val) {
@@ -1584,35 +1456,26 @@
       if (!f5Ctx) return;
       const w = f5Canvas.width, h = f5Canvas.height;
       f5Ctx.fillStyle = '#0a0a0c'; f5Ctx.fillRect(0, 0, w, h);
-
       const ox = 50, oy = h - 30;
       f5Ctx.strokeStyle = 'rgba(255,255,255,0.15)'; f5Ctx.beginPath();
       f5Ctx.moveTo(ox, oy); f5Ctx.lineTo(w - 30, oy);
       f5Ctx.moveTo(ox, oy); f5Ctx.lineTo(ox, 20); f5Ctx.stroke();
-
-      // Vector A (ngắn)
       const ax = ox + 35, ay = oy - 25;
       f5Ctx.strokeStyle = '#38bdf8'; f5Ctx.lineWidth = 3;
       f5Ctx.beginPath(); f5Ctx.moveTo(ox, oy); f5Ctx.lineTo(ax, ay); f5Ctx.stroke();
       f5Ctx.fillStyle = '#38bdf8'; f5Ctx.fillText('A ("Con chó")', ax + 8, ay);
-
-      // Vector B (dài)
       const bx = ox + 35 * (state.f5Scale / 2 + 1);
       const by = oy - 25 * (state.f5Scale / 2 + 1);
       f5Ctx.strokeStyle = '#38bdf8'; f5Ctx.lineWidth = 3;
       f5Ctx.beginPath(); f5Ctx.moveTo(ox, oy); f5Ctx.lineTo(bx, by); f5Ctx.stroke();
       f5Ctx.fillStyle = '#38bdf8'; f5Ctx.fillText('B ("Chú chó nhỏ đáng yêu...")', bx + 8, by);
-
-      // Thước kẻ Euclid đỏ nối giữa 2 đầu
       f5Ctx.strokeStyle = '#ef4444'; f5Ctx.lineWidth = 2; f5Ctx.setLineDash([4, 3]);
       f5Ctx.beginPath(); f5Ctx.moveTo(ax, ay); f5Ctx.lineTo(bx, by); f5Ctx.stroke();
       f5Ctx.setLineDash([]);
-
       const dist = Math.sqrt((bx - ax) ** 2 + (by - ay) ** 2) / 20;
       document.getElementById('f5-badge').innerText = `Khoảng cách Euclid: d = ${dist.toFixed(2)}`;
     }
 
-    // FIGURE 6
     const f6Canvas = document.getElementById('fig6Canvas');
     const f6Ctx = f6Canvas ? f6Canvas.getContext('2d') : null;
     function updateFig6() {
@@ -1627,37 +1490,27 @@
       if (!f6Ctx) return;
       const w = f6Canvas.width, h = f6Canvas.height;
       f6Ctx.fillStyle = '#0a0a0c'; f6Ctx.fillRect(0, 0, w, h);
-
       const ox = 70, oy = h - 35, baseR = 70;
       f6Ctx.strokeStyle = 'rgba(255,255,255,0.15)';
       f6Ctx.beginPath(); f6Ctx.moveTo(ox, oy); f6Ctx.lineTo(w - 30, oy);
       f6Ctx.moveTo(ox, oy); f6Ctx.lineTo(ox, 20); f6Ctx.stroke();
-
-      // Vòng tròn đơn vị r=1.0
       f6Ctx.strokeStyle = '#10b981'; f6Ctx.lineWidth = 1.5; f6Ctx.setLineDash([4, 4]);
       f6Ctx.beginPath(); f6Ctx.arc(ox, oy, baseR, 0, -Math.PI / 2, true); f6Ctx.stroke();
       f6Ctx.setLineDash([]);
       f6Ctx.fillStyle = '#10b981'; f6Ctx.font = '10px Roboto Mono';
       f6Ctx.fillText('Vỏ đơn vị ||v||=1.0', ox + baseR + 5, oy - 10);
-
       const rad = (-state.f6Angle * Math.PI) / 180;
       const ux = ox + baseR * Math.cos(rad);
       const uy = oy + baseR * Math.sin(rad);
-
       const vx = ox + baseR * state.f6Mag * Math.cos(rad);
       const vy = oy + baseR * state.f6Mag * Math.sin(rad);
-
-      // Vector đầy đủ
       f6Ctx.strokeStyle = '#f59e0b'; f6Ctx.lineWidth = 3;
       f6Ctx.beginPath(); f6Ctx.moveTo(ox, oy); f6Ctx.lineTo(vx, vy); f6Ctx.stroke();
       f6Ctx.fillStyle = '#f59e0b'; f6Ctx.fillText(`v (r = ${state.f6Mag.toFixed(2)})`, vx + 8, vy);
-
-      // Điểm đơn vị u_hat
       f6Ctx.fillStyle = '#10b981'; f6Ctx.beginPath(); f6Ctx.arc(ux, uy, 5, 0, Math.PI * 2); f6Ctx.fill();
       f6Ctx.fillText('v̂ (Hướng)', ux - 15, uy - 10);
     }
 
-    // FIGURE 7
     const f7Canvas = document.getElementById('fig7Canvas');
     const f7Ctx = f7Canvas ? f7Canvas.getContext('2d') : null;
     function updateFig7(val) {
@@ -1669,37 +1522,26 @@
       if (!f7Ctx) return;
       const w = f7Canvas.width, h = f7Canvas.height;
       f7Ctx.fillStyle = '#0a0a0c'; f7Ctx.fillRect(0, 0, w, h);
-
       const ox = 70, oy = h - 45, lenU = 220, lenV = 130;
       const rad = (-state.f7Angle * Math.PI) / 180;
-
-      // Vector u nằm ngang
       f7Ctx.strokeStyle = '#38bdf8'; f7Ctx.lineWidth = 4;
       f7Ctx.beginPath(); f7Ctx.moveTo(ox, oy); f7Ctx.lineTo(ox + lenU, oy); f7Ctx.stroke();
       f7Ctx.fillStyle = '#38bdf8'; f7Ctx.font = '11px Roboto Mono';
       f7Ctx.fillText('Vector u (Mặt đất)', ox + lenU + 8, oy + 4);
-
-      // Vector v chéo góc
       const vx = ox + lenV * Math.cos(rad);
       const vy = oy + lenV * Math.sin(rad);
       f7Ctx.strokeStyle = '#f59e0b'; f7Ctx.lineWidth = 3.5;
       f7Ctx.beginPath(); f7Ctx.moveTo(ox, oy); f7Ctx.lineTo(vx, vy); f7Ctx.stroke();
       f7Ctx.fillStyle = '#f59e0b'; f7Ctx.fillText('Vector v', vx + 8, vy);
-
-      // Chiếc bóng chiếu thẳng đứng xuống
       f7Ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)'; f7Ctx.setLineDash([3, 3]);
       f7Ctx.beginPath(); f7Ctx.moveTo(vx, vy); f7Ctx.lineTo(vx, oy); f7Ctx.stroke();
       f7Ctx.setLineDash([]);
-
-      // Chiếc bóng màu vàng
       f7Ctx.strokeStyle = '#facc15'; f7Ctx.lineWidth = 7;
       f7Ctx.beginPath(); f7Ctx.moveTo(ox, oy); f7Ctx.lineTo(vx, oy); f7Ctx.stroke();
-
       const cosVal = Math.cos((state.f7Angle * Math.PI) / 180);
       document.getElementById('f7-badge').innerText = `Bóng: ||v||·cos(θ) = ${(cosVal * 1.5).toFixed(2)}`;
     }
 
-    // FIGURE 8
     const f8Canvas = document.getElementById('fig8Canvas');
     const f8Ctx = f8Canvas ? f8Canvas.getContext('2d') : null;
     function updateFig8(val) {
@@ -1713,33 +1555,24 @@
       if (!f8Ctx) return;
       const w = f8Canvas.width, h = f8Canvas.height;
       f8Ctx.fillStyle = '#0a0a0c'; f8Ctx.fillRect(0, 0, w, h);
-
       const cx = w / 2, cy = h - 30, R = 110;
       f8Ctx.strokeStyle = 'rgba(255,255,255,0.15)';
       f8Ctx.beginPath(); f8Ctx.arc(cx, cy, R, Math.PI, 0); f8Ctx.stroke();
-
-      // Vector 1 chuẩn (nằm ngang sang phải)
       f8Ctx.strokeStyle = '#38bdf8'; f8Ctx.lineWidth = 3.5;
       f8Ctx.beginPath(); f8Ctx.moveTo(cx, cy); f8Ctx.lineTo(cx + R, cy); f8Ctx.stroke();
       f8Ctx.fillStyle = '#38bdf8'; f8Ctx.font = '10px Roboto Mono';
       f8Ctx.fillText('u (Gốc)', cx + R + 6, cy);
-
-      // Vector 2 quay
       const rad = (-state.f8Angle * Math.PI) / 180;
       const vx = cx + R * Math.cos(rad);
       const vy = cy + R * Math.sin(rad);
-
       f8Ctx.strokeStyle = '#f59e0b'; f8Ctx.lineWidth = 3.5;
       f8Ctx.beginPath(); f8Ctx.moveTo(cx, cy); f8Ctx.lineTo(vx, vy); f8Ctx.stroke();
       f8Ctx.fillStyle = '#f59e0b'; f8Ctx.fillText('v', vx + 6, vy);
-
-      // Cung góc theta
       f8Ctx.strokeStyle = '#10b981'; f8Ctx.lineWidth = 2;
       f8Ctx.beginPath(); f8Ctx.arc(cx, cy, 40, 0, rad, true); f8Ctx.stroke();
       f8Ctx.fillStyle = '#10b981'; f8Ctx.fillText(`θ=${state.f8Angle}°`, cx + 45, cy - 15);
     }
 
-    // FIGURE 9
     const f9Canvas = document.getElementById('fig9Canvas');
     const f9Ctx = f9Canvas ? f9Canvas.getContext('2d') : null;
     function setFig9Scenario(ang) {
@@ -1749,9 +1582,7 @@
       const b180 = document.getElementById('btn-f9-180');
       const tag = document.getElementById('f9-badge');
       const desc = document.getElementById('f9-desc');
-
       [b0, b90, b180].forEach(b => b.className = "px-2 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300");
-
       if (ang === 0) {
         b0.className = "px-2 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-900";
         tag.className = "text-[11px] font-code bg-green-900 text-stone-100 px-2 py-0.5 font-bold";
@@ -1774,23 +1605,19 @@
       if (!f9Ctx) return;
       const w = f9Canvas.width, h = f9Canvas.height;
       f9Ctx.fillStyle = '#0a0a0c'; f9Ctx.fillRect(0, 0, w, h);
-
       const cx = w / 2, cy = h / 2, R = 80;
       f9Ctx.strokeStyle = '#38bdf8'; f9Ctx.lineWidth = 3.5;
       f9Ctx.beginPath(); f9Ctx.moveTo(cx, cy); f9Ctx.lineTo(cx + R, cy); f9Ctx.stroke();
       f9Ctx.fillStyle = '#38bdf8'; f9Ctx.font = '10px Roboto Mono';
       f9Ctx.fillText('Từ khóa A', cx + R + 8, cy + 4);
-
       const rad = (-state.f9Scenario * Math.PI) / 180;
       const vx = cx + R * Math.cos(rad);
       const vy = cy + R * Math.sin(rad);
-
       f9Ctx.strokeStyle = '#f59e0b'; f9Ctx.lineWidth = 3.5;
       f9Ctx.beginPath(); f9Ctx.moveTo(cx, cy); f9Ctx.lineTo(vx, vy); f9Ctx.stroke();
       f9Ctx.fillStyle = '#f59e0b'; f9Ctx.fillText('Từ khóa B', vx - 20, vy - 8);
     }
 
-    // FIGURE 10
     const f10Canvas = document.getElementById('fig10Canvas');
     const f10Ctx = f10Canvas ? f10Canvas.getContext('2d') : null;
     function resetFig10() {
@@ -1815,29 +1642,22 @@
       if (!f10Ctx) return;
       const w = f10Canvas.width, h = f10Canvas.height;
       f10Ctx.fillStyle = '#0a0a0c'; f10Ctx.fillRect(0, 0, w, h);
-
       const cx = w / 2, cy = h / 2, unitR = 65;
-
-      // Quả cầu đơn vị S1
       f10Ctx.strokeStyle = '#10b981'; f10Ctx.lineWidth = 2;
       f10Ctx.beginPath(); f10Ctx.arc(cx, cy, unitR, 0, Math.PI * 2); f10Ctx.stroke();
       f10Ctx.fillStyle = '#10b981'; f10Ctx.font = '10px Roboto Mono';
       f10Ctx.fillText('Mặt cầu R=1.0', cx + unitR + 6, cy - 6);
-
       state.f10Points.forEach(p => {
         const curR = state.f10Normalized ? unitR : p.origR;
         const px = cx + curR * Math.cos(p.ang);
         const py = cy + curR * Math.sin(p.ang);
-
         f10Ctx.strokeStyle = 'rgba(255,255,255,0.15)'; f10Ctx.lineWidth = 1;
         f10Ctx.beginPath(); f10Ctx.moveTo(cx, cy); f10Ctx.lineTo(px, py); f10Ctx.stroke();
-
         f10Ctx.fillStyle = state.f10Normalized ? '#10b981' : '#f43f5e';
         f10Ctx.beginPath(); f10Ctx.arc(px, py, 4, 0, Math.PI * 2); f10Ctx.fill();
       });
     }
 
-    // FIGURE 11
     const f11Canvas = document.getElementById('fig11Canvas');
     const f11Ctx = f11Canvas ? f11Canvas.getContext('2d') : null;
     function setFig11Dim(dim) {
@@ -1850,14 +1670,11 @@
       if (!f11Ctx) return;
       const w = f11Canvas.width, h = f11Canvas.height;
       f11Ctx.fillStyle = '#0a0a0c'; f11Ctx.fillRect(0, 0, w, h);
-
       const d = state.f11Dim;
       const spread = 80 / Math.sqrt(d);
       const cx = w / 2, cy = h - 35;
-
       f11Ctx.strokeStyle = 'rgba(255,255,255,0.2)'; f11Ctx.beginPath();
       f11Ctx.moveTo(40, cy); f11Ctx.lineTo(w - 40, cy); f11Ctx.stroke();
-
       f11Ctx.strokeStyle = '#f59e0b'; f11Ctx.lineWidth = 2.5;
       f11Ctx.beginPath();
       for (let x = 40; x <= w - 40; x += 3) {
@@ -1867,12 +1684,10 @@
         if (x === 40) f11Ctx.moveTo(x, y); else f11Ctx.lineTo(x, y);
       }
       f11Ctx.stroke();
-
       f11Ctx.fillStyle = '#f59e0b'; f11Ctx.font = '10px Roboto Mono';
       f11Ctx.fillText('90° (Vuông góc hoàn hảo)', cx - 65, cy + 18);
     }
 
-    // FIGURE 12
     const f12Canvas = document.getElementById('fig12Canvas');
     const f12Ctx = f12Canvas ? f12Canvas.getContext('2d') : null;
     function setFig12Op(op) {
@@ -1881,7 +1696,6 @@
       const bMon = document.getElementById('btn-f12-monster');
       const tag = document.getElementById('f12-badge');
       const desc = document.getElementById('f12-desc');
-
       if (op === 'royalty') {
         bRoy.className = "px-2 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-900";
         bMon.className = "px-2 py-1 bg-stone-100 border border-stone-800 font-bold hover:bg-stone-300";
@@ -1899,17 +1713,14 @@
       if (!f12Ctx) return;
       const w = f12Canvas.width, h = f12Canvas.height;
       f12Ctx.fillStyle = '#0a0a0c'; f12Ctx.fillRect(0, 0, w, h);
-
       const ox = 60, oy = h - 35;
       f12Ctx.strokeStyle = 'rgba(255,255,255,0.15)'; f12Ctx.beginPath();
       f12Ctx.moveTo(ox, oy); f12Ctx.lineTo(w - 30, oy);
       f12Ctx.moveTo(ox, oy); f12Ctx.lineTo(ox, 20); f12Ctx.stroke();
-
       if (state.f12Op === 'royalty') {
         f12Ctx.strokeStyle = '#38bdf8'; f12Ctx.lineWidth = 2;
         f12Ctx.beginPath(); f12Ctx.moveTo(ox, oy); f12Ctx.lineTo(ox + 160, oy - 120); f12Ctx.stroke();
         f12Ctx.fillStyle = '#38bdf8'; f12Ctx.fillText('v(Vua)', ox + 165, oy - 120);
-
         f12Ctx.strokeStyle = '#f59e0b'; f12Ctx.lineWidth = 4;
         f12Ctx.beginPath(); f12Ctx.moveTo(ox, oy); f12Ctx.lineTo(ox + 210, oy - 105); f12Ctx.stroke();
         f12Ctx.fillStyle = '#f59e0b'; f12Ctx.fillText('v\'(Nữ hoàng)', ox + 215, oy - 105);
@@ -1921,108 +1732,636 @@
     }
 
     function renderAllFigures() {
-      renderFig1();
-      renderFig2();
-      renderFig3();
-      renderFig4();
-      renderFig5();
-      renderFig6();
-      renderFig7();
-      renderFig8();
-      renderFig9();
-      resetFig10();
-      renderFig11();
-      renderFig12();
+      renderFig1(); renderFig2(); renderFig3(); renderFig4(); renderFig5();
+      renderFig6(); renderFig7(); renderFig8(); renderFig9();
+      resetFig10(); renderFig11(); renderFig12();
     }
 
-    /* ========================================================================= */
-    /* HỆ THỐNG CÂU HỎI TRẮC NGHIỆM: 12 CHECKPOINTS (60 CÂU) + 1 CAPSTONE (15 CÂU) */
-    /* ========================================================================= */
-
+    /* ============ NGÂN HÀNG CÂU HỎI (ĐÃ CÂN BẰNG ĐÁP ÁN & CHÚ GIẢI SÂU) ============ */
     const checkpointsDb = {
       1: [
-        { q: "Trong khoa học dữ liệu, 'số chiều' (dimension) của một không gian thực chất đại diện cho điều gì?", opts: ["Số lượng các bức tường trong căn phòng", "Số lượng các thuộc tính/thông số số học được dùng để mô tả một thực thể", "Kích thước màn hình máy tính", "Tốc độ của mạng Internet"], ans: 1, exp: "Chính xác! Mỗi chiều đại diện cho một thước đo thuộc tính độc lập (ví dụ GPA, cân nặng, độ tuổi...)." },
-        { q: "Một chiếc hồ sơ sinh viên gồm: Điểm GPA, Chiều cao, Số giờ tự học và Quê quán (đã mã hóa số). Vector này thuộc không gian nào?", opts: ["Không gian 1 chiều R¹", "Không gian 4 chiều R⁴", "Không gian vô cực", "Mặt phẳng 2D"], ans: 1, exp: "Đúng! Có 4 thuộc tính tương ứng với vector trong R⁴." },
-        { q: "Để mô tả ý niệm ngôn ngữ trong CLIP, người ta dùng vector có bao nhiêu chiều?", opts: ["3 chiều", "768 chiều (hoặc hơn)", "2 chiều", "1 chiều"], ans: 1, exp: "Chính xác! CLIP dùng 768 chiều để chứa hàng trăm thuộc tính trừu tượng." },
-        { q: "Điểm tọa độ (0, 0, ..., 0) có phải là một sinh viên có điểm GPA = 0 không?", opts: ["Phải, đó là một hồ sơ có các thuộc tính bằng 0", "Không, đó là điểm vô nghĩa", "Đó là một bức tranh màu đỏ", "Đó là lỗi tràn bộ nhớ"], ans: 0, exp: "Chính xác! Ở không gian dữ liệu hồ sơ, gốc (0,0) chỉ đơn giản là các chỉ số bằng 0." },
-        { q: "Tại sao con người không thể vẽ trực tiếp vector 768 chiều ra giấy?", opts: ["Vì bút mực không đủ màu", "Vì mắt và não bộ con người chỉ cảm nhận được không gian tối đa 3 chiều vật lý", "Vì máy tính không cho phép", "Vì giấy vẽ quá nhỏ"], ans: 1, exp: "Đúng! Giác quan con người bị giới hạn trong 3 chiều không gian vật lý." }
+        { q: "Trong khoa học dữ liệu, 'số chiều' (dimension) của một không gian thực chất đại diện cho điều gì?",
+          opts: [
+            "Số lượng các bức tường vật lý vuông góc nhau trong một căn phòng",
+            "Số lượng thuộc tính/thông số số học độc lập được dùng để mô tả một thực thể",
+            "Kích thước bộ nhớ RAM tối thiểu mà máy tính cần để lưu vector",
+            "Số phép tính mà GPU phải thực hiện để xử lý vector đó"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Mỗi chiều là MỘT TRỤC THUỘC TÍNH độc lập (GPA, chiều cao, số giờ tự học...). Vì sao A sai? A áp đặt trực giác không gian vật lý 3D lên khái niệm trừu tượng — bạn đang nhầm 'trừu tượng toán học' với 'căn phòng thực'. Vì sao C sai? C nhầm 'số chiều' (cấu trúc dữ liệu) với 'dung lượng lưu trữ' (tài nguyên phần cứng) — hai khái niệm hoàn toàn khác. Vì sao D sai? D nhầm chiều với khối lượng tính toán — chiều là thuộc tính của DỮ LIỆU, không phải chỉ số HIỆU NĂNG. Nếu bạn chọn A, bạn đang bám chấp vào trực giác vật lý. Nếu chọn C hoặc D, bạn đang lẫn vai trò của dữ liệu với hạ tầng."
+        },
+        { q: "Một chiếc hồ sơ sinh viên gồm: Điểm GPA, Chiều cao, Số giờ tự học và Quê quán (đã mã hóa số). Vector này thuộc không gian nào?",
+          opts: [
+            "Không gian 4 chiều ℝ⁴",
+            "Không gian 1 chiều ℝ¹",
+            "Không gian 3 chiều ℝ³",
+            "Không gian vô hạn chiều"
+          ],
+          ans: 0,
+          exp: "Đáp án đúng: A — Có đúng 4 thuộc tính → vector trong ℝ⁴. Vì sao B sai? B là không gian của một số vô hướng đơn lẻ — không đủ chỗ chứa 4 thuộc tính. Vì sao C sai? C đếm thiếu — có thể bạn quên rằng 'quê quán đã mã hóa số' vẫn là một chiều hợp lệ, hoặc nhầm số chiều với 'số trường thông tin quan trọng'. Vì sao D sai? D nhầm 'số thuộc tính hữu hạn' với 'không gian vô hạn' — mỗi hồ sơ cụ thể LUÔN có số chiều xác định (ở đây là 4). Nếu chọn C, lỗ hổng là đếm thiếu trục. Nếu chọn D, lỗ hổng là chưa phân biệt 'số chiều' với 'kích thước không gian'."
+        },
+        { q: "Để mô tả ý niệm ngôn ngữ trong CLIP, người ta dùng vector có bao nhiêu chiều?",
+          opts: [
+            "2 chiều (đủ để vẽ trên mặt phẳng)",
+            "3 chiều (giống không gian vật lý)",
+            "64 chiều (đủ để nén gọn)",
+            "768 chiều hoặc hơn, tùy phiên bản mô hình"
+          ],
+          ans: 3,
+          exp: "Đáp án đúng: D — CLIP của OpenAI dùng 768 chiều cho text encoder; các mô hình tiên tiến hơn có thể dùng 1024, 2048, 4096 chiều. Vì sao A, B sai? A và B lấy trực giác không gian vật lý — quá chật để biểu diễn ngôn ngữ loài người (chính là nội dung 'The Crowding Problem' ở Chương 2). Vì sao C sai? 64 chiều vẫn khả thi cho mô hình nhỏ, nhưng KHÔNG phải kích thước chuẩn của CLIP — bạn đang ước lượng theo cảm tính thay vì theo thông số kỹ thuật. Nếu bạn chọn A/B, lỗ hổng là chưa thoát khỏi tư duy vật lý. Nếu chọn C, lỗ hổng là thiếu tra cứu thông số kỹ thuật."
+        },
+        { q: "Điểm tọa độ (0, 0, ..., 0) trong không gian hồ sơ sinh viên có phải là một sinh viên có GPA = 0 không?",
+          opts: [
+            "Đúng, đó là sinh viên có mọi chỉ số đều bằng 0",
+            "Không, đó chỉ là vector gốc — một quy ước tọa độ, không đại diện cho sinh viên cụ thể nào",
+            "Đúng, đó là sinh viên chưa nhập học",
+            "Không, vì không tồn tại GPA = 0 trong hệ thống"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Vector gốc chỉ là điểm quy chiếu của hệ tọa độ; nó không BẮT BUỘC tương ứng với một đối tượng thực tế. Vì sao A, C sai? A và C lẫn 'tọa độ hình học' với 'giá trị thực tế'. Việc bạn đặt trục tọa độ tại (0,0,...,0) là quy ước hình học — không có nghĩa là tồn tại một sinh viên với mọi chỉ số bằng 0. Vì sao D sai? D lý luận theo hướng 'không có ai GPA=0 nên vector gốc vô nghĩa' — nhưng vector gốc vẫn có nghĩa như một QUY CHIẾU, không phải như một hồ sơ cụ thể. Nếu bạn chọn A/C, lỗ hổng là nhầm 'điểm biểu diễn' với 'đối tượng được biểu diễn'. Nếu chọn D, lỗ hổng là chưa phân biệt 'tồn tại thực tế' với 'tồn tại hình học'."
+        },
+        { q: "Tại sao con người không thể vẽ trực tiếp vector 768 chiều ra giấy?",
+          opts: [
+            "Vì giấy không đủ lớn để chứa hết các con số",
+            "Vì bút mực không có đủ màu để biểu diễn 768 chiều",
+            "Vì não bộ và thị giác con người bị giới hạn trong không gian vật lý 3 chiều",
+            "Vì máy tính chưa cho phép in vector nhiều chiều"
+          ],
+          ans: 2,
+          exp: "Đáp án đúng: C — Giới hạn SINH HỌC của giác quan, không phải vấn đề công nghệ. Vì sao A sai? 'Kích thước vật lý' khác 'số chiều' — một vector có thể vẽ gọn trên giấy nếu chỉ có 2-3 chiều. Vì sao B sai? Lẫn 'chiều' với 'màu sắc' — mỗi chiều không cần một màu riêng. Vì sao D sai? Công nghệ in hoàn toàn đủ khả năng in mảng 768 số; vấn đề là NÃO không thể hình dung HƯỚNG của nó trong không gian. Nếu bạn chọn A/B/D, lỗ hổng chung là nhầm 'chiều toán học' với một thuộc tính vật lý bề mặt (kích thước, màu sắc, công nghệ in)."
+        }
       ],
       2: [
-        { q: "Hiện tượng 'Sự chen chúc ý niệm' (The Crowding Problem) xảy ra khi nào?", opts: ["Khi có quá nhiều sinh viên trong lớp học", "Khi ta cố ép quá nhiều khái niệm đa dạng vào một không gian có quá ít số chiều (như 2D)", "Khi máy tính bị virus", "Khi mạng nơ-ron học quá nhanh"], ans: 1, exp: "Chính xác! Thiếu chiều phân loại khiến các sự vật hoàn toàn khác nhau bị xếp đè lên cùng tọa độ." },
-        { q: "Nếu chỉ dùng 2 trục X và Y, ta tối đa phân loại độc lập được bao nhiêu thuộc tính?", opts: ["2 thuộc tính", "100 thuộc tính", "768 thuộc tính", "Vô số"], ans: 0, exp: "Đúng! Mỗi trục hình học độc lập chỉ biểu diễn được 1 chiều thuộc tính." },
-        { q: "Trong ví dụ Chương 2, tại sao 'Khủng long T-Rex' và 'Máy xúc' bị đè lên nhau ở 2D?", opts: ["Vì chúng cùng màu đỏ", "Vì 2D chỉ đo kích thước và độ nguy hiểm, thiếu chiều phân biệt 'Cơ khí vs Sinh học'", "Do lỗi lập trình đồ họa", "Vì T-Rex biết lái máy xúc"], ans: 1, exp: "Chính xác! Cần thêm chiều thứ 3 để tách 'sinh học' khỏi 'kim loại cơ khí'." },
-        { q: "Số chiều cao (High-dimensional space) đem lại lợi thế cốt lõi nào cho AI?", opts: ["Làm file tải về nặng hơn", "Cung cấp nhiều bậc tự do độc lập để hàng triệu ý niệm cùng tồn tại mà không va chạm", "Giúp máy tính không bị nóng", "Tăng tốc độ gõ bàn phím"], ans: 1, exp: "Đúng! Không gian nhiều chiều cung cấp sức chứa biểu diễn cực lớn." },
-        { q: "Một không gian có 100 chiều có thể chứa tối đa bao nhiêu trục tọa độ đôi một vuông góc?", opts: ["Đúng 100 trục", "Chỉ 3 trục", "2 trục", "Vô số"], ans: 0, exp: "Chính xác! Không gian R^d có tối đa d trục cơ sở trực giao." }
+        { q: "Hiện tượng 'Sự chen chúc ý niệm' (The Crowding Problem) xảy ra khi nào?",
+          opts: [
+            "Khi ta cố ép quá nhiều khái niệm đa dạng vào một không gian có quá ít số chiều",
+            "Khi có quá nhiều sinh viên trong lớp học cùng truy cập mạng Wi-Fi",
+            "Khi mạng nơ-ron học quá nhanh khiến trọng số bị nhiễu loạn",
+            "Khi máy tính bị quá tải vì lượng dữ liệu đầu vào quá lớn"
+          ],
+          ans: 0,
+          exp: "Đáp án đúng: A — Thiếu chiều phân loại khiến các thực thể khác nhau bị xếp đè lên tọa độ gần nhau. Vì sao B sai? B nhầm 'chen chúc ý niệm' (khái niệm hình học) với 'chen chúc người dùng' (khái niệm mạng máy tính) — hai lĩnh vực khác nhau. Vì sao C sai? Đây là vấn đề tối ưu hóa (learning rate quá cao), không phải hình học biểu diễn. Vì sao D sai? Đây là vấn đề tài nguyên phần cứng, không liên quan số chiều — một tập dữ liệu nhỏ vẫn có thể 'chen chúc' nếu biểu diễn sai chiều. Nếu bạn chọn B/C/D, lỗ hổng là chưa phân biệt 'vấn đề hình học biểu diễn' với các vấn đề vận hành/hạ tầng."
+        },
+        { q: "Nếu chỉ dùng 2 trục X và Y, ta tối đa phân loại độc lập được bao nhiêu thuộc tính?",
+          opts: [
+            "1 thuộc tính",
+            "3 thuộc tính",
+            "2 thuộc tính",
+            "Vô số thuộc tính"
+          ],
+          ans: 2,
+          exp: "Đáp án đúng: C — Mỗi trục hình học độc lập biểu diễn ĐÚNG 1 chiều thuộc tính → 2 trục = 2 thuộc tính. Vì sao A sai? Bạn đếm thiếu một trục. Vì sao B sai? B vi phạm tính độc lập tuyến tính — nếu dùng 3 thuộc tính trên 2 trục, hai trong ba thuộc tính buộc phải chia sẻ cùng một trục, làm mất khả năng phân biệt. Vì sao D sai? Nếu một trục biểu diễn được vô số thuộc tính thì khái niệm 'chiều' trở nên vô nghĩa — đây là lỗi nghiêm trọng về ĐỊNH NGHĨA cơ sở. Nếu bạn chọn A, lỗ hổng là đếm sai. Nếu chọn B hoặc D, lỗ hổng là chưa hiểu 'độc lập tuyến tính'."
+        },
+        { q: "Trong ví dụ Chương 2, tại sao 'Khủng long T-Rex' và 'Máy xúc' bị đè lên nhau ở 2D?",
+          opts: [
+            "Vì cả hai đều có màu nâu xám giống nhau ngoài đời thực",
+            "Vì chúng cùng xuất hiện trong các bộ phim Hollywood nổi tiếng",
+            "Vì cả hai đều nặng hàng tấn và có kích thước khổng lồ",
+            "Vì 2D chỉ đo kích thước và độ nguy hiểm, thiếu chiều phân biệt 'Cơ khí vs Sinh học'"
+          ],
+          ans: 3,
+          exp: "Đáp án đúng: D — Trục X (kích thước) và Y (mức nguy hiểm) không đủ để tách 'sinh học' khỏi 'kim loại cơ khí'. Vì sao A sai? Màu sắc là thuộc tính bề ngoài, không phải NGUYÊN NHÂN cốt lõi của việc 'đè lên nhau' — kể cả khác màu, nếu cùng tọa độ thì vẫn đè. Vì sao B sai? Đây là thông tin văn hóa, không có cơ sở toán học. Vì sao C sai? C đúng khi nói về điểm chung, nhưng bỏ qua NGUYÊN NHÂN SÂU XA là thiếu trục phân biệt bản chất. Nếu bạn chọn A/B/C, lỗ hổng là dừng lại ở mô tả bề mặt mà không chỉ ra được trục thuộc tính còn thiếu."
+        },
+        { q: "Số chiều cao (High-dimensional space) đem lại lợi thế cốt lõi nào cho AI?",
+          opts: [
+            "Làm file trọng số nặng hơn để chứng tỏ mô hình phức tạp",
+            "Cung cấp nhiều bậc tự do độc lập để hàng triệu ý niệm cùng tồn tại mà không va chạm",
+            "Tự động tăng tốc độ tính toán vì mỗi chiều xử lý song song",
+            "Đảm bảo mô hình không bao giờ bị overfit"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Không gian nhiều chiều cung cấp 'chỗ ở' cho các ý niệm độc lập (đúng như định nghĩa bậc tự do). Vì sao A sai? File lớn là HỆ QUẢ (đôi khi không mong muốn), không phải LỢI THẾ BẢN CHẤT. Vì sao C sai? Số chiều cao KHÔNG tự động tăng tốc — thực tế đôi khi còn chậm hơn vì tính toán nhiều hơn. Vì sao D sai? Chiều cao không đảm bảo chống overfit — vẫn cần regularization và dữ liệu lớn. Nếu bạn chọn A, bạn đang nhầm hệ quả với lợi thế. Nếu chọn C, lỗ hổng là nhầm 'không gian biểu diễn' với 'tốc độ tính toán'. Nếu chọn D, lỗ hổng là tin vào 'silver bullet' — không có thuộc tính nào đảm bảo chống overfit."
+        },
+        { q: "Một không gian có 100 chiều có thể chứa tối đa bao nhiêu trục tọa độ đôi một vuông góc?",
+          opts: [
+            "Đúng 100 trục",
+            "Chỉ 3 trục vì giới hạn vật lý của vũ trụ",
+            "2 trục như mặt phẳng thông thường",
+            "Vô số trục"
+          ],
+          ans: 0,
+          exp: "Đáp án đúng: A — Trong ℝᵈ luôn tồn tại hệ cơ sở trực chuẩn gồm ĐÚNG d vector độc lập tuyến tính. Vì sao B sai? B nhầm với giới hạn 3D vật lý của thế giới thực. Vì sao C sai? C là giới hạn của mặt phẳng 2D — không phải định nghĩa tổng quát. Vì sao D sai? Trong ℝᵈ KHÔNG THỂ có quá d vector đôi một trực giao — đó chính là ĐỊNH NGHĨA của số chiều. Nếu bạn chọn D, lỗ hổng là chưa nắm vững định nghĩa chiều. Nếu chọn B/C, lỗ hổng là bám chấp vào trực giác vật lý."
+        }
       ],
       3: [
-        { q: "Về mặt lập trình máy tính (Python/NumPy), một vector 768 chiều thực chất là gì?", opts: ["Một file ảnh JPEG", "Một mảng 1 chiều chứa 768 số thực: np.array([...])", "Một đoạn văn bản dài 768 từ", "Một con trỏ chuột"], ans: 1, exp: "Chính xác! Máy tính lưu trữ vector dưới dạng mảng số 1 chiều." },
-        { q: "Góc nhìn hình học và góc nhìn đại số của vector có mâu thuẫn nhau không?", opts: ["Có, chúng hoàn toàn trái ngược nhau", "Không, chúng là hai mặt của một đồng xu: Đại số để tính toán, Hình học để tư duy bản chất", "Hình học đúng hơn đại số", "Đại số chỉ dùng cho game"], ans: 1, exp: "Đúng! Đại số cung cấp công cụ tính, hình học đem lại trực giác." },
-        { q: "Thành phần thứ i trong vector v (ký hiệu v_i) đại diện cho điều gì?", opts: ["Tọa độ của vector trên trục thứ i", "Màu sắc của vector", "Tên của tác giả mô hình", "Số thứ tự dòng lệnh"], ans: 0, exp: "Chính xác! v_i là giá trị thành phần trên trục chiều tương ứng." },
-        { q: "Vector từ ngữ 'Mèo' và 'Hổ' có điểm gì giống nhau trên mảng số?", opts: ["Hoàn toàn giống nhau từng chữ số", "Các chiều mô tả đặc tính thú có lông, móng vuốt ăn thịt đều mang giá trị dương cao", "Các số đều bằng 0", "Không có bất kỳ điểm tương đồng nào"], ans: 1, exp: "Đúng! Cùng họ loài nên các đặc trưng sinh học chia sẻ các giá trị tọa độ gần nhau." },
-        { q: "Sinh viên năm nhất nên tư duy thế nào về vector 768 chiều để không bị quá tải?", opts: ["Cố gắng tưởng tượng ra 768 bức tường", "Coi nó là một mảng danh sách số và áp dụng các định lý hình học quen thuộc", "Bỏ qua không học phần này", "Quy đổi tất cả về số nguyên"], ans: 1, exp: "Chính xác! Giữ tư duy mảng số và các quy tắc hình học cơ bản." }
+        { q: "Về mặt lập trình máy tính (Python/NumPy), một vector 768 chiều thực chất là gì?",
+          opts: [
+            "Một file ảnh JPEG có kích thước 768 pixel",
+            "Một chuỗi ký tự dài 768 chữ cái",
+            "Một ma trận 2 chiều kích thước 768×768",
+            "Một mảng một chiều chứa 768 số thực: np.array([...])"
+          ],
+          ans: 3,
+          exp: "Đáp án đúng: D — Vector = mảng 1 CHIỀU gồm d phần tử số. Vì sao A sai? Lẫn vector với ảnh — ảnh cần thêm 2 chiều không gian (cao × rộng). Vì sao B sai? Chuỗi ký tự là kiểu dữ liệu text, không phải vector số. Vì sao C sai? Ma trận là mảng 2 CHIỀU — còn vector chỉ là mảng 1 chiều. Đây là lỗi nhầm lẫn giữa 'tensor hạng 1' và 'tensor hạng 2'. Nếu bạn chọn C, lỗ hổng là chưa phân biệt 'vector' với 'ma trận'. Nếu chọn A/B, lỗ hổng là lẫn 'biểu diễn số' với 'định dạng tệp'."
+        },
+        { q: "Góc nhìn hình học và góc nhìn đại số của vector có mâu thuẫn nhau không?",
+          opts: [
+            "Có, hình học đúng hơn vì trực quan hơn",
+            "Không, chúng là hai mặt của cùng một đối tượng: đại số để tính toán, hình học để tư duy bản chất",
+            "Có, đại số đúng hơn vì chính xác hơn về mặt số học",
+            "Không, vì hình học chỉ là minh họa cho vui"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Hai góc nhìn BỔ SUNG cho nhau (đẳng cấu). Vì sao A sai? A đặt hình học lên trên đại số — sai lệch bản chất toán học. Vì sao C sai? C đặt đại số lên trên hình học — cũng sai lệch tương tự. Vì sao D sai? D xem nhẹ vai trò trực giác hình học — đây là lỗ hổng tư duy khi học hình học cao chiều, vì bạn sẽ không có 'la bàn' để suy luận. Nếu bạn chọn A hoặc C, lỗ hổng là tư duy nhị nguyên 'cái này đúng hơn cái kia'. Nếu chọn D, lỗ hổng là coi thường trực giác."
+        },
+        { q: "Thành phần thứ i trong vector v (ký hiệu v_i) đại diện cho điều gì?",
+          opts: [
+            "Màu sắc riêng của vector khi hiển thị trên màn hình",
+            "Số thứ tự định danh (ID) của vector trong danh sách",
+            "Tọa độ của vector trên trục chiều thứ i",
+            "Xác suất vector xuất hiện trong tập dữ liệu huấn luyện"
+          ],
+          ans: 2,
+          exp: "Đáp án đúng: C — v_i là giá trị tọa độ trên trục i. Vì sao A sai? Nhầm với mặt hiển thị (chiều không có màu). Vì sao B sai? Index chỉ là VỊ TRÍ trong mảng, không phải TỌA ĐỘ hình học. Vì sao D sai? Xác suất không liên quan định nghĩa tọa độ. Nếu bạn chọn A, lỗ hổng là nhầm biểu diễn trực quan với giá trị toán học. Nếu chọn B, lỗ hổng là chưa phân biệt 'index' và 'component value'. Nếu chọn D, lỗ hổng là lẫn khái niệm xác suất với tọa độ."
+        },
+        { q: "Vector từ ngữ 'Mèo' và 'Hổ' có điểm gì giống nhau trên mảng số?",
+          opts: [
+            "Các chiều mô tả đặc tính thú có lông, móng vuốt ăn thịt đều mang giá trị dương cao",
+            "Cả hai đều có độ dài vector bằng đúng 1.0 sau chuẩn hóa",
+            "Cả hai đều có tất cả các phần tử bằng 0",
+            "Không có bất kỳ điểm tương đồng nào vì chúng là hai loài khác nhau"
+          ],
+          ans: 0,
+          exp: "Đáp án đúng: A — Cùng họ mèo lớn nên chia sẻ nhiều đặc trưng sinh học. Vì sao B sai? Chuẩn hóa KHÔNG làm cho hai từ khác nhau có cùng độ dài — nó chỉ ÉP độ dài về 1, còn HƯỚNG vẫn khác. Vì sao C sai? Vector 0 không mang thông tin gì. Vì sao D sai? Phủ nhận sai lầm — thực tế chúng chia sẻ nhiều đặc tính. Nếu bạn chọn B, lỗ hổng là nhầm 'cùng độ dài sau chuẩn hóa' với 'cùng nội dung'. Nếu chọn C, lỗ hổng là hiểu sai về vector 0. Nếu chọn D, lỗ hổng là bỏ qua cấu trúc chia sẻ đặc trưng."
+        },
+        { q: "Sinh viên năm nhất nên tư duy thế nào về vector 768 chiều để không bị quá tải?",
+          opts: [
+            "Cố gắng tưởng tượng ra 768 bức tường vuông góc trong đầu",
+            "Vẽ 768 trục tọa độ trên giấy kẻ ô để hình dung",
+            "Bỏ qua không học phần này vì quá khó với người mới",
+            "Coi nó là mảng danh sách số và áp dụng các định lý hình học quen thuộc"
+          ],
+          ans: 3,
+          exp: "Đáp án đúng: D — Chuyển từ tư duy hình ảnh sang tư duy đại số mảng. Vì sao A, B sai? Cố hình dung bằng mắt là BẤT KHẢ THI về mặt sinh học. Vì sao C sai? Né tránh chứ không phải giải pháp — bạn sẽ mất nền tảng cho các phần sau. Nếu bạn chọn A/B, lỗ hổng là chưa thoát khỏi tư duy vật lý. Nếu chọn C, lỗ hổng là tâm lý né tránh khó khăn — rất nguy hiểm cho lộ trình học AI."
+        }
       ],
       4: [
-        { q: "Công thức tính chuẩn Euclid (L2 norm) của vector v = [v1, v2, ..., vd] là gì?", opts: ["Tổng các giá trị tuyệt đối |vi|", "Căn bậc hai của tổng các bình phương: √(v1² + v2² + ... + vd²)", "Số lớn nhất trong các số vi", "v1 nhân v2 nhân vd"], ans: 1, exp: "Chính xác! Đây là sự mở rộng trực tiếp của định lý Pythagoras." },
-        { q: "Chuẩn L1 (Manhattan) đo khoảng cách theo cách nào?", opts: ["Đường chim bay xuyên thẳng", "Đường đi ô bàn cờ vuông góc zíc zắc: Σ |vi|", "Đường vòng tròn", "Đường xoắn ốc"], ans: 1, exp: "Đúng! L1 đo theo kiểu taxi chạy qua các khối phố Manhattan." },
-        { q: "Một vector trong không gian 3 chiều có tọa độ (1, 2, 2). Chuẩn L2 của nó bằng bao nhiêu?", opts: ["√(1 + 4 + 4) = √9 = 3.0", "1 + 2 + 2 = 5.0", "9.0", "1.0"], ans: 0, exp: "Chính xác! ||v||_2 = √(1² + 2² + 2²) = 3." },
-        { q: "Ký hiệu ||v||_2 đại diện cho đại lượng hình học nào của vector?", opts: ["Góc xoay của vector", "Độ dài thẳng (Magnitude) từ gốc tọa độ đến điểm đầu mút", "Số chiều của không gian", "Màu sắc của mũi tên"], ans: 1, exp: "Đúng! Đó là độ dài thước kẻ thẳng của mũi tên." },
-        { q: "Tại sao chuẩn L2 được dùng làm chuẩn mặc định trong CLIP?", opts: ["Vì nó dễ tính nhẩm hơn L1", "Vì nó gắn liền với khoảng cách góc và bất biến dưới các phép xoay hệ trục", "Vì L2 là số nguyên", "Do quy định của hiệp hội toán học"], ans: 1, exp: "Chính xác! Chuẩn L2 giữ tính bất biến quay trực giao." }
+        { q: "Công thức tính chuẩn Euclid (L2 norm) của vector v = [v1, v2, ..., vd] là gì?",
+          opts: [
+            "Tổng các giá trị tuyệt đối: Σ |vi|",
+            "Căn bậc hai của tổng các bình phương: √(v1² + v2² + ... + vd²)",
+            "Giá trị lớn nhất trong các phần tử: max(|vi|)",
+            "Tích của tất cả các phần tử: v1 × v2 × ... × vd"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Mở rộng trực tiếp của định lý Pythagoras. Vì sao A sai? A là chuẩn L1 (Manhattan), không phải L2. Vì sao C sai? C là chuẩn L∞ (Chebyshev). Vì sao D sai? Tích các phần tử không có ý nghĩa hình học độ dài — đây là lỗi nhầm 'phép toán đại số tùy ý' với 'định nghĩa hình học'. Nếu bạn chọn A, lỗ hổng là nhầm L1 với L2. Nếu chọn C, lỗ hổng là nhầm L∞ với L2. Nếu chọn D, lỗ hổng là chưa hiểu vì sao người ta chọn 'tổng bình phương' mà không phải phép toán khác."
+        },
+        { q: "Chuẩn L1 (Manhattan) đo khoảng cách theo cách nào?",
+          opts: [
+            "Đường chim bay xuyên thẳng qua không gian",
+            "Đường vòng tròn trên mặt cầu đơn vị",
+            "Bình phương của khoảng cách Euclid",
+            "Tổng các giá trị tuyệt đối của các thành phần: Σ |vi|"
+          ],
+          ans: 3,
+          exp: "Đáp án đúng: D — L1 = tổng quãng đường zíc zắc theo các trục (như taxi qua các khối phố). Vì sao A sai? A là chuẩn L2. Vì sao B sai? Đó là khoảng cách cung tròn (geodesic) trên mặt cầu — không liên quan L1. Vì sao C sai? Bình phương khoảng cách chỉ dùng trong một số bài toán tối ưu, không phải chuẩn L1. Nếu bạn chọn A, lỗ hổng là nhầm L2 với L1. Nếu chọn B, lỗ hổng là nhầm với hình học Riemann. Nếu chọn C, lỗ hổng là lẫn 'bình phương khoảng cách' với 'chuẩn L1'."
+        },
+        { q: "Một vector trong không gian 3 chiều có tọa độ (1, 2, 2). Chuẩn L2 của nó bằng bao nhiêu?",
+          opts: [
+            "3.0",
+            "5.0",
+            "9.0",
+            "1.0"
+          ],
+          ans: 0,
+          exp: "Đáp án đúng: A — ||v||₂ = √(1² + 2² + 2²) = √9 = 3. Vì sao B sai? B là chuẩn L1 (1+2+2=5) — nhầm công thức. Vì sao C sai? C là tổng bình phương (chưa lấy căn) — lỗi quên bước cuối. Vì sao D sai? Bạn nhầm với vector đã chuẩn hóa — nhưng (1,2,2) có độ dài 3, không phải 1. Nếu bạn chọn B, lỗ hổng là chưa phân biệt L1/L2. Nếu chọn C, lỗ hổng là quy trình tính toán (bỏ sót bước căn). Nếu chọn D, lỗ hổng là nhầm 'độ dài' với 'chuẩn hóa'."
+        },
+        { q: "Ký hiệu ||v||₂ đại diện cho đại lượng hình học nào của vector?",
+          opts: [
+            "Góc xoay của vector so với trục hoành",
+            "Số chiều của không gian chứa vector",
+            "Độ dài thẳng (Magnitude) từ gốc tọa độ đến đầu mút vector",
+            "Diện tích hình chiếu của vector lên mặt phẳng cơ sở"
+          ],
+          ans: 2,
+          exp: "Đáp án đúng: C — ||v||₂ là độ dài Euclid. Vì sao A sai? Góc θ là đại lượng khác (đo bằng cos). Vì sao B sai? Số chiều là d — không phải độ dài. Vì sao D sai? Độ dài không đo diện tích — lỗi lẫn đại lượng hình học. Nếu bạn chọn A, lỗ hổng là nhầm norm với góc. Nếu chọn B, lỗ hổng là nhầm thuộc tính không gian với thuộc tính vector. Nếu chọn D, lỗ hổng là nhầm 'độ dài' với 'diện tích'."
+        },
+        { q: "Tại sao chuẩn L2 được dùng làm chuẩn mặc định trong CLIP?",
+          opts: [
+            "Vì L2 dễ tính nhẩm hơn L1 trong đầu",
+            "Vì L2 gắn liền với khoảng cách góc và bất biến dưới phép xoay hệ trục tọa độ",
+            "Vì L2 luôn cho kết quả là số nguyên",
+            "Vì L1 không thể tính được trên GPU"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Tính BẤT BIẾN QUAY của L2 phù hợp với hình học Cosine. Vì sao A sai? Cả L1 và L2 đều dễ tính. Vì sao C sai? L2 hầu như luôn cho số vô tỉ (√ của tổng bình phương). Vì sao D sai? L1 hoàn toàn tính được trên GPU, chỉ kém phù hợp cho chuẩn hóa góc. Nếu bạn chọn A, lỗ hổng là lý luận theo cảm tính. Nếu chọn C, lỗ hổng là hiểu sai kết quả số học của L2. Nếu chọn D, lỗ hổng là nhầm 'không phù hợp' với 'không thể tính'."
+        }
       ],
       5: [
-        { q: "Tại sao thước đo khoảng cách Euclid thất bại khi so sánh độ tương đồng ngữ nghĩa?", opts: ["Vì thước Euclid chạy quá chậm", "Vì độ dài câu văn (nhiều từ hoa mỹ) làm độ lớn vector phình to, khiến khoảng cách thẳng bị sai lệch", "Vì thước Euclid chỉ đo được số âm", "Vì ngôn ngữ không có số"], ans: 1, exp: "Chính xác! Câu dài tích lũy nhiều từ làm vector bị kéo dài ra xa gốc, dù nghĩa giống nhau." },
-        { q: "Câu 'Con chó' và câu 'Một chú chó con lông vàng tuyệt đẹp đang đùa nghịch' có nghĩa gần nhau nhưng khoảng cách Euclid giữa chúng lại:", opts: ["Bằng đúng số 0", "Rất lớn do vector câu dài có độ lớn vượt trội", "Luôn là số âm", "Không tính toán được"], ans: 1, exp: "Đúng! Độ dài vector chênh lệch khiến khoảng cách thẳng Euclid tăng vọt." },
-        { q: "Trong ngữ nghĩa ngôn ngữ tự nhiên, độ dài vector phản ánh điều gì là chủ yếu?", opts: ["Bản chất cốt lõi của chủ đề", "Mức độ lặp từ, số lượng từ ngữ hoặc tần suất xuất hiện", "Chất lượng ngữ pháp", "Độ phân giải của màn hình"], ans: 1, exp: "Chính xác! Độ dài là quy mô hình thức bên ngoài, không phải bản chất chủ đề." },
-        { q: "Nếu dùng thước đo Euclid, câu 'Con chó' lại bị chấm điểm gần với câu 'Khối sắt vụn' hơn là câu 'Chú chó đáng yêu'. Đây gọi là:", opts: ["Cạm bẫy của thước kẻ thẳng (Magnitude Bias)", "Ưu điểm của trí tuệ nhân tạo", "Hiện tượng học chuyển giao", "Lỗi phần cứng máy tính"], ans: 0, exp: "Đúng! Thiên kiến độ lớn làm sai lệch bản chất tương đồng." },
-        { q: "Để giải quyết cạm bẫy thước kẻ Euclid, ta cần làm gì?", opts: ["Xóa bỏ bớt các từ ngữ trong từ điển", "Triệt tiêu độ dài vector và chuyển sang đo góc lệch hướng (Cosine)", "Chỉ dùng câu có đúng 3 từ", "Đổi sang dùng hệ số thập lục phân"], ans: 1, exp: "Chính xác! Bỏ độ dài, chỉ đo góc." }
+        { q: "Tại sao thước đo khoảng cách Euclid thất bại khi so sánh độ tương đồng ngữ nghĩa?",
+          opts: [
+            "Vì thước Euclid chạy quá chậm so với Cosine",
+            "Vì Euclid chỉ đo được khoảng cách giữa hai điểm, không đo được giữa hai vector",
+            "Vì độ dài câu văn (nhiều từ hoa mỹ) làm độ lớn vector phình to, khiến khoảng cách thẳng bị sai lệch dù cùng chủ đề",
+            "Vì Euclid không xử lý được số âm trong tọa độ vector"
+          ],
+          ans: 2,
+          exp: "Đáp án đúng: C — Thiên kiến độ lớn (Magnitude Bias) làm sai lệch kết quả. Vì sao A sai? Tốc độ không phải vấn đề bản chất — Euclid cũng rất nhanh. Vì sao B sai? Khoảng cách giữa hai vector CHÍNH LÀ khoảng cách giữa hai đầu mút — định nghĩa hợp lệ. Vì sao D sai? Euclid bình phương nên luôn xử lý được số âm. Nếu bạn chọn A, lỗ hổng là lý luận theo cảm tính 'cái gì đó nhanh/chậm'. Nếu chọn B, lỗ hổng là hiểu sai định nghĩa khoảng cách. Nếu chọn D, lỗ hổng là lẫn phép bình phương với phép khai căn."
+        },
+        { q: "Câu 'Con chó' và câu 'Một chú chó con lông vàng tuyệt đẹp đang đùa nghịch' có nghĩa gần nhau nhưng khoảng cách Euclid giữa chúng lại:",
+          opts: [
+            "Rất lớn do vector câu dài có độ lớn vượt trội",
+            "Bằng đúng 0 vì cùng nói về chó",
+            "Luôn là số âm",
+            "Nhỏ hơn khoảng cách giữa 'Con chó' và 'Khối sắt'"
+          ],
+          ans: 0,
+          exp: "Đáp án đúng: A — Câu dài tích lũy nhiều từ làm vector kéo dài, khoảng cách thẳng tăng vọt. Vì sao B sai? Chỉ khi hai vector TRÙNG KHÍT mới có khoảng cách 0 — ở đây khác độ dài. Vì sao C sai? Khoảng cách là đại lượng KHÔNG ÂM. Vì sao D sai? Đây chính là NGHỊCH LÝ mà chương này vạch ra — chọn D nghĩa là bạn chưa hiểu vấn đề. Nếu bạn chọn B, lỗ hổng là nhầm 'cùng chủ đề' với 'cùng tọa độ'. Nếu chọn C, lỗ hổng là lẫn khoảng cách với số có dấu. Nếu chọn D, lỗ hổng là không nhận ra được cạm bẫy."
+        },
+        { q: "Trong ngữ nghĩa ngôn ngữ tự nhiên, độ dài vector phản ánh điều gì là chủ yếu?",
+          opts: [
+            "Bản chất cốt lõi của chủ đề được nói tới",
+            "Mức độ lặp từ, số lượng từ ngữ hoặc tần suất xuất hiện của đặc trưng",
+            "Chất lượng ngữ pháp của câu văn",
+            "Mức độ cảm xúc tích cực của câu văn"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Độ dài đo 'quy mô hình thức' — càng nhiều từ thì vector càng dài. Vì sao A sai? Bản chất chủ đề nằm ở HƯỚNG, không phải độ dài. Vì sao C sai? Ngữ pháp đúng/sai không làm vector dài thêm. Vì sao D sai? Cảm xúc ảnh hưởng HƯỚNG, không chủ yếu ảnh hưởng độ dài. Nếu bạn chọn A, lỗ hổng là lẫn 'hướng' với 'độ dài'. Nếu chọn C/D, lỗ hổng là lẫn các thuộc tính ngôn ngữ học với cấu trúc đại số của vector."
+        },
+        { q: "Nếu dùng thước đo Euclid, câu 'Con chó' lại bị chấm điểm gần với câu 'Khối sắt vụn' hơn là câu 'Chú chó đáng yêu'. Đây gọi là:",
+          opts: [
+            "Hiện tượng học chuyển giao (Transfer Learning)",
+            "Ưu điểm vượt trội của trí tuệ nhân tạo",
+            "Lỗi tràn số trong tính toán dấu phẩy động",
+            "Cạm bẫy thiên kiến độ lớn (Magnitude Bias)"
+          ],
+          ans: 3,
+          exp: "Đáp án đúng: D — Độ dài chênh lệch khiến Euclid đánh lừa. Vì sao A sai? Transfer learning là khái niệm khác hoàn toàn. Vì sao B sai? Đây là HẠN CHẾ chứ không phải ưu điểm. Vì sao C sai? Đây là vấn đề LÝ THUYẾT, không phải lỗi số học — nhầm 'sai lệch mô hình' với 'sai lệch tính toán'. Nếu bạn chọn A, lỗ hổng là lẫn khái niệm ML. Nếu chọn C, lỗ hổng là lẫn tầng lý thuyết với tầng triển khai."
+        },
+        { q: "Để giải quyết cạm bẫy thước kẻ Euclid, ta cần làm gì?",
+          opts: [
+            "Xóa bỏ bớt các từ ngữ trong từ điển cho ngắn gọn",
+            "Chỉ dùng câu có đúng 3 từ để đồng nhất độ dài",
+            "Triệt tiêu độ dài vector và chuyển sang đo góc lệch hướng (Cosine)",
+            "Nhân đôi tất cả các vector để đồng nhất độ dài"
+          ],
+          ans: 2,
+          exp: "Đáp án đúng: C — Chuẩn hóa và đo góc là giải pháp chuẩn. Vì sao A, B sai? Đây là giải pháp cực đoan làm MẤT THÔNG TIN (ngữ nghĩa cần đủ từ ngữ để diễn đạt). Vì sao D sai? Nhân đôi chỉ đồng nhất nếu MỌI vector có cùng độ dài gốc — thực tế không như vậy. Nếu bạn chọn A/B, lỗ hổng là tìm cách 'thay đổi dữ liệu' thay vì 'đổi thước đo'. Nếu chọn D, lỗ hổng là chưa hiểu chuẩn hóa phải CHIA cho độ dài riêng của từng vector."
+        }
       ],
       6: [
-        { q: "Bất kỳ vector v nào cũng có thể phân tích thành tích của hai thành phần nào?", opts: ["Chu vi và diện tích", "Độ lớn ||v|| (Magnitude) nhân với Vector đơn vị chỉ hướng v̂ (Direction)", "Tọa độ X nhân tọa độ Y", "Phần thực và phần ảo"], ans: 1, exp: "Chính xác! v = ||v|| * v̂." },
-        { q: "Vector đơn vị chỉ hướng v̂ = v / ||v|| luôn có độ dài bằng bao nhiêu?", opts: ["Bằng 0.0", "Bằng đúng 1.0", "Bằng số chiều d", "Tùy thuộc vào câu nói dài hay ngắn"], ans: 1, exp: "Đúng! ||v̂|| luôn luôn bằng 1.0." },
-        { q: "Thành phần nào chứa đựng 'linh hồn ngữ nghĩa' của một khái niệm?", opts: ["Độ lớn ||v||", "Hướng chỉ của vector đơn vị v̂", "Dung lượng bộ nhớ RAM", "Số lượng ký tự trong từ"], ans: 1, exp: "Chính xác! Hướng mũi tên chỉ định chủ đề và thuộc tính khái niệm." },
-        { q: "Khi ta kéo dài một vector ra gấp 10 lần nhưng giữ nguyên hướng, vector đơn vị v̂ thay đổi thế nào?", opts: ["Tăng lên gấp 10 lần", "Hoàn toàn không thay đổi", "Bị quay góc 90 độ", "Biến thành số 0"], ans: 1, exp: "Đúng! Hướng đi không đổi thì v̂ giữ nguyên giá trị." },
-        { q: "Hình ảnh ẩn dụ 'Ngọn hải đăng quét ánh sáng' trong bài học minh họa cho điều gì?", opts: ["Cần tiết kiệm điện khi chạy AI", "Dù công suất đèn lớn hay nhỏ, hướng quét tia sáng mới định vị được bến cảng", "Màu sắc của ánh sáng quyết định độ dài", "Biển đêm rất tối"], ans: 1, exp: "Chính xác! Hướng tia sáng chính là ý niệm." }
+        { q: "Bất kỳ vector v nào cũng có thể phân tích thành tích của hai thành phần nào?",
+          opts: [
+            "Độ lớn ||v|| nhân với Vector đơn vị chỉ hướng v̂",
+            "Tọa độ X nhân tọa độ Y",
+            "Phần thực cộng phần ảo",
+            "Chu vi nhân diện tích hình bao"
+          ],
+          ans: 0,
+          exp: "Đáp án đúng: A — v = ||v|| · v̂ là phân tích chính tắc. Vì sao B sai? Tọa độ X và Y là hai thành phần ĐỘC LẬP, không phải tích. Vì sao C sai? Đây là số phức, không áp dụng cho vector thực. Vì sao D sai? Chu vi và diện tích không phải thành phần vector. Nếu bạn chọn B, lỗ hổng là nhầm 'thành phần độc lập' với 'phân tích nhân tử'. Nếu chọn C/D, lỗ hổng là lẫn khái niệm từ lĩnh vực khác."
+        },
+        { q: "Vector đơn vị chỉ hướng v̂ = v / ||v|| luôn có độ dài bằng bao nhiêu?",
+          opts: [
+            "Bằng số chiều d của không gian",
+            "Bằng 0.0",
+            "Bằng đúng 1.0",
+            "Tùy thuộc vào câu nói dài hay ngắn"
+          ],
+          ans: 2,
+          exp: "Đáp án đúng: C — Định nghĩa chuẩn hóa cho ||v̂|| = 1. Vì sao A sai? Số chiều d không liên quan. Vì sao B sai? Chỉ vector 0 mới có độ dài 0 — nhưng vector 0 không thể chuẩn hóa. Vì sao D sai? Chuẩn hóa đã TRIỆT TIÊU ảnh hưởng của độ dài gốc. Nếu bạn chọn D, lỗ hổng là chưa hiểu bản chất phép chia chuẩn hóa. Nếu chọn B, lỗ hổng là hiểu sai về vector 0."
+        },
+        { q: "Thành phần nào chứa đựng 'linh hồn ngữ nghĩa' của một khái niệm?",
+          opts: [
+            "Độ lớn ||v||",
+            "Hướng chỉ của vector đơn vị v̂",
+            "Số chiều của không gian biểu diễn",
+            "Số lượng ký tự trong từ tương ứng"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Hướng mũi tên quyết định chủ đề; độ dài chỉ là quy mô. Vì sao A sai? Độ dài bị ảnh hưởng bởi số từ. Vì sao C sai? Số chiều là thuộc tính không gian, không phải nội dung ngữ nghĩa. Vì sao D sai? Độ dài từ ảnh hưởng đến ĐỘ DÀI vector, không phải HƯỚNG. Nếu bạn chọn A, lỗ hổng là nhầm 'quy mô' với 'bản chất'. Nếu chọn C/D, lỗ hổng là lẫn các chiều khác của biểu diễn."
+        },
+        { q: "Khi ta kéo dài một vector ra gấp 10 lần nhưng giữ nguyên hướng, vector đơn vị v̂ thay đổi thế nào?",
+          opts: [
+            "Tăng lên gấp 10 lần",
+            "Bị quay một góc 90°",
+            "Biến thành vector 0",
+            "Hoàn toàn không thay đổi"
+          ],
+          ans: 3,
+          exp: "Đáp án đúng: D — v̂ chỉ phụ thuộc HƯỚNG, không phụ thuộc độ lớn. Vì sao A sai? Nhầm v̂ với v. Vì sao B sai? Kéo dài không làm quay — chỉ phép nhân với số DƯƠNG mới giữ nguyên hướng. Vì sao C sai? Chỉ khi độ dài gốc bằng 0 mới có vấn đề — nhưng ta nhân với 10. Nếu bạn chọn A, lỗ hổng là lẫn v với v̂. Nếu chọn B, lỗ hổng là lẫn 'co giãn' với 'quay'. Nếu chọn C, lỗ hổng là hiểu sai điều kiện biên."
+        },
+        { q: "Hình ảnh ẩn dụ 'Ngọn hải đăng quét ánh sáng' trong bài học minh họa cho điều gì?",
+          opts: [
+            "Dù công suất đèn lớn hay nhỏ, hướng quét tia sáng mới định vị được bến cảng",
+            "Cần tiết kiệm điện khi chạy mô hình AI vào ban đêm",
+            "Ánh sáng màu vàng tốt hơn ánh sáng trắng cho việc định vị",
+            "Biển đêm luôn tăm tối và nguy hiểm cho tàu thuyền"
+          ],
+          ans: 0,
+          exp: "Đáp án đúng: A — Hướng tia sáng = hướng vector = bản chất ý niệm. Vì sao B sai? Tiết kiệm điện không phải ẩn dụ. Vì sao C sai? Màu sắc không liên quan. Vì sao D sai? Đây là mô tả bối cảnh, không phải thông điệp toán học. Nếu bạn chọn B/C/D, lỗ hổng là nhầm ẩn dụ sư phạm với chi tiết bối cảnh — cần đọc ẩn dụ để trích ra nguyên lý toán học, không phải ghi nhớ chi tiết."
+        }
       ],
       7: [
-        { q: "Bản chất hình học trực quan của tích vô hướng u · v là gì?", opts: ["Diện tích hình chữ nhật tạo bởi hai vector", "Độ dài vector u nhân với độ dài chiếc bóng hình chiếu của v đổ lên u", "Tổng số ký tự của hai từ", "Phép chia ma trận"], ans: 1, exp: "Chính xác! Tích vô hướng đo mức độ cùng hướng thông qua hình chiếu." },
-        { q: "Nếu hai vector vuông góc 90 độ với nhau, tích vô hướng u · v bằng bao nhiêu?", opts: ["Bằng 1.0", "Bằng đúng 0", "Bằng vô cùng", "Bằng -1.0"], ans: 1, exp: "Đúng! Bóng chiếu vuông góc co lại thành 1 điểm nên u · v = 0." },
-        { q: "Công thức tính tích vô hướng theo tọa độ trong máy tính là gì?", opts: ["u1/v1 + u2/v2 + ...", "u1*v1 + u2*v2 + ... + ud*vd (Tổng các tích thành phần tương ứng)", "√(u1*v1)", "u1 - v1"], ans: 1, exp: "Chính xác! u · v = Σ ui * vi." },
-        { q: "Khi vector v ngả rạp trùng khít cùng chiều với u (góc 0 độ), chiếc bóng của v sẽ:", opts: ["Bằng 0", "Đạt độ dài tối đa bằng đúng ||v||", "Mang giá trị âm", "Biến mất"], ans: 1, exp: "Đúng! cos(0°) = 1, bóng dài trọn vẹn thân vector." },
-        { q: "Nếu chiếc bóng của v đổ ngược chiều lại so với vector u, tích vô hướng sẽ mang dấu gì?", opts: ["Dấu âm (-)", "Dấu dương (+)", "Bằng 0", "Không xác định"], ans: 0, exp: "Chính xác! Khi góc tù > 90°, cos(θ) < 0 nên tích vô hướng âm." }
+        { q: "Bản chất hình học trực quan của tích vô hướng u · v là gì?",
+          opts: [
+            "Diện tích hình chữ nhật tạo bởi hai vector",
+            "Khoảng cách ngắn nhất giữa hai đầu mũi tên",
+            "Góc kẹp giữa hai vector",
+            "Độ dài vector u nhân với độ dài chiếc bóng hình chiếu của v đổ lên u"
+          ],
+          ans: 3,
+          exp: "Đáp án đúng: D — Tích vô hướng = ||u|| × (hình chiếu của v lên u). Vì sao A sai? Diện tích là TÍCH CÓ HƯỚNG (cross product), không phải vô hướng. Vì sao B sai? Đó là khoảng cách Euclid. Vì sao C sai? Góc là θ — còn tích vô hướng là ||u|| ||v|| cos(θ), một SỐ VÔ HƯỚNG. Nếu bạn chọn A, lỗ hổng là lẫn dot với cross product. Nếu chọn C, lỗ hổng là nhầm đại lượng vô hướng với đại lượng góc."
+        },
+        { q: "Nếu hai vector vuông góc 90° với nhau, tích vô hướng u · v bằng bao nhiêu?",
+          opts: [
+            "Bằng 1.0",
+            "Bằng đúng 0",
+            "Bằng -1.0",
+            "Bằng vô cùng"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — cos(90°) = 0 nên u · v = 0. Vì sao A sai? A là trường hợp CÙNG HƯỚNG (0°). Vì sao C sai? C là trường hợp NGƯỢC HƯỚNG (180°). Vì sao D sai? Tích vô hướng của hai vector hữu hạn luôn HỮU HẠN — nhầm với phép chia cho 0. Nếu bạn chọn A/C, lỗ hổng là nhầm các mốc góc đặc biệt. Nếu chọn D, lỗ hổng là lẫn cấu trúc đại số."
+        },
+        { q: "Công thức tính tích vô hướng theo tọa độ trong máy tính là gì?",
+          opts: [
+            "u1·v1 + u2·v2 + ... + ud·vd (tổng các tích thành phần tương ứng)",
+            "u1/v1 + u2/v2 + ... + ud/vd",
+            "√(u1·v1) + √(u2·v2) + ... + √(ud·vd)",
+            "u1 - v1 + u2 - v2 + ... + ud - vd"
+          ],
+          ans: 0,
+          exp: "Đáp án đúng: A — u · v = Σ ui·vi. Vì sao B sai? Phép CHIA không có trong tích vô hướng. Vì sao C sai? Căn bậc hai từng tích không đúng định nghĩa. Vì sao D sai? Đây là tổng HIỆU, không phải tích. Nếu bạn chọn B, lỗ hổng là lẫn phép toán. Nếu chọn C, lỗ hổng là thêm phép biến đổi không có cơ sở. Nếu chọn D, lỗ hổng là nhầm phép trừ với phép nhân."
+        },
+        { q: "Khi vector v ngả rạp trùng khít cùng chiều với u (góc 0°), chiếc bóng của v sẽ:",
+          opts: [
+            "Bằng 0",
+            "Mang giá trị âm",
+            "Đạt độ dài tối đa bằng đúng ||v||",
+            "Biến mất hoàn toàn khỏi trục u"
+          ],
+          ans: 2,
+          exp: "Đáp án đúng: C — cos(0°) = 1 → hình chiếu = ||v|| × 1 = ||v||. Vì sao A sai? Đó là khi góc 90°. Vì sao B sai? Âm khi góc tù (>90°). Vì sao D sai? Cũng là trường hợp 90° — nhầm 0° với 90°. Nếu bạn chọn A hoặc D, lỗ hổng là nhầm 0° với 90°. Nếu chọn B, lỗ hổng là nhầm 0° với góc tù."
+        },
+        { q: "Nếu chiếc bóng của v đổ ngược chiều lại so với vector u, tích vô hướng sẽ mang dấu gì?",
+          opts: [
+            "Dấu dương (+)",
+            "Bằng 0",
+            "Không xác định",
+            "Dấu âm (-)"
+          ],
+          ans: 3,
+          exp: "Đáp án đúng: D — Góc tù (90° < θ ≤ 180°) → cos(θ) < 0. Vì sao A sai? A là góc nhọn (<90°). Vì sao B sai? B là 90° — bóng co thành điểm. Vì sao C sai? Tích vô hướng LUÔN xác định với mọi cặp vector hữu hạn. Nếu bạn chọn A, lỗ hổng là nhầm khoảng góc. Nếu chọn C, lỗ hổng là ngộ nhận về tính bất định."
+        }
       ],
       8: [
-        { q: "Công thức độ tương đồng Cosine thu được bằng cách nào từ tích vô hướng?", opts: ["Cộng thêm 1 vào hai vế", "Lấy tích vô hướng chia cho tích độ dài của hai vector: (u · v) / (||u|| ||v||)", "Nhân hai vế với số 0", "Lấy căn bậc hai"], ans: 1, exp: "Chính xác! cos(θ) = (u · v) / (||u|| ||v||)." },
-        { q: "Giá trị của độ tương đồng Cosine luôn bị chặn trong khoảng nào?", opts: ["Từ 0 đến vô cùng", "Từ -1.0 đến +1.0", "Từ 0 đến 100", "Bất kỳ số thực nào"], ans: 1, exp: "Đúng! Hàm Cosine luôn nằm trong [-1, +1]." },
-        { q: "Tại sao việc giá trị bị chặn trong [-1, +1] lại là ưu điểm vượt trội cho AI?", opts: ["Giúp thang đo luôn ổn định, chuẩn mực và không bị bùng nổ số học", "Để máy tính không cần dùng số thập phân", "Vì các nhà khoa học thích số 1", "Giúp tiết kiệm ổ cứng"], ans: 0, exp: "Chính xác! Thang đo chuẩn hóa ngăn chặn bùng nổ số học." },
-        { q: "Nếu hai vector có Cosine = +1.0, góc kẹp giữa chúng bằng bao nhiêu độ?", opts: ["90 độ", "0 độ (Trùng hướng hoàn toàn)", "180 độ", "45 độ"], ans: 1, exp: "Đúng! cos(0°) = 1." },
-        { q: "Hai câu văn có độ dài gấp 100 lần nhau nhưng cùng nói về một ý niệm sẽ có Cosine bằng bao nhiêu?", opts: ["Xấp xỉ 0", "Xấp xỉ +1.0 (Vì mẫu số đã chia triệt tiêu hoàn toàn sự chênh lệch độ dài)", "Bằng -1.0", "Bằng 100"], ans: 1, exp: "Chính xác! Cosine hoàn toàn bất biến trước độ dài văn bản." }
+        { q: "Công thức độ tương đồng Cosine thu được bằng cách nào từ tích vô hướng?",
+          opts: [
+            "Cộng thêm 1 vào hai vế của tích vô hướng",
+            "Lấy tích vô hướng chia cho tích độ dài hai vector: (u · v) / (||u||·||v||)",
+            "Lấy căn bậc hai của tích vô hướng",
+            "Nhân tích vô hướng với số chiều d"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Biến đổi đại số trực tiếp từ u·v = ||u||·||v||·cos(θ). Vì sao A sai? Cộng 1 không có ý nghĩa hình học. Vì sao C sai? Căn bậc hai không xuất hiện trong công thức. Vì sao D sai? Nhân với d không có cơ sở toán học. Nếu bạn chọn A, lỗ hổng là bịa phép biến đổi. Nếu chọn C/D, lỗ hổng là chưa nắm vững công thức chuẩn."
+        },
+        { q: "Giá trị của độ tương đồng Cosine luôn bị chặn trong khoảng nào?",
+          opts: [
+            "Từ 0 đến vô cùng",
+            "Từ 0 đến 100",
+            "Bất kỳ số thực âm hay dương nào",
+            "Từ -1.0 đến +1.0"
+          ],
+          ans: 3,
+          exp: "Đáp án đúng: D — Vì Cosine = cos(θ) với θ ∈ [0°, 180°]. Vì sao A sai? Nhầm với khoảng cách Euclid. Vì sao B sai? Thang 0-100 là quy ước con người, không phải Cosine. Vì sao C sai? Cosine bị chặn chặt bởi định nghĩa hàm cos. Nếu bạn chọn A, lỗ hổng là lẫn khoảng cách với góc. Nếu chọn B, lỗ hổng là dùng thang đo tùy ý. Nếu chọn C, lỗ hổng là không nhận ra tính bị chặn."
+        },
+        { q: "Tại sao việc giá trị bị chặn trong [-1, +1] lại là ưu điểm vượt trội cho AI?",
+          opts: [
+            "Vì các nhà khoa học có sở thích cá nhân với số 1",
+            "Để tiết kiệm ổ cứng khi lưu trữ ma trận tương đồng",
+            "Giúp thang đo luôn ổn định, chuẩn mực và không bị bùng nổ số học",
+            "Vì các GPU thế hệ cũ chỉ xử lý được số nhỏ"
+          ],
+          ans: 2,
+          exp: "Đáp án đúng: C — Thang đo chuẩn hóa ngăn hiện tượng gradient bùng nổ. Vì sao A sai? Đây không phải lý do khoa học. Vì sao B sai? Giá trị bị chặn không tiết kiệm đáng kể bộ nhớ (vẫn là float32). Vì sao D sai? GPU hiện đại xử lý được số rất lớn — nhưng bùng nổ số học gây MẤT ỔN ĐỊNH huấn luyện. Nếu bạn chọn A, lỗ hổng là lý luận theo cảm tính. Nếu chọn B, lỗ hổng là nhầm vai trò bộ nhớ. Nếu chọn D, lỗ hổng là nhầm 'không xử lý được' với 'không ổn định'."
+        },
+        { q: "Nếu hai vector có Cosine = +1.0, góc kẹp giữa chúng bằng bao nhiêu độ?",
+          opts: [
+            "0° (Trùng hướng hoàn toàn)",
+            "45°",
+            "90°",
+            "180°"
+          ],
+          ans: 0,
+          exp: "Đáp án đúng: A — cos(0°) = +1. Vì sao B sai? cos(45°) ≈ 0.707. Vì sao C sai? cos(90°) = 0. Vì sao D sai? cos(180°) = -1. Nếu bạn chọn B/C/D, lỗ hổng là nhầm các giá trị đặc biệt của hàm cos."
+        },
+        { q: "Hai câu văn có độ dài gấp 100 lần nhau nhưng cùng nói về một ý niệm sẽ có Cosine bằng bao nhiêu?",
+          opts: [
+            "Bằng 100",
+            "Xấp xỉ +1.0 vì mẫu số đã triệt tiêu hoàn toàn sự chênh lệch độ dài",
+            "Xấp xỉ 0",
+            "Bằng -1.0"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Cosine bất biến trước độ dài. Vì sao A sai? Kết quả Cosine luôn ≤ 1 — nhầm với giá trị thô của tích vô hướng. Vì sao C sai? Đây là kết quả của hai ý niệm ĐỘC LẬP. Vì sao D sai? Đây là hai ý niệm ĐỐI NGHỊCH. Nếu bạn chọn A, lỗ hổng là nhầm Cosine với dot product thô. Nếu chọn C/D, lỗ hổng là nhầm mối quan hệ ngữ nghĩa."
+        }
       ],
       9: [
-        { q: "Mốc góc 90 độ (cos = 0) trong không gian ngữ nghĩa đại diện cho mối quan hệ nào?", opts: ["Hai từ hoàn toàn đồng nghĩa", "Hai khái niệm hoàn toàn độc lập, không liên quan gì tới nhau", "Hai từ trái nghĩa gay gắt", "Hai từ viết sai chính tả"], ans: 1, exp: "Chính xác! 90 độ là trực giao, độc lập thông tin." },
-        { q: "Mốc góc 180 độ (cos = -1.0) đại diện cho mối quan hệ nào?", opts: ["Đồng nghĩa", "Đối nghịch, trái ngược nhau tuyệt đối", "Độc lập", "Không xác định"], ans: 1, exp: "Đúng! 180 độ là hai mũi tên trỏ ngược chiều nhau." },
-        { q: "Cặp từ 'Bác sĩ' và 'Thầy thuốc' sẽ có góc vector xấp xỉ bao nhiêu?", opts: ["Gần 0 độ (Cosine xấp xỉ +1)", "90 độ", "180 độ", "360 độ"], ans: 0, exp: "Chính xác! Đồng nghĩa thì góc kẹp xấp xỉ 0 độ." },
-        { q: "Cặp từ 'Số nguyên tố' và 'Bát phở bò' có góc vector xấp xỉ bao nhiêu?", opts: ["0 độ", "Gần 90 độ (Cosine xấp xỉ 0 vì không có liên hệ ngữ nghĩa)", "180 độ", "270 độ"], ans: 1, exp: "Đúng! Hai khái niệm hoàn toàn trực giao." },
-        { q: "Mô hình CLIP huấn luyện tương phản bằng cách nào dựa trên 3 góc vàng?", opts: ["Kéo cặp đúng về 0° và đẩy các cặp sai về 90°", "Đẩy tất cả về 180°", "Kéo tất cả về điểm (0,0)", "Không làm gì cả"], ans: 0, exp: "Chính xác! InfoNCE tối đa hóa tích vô hướng cặp đúng và dìm các cặp sai." }
+        { q: "Mốc góc 90° (cos = 0) trong không gian ngữ nghĩa đại diện cho mối quan hệ nào?",
+          opts: [
+            "Hai từ đồng nghĩa hoàn toàn",
+            "Hai từ trái nghĩa gay gắt",
+            "Hai khái niệm hoàn toàn độc lập, không liên quan gì tới nhau",
+            "Hai từ viết sai chính tả"
+          ],
+          ans: 2,
+          exp: "Đáp án đúng: C — Trực giao = độc lập thông tin. Vì sao A sai? Đồng nghĩa là 0°. Vì sao B sai? Trái nghĩa là 180°. Vì sao D sai? Chính tả không phải khái niệm hình học — nhầm 'sai chính tả' với 'khác nghĩa'. Nếu bạn chọn A/B, lỗ hổng là nhầm mốc góc. Nếu chọn D, lỗ hổng là lẫn ngôn ngữ học với hình học."
+        },
+        { q: "Mốc góc 180° (cos = -1.0) đại diện cho mối quan hệ nào?",
+          opts: [
+            "Đối nghịch, trái ngược nhau tuyệt đối",
+            "Đồng nghĩa hoàn toàn",
+            "Độc lập hoàn toàn",
+            "Không xác định về mặt ngữ nghĩa"
+          ],
+          ans: 0,
+          exp: "Đáp án đúng: A — 180° là hai mũi tên ngược chiều. Vì sao B sai? Đồng nghĩa là 0°. Vì sao C sai? Độc lập là 90°. Vì sao D sai? Mọi góc đều xác định — ngộ nhận về tính bất định. Nếu bạn chọn B/C, lỗ hổng là nhầm mốc góc. Nếu chọn D, lỗ hổng là không nắm được tính xác định của các mốc."
+        },
+        { q: "Cặp từ 'Bác sĩ' và 'Thầy thuốc' sẽ có góc vector xấp xỉ bao nhiêu?",
+          opts: [
+            "180°",
+            "90°",
+            "45°",
+            "Gần 0° (Cosine xấp xỉ +1)"
+          ],
+          ans: 3,
+          exp: "Đáp án đúng: D — Đồng nghĩa nên hướng gần như trùng nhau. Vì sao A sai? 180° là trái nghĩa. Vì sao B sai? 90° là độc lập. Vì sao C sai? 45° là tương đồng MỘT PHẦN — không phải đồng nghĩa hoàn toàn. Nếu bạn chọn A/B/C, lỗ hổng là chưa phân biệt các mức độ tương đồng ngữ nghĩa."
+        },
+        { q: "Cặp từ 'Số nguyên tố' và 'Bát phở bò' có góc vector xấp xỉ bao nhiêu?",
+          opts: [
+            "Gần 0° vì cả hai đều là danh từ",
+            "Gần 90° (Cosine xấp xỉ 0 vì không có liên hệ ngữ nghĩa)",
+            "Gần 180° vì chúng khác nhau hoàn toàn",
+            "Gần 270°"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Hai khái niệm không liên quan → trực giao. Vì sao A sai? Cùng là danh từ không đủ để đồng nghĩa. Vì sao C sai? 180° là TRÁI NGHĨA — hai khái niệm này không đối lập. Vì sao D sai? Góc giữa hai vector trong không gian biểu diễn LUÔN nằm trong [0°, 180°] — 270° là bất khả thi. Nếu bạn chọn A, lỗ hổng là dùng tiêu chí ngữ pháp. Nếu chọn C, lỗ hổng là nhầm 'khác' với 'đối lập'. Nếu chọn D, lỗ hổng là hiểu sai khoảng giá trị của góc."
+        },
+        { q: "Mô hình CLIP huấn luyện tương phản bằng cách nào dựa trên 3 góc vàng?",
+          opts: [
+            "Kéo tất cả các cặp về 180° để tách biệt hoàn toàn",
+            "Đẩy tất cả các vector về gốc tọa độ 0",
+            "Kéo cặp ảnh-chữ đúng về 0° và đẩy các cặp sai về 90°",
+            "Không can thiệp vào góc, chỉ cập nhật độ dài vector"
+          ],
+          ans: 2,
+          exp: "Đáp án đúng: C — InfoNCE tối đa hóa tích vô hướng cặp đúng và tối thiểu hóa cặp sai. Vì sao A sai? 180° là TRÁI NGHĨA — không phải 'tách biệt'. Vì sao B sai? Gốc tọa độ là điểm kỳ dị vô nghĩa. Vì sao D sai? CLIP CHUẨN HÓA độ dài và chỉ học hướng — bỏ qua độ dài là sai lầm. Nếu bạn chọn A, lỗ hổng là nhầm 'khác biệt' với 'đối lập'. Nếu chọn B, lỗ hổng là hiểu sai vai trò gốc tọa độ. Nếu chọn D, lỗ hổng là chưa nắm nguyên lý chuẩn hóa của CLIP."
+        }
       ],
       10: [
-        { q: "Thao tác chuẩn hóa vector e = v / ||v|| biến không gian vô hạn thành hình học gì?", opts: ["Khối lập phương", "Siêu Cầu Đơn Vị (Unit Hypersphere) bán kính R = 1.0", "Đường thẳng 1 chiều", "Mặt phẳng 2D"], ans: 1, exp: "Chính xác! Mọi vector chuẩn hóa đều nằm trên vỏ cầu đơn vị." },
-        { q: "Khi hai vector u và v đều nằm trên Siêu Cầu Đơn Vị (||u|| = ||v|| = 1), phép tính Cosine rút gọn thành:", opts: ["u + v", "u · v (Chỉ còn lại phép nhân vô hướng đơn giản)", "u / v", "||u - v||"], ans: 1, exp: "Đúng! Vì mẫu số bằng 1x1 = 1." },
-        { q: "Tại sao việc tính Cosine trên Siêu Cầu lại chạy cực nhanh trên GPU?", opts: ["Vì GPU thích hình tròn", "Vì GPU chỉ cần làm phép nhân vô hướng song song mà không cần tính lại độ dài và làm phép chia phức tạp", "Vì Siêu Cầu làm giảm số lượng ảnh", "Do GPU tự động tắt bớt quạt"], ans: 1, exp: "Chính xác! Tích vô hướng chạy song song cực nhanh trên các nhân phần cứng GPU." },
-        { q: "Trong không gian 3D, các vector có độ dài bằng 1 nằm trên hình thể nào?", opts: ["Đoạn thẳng dài 1m", "Vỏ quả cầu 2 chiều S²", "Hình tam giác đều", "Hình kim tự tháp"], ans: 1, exp: "Đúng! Đó là vỏ mặt cầu S²." },
-        { q: "Có vector ý niệm hợp lệ nào trong CLIP nằm ở tâm quả cầu (bán kính R = 0) không?", opts: ["Có, đó là câu prompt rỗng", "Tuyệt đối không, mọi ý niệm đều nằm trên vỏ siêu cầu R = 1.0", "Có, đó là từ 'Không'", "Tùy thuộc vào hệ điều hành"], ans: 1, exp: "Chính xác! Gốc tọa độ r=0 là điểm kỳ dị vô nghĩa, mọi vector đều nằm trên vỏ R=1." }
+        { q: "Thao tác chuẩn hóa vector e = v / ||v|| biến không gian vô hạn thành hình học gì?",
+          opts: [
+            "Siêu Cầu Đơn Vị (Unit Hypersphere) bán kính R = 1.0",
+            "Khối lập phương đơn vị có cạnh bằng 1",
+            "Mặt phẳng 2D phẳng lì",
+            "Đường thẳng 1 chiều kéo dài vô tận"
+          ],
+          ans: 0,
+          exp: "Đáp án đúng: A — Tập hợp các điểm cách gốc đúng 1 đơn vị là MẶT CẦU. Vì sao B sai? Khối lập phương tương ứng chuẩn L∞. Vì sao C, D sai? Đây là các không gian con THẤP CHIỀU — không thể chứa vector nhiều chiều. Nếu bạn chọn B, lỗ hổng là nhầm L2 với L∞. Nếu chọn C/D, lỗ hổng là chưa hiểu 'số chiều không đổi' khi chuẩn hóa."
+        },
+        { q: "Khi hai vector u và v đều nằm trên Siêu Cầu Đơn Vị (||u|| = ||v|| = 1), phép tính Cosine rút gọn thành:",
+          opts: [
+            "u + v",
+            "u / v",
+            "||u - v||",
+            "u · v (chỉ còn phép nhân vô hướng đơn giản)"
+          ],
+          ans: 3,
+          exp: "Đáp án đúng: D — Mẫu số = 1×1 = 1. Vì sao A sai? Cộng vector không liên quan. Vì sao B sai? Chia vector không có nghĩa đại số. Vì sao C sai? Đó là khoảng cách Euclid — không phải Cosine. Nếu bạn chọn A, lỗ hổng là nhầm phép cộng với tích vô hướng. Nếu chọn B, lỗ hổng là sáng tạo phép toán không tồn tại. Nếu chọn C, lỗ hổng là nhầm Cosine với Euclid."
+        },
+        { q: "Tại sao việc tính Cosine trên Siêu Cầu lại chạy cực nhanh trên GPU?",
+          opts: [
+            "Vì GPU được thiết kế tối ưu cho hình tròn",
+            "Vì GPU chỉ cần làm phép nhân vô hướng song song mà không cần tính lại độ dài và phép chia phức tạp",
+            "Vì Siêu Cầu làm giảm số lượng ảnh cần xử lý",
+            "Do GPU tự động tắt bớt quạt để tiết kiệm điện"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Bỏ được căn bậc hai và phép chia → tăng tốc. Vì sao A sai? Không phải lý do kỹ thuật. Vì sao C sai? Số ảnh không đổi — chỉ phép tính đơn giản hơn. Vì sao D sai? Không liên quan hiệu năng tính toán. Nếu bạn chọn A, lỗ hổng là ngộ nhận về GPU. Nếu chọn C, lỗ hổng là nhầm dữ liệu với phép toán. Nếu chọn D, lỗ hổng là lẫn tản nhiệt với tính toán."
+        },
+        { q: "Trong không gian 3D, các vector có độ dài bằng 1 nằm trên hình thể nào?",
+          opts: [
+            "Đoạn thẳng dài 1m",
+            "Vỏ quả cầu 2 chiều S²",
+            "Hình tam giác đều",
+            "Hình kim tự tháp"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Đó là vỏ mặt cầu S². Vì sao A sai? Đoạn thẳng là 1D. Vì sao C sai? Tam giác đều không phải 'tập hợp các điểm cách gốc 1 đơn vị'. Vì sao D sai? Kim tự tháp không có tính đối xứng cầu. Nếu bạn chọn A/C/D, lỗ hổng là chưa nắm định nghĩa 'quỹ tích các điểm cách gốc một khoảng cố định'."
+        },
+        { q: "Có vector ý niệm hợp lệ nào trong CLIP nằm ở tâm quả cầu (bán kính R = 0) không?",
+          opts: [
+            "Có, đó là câu prompt rỗng",
+            "Tuyệt đối không, mọi ý niệm đều nằm trên vỏ siêu cầu R = 1.0",
+            "Có, đó là từ 'Không'",
+            "Tùy thuộc vào hệ điều hành"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Gốc tọa độ r=0 là điểm kỳ dị vô nghĩa, mọi vector đều nằm trên vỏ R=1. Vì sao A sai? Prompt rỗng vẫn có vector riêng (khác gốc). Vì sao C sai? Từ 'Không' là một khái niệm bình thường. Vì sao D sai? Không liên quan hệ điều hành. Nếu bạn chọn A/C, lỗ hổng là nhầm 'không có nội dung' với 'vector 0'. Nếu chọn D, lỗ hổng là hiểu sai bản chất toán học."
+        }
       ],
       11: [
-        { q: "Hiện tượng kỳ lạ nào xảy ra khi lấy ngẫu nhiên hai vector trong không gian số chiều cực lớn (d=768)?", opts: ["Chúng luôn trùng khít nhau (0 độ)", "Chúng hầu như luôn luôn vuông góc với nhau (xấp xỉ 90 độ)", "Chúng luôn có độ dài bằng 0", "Chúng làm máy tính bị khởi động lại"], ans: 1, exp: "Chính xác! Đây là tính chất trực giao ngẫu nhiên trong không gian nhiều chiều." },
-        { q: "Tại sao tổng tích vô hướng Σ ui * vi của hai vector ngẫu nhiên trong 768 chiều lại xấp xỉ 0?", opts: ["Vì tất cả các số đều bằng 0", "Vì có khoảng 384 tích mang dấu âm triệt tiêu cho 384 tích mang dấu dương", "Do thuật toán xóa bỏ số âm", "Vì 768 là số chẵn"], ans: 1, exp: "Đúng! Theo luật số lớn, các tích âm và dương bù trừ nhau về 0." },
-        { q: "Tính chất trực giao ngẫu nhiên giúp ích gì cho các mô hình AI ngôn ngữ?", opts: ["Giúp các từ ngẫu nhiên không liên quan tự động không dẫm chân lên nhau mà không cần dạy", "Giúp tăng tốc độ mạng Wi-Fi", "Làm giảm nhiệt độ chip xử lý", "Giúp màn hình hiển thị sáng hơn"], ans: 0, exp: "Chính xác! Các ý niệm độc lập mặc định vuông góc 90°." },
-        { q: "Ở không gian 2 chiều (d=2), góc giữa hai vector ngẫu nhiên phân bố thế nào?", opts: ["Chỉ duy nhất 90 độ", "Trải đều khắp từ 0 độ đến 180 độ", "Luôn bằng 0 độ", "Luôn bằng 45 độ"], ans: 1, exp: "Đúng! Ở 2D phân phối góc phẳng lì, chỉ khi d cao thì góc mới nhọn quanh 90°." },
-        { q: "Khi số chiều d tăng từ 2 -> 10 -> 100 -> 768, phân bố góc kẹp giữa hai vector ngẫu nhiên sẽ:", opts: ["Càng ngày càng xòe rộng ra", "Càng ngày càng co cụm nhọn hoắt sát vạch 90 độ", "Biến đổi ngẫu nhiên hỗn loạn", "Giữ nguyên không đổi"], ans: 1, exp: "Chính xác! Phân phối góc thu hẹp phương sai tỉ lệ với 1/√d." }
+        { q: "Hiện tượng kỳ lạ nào xảy ra khi lấy ngẫu nhiên hai vector trong không gian số chiều cực lớn (d=768)?",
+          opts: [
+            "Chúng luôn trùng khít nhau (0 độ)",
+            "Chúng hầu như luôn luôn vuông góc với nhau (xấp xỉ 90 độ)",
+            "Chúng luôn có độ dài bằng 0",
+            "Chúng làm máy tính bị khởi động lại"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Đây là tính chất trực giao ngẫu nhiên trong không gian nhiều chiều. Vì sao A sai? Trùng khít là trường hợp cực hiếm. Vì sao C sai? Vector ngẫu nhiên có độ dài hữu hạn, không bằng 0. Vì sao D sai? Đây là ngộ nhận kỹ thuật — không liên quan phần cứng. Nếu bạn chọn A, lỗ hổng là nhầm 'gần trực giao' với 'trùng hướng'. Nếu chọn C, lỗ hổng là lẫn vector 0 với vector ngẫu nhiên. Nếu chọn D, lỗ hổng là lẫn toán học với hạ tầng."
+        },
+        { q: "Tại sao tổng tích vô hướng Σ ui * vi của hai vector ngẫu nhiên trong 768 chiều lại xấp xỉ 0?",
+          opts: [
+            "Vì tất cả các số đều bằng 0",
+            "Vì có khoảng 384 tích mang dấu âm triệt tiêu cho 384 tích mang dấu dương",
+            "Do thuật toán xóa bỏ số âm",
+            "Vì 768 là số chẵn"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Theo luật số lớn, các tích âm và dương bù trừ nhau về 0. Vì sao A sai? Vector ngẫu nhiên không bằng 0. Vì sao C sai? Không có thuật toán nào xóa số âm. Vì sao D sai? Tính chẵn của d không quyết định — vấn đề là SỐ LƯỢNG LỚN các tích bù trừ. Nếu bạn chọn A, lỗ hổng là lẫn vector 0. Nếu chọn C, lỗ hổng là tưởng có can thiệp nhân tạo. Nếu chọn D, lỗ hổng là lý luận theo đặc điểm bề mặt."
+        },
+        { q: "Tính chất trực giao ngẫu nhiên giúp ích gì cho các mô hình AI ngôn ngữ?",
+          opts: [
+            "Giúp các từ ngẫu nhiên không liên quan tự động không dẫm chân lên nhau mà không cần dạy",
+            "Giúp tăng tốc độ mạng Wi-Fi",
+            "Làm giảm nhiệt độ chip xử lý",
+            "Giúp màn hình hiển thị sáng hơn"
+          ],
+          ans: 0,
+          exp: "Đáp án đúng: A — Các ý niệm độc lập mặc định vuông góc 90°. Vì sao B, C, D sai? Đây đều là các yếu tố hạ tầng phần cứng, không liên quan đến TÍNH CHẤT HÌNH HỌC của không gian biểu diễn. Nếu bạn chọn B/C/D, lỗ hổng là lẫn 'tính chất toán học của biểu diễn' với 'hiệu năng vận hành'."
+        },
+        { q: "Ở không gian 2 chiều (d=2), góc giữa hai vector ngẫu nhiên phân bố thế nào?",
+          opts: [
+            "Chỉ duy nhất 90 độ",
+            "Trải đều khắp từ 0 độ đến 180 độ",
+            "Luôn bằng 0 độ",
+            "Luôn bằng 45 độ"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Ở 2D, phân phối góc 'phẳng', không co cụm. Vì sao A sai? 90° chỉ là một trong vô số góc có thể. Vì sao C sai? Góc 0° cực hiếm. Vì sao D sai? 45° không phải giá trị đặc biệt. Nếu bạn chọn A/C/D, lỗ hổng là chưa nhận ra sự khác biệt cơ bản giữa d=2 và d lớn."
+        },
+        { q: "Khi số chiều d tăng từ 2 → 10 → 100 → 768, phân bố góc kẹp giữa hai vector ngẫu nhiên sẽ:",
+          opts: [
+            "Càng ngày càng xòe rộng ra",
+            "Càng ngày càng co cụm nhọn hoắt sát vạch 90 độ",
+            "Biến đổi ngẫu nhiên hỗn loạn",
+            "Giữ nguyên không đổi"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Phân phối góc thu hẹp phương sai tỉ lệ với 1/√d. Vì sao A sai? Ngược lại — càng nhiều chiều càng co cụm. Vì sao C sai? Có quy luật rõ ràng, không hỗn loạn. Vì sao D sai? Có thay đổi rõ rệt theo d. Nếu bạn chọn A, lỗ hổng là nhầm hướng biến đổi. Nếu chọn D, lỗ hổng là chưa quan sát kỹ hiện tượng."
+        }
       ],
       12: [
-        { q: "Phép toán kinh điển 'Vua - Nam + Nữ ≈ Nữ hoàng' chứng minh tính chất nào của không gian ý niệm?", opts: ["Tính chất ngẫu nhiên may rủi", "Tính chất tuyến tính của các trục ngữ nghĩa (Linear Semantic Compositionality)", "Tính chất bất đối xứng", "Máy tính biết nói đùa"], ans: 1, exp: "Chính xác! Các trục ngữ nghĩa có tính cộng trừ đại số tuyến tính." },
-        { q: "Làm thế nào mô hình AI có thể tạo ra hình ảnh 'Người đá thiên thạch 4 tay' chưa từng có thật?", opts: ["Nó ghép các mảnh ảnh cũ tìm trên Google", "Nó thực hiện phép cộng các vector ý niệm: v(người) + v(đá) + 2*v(tay) để tìm điểm tọa độ mới", "Do lỗi hiển thị đồ họa", "Nó hỏi xin ý kiến người dùng"], ans: 1, exp: "Đúng! AI điều hướng hạt nhiễu đến tọa độ kết quả của phép cộng vector." },
-        { q: "Khi trừ đi vector 'Nam' khỏi vector 'Vua', phần vector còn lại đại diện cho điều gì?", opts: ["Số 0", "Ý niệm trừu tượng về 'Ngôi vị hoàng gia / Quyền lực vương giả'", "Bộ quần áo hoàng đế", "Một con ngựa"], ans: 1, exp: "Chính xác! Phép trừ triệt tiêu thuộc tính giới tính nam, giữ lại thuộc tính quyền vương." },
-        { q: "Đại số vector ý niệm hoạt động hiệu quả nhất trong không gian nào?", opts: ["Không gian góc phẳng 2D chật chội", "Không gian siêu chiều sau khi đã được uốn nắn qua mạng nơ-ron", "Không gian 1 chiều", "Không gian số nguyên"], ans: 1, exp: "Đúng! Cần không gian biểu diễn sâu để các thuộc tính thẳng hàng." },
-        { q: "Sau khi học xong Phần 2.1, sinh viên đã nắm vững nền tảng nào trước khi bước sang Phần 2.2?", opts: ["Chưa nắm được gì", "Bản chất không gian nhiều chiều, Độ dài L2, Tích vô hướng hình chiếu, Cosine và Siêu cầu đơn vị", "Cách lắp ráp phần cứng máy tính", "Lập trình web bằng HTML"], ans: 1, exp: "Xuất sắc! Bạn đã trang bị trọn vẹn tư duy hình học và đại số vector nền tảng." }
+        { q: "Phép toán kinh điển 'Vua - Nam + Nữ ≈ Nữ hoàng' chứng minh tính chất nào của không gian ý niệm?",
+          opts: [
+            "Tính chất ngẫu nhiên may rủi",
+            "Tính chất tuyến tính của các trục ngữ nghĩa (Linear Semantic Compositionality)",
+            "Tính chất bất đối xứng",
+            "Máy tính biết nói đùa"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Các trục ngữ nghĩa có tính cộng trừ đại số tuyến tính. Vì sao A sai? Đây là quy luật có thể dự đoán, không ngẫu nhiên. Vì sao C sai? Vector không có tính bất đối xứng. Vì sao D sai? Đây là hiện tượng toán học, không phải 'trò đùa'. Nếu bạn chọn A, lỗ hổng là ngộ nhận về tính ngẫu nhiên. Nếu chọn C, lỗ hổng là lẫn khái niệm. Nếu chọn D, lỗ hổng là nhân cách hóa mô hình."
+        },
+        { q: "Làm thế nào mô hình AI có thể tạo ra hình ảnh 'Người đá thiên thạch 4 tay' chưa từng có thật?",
+          opts: [
+            "Nó ghép các mảnh ảnh cũ tìm trên Google",
+            "Nó thực hiện phép cộng các vector ý niệm: v(người) + v(đá) + 2*v(tay) để tìm điểm tọa độ mới",
+            "Do lỗi hiển thị đồ họa",
+            "Nó hỏi xin ý kiến người dùng"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — AI điều hướng hạt nhiễu đến tọa độ kết quả của phép cộng vector. Vì sao A sai? Đây là quan niệm lỗi thời — mô hình hiện đại không 'ghép ảnh'. Vì sao C sai? Đây là chức năng thiết kế, không phải lỗi. Vì sao D sai? Mô hình không 'hỏi ý kiến' theo nghĩa này. Nếu bạn chọn A, lỗ hổng là chưa hiểu cơ chế sinh ảnh hiện đại. Nếu chọn C/D, lỗ hổng là nhân cách hóa hệ thống."
+        },
+        { q: "Khi trừ đi vector 'Nam' khỏi vector 'Vua', phần vector còn lại đại diện cho điều gì?",
+          opts: [
+            "Số 0",
+            "Ý niệm trừu tượng về 'Ngôi vị hoàng gia / Quyền lực vương giả'",
+            "Bộ quần áo hoàng đế",
+            "Một con ngựa"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Phép trừ triệt tiêu thuộc tính giới tính nam, giữ lại thuộc tính quyền vương. Vì sao A sai? Phép trừ vector không cho vector 0. Vì sao C sai? Trang phục là khái niệm cụ thể khác — không phải kết quả của Vua - Nam. Vì sao D sai? Không có cơ sở để xuất hiện 'con ngựa'. Nếu bạn chọn A, lỗ hổng là nhầm phép trừ vector với phép trừ số. Nếu chọn C/D, lỗ hổng là bịa thêm thông tin."
+        },
+        { q: "Đại số vector ý niệm hoạt động hiệu quả nhất trong không gian nào?",
+          opts: [
+            "Không gian góc phẳng 2D chật chội",
+            "Không gian siêu chiều sau khi đã được uốn nắn qua mạng nơ-ron",
+            "Không gian 1 chiều",
+            "Không gian số nguyên"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Cần không gian biểu diễn sâu để các thuộc tính thẳng hàng. Vì sao A sai? 2D quá chật (Crowding Problem). Vì sao C sai? 1D không thể chứa các trục thuộc tính độc lập. Vì sao D sai? Số nguyên không đủ độ mịn cho biểu diễn liên tục. Nếu bạn chọn A/C, lỗ hổng là chưa nắm 'số chiều cao là điều kiện cần'. Nếu chọn D, lỗ hổng là nhầm kiểu dữ liệu với không gian biểu diễn."
+        },
+        { q: "Sau khi học xong Phần 2.1, sinh viên đã nắm vững nền tảng nào trước khi bước sang Phần 2.2?",
+          opts: [
+            "Chưa nắm được gì",
+            "Bản chất không gian nhiều chiều, Độ dài L2, Tích vô hướng hình chiếu, Cosine và Siêu cầu đơn vị",
+            "Cách lắp ráp phần cứng máy tính",
+            "Lập trình web bằng HTML"
+          ],
+          ans: 1,
+          exp: "Đáp án đúng: B — Đây là tổng kết toàn bộ 12 chương. Vì sao A sai? Đây là tự phủ định toàn bộ nỗ lực học tập. Vì sao C, D sai? Đây là các chủ đề khác hoàn toàn, không thuộc phạm vi phần này. Nếu bạn chọn A, lỗ hổng có thể là sự thiếu tự tin — hãy tự kiểm tra lại bằng bài thi Bloom bên dưới. Nếu chọn C/D, lỗ hổng là lẫn phạm vi môn học."
+        }
       ]
     };
 
@@ -2030,92 +2369,167 @@
       {
         id: 1, tier: "1. Nhận Biết", ans: 1,
         q: "Trong khoa học máy tính và AI, 'số chiều' d của một không gian biểu diễn mang ý nghĩa bản chất là gì?",
-        opts: ["Số chiều không gian vật lý mà con người có thể nhìn thấy", "Số lượng các thước đo thuộc tính độc lập được dùng để mô tả một thực thể", "Kích thước của thanh RAM máy tính", "Số lần xoay của màn hình đồ họa"],
-        exp: "Chính xác! Mỗi chiều d đại diện cho một trục thuộc tính số học được dùng để nhận diện và phân loại thực thể."
+        opts: [
+          "Số chiều không gian vật lý mà con người có thể nhìn thấy",
+          "Số lượng các thước đo thuộc tính độc lập được dùng để mô tả một thực thể",
+          "Kích thước của thanh RAM máy tính cần để lưu vector",
+          "Số lần xoay của màn hình đồ họa"
+        ],
+        exp: "Đáp án đúng: B. Vì sao A sai? A nhầm với giới hạn sinh học của giác quan. Vì sao C sai? C nhầm thuộc tính dữ liệu với tài nguyên phần cứng. Vì sao D sai? D là thông số hiển thị, không liên quan đến định nghĩa toán học của chiều."
       },
       {
         id: 2, tier: "1. Nhận Biết", ans: 2,
         q: "Công thức chuẩn hóa L2 của một vector z thành vector đơn vị e nằm trên siêu cầu là:",
-        opts: ["e = z * ||z||", "e = z - ||z||", "e = z / ||z||₂", "e = z² / 2"],
-        exp: "Đúng! Chia một vector cho độ dài của chính nó sẽ ép độ dài mới về đúng 1.0 (chuẩn đơn vị)."
+        opts: [
+          "e = z * ||z||",
+          "e = z - ||z||",
+          "e = z / ||z||₂",
+          "e = z² / 2"
+        ],
+        exp: "Đáp án đúng: C. Vì sao A sai? Nhân độ dài làm vector dài thêm, không chuẩn hóa. Vì sao B sai? Trừ một số vô hướng khỏi vector không có định nghĩa hình học đúng. Vì sao D sai? Bình phương không bảo toàn hướng, phá vỡ cấu trúc biểu diễn."
       },
       {
         id: 3, tier: "1. Nhận Biết", ans: 0,
         q: "Giá trị của độ tương đồng Cosine giữa hai vector bất kỳ luôn nằm trong phạm vi nào?",
-        opts: ["Trong đoạn [-1.0, +1.0]", "Trong khoảng từ 0 đến +∞", "Trong đoạn [0, 100]", "Bất kỳ số thực âm hay dương"],
-        exp: "Chính xác! Hàm Cosine của góc kẹp giữa hai vector luôn bị chặn tuyệt đối trong đoạn [-1, +1]."
+        opts: [
+          "Trong đoạn [-1.0, +1.0]",
+          "Trong khoảng từ 0 đến +∞",
+          "Trong đoạn [0, 100]",
+          "Bất kỳ số thực âm hay dương"
+        ],
+        exp: "Đáp án đúng: A. Vì sao B sai? B mô tả khoảng cách Euclid, không phải Cosine. Vì sao C sai? Thang 0-100 là quy ước con người, không phải định nghĩa toán học. Vì sao D sai? Hàm cos bị chặn chặt bởi định nghĩa hình học của góc."
       },
       {
         id: 4, tier: "2. Thông Hiểu", ans: 1,
         q: "Vì sao thước đo khoảng cách thẳng Euclid ||u - v|| thất bại trong việc so sánh ngữ nghĩa giữa hai câu văn?",
-        opts: ["Vì máy tính không biết làm phép trừ", "Vì câu dài có nhiều từ bổ trợ làm vector bị kéo dài ngẫu nhiên, khiến khoảng cách thẳng bị sai lệch dù cùng chủ đề", "Vì khoảng cách Euclid chạy chậm hơn 1 triệu lần", "Vì ngôn ngữ tự nhiên không có số âm"],
-        exp: "Đúng! Cạm bẫy thiên kiến độ dài (Magnitude Bias) khiến hai câu cùng nói về một chủ đề bị đo là cách xa nhau."
+        opts: [
+          "Vì máy tính không biết làm phép trừ vector",
+          "Vì câu dài có nhiều từ bổ trợ làm vector bị kéo dài ngẫu nhiên, khiến khoảng cách thẳng bị sai lệch dù cùng chủ đề",
+          "Vì khoảng cách Euclid chạy chậm hơn Cosine 1 triệu lần",
+          "Vì ngôn ngữ tự nhiên không có số âm"
+        ],
+        exp: "Đáp án đúng: B — Magnitude Bias. Vì sao A sai? Phép trừ vector là toán học cơ bản. Vì sao C sai? Tốc độ không phải lý do bản chất. Vì sao D sai? Không liên quan đến số âm — vector hoàn toàn có thể chứa số âm."
       },
       {
         id: 5, tier: "2. Thông Hiểu", ans: 0,
         q: "Hiện tượng 'Chen chúc ý niệm' (The Crowding Problem) trong không gian số chiều thấp (2D/3D) dẫn đến hậu quả gì?",
-        opts: ["Các khái niệm hoàn toàn khác nhau bị ép nằm đè lên cùng một vị trí tọa độ do thiếu các trục thuộc tính độc lập", "Làm máy tính bị tràn bộ nhớ VRAM", "Làm ảnh sinh ra luôn có màu đen trắng", "Làm mất kết nối mạng Internet"],
-        exp: "Chính xác! Số chiều thấp không đủ 'ngăn kéo' để chứa các thuộc tính đa dạng, gây va chạm và nhầm lẫn ý niệm."
+        opts: [
+          "Các khái niệm hoàn toàn khác nhau bị ép nằm đè lên cùng một vị trí tọa độ do thiếu các trục thuộc tính độc lập",
+          "Làm máy tính bị tràn bộ nhớ VRAM",
+          "Làm ảnh sinh ra luôn có màu đen trắng",
+          "Làm mất kết nối mạng Internet"
+        ],
+        exp: "Đáp án đúng: A. Vì sao B sai? VRAM là tài nguyên phần cứng, không liên quan số chiều. Vì sao C sai? Màu sắc là tham số sinh ảnh, không phải hệ quả của crowding. Vì sao D sai? Internet là hạ tầng truyền thông."
       },
       {
         id: 6, tier: "2. Thông Hiểu", ans: 2,
         q: "Bản chất hình học của tích vô hướng u · v là gì?",
-        opts: ["Chu vi của tam giác tạo bởi hai vector", "Khoảng cách ngắn nhất giữa hai đầu mũi tên", "Độ dài của vector u nhân với độ dài chiếc bóng chiếu vuông góc của vector v đổ lên u", "Diện tích của hình vuông có cạnh là u"],
-        exp: "Đúng! Tích vô hướng u · v = ||u|| ||v|| cos(θ) đo lường sự cùng hướng thông qua phép chiếu thẳng đứng."
+        opts: [
+          "Chu vi của tam giác tạo bởi hai vector",
+          "Khoảng cách ngắn nhất giữa hai đầu mũi tên",
+          "Độ dài của vector u nhân với độ dài chiếc bóng chiếu vuông góc của vector v đổ lên u",
+          "Diện tích của hình vuông có cạnh là u"
+        ],
+        exp: "Đáp án đúng: C. Vì sao A sai? Chu vi không xuất hiện trong tích vô hướng. Vì sao B sai? Đây là khoảng cách Euclid. Vì sao D sai? Diện tích hình vuông cạnh u là ||u||², không phải u·v."
       },
       {
         id: 7, tier: "3. Vận Dụng", ans: 1,
         q: "Cho vector u = [3, 0] và vector v = [0, 4]. Độ tương đồng Cosine giữa chúng bằng bao nhiêu?",
-        opts: ["1.0", "0.0 (Vì hai vector vuông góc 90 độ, tích vô hướng u · v = 0)", "-1.0", "0.5"],
-        exp: "Chính xác! u · v = 3*0 + 0*4 = 0. Do đó Cosine = 0 / (3 * 4) = 0.0 (Hai ý niệm hoàn toàn độc lập)."
+        opts: [
+          "1.0",
+          "0.0 (Vì hai vector vuông góc 90 độ, tích vô hướng u · v = 0)",
+          "-1.0",
+          "0.5"
+        ],
+        exp: "Đáp án đúng: B. Vì sao A sai? A là trường hợp cùng hướng. Vì sao C sai? C là trường hợp ngược hướng. Vì sao D sai? 0.5 là góc 60°, không liên quan đến bài toán."
       },
       {
         id: 8, tier: "3. Vận Dụng", ans: 0,
         q: "Một vector thô z có tọa độ (6, 8). Sau khi thực hiện chuẩn hóa L2, độ dài mới của vector e bằng bao nhiêu?",
-        opts: ["Đúng bằng 1.0", "Bằng 14.0", "Bằng 10.0", "Bằng 0.0"],
-        exp: "Đúng! Độ dài cũ là √(6² + 8²) = 10. Vector sau chuẩn hóa e = (0.6, 0.8) có độ dài √(0.6² + 0.8²) = 1.0."
+        opts: [
+          "Đúng bằng 1.0",
+          "Bằng 14.0",
+          "Bằng 10.0",
+          "Bằng 0.0"
+        ],
+        exp: "Đáp án đúng: A. Vì sao B sai? 14 là tổng L1, không liên quan. Vì sao C sai? 10 là độ dài GỐC trước chuẩn hóa — đây là bẫy quên 'sau chuẩn hóa'. Vì sao D sai? Vector 0 không có hướng xác định, không thể sinh từ chuẩn hóa (6,8)."
       },
       {
         id: 9, tier: "3. Vận Dụng", ans: 2,
         q: "Nếu hai vector ý niệm u và v có góc lệch θ = 60°, độ tương đồng Cosine của chúng là:",
-        opts: ["1.0", "0.0", "0.5 (Vì cos(60°) = 0.5)", "-0.5"],
-        exp: "Chính xác! cos(60°) = 1/2 = 0.5."
+        opts: [
+          "1.0",
+          "0.0",
+          "0.5 (Vì cos(60°) = 0.5)",
+          "-0.5"
+        ],
+        exp: "Đáp án đúng: C. Vì sao A sai? 1.0 là góc 0°. Vì sao B sai? 0.0 là góc 90°. Vì sao D sai? -0.5 là góc 120°."
       },
       {
         id: 10, tier: "4. Phân Tích", ans: 1,
         q: "Phân tích vì sao khi chuẩn hóa mọi vector về độ dài bằng 1 trên Siêu Cầu, tốc độ xử lý của mô hình lại tăng vọt:",
-        opts: ["Vì màn hình máy tính không cần hiển thị mũi tên", "Vì mẫu số ||u|| ||v|| = 1x1 = 1 biến mất, phép tính Cosine trở thành phép nhân vô hướng u · v chạy cực nhanh trên GPU", "Vì mô hình không cần dùng mạng nơ-ron nữa", "Vì dữ liệu tự động biến thành số nguyên"],
-        exp: "Đúng! Loại bỏ phép tính căn bậc hai và phép chia mẫu số ở từng bước thời gian giúp GPU tối ưu hóa tốc độ nhân ma trận."
+        opts: [
+          "Vì màn hình máy tính không cần hiển thị mũi tên",
+          "Vì mẫu số ||u|| ||v|| = 1x1 = 1 biến mất, phép tính Cosine trở thành phép nhân vô hướng u · v chạy cực nhanh trên GPU",
+          "Vì mô hình không cần dùng mạng nơ-ron nữa",
+          "Vì dữ liệu tự động biến thành số nguyên"
+        ],
+        exp: "Đáp án đúng: B. Vì sao A sai? Không liên quan đến hiển thị. Vì sao C sai? Mạng nơ-ron vẫn là thành phần cốt lõi. Vì sao D sai? Vector vẫn là số thực, không tự thành số nguyên."
       },
       {
         id: 11, tier: "4. Phân Tích", ans: 0,
         q: "Phân tích hiện tượng: Tại sao trong không gian 768 chiều, hai vector chọn ngẫu nhiên hầu như luôn có Cosine xấp xỉ 0?",
-        opts: ["Vì tổng 768 tích ui * vi gồm các giá trị âm và dương ngẫu nhiên bù trừ triệt tiêu lẫn nhau về số 0", "Vì thuật toán AI tự động xóa các số khác 0", "Vì các vector ngẫu nhiên đều có độ dài bằng 0", "Do không gian siêu chiều bị bẻ cong thành hình elip"],
-        exp: "Chính xác! Theo định lý giới hạn trung tâm, tổng của 768 biến ngẫu nhiên độc lập có kỳ vọng bằng 0 và phương sai co cụm rất hẹp."
+        opts: [
+          "Vì tổng 768 tích ui * vi gồm các giá trị âm và dương ngẫu nhiên bù trừ triệt tiêu lẫn nhau về số 0",
+          "Vì thuật toán AI tự động xóa các số khác 0",
+          "Vì các vector ngẫu nhiên đều có độ dài bằng 0",
+          "Do không gian siêu chiều bị bẻ cong thành hình elip"
+        ],
+        exp: "Đáp án đúng: A. Vì sao B sai? Không có thuật toán nào xóa số. Vì sao C sai? Vector ngẫu nhiên có độ dài hữu hạn. Vì sao D sai? Không gian ℝᵈ là phẳng Euclid, không bị bẻ cong."
       },
       {
         id: 12, tier: "4. Phân Tích", ans: 2,
         q: "Phân tích vai trò của phép trừ vector trong phương trình 'Vua - Nam + Nữ ≈ Nữ hoàng':",
-        opts: ["Phép trừ làm mất dữ liệu của từ Vua", "Phép trừ đổi màu sắc của nhân vật", "Phép trừ vector triệt tiêu trục thuộc tính 'Giới tính Nam' ra khỏi khái niệm Vua, chỉ giữ lại thuộc tính 'Quyền lực hoàng gia'", "Phép trừ khiến mô hình báo lỗi cú pháp"],
-        exp: "Đúng! Đại số vector cho phép cô lập và trừ khử một khía cạnh ngữ nghĩa cụ thể trong không gian biểu diễn."
+        opts: [
+          "Phép trừ làm mất dữ liệu của từ Vua",
+          "Phép trừ đổi màu sắc của nhân vật",
+          "Phép trừ vector triệt tiêu trục thuộc tính 'Giới tính Nam' ra khỏi khái niệm Vua, chỉ giữ lại thuộc tính 'Quyền lực hoàng gia'",
+          "Phép trừ khiến mô hình báo lỗi cú pháp"
+        ],
+        exp: "Đáp án đúng: C. Vì sao A sai? Dữ liệu không 'mất' — phép trừ vector là phép toán có quy luật. Vì sao B sai? Màu sắc không phải thuộc tính được trừ. Vì sao D sai? Đây là đại số vector hợp lệ, không phải lỗi cú pháp."
       },
       {
         id: 13, tier: "5. Đánh Giá", ans: 1,
         q: "Đánh giá: Nếu một kỹ sư dùng khoảng cách Manhattan L1 thay cho Cosine để đo độ tương đồng trên Siêu Cầu, điều gì sẽ xảy ra?",
-        opts: ["Mô hình sẽ sinh ảnh đẹp hơn gấp 10 lần", "Thước đo bị mất tính bất biến quay (Rotational Invariance), khiến điểm số phụ thuộc giả tạo vào cách xoay hệ trục tọa độ", "Không có bất kỳ sự thay đổi nào", "Mô hình sẽ học nhanh hơn gấp 100 lần"],
-        exp: "Xuất sắc! Chuẩn L1 phụ thuộc vào các trục tọa độ cụ thể; khi xoay hệ trục đi một góc, khoảng cách L1 bị biến dạng trong khi Cosine giữ nguyên!"
+        opts: [
+          "Mô hình sẽ sinh ảnh đẹp hơn gấp 10 lần",
+          "Thước đo bị mất tính bất biến quay (Rotational Invariance), khiến điểm số phụ thuộc giả tạo vào cách xoay hệ trục tọa độ",
+          "Không có bất kỳ sự thay đổi nào",
+          "Mô hình sẽ học nhanh hơn gấp 100 lần"
+        ],
+        exp: "Đáp án đúng: B. Vì sao A sai? Không có cơ sở — L1 không ảnh hưởng trực tiếp chất lượng sinh ảnh. Vì sao C sai? L1 và L2 cho kết quả khác nhau rõ rệt. Vì sao D sai? Không có tăng tốc thần kỳ như vậy."
       },
       {
         id: 14, tier: "5. Đánh Giá", ans: 0,
         q: "Đánh giá: Một lập trình viên thắc mắc: 'Tại sao không để các vector tự do mà phải định vị lên mặt siêu cầu R=1?'. Câu trả lời chuẩn xác nhất là:",
-        opts: ["Để triệt tiêu thiên kiến độ dài (ngắn vs dài), cô lập hoàn toàn góc ngữ nghĩa và bảo vệ hàm Softmax không bị tràn số", "Để file trọng số mô hình nhẹ hơn 50%", "Vì toán học cổ điển bắt buộc như vậy", "Để tránh bị lỗi màn hình xanh"],
-        exp: "Chính xác! Chuẩn hóa lên mặt cầu đơn vị vừa loại bỏ yếu tố chiều dài ngẫu nhiên, vừa bảo đảm tính ổn định số học trong mạng sâu."
+        opts: [
+          "Để triệt tiêu thiên kiến độ dài (ngắn vs dài), cô lập hoàn toàn góc ngữ nghĩa và bảo vệ hàm Softmax không bị tràn số",
+          "Để file trọng số mô hình nhẹ hơn 50%",
+          "Vì toán học cổ điển bắt buộc như vậy",
+          "Để tránh bị lỗi màn hình xanh"
+        ],
+        exp: "Đáp án đúng: A. Vì sao B sai? Chuẩn hóa không giảm kích thước file đáng kể. Vì sao C sai? Không có luật nào bắt buộc — đây là lựa chọn thiết kế. Vì sao D sai? Lỗi màn hình xanh liên quan hệ điều hành, không liên quan toán học."
       },
       {
         id: 15, tier: "6. Vận Dụng Cao", ans: 1,
         q: "Vận dụng cao: Bạn muốn hướng dẫn mạng Diffusion tạo ra 'Người ngoài hành tinh bằng kim loại có cánh bướm'. Cơ chế định hướng vector tương ứng trong không gian là gì?",
-        opts: ["Chỉ gõ từ 'Alien' và chờ đợi may mắn ngẫu nhiên", "Thiết lập vector mục tiêu bằng tổ hợp tuyến tính: v_mục_tiêu = v(Alien) + v(Metallic) + v(Butterfly wings), và dùng CFG hướng các hạt nhiễu trôi về góc đó", "Xóa bỏ tất cả các token từ vựng trong CLIP", "Giảm số chiều từ 768 xuống còn 2 chiều"],
-        exp: "Hoàn hảo! Bạn đã nắm vững bản chất: Điểm hội tụ của phép cộng vector thuộc tính trừu tượng chính là ngọn hải đăng dẫn đường cho quá trình khử nhiễu!"
+        opts: [
+          "Chỉ gõ từ 'Alien' và chờ đợi may mắn ngẫu nhiên",
+          "Thiết lập vector mục tiêu bằng tổ hợp tuyến tính: v_mục_tiêu = v(Alien) + v(Metallic) + v(Butterfly wings), và dùng CFG hướng các hạt nhiễu trôi về góc đó",
+          "Xóa bỏ tất cả các token từ vựng trong CLIP",
+          "Giảm số chiều từ 768 xuống còn 2 chiều"
+        ],
+        exp: "Đáp án đúng: B. Vì sao A sai? Đây là cách tiếp cận thụ động, thiếu kiểm soát. Vì sao C sai? Xóa token từ vựng sẽ phá hủy toàn bộ không gian biểu diễn. Vì sao D sai? Giảm chiều xuống 2D làm mất toàn bộ khả năng biểu diễn đặc trưng phức tạp."
       }
     ];
 
@@ -2194,7 +2608,7 @@
           <div class="text-xs font-code font-bold pt-1.5 ${isAnswered ? '' : 'hidden'}">
             ${isAnswered ? (chosen === item.ans 
               ? `<span class="text-green-800">✓ ${item.exp}</span>` 
-              : `<span class="text-red-800">✗ Chưa chuẩn xác. Hãy xem kỹ lại công thức và lý giải hình học tương ứng!</span>`) : ''}
+              : `<span class="text-red-800">✗ Chưa chuẩn xác. ${item.exp}</span>`) : ''}
           </div>
         `;
         container.appendChild(card);
@@ -2232,7 +2646,6 @@
       renderMathKaTeX();
     }
 
-    /* KHỞI ĐỘNG ỨNG DỤNG SAU KHI TẢI XONG TRANG */
     window.onload = function() {
       renderAllFigures();
       renderCheckpoints();
@@ -2240,27 +2653,17 @@
       renderMathKaTeX();
     };
 
-    /* ============================================================
-       HOME FAB — Logic cuộn thông minh:
-       • Cuộn xuống  → ẨN NGAY
-       • Cuộn lên    → Tích lũy quãng đường, chỉ HIỆN khi đủ ngưỡng
-       ============================================================ */
     (function () {
       const fab = document.getElementById('homeFab');
       if (!fab) return;
-
-      const SHOW_THRESHOLD = 180;   // Phải cuộn lên đủ 180px mới hiện lại
-      const TOP_SAFE_ZONE  = 80;    // Ở gần đỉnh trang luôn hiện
-      const DIRECTION_EPS  = 4;     // Bỏ qua rung lắc nhỏ (px)
-
-      let lastY        = window.scrollY;
-      let accumulated  = 0;         // Quãng đường đã cuộn LÊN tích lũy
-      let ticking      = false;
-
+      const SHOW_THRESHOLD = 180;
+      const TOP_SAFE_ZONE  = 80;
+      const DIRECTION_EPS  = 4;
+      let lastY = window.scrollY;
+      let accumulated = 0;
+      let ticking = false;
       function update() {
         const y = window.scrollY;
-
-        // 1) Luôn hiện khi ở gần đầu trang
         if (y < TOP_SAFE_ZONE) {
           fab.classList.remove('fab-hidden');
           accumulated = 0;
@@ -2268,38 +2671,25 @@
           ticking = false;
           return;
         }
-
-        const delta = y - lastY; // >0: cuộn xuống | <0: cuộn lên
-
+        const delta = y - lastY;
         if (delta > DIRECTION_EPS) {
-          // ----- Đang cuộn XUỐNG -----
           fab.classList.add('fab-hidden');
-          accumulated = 0;         // reset quãng đường cuộn lên
+          accumulated = 0;
         } else if (delta < -DIRECTION_EPS) {
-          // ----- Đang cuộn LÊN -----
           accumulated += Math.abs(delta);
-          if (accumulated >= SHOW_THRESHOLD) {
-            fab.classList.remove('fab-hidden');
-          }
+          if (accumulated >= SHOW_THRESHOLD) fab.classList.remove('fab-hidden');
         }
-
         lastY = y;
         ticking = false;
       }
-
       window.addEventListener('scroll', () => {
         if (!ticking) {
           requestAnimationFrame(update);
           ticking = true;
         }
       }, { passive: true });
-
-      // Khởi tạo trạng thái ban đầu (hiện nếu đang ở đầu trang)
-      if (window.scrollY < TOP_SAFE_ZONE) {
-        fab.classList.remove('fab-hidden');
-      } else {
-        fab.classList.add('fab-hidden');
-      }
+      if (window.scrollY < TOP_SAFE_ZONE) fab.classList.remove('fab-hidden');
+      else fab.classList.add('fab-hidden');
     })();
   </script>
 </body>

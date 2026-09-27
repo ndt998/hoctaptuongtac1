@@ -118,6 +118,20 @@
       background: #776250;
       border-radius: 3px;
     }
+
+    /* ========================================================
+       HOME FAB: Hiệu ứng trồi lên / thụt xuống êm ái
+       ======================================================== */
+    #homeFab {
+      transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: opacity, transform;
+    }
+    #homeFab.fab-hidden {
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transform: translateY(28px) scale(0.9) !important;
+    }
   </style>
 </head>
 
@@ -1312,6 +1326,22 @@
 
   </div>
 
+  <!-- ============================================================ -->
+  <!-- NÚT FAB QUAY VỀ TRANG MẸ (index.html)                        -->
+  <!-- ============================================================ -->
+  <a id="homeFab" href="index.html"
+     class="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-2.5
+            bg-stone-900 text-stone-100 border-2 border-stone-800 shadow-2xl
+            rounded-full font-code text-xs font-bold uppercase
+            hover:bg-[#9e3d24] hover:text-white hover:scale-105 active:scale-95 group"
+     title="Quay về trang chủ">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform group-hover:-translate-x-1"
+         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+    </svg>
+    <span>Về Trang Chủ</span>
+  </a>
+
   <script>
     /* TRẠNG THÁI ỨNG DỤNG TOÀN CỤC PHẦN 2.1 */
     const state = {
@@ -2209,6 +2239,68 @@
       renderCapstoneExam();
       renderMathKaTeX();
     };
+
+    /* ============================================================
+       HOME FAB — Logic cuộn thông minh:
+       • Cuộn xuống  → ẨN NGAY
+       • Cuộn lên    → Tích lũy quãng đường, chỉ HIỆN khi đủ ngưỡng
+       ============================================================ */
+    (function () {
+      const fab = document.getElementById('homeFab');
+      if (!fab) return;
+
+      const SHOW_THRESHOLD = 180;   // Phải cuộn lên đủ 180px mới hiện lại
+      const TOP_SAFE_ZONE  = 80;    // Ở gần đỉnh trang luôn hiện
+      const DIRECTION_EPS  = 4;     // Bỏ qua rung lắc nhỏ (px)
+
+      let lastY        = window.scrollY;
+      let accumulated  = 0;         // Quãng đường đã cuộn LÊN tích lũy
+      let ticking      = false;
+
+      function update() {
+        const y = window.scrollY;
+
+        // 1) Luôn hiện khi ở gần đầu trang
+        if (y < TOP_SAFE_ZONE) {
+          fab.classList.remove('fab-hidden');
+          accumulated = 0;
+          lastY = y;
+          ticking = false;
+          return;
+        }
+
+        const delta = y - lastY; // >0: cuộn xuống | <0: cuộn lên
+
+        if (delta > DIRECTION_EPS) {
+          // ----- Đang cuộn XUỐNG -----
+          fab.classList.add('fab-hidden');
+          accumulated = 0;         // reset quãng đường cuộn lên
+        } else if (delta < -DIRECTION_EPS) {
+          // ----- Đang cuộn LÊN -----
+          accumulated += Math.abs(delta);
+          if (accumulated >= SHOW_THRESHOLD) {
+            fab.classList.remove('fab-hidden');
+          }
+        }
+
+        lastY = y;
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(update);
+          ticking = true;
+        }
+      }, { passive: true });
+
+      // Khởi tạo trạng thái ban đầu (hiện nếu đang ở đầu trang)
+      if (window.scrollY < TOP_SAFE_ZONE) {
+        fab.classList.remove('fab-hidden');
+      } else {
+        fab.classList.add('fab-hidden');
+      }
+    })();
   </script>
 </body>
 </html>

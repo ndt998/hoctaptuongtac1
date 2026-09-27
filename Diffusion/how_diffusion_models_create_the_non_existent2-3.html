@@ -127,6 +127,20 @@
       background: #78614e;
       border-radius: 3px;
     }
+
+    /* ============================================================
+       HOME FAB: Hiệu ứng trồi lên / thụt xuống êm ái
+       ============================================================ */
+    #homeFab {
+      transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    #homeFab.hidden {
+      display: flex !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transform: translateY(24px) !important;
+    }
   </style>
 </head>
 
@@ -1027,7 +1041,7 @@
               <button onclick="playPipelineAnim()" class="px-3 py-1 bg-amber-900 text-stone-100 font-bold border border-stone-800 hover:bg-amber-800">▶ Bấm Xem Dòng Chảy Dữ Liệu</button>
             </div>
             <div id="fig12-pipeline-log" class="p-2 bg-stone-100 border border-stone-400 text-xs font-code text-stone-800">
-              Văn bản thô ➔ BPE Tokens ➔ Ma trận Tra cứu We ➔ Self-Attention ➔ Ma trận Chiếu Wt ➔ Tọa độ CLIP sẵn sàng!
+              Văn bản thô ➔ BPE Tokens ➔ Ma trận Tra cứu We ➔ Self-Attention ➔ Ma Trận Chiếu Wt ➔ Tọa độ CLIP sẵn sàng!
             </div>
           </div>
         </div>
@@ -1079,6 +1093,18 @@
     </footer>
 
   </div>
+
+  <!-- ============================================================ -->
+  <!-- NÚT FAB QUAY VỀ TRANG MẸ (index.html)                        -->
+  <!-- ============================================================ -->
+  <a id="homeFab" href="index.html" 
+     class="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-2.5 bg-stone-900 text-stone-100 border-2 border-stone-800 shadow-2xl rounded-full font-code text-xs font-bold uppercase transition-all duration-300 hover:bg-[#9e3d24] hover:text-white hover:scale-105 active:scale-95 group"
+     title="Quay về trang chủ">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+    </svg>
+    <span data-key="fab_home">Về Trang Chủ</span>
+  </a>
 
   <!-- JAVASCRIPT ĐIỀU KHIỂN TOÀN BỘ 12 INTERACTIVE FIGURES & 75 CÂU HỎI -->
   <script>
@@ -1229,7 +1255,6 @@
       {
         id: 10, tier: "4. Phân Tích", ans: 1,
         q: "Phân tích vì sao ma trận chiếu Wt và Wv là bắt buộc, kể cả khi Text Encoder và Vision Encoder đều có số chiều ẩn 768:",
-        q: "Analyze why linear projection heads Wt and Wv are strictly required:",
         opts: ["Chỉ để làm tốn thêm RAM của card màn hình", "Vì cơ sở trực chuẩn và phân phối nội tại của không gian ngôn ngữ và không gian quang học là hoàn toàn khác biệt; cần ma trận chiếu xoay hai hệ quy chiếu về đồng quy", "Vì luật bản quyền của OpenAI", "Để chuyển đổi font chữ"],
         exp: "Đúng! Cùng số chiều không có nghĩa là cùng hệ tọa độ. Chiếu tuyến tính là chiếc cầu xoay trục tương thích."
       },
@@ -1351,7 +1376,6 @@
         }
       }
 
-      // Cập nhật điểm số checkpoint
       let correct = 0;
       checkpointData[cpKey].forEach((item, idx) => {
         if (state23.checkpointScores[cpKey][idx] === item.ans) correct++;
@@ -1454,7 +1478,7 @@
     /* MÃ NGUỒN ĐIỀU KHIỂN 12 PHÒNG THÍ NGHIỆM TƯƠNG TÁC (INTERACTIVE FIGURES) */
     /* ========================================================================= */
 
-    // FIGURE 1: ASCII VS SEMANTIC
+    // FIGURE 1
     const f1Canvas = document.getElementById('fig1Canvas');
     const f1Ctx = f1Canvas ? f1Canvas.getContext('2d') : null;
 
@@ -1485,7 +1509,6 @@
       f1Ctx.fillStyle = '#0a0a0c';
       f1Ctx.fillRect(0, 0, w, h);
 
-      // Trục tọa độ
       f1Ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
       f1Ctx.lineWidth = 1;
       f1Ctx.beginPath();
@@ -1504,7 +1527,6 @@
         carPos = { x: 370, y: 140 };
       }
 
-      // Vẽ các điểm
       const points = [
         { label: "cat (mèo)", pos: catPos, color: "#38bdf8" },
         { label: "car (ô tô)", pos: carPos, color: "#f87171" },
@@ -1518,7 +1540,6 @@
         f1Ctx.fillText(p.label, p.pos.x + 8, p.pos.y + 3);
       });
 
-      // Nối đường khoảng cách giữa cat và đối tượng gần
       f1Ctx.strokeStyle = state23.fig1Mode === 'ascii' ? '#f87171' : '#4ade80';
       f1Ctx.lineWidth = 1.5;
       f1Ctx.setLineDash([3, 3]);
@@ -1530,7 +1551,7 @@
       f1Ctx.setLineDash([]);
     }
 
-    // FIGURE 2: TOKENIZATION STRATEGIES
+    // FIGURE 2
     function setFig2Strategy(strat) {
       state23.fig2Strat = strat;
       const bC = document.getElementById('btn-f2-char');
@@ -1565,7 +1586,7 @@
       }
     }
 
-    // FIGURE 3: BPE MERGE SIMULATOR
+    // FIGURE 3
     const bpeSteps = [
       { step: 0, tokens: ["l", "o", "w", "</w>", "l", "o", "w", "e", "r", "</w>", "n", "e", "w", "e", "s", "t", "</w>", "w", "i", "d", "e", "s", "t", "</w>"], log: "Bước 0: Mọi từ bị chém thành chữ cái đơn lẻ. Cặp phổ biến nhất: 'e' + 'r' (2 lần)." },
       { step: 1, tokens: ["l", "o", "w", "</w>", "l", "o", "w", "er", "</w>", "n", "e", "w", "e", "s", "t", "</w>", "w", "i", "d", "e", "s", "t", "</w>"], log: "Bước 1: Ghép 'e' + 'r' ➔ 'er'. Mảnh 'er' được thêm vào từ điển! Cặp tiếp theo: 'e' + 's'." },
@@ -1601,7 +1622,7 @@
       renderFig3();
     }
 
-    // FIGURE 4: EMBEDDING LOOKUP
+    // FIGURE 4
     const f4Canvas = document.getElementById('fig4Canvas');
     const f4Ctx = f4Canvas ? f4Canvas.getContext('2d') : null;
 
@@ -1652,7 +1673,7 @@
       }
     }
 
-    // FIGURE 5: POSITIONAL ENCODING
+    // FIGURE 5
     const f5Canvas = document.getElementById('fig5Canvas');
     const f5Ctx = f5Canvas ? f5Canvas.getContext('2d') : null;
 
@@ -1683,7 +1704,6 @@
       f5Ctx.fillStyle = '#0a0a0c';
       f5Ctx.fillRect(0, 0, w, h);
 
-      // Đường sóng sin Positional Encoding
       f5Ctx.strokeStyle = 'rgba(251, 191, 36, 0.25)';
       f5Ctx.lineWidth = 1.5;
       f5Ctx.beginPath();
@@ -1714,7 +1734,7 @@
       });
     }
 
-    // FIGURE 6: STATIC VS CONTEXTUAL
+    // FIGURE 6
     const f6Canvas = document.getElementById('fig6Canvas');
     const f6Ctx = f6Canvas ? f6Canvas.getContext('2d') : null;
 
@@ -1750,7 +1770,6 @@
       f6Ctx.fillStyle = '#0a0a0c';
       f6Ctx.fillRect(0, 0, w, h);
 
-      // Cụm Music & Cụm Geology
       f6Ctx.fillStyle = 'rgba(236, 72, 153, 0.15)';
       f6Ctx.beginPath(); f6Ctx.arc(100, 70, 50, 0, Math.PI*2); f6Ctx.fill();
       f6Ctx.fillStyle = '#f472b6';
@@ -1766,7 +1785,6 @@
       if (state23.fig6Mode === 'music') { rockX = 100; rockY = 70; }
       else if (state23.fig6Mode === 'geology') { rockX = 380; rockY = 130; }
 
-      // Vẽ vector Rock
       f6Ctx.strokeStyle = '#f97316';
       f6Ctx.lineWidth = 3;
       f6Ctx.beginPath();
@@ -1780,7 +1798,7 @@
       f6Ctx.fillText("Vector 'Rock'", rockX + 10, rockY + 4);
     }
 
-    // FIGURE 7: Q-K-V MATCHMAKER
+    // FIGURE 7
     const f7Canvas = document.getElementById('fig7Canvas');
     const f7Ctx = f7Canvas ? f7Canvas.getContext('2d') : null;
 
@@ -1811,7 +1829,6 @@
       f7Ctx.fillStyle = '#0a0a0c';
       f7Ctx.fillRect(0, 0, w, h);
 
-      // Điểm phát Query
       f7Ctx.fillStyle = '#38bdf8';
       f7Ctx.beginPath(); f7Ctx.arc(70, h/2, 8, 0, Math.PI*2); f7Ctx.fill();
       f7Ctx.font = '10px Roboto Mono';
@@ -1830,7 +1847,6 @@
         f7Ctx.fillStyle = k.score > 0.5 ? '#052e16' : '#f8fafc';
         f7Ctx.fillText(`${k.label} (Softmax: ${(k.score*100).toFixed(1)}%)`, 290, k.y + 4);
 
-        // Chùm tia sáng Attention
         f7Ctx.strokeStyle = k.score > 0.5 ? 'rgba(74, 222, 128, 0.85)' : 'rgba(255, 255, 255, 0.06)';
         f7Ctx.lineWidth = k.score > 0.5 ? 3.5 : 1;
         f7Ctx.beginPath();
@@ -1840,7 +1856,7 @@
       });
     }
 
-    // FIGURE 8: MULTI-HEAD CONCURRENT
+    // FIGURE 8
     const f8Canvas = document.getElementById('fig8Canvas');
     const f8Ctx = f8Canvas ? f8Canvas.getContext('2d') : null;
 
@@ -1893,7 +1909,6 @@
         f8Ctx.fillText(words[i], c.x - 20, c.y - 10);
       });
 
-      // Vẽ liên kết theo Head
       f8Ctx.lineWidth = 2.5;
       if (state23.fig8Head === 1) {
         f8Ctx.strokeStyle = '#38bdf8';
@@ -1913,7 +1928,7 @@
       }
     }
 
-    // FIGURE 9: DUAL TOWER
+    // FIGURE 9
     const f9Canvas = document.getElementById('fig9Canvas');
     const f9Ctx = f9Canvas ? f9Canvas.getContext('2d') : null;
 
@@ -1932,7 +1947,6 @@
       const showT = hMode === 'both' || hMode === 'text';
       const showV = hMode === 'both' || hMode === 'vision';
 
-      // Tòa tháp Text
       f9Ctx.fillStyle = showT ? 'rgba(56, 189, 248, 0.2)' : 'rgba(255, 255, 255, 0.05)';
       f9Ctx.strokeStyle = showT ? '#38bdf8' : '#334155';
       f9Ctx.strokeRect(40, 40, 160, 110);
@@ -1943,7 +1957,6 @@
       f9Ctx.font = '9px Roboto Mono';
       f9Ctx.fillText("(Transformer 768D)", 65, 90);
 
-      // Tòa tháp Vision
       f9Ctx.fillStyle = showV ? 'rgba(251, 146, 60, 0.2)' : 'rgba(255, 255, 255, 0.05)';
       f9Ctx.strokeStyle = showV ? '#fb923c' : '#334155';
       f9Ctx.strokeRect(280, 40, 160, 110);
@@ -1954,7 +1967,6 @@
       f9Ctx.font = '9px Roboto Mono';
       f9Ctx.fillText("(ViT 16x16 Patches)", 305, 90);
 
-      // Mũi tên hội tụ xuống
       f9Ctx.strokeStyle = '#fbbf24';
       f9Ctx.lineWidth = 2;
       f9Ctx.setLineDash([4, 4]);
@@ -1969,7 +1981,7 @@
       f9Ctx.fillText("Không Gian Nhúng Chung", 175, 195);
     }
 
-    // FIGURE 10: PROJECTION
+    // FIGURE 10
     const f10Canvas = document.getElementById('fig10Canvas');
     const f10Ctx = f10Canvas ? f10Canvas.getContext('2d') : null;
 
@@ -2001,7 +2013,6 @@
       f10Ctx.fillStyle = '#0a0a0c';
       f10Ctx.fillRect(0, 0, w, h);
 
-      // Vòng tròn đơn vị R=70
       f10Ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
       f10Ctx.lineWidth = 1.5;
       f10Ctx.beginPath(); f10Ctx.arc(cx, cy, 70, 0, Math.PI*2); f10Ctx.stroke();
@@ -2009,7 +2020,6 @@
       const textAng = -Math.PI / 4;
       const imgAng = state23.fig10Aligned ? (-Math.PI / 4 + 0.05) : (Math.PI / 2.5);
 
-      // Vector Text
       const tx = cx + 70 * Math.cos(textAng);
       const ty = cy + 70 * Math.sin(textAng);
       f10Ctx.strokeStyle = '#38bdf8';
@@ -2018,7 +2028,6 @@
       f10Ctx.fillStyle = '#38bdf8';
       f10Ctx.fillText("u_text (Chữ)", tx + 8, ty);
 
-      // Vector Image
       const ix = cx + 70 * Math.cos(imgAng);
       const iy = cy + 70 * Math.sin(imgAng);
       f10Ctx.strokeStyle = '#fb923c';
@@ -2028,7 +2037,7 @@
       f10Ctx.fillText("v_image (Ảnh)", ix + 8, iy + 10);
     }
 
-    // FIGURE 11: CONTRASTIVE MAGNET
+    // FIGURE 11
     const f11Canvas = document.getElementById('fig11Canvas');
     const f11Ctx = f11Canvas ? f11Canvas.getContext('2d') : null;
 
@@ -2052,7 +2061,6 @@
       const badge = document.getElementById('fig11-state-badge');
       if (badge) badge.innerText = `Độ Hút Cặp Đúng: ${(sim * 100).toFixed(0)}%`;
 
-      // Vị trí ảnh mèo trung tâm
       const imgX = 140, imgY = h/2;
       f11Ctx.fillStyle = '#f59e0b';
       f11Ctx.beginPath(); f11Ctx.arc(imgX, imgY, 12, 0, Math.PI*2); f11Ctx.fill();
@@ -2060,7 +2068,6 @@
       f11Ctx.fillStyle = '#fef08a';
       f11Ctx.fillText("Ảnh [Mèo]", imgX - 25, imgY - 18);
 
-      // Thẻ chữ đúng (bị hút lại gần)
       const targetTxtX = imgX + 180 - sim * 120;
       const targetTxtY = imgY;
 
@@ -2068,12 +2075,10 @@
       f11Ctx.beginPath(); f11Ctx.arc(targetTxtX, targetTxtY, 10, 0, Math.PI*2); f11Ctx.fill();
       f11Ctx.fillText("Chữ: 'Mèo con'", targetTxtX + 14, targetTxtY + 4);
 
-      // Dây lò xo hút
       f11Ctx.strokeStyle = 'rgba(74, 222, 128, 0.6)';
       f11Ctx.lineWidth = 2.5;
       f11Ctx.beginPath(); f11Ctx.moveTo(imgX, imgY); f11Ctx.lineTo(targetTxtX, targetTxtY); f11Ctx.stroke();
 
-      // Thẻ chữ sai (bị đẩy văng ra góc)
       const negX1 = imgX + 80 + sim * 160, negY1 = 40;
       const negX2 = imgX + 80 + sim * 160, negY2 = h - 40;
 
@@ -2082,7 +2087,6 @@
         f11Ctx.beginPath(); f11Ctx.arc(neg.x, neg.y, 8, 0, Math.PI*2); f11Ctx.fill();
         f11Ctx.fillText(neg.label, neg.x + 12, neg.y + 4);
 
-        // Mũi tên đẩy bài xích
         f11Ctx.strokeStyle = 'rgba(248, 113, 113, 0.3)';
         f11Ctx.lineWidth = 1;
         f11Ctx.setLineDash([3, 3]);
@@ -2091,7 +2095,7 @@
       });
     }
 
-    // FIGURE 12: PIPELINE OVERVIEW
+    // FIGURE 12
     const f12Canvas = document.getElementById('fig12Canvas');
     const f12Ctx = f12Canvas ? f12Canvas.getContext('2d') : null;
 
@@ -2148,6 +2152,54 @@
       renderFig11();
       renderFig12();
     }
+
+    /* ========================================================================= */
+    /* HOME FAB: Hiện ở đầu trang, ẩn khi cuộn xuống,                          */
+    /*           chỉ hiện lại khi người dùng đã cuộn lên đủ nhiều (>=150px).   */
+    /* ========================================================================= */
+    (function () {
+      const fab = document.getElementById('homeFab');
+      if (!fab) return;
+
+      const UP_THRESHOLD = 150;   // tổng quãng đường cuộn lên cần tích lũy để hiện lại
+      const DOWN_TOLERANCE = 4;   // ngưỡng nhỏ tránh rung lắc trackpad
+      const TOP_ZONE = 80;        // ở gần đầu trang thì luôn hiện
+
+      let lastY = window.scrollY;
+      let upAccum = 0;
+      let ticking = false;
+
+      function onScroll() {
+        const y = window.scrollY;
+        const delta = y - lastY; // > 0 => cuộn xuống, < 0 => cuộn lên
+
+        if (y < TOP_ZONE) {
+          // Luôn hiện ở gần đầu trang
+          fab.classList.remove('hidden');
+          upAccum = 0;
+        } else if (delta > DOWN_TOLERANCE) {
+          // Đang cuộn xuống -> ẩn và reset bộ đếm cuộn lên
+          fab.classList.add('hidden');
+          upAccum = 0;
+        } else if (delta < -DOWN_TOLERANCE) {
+          // Đang cuộn lên -> tích lũy quãng đường
+          upAccum += Math.abs(delta);
+          if (upAccum >= UP_THRESHOLD) {
+            fab.classList.remove('hidden');
+          }
+        }
+
+        lastY = y;
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(onScroll);
+          ticking = true;
+        }
+      }, { passive: true });
+    })();
 
     /* KHỞI ĐỘNG ỨNG DỤNG */
     window.onload = function() {
